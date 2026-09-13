@@ -50,9 +50,9 @@
     </div>
 
     <script>
-      // Config SDK — widgetUrl = même origine (le widget buildé est servi ici)
+      // Config SDK — widgetUrl = dossier courant (sous-chemin GitHub Pages inclus)
       window.ePerformanceConfig = {
-        widgetUrl: window.location.origin,
+        widgetUrl: new URL('.', window.location.href).href,
         apiUrl: 'https://web-production-4ab53.up.railway.app',
         siteId: 'eperformance_vitrine',
         position: 'right',
