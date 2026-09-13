@@ -117,9 +117,12 @@ const SDK_CSS = `
   #${HOLDER_ID} {
     right: 0 !important;
     left: 0 !important;
+    top: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    height: 100dvh !important;
+    /* 100% (viewport exact) plutôt que 100dvh: dvh inclut les barres
+       rétractables du navigateur → débordement haut (header coupé) */
+    height: 100% !important;
     max-width: 100%;
     border-radius: 0;
   }
