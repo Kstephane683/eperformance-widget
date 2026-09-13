@@ -87,6 +87,24 @@ a {
   opacity: 0.65;
 }
 
+/* Rendu markdown dans les bulles agent */
+.ep-bubble--agent strong {
+  color: var(--ep-gold-light);
+  font-weight: 700;
+}
+
+.ep-bubble--agent em {
+  opacity: 0.9;
+}
+
+.ep-bubble--agent code {
+  background: rgba(201, 169, 110, 0.12);
+  border: 1px solid var(--ep-border-soft);
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 13px;
+}
+
 /* ---------- Quick replies ---------- */
 
 .ep-quick-replies {
@@ -176,6 +194,13 @@ a {
 
 .ep-input:focus-visible {
   border-color: var(--ep-gold);
+}
+
+/* Plein écran mobile (iframe) : respecter la barre home de l'iPhone */
+@media (max-width: 668px) {
+  .ep-input-bar {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
 }
 
 .ep-send {

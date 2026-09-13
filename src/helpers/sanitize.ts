@@ -34,3 +34,20 @@ export function htmlToText(html: string): string {
   host.innerHTML = clean
   return host.textContent?.trim() ?? ''
 }
+
+/**
+ * Rendu markdown minimal (le backend renvoie du markdown dans le texte :
+ * **gras**, *italique*, `code`). Le texte est déjà purifié via htmlToText,
+ * donc on échappe puis on transforme — sortie HTML sûre.
+ */
+export function renderMarkdown(text: string): string {
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+  return escaped
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/\n/g, '<br>')
+}

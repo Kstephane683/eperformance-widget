@@ -8,7 +8,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { ConversationNotFoundError, getConversation, sendMessage } from '@/api/railway'
 import type { ChatbotMessageResponse } from '@/types/api'
-import { htmlToText, sanitizeMessageHtml } from '@/helpers/sanitize'
+import { htmlToText, renderMarkdown, sanitizeMessageHtml } from '@/helpers/sanitize'
 import { useConfigStore } from '@/stores/config'
 import { useConversationStore } from '@/stores/conversation'
 import { useMessagesStore } from '@/stores/messages'
@@ -262,5 +262,22 @@ describe('sanitize (contrat V2 §Normalisations)', () => {
   it('htmlToText extrait le texte brut après sanitization', () => {
     const html = '<div><p>Tu es dans quel secteur ?</p><script>alert(1)</script></div>'
     expect(htmlToText(html)).toBe('Tu es dans quel secteur ?')
+  })
+
+  it('renderMarkdown convertit gras/italique/code en HTML sûr', () => {
+    const out = renderMarkdown('Voici **un point clé** et *une nuance* et `du code`\nSuite')
+    expect(out).toContain('<strong>un point clé</strong>')
+    expect(out).toContain('<em>une nuance</em>')
+    expect(out).toContain('<code>du code</code>')
+    expect(out).toContain('<br>')
+    // Pas de ** résiduel
+    expect(out).not.toContain('**')
+  })
+
+  it('renderMarkdown échappe le HTML injecté dans le texte', () => {
+    const out = renderMarkdown('Texte avec <script>alert(1)</script> et **gras**')
+    expect(out).not.toContain('<script>')
+    expect(out).toContain('&lt;script&gt;')
+    expect(out).toContain('<strong>gras</strong>')
   })
 })

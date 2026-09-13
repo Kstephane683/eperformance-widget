@@ -142,6 +142,7 @@ const CLOSE_ICON = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" 
 
 let config: SdkConfig = { ...DEFAULTS }
 let isOpen = false
+let keyboardUpdate: (() => void) | null = null
 const listeners: Record<'open' | 'close', SdkListener[]> = { open: [], close: [] }
 
 // ============================================================
@@ -228,6 +229,7 @@ function open(): void {
   document.getElementById(HOLDER_ID)?.removeAttribute('aria-hidden')
   setIcon(CLOSE_ICON)
   postToWidget({ event: 'open' })
+  keyboardUpdate?.()
   listeners.open.forEach((fn) => fn())
 }
 
@@ -243,6 +245,36 @@ function close(): void {
 
 function toggle(): void {
   isOpen ? close() : open()
+}
+
+// ============================================================
+// Fix clavier mobile (iOS : le clavier ne redimensionne pas le viewport)
+// ============================================================
+
+function initKeyboardFix(): void {
+  const vv = window.visualViewport
+  if (!vv) return
+  const update = () => {
+    const el = document.getElementById(HOLDER_ID)
+    if (!el || !isOpen) return
+    const keyboardHeight = window.innerHeight - vv.height
+    if (keyboardHeight > 150) {
+      // Clavier visible : le holder occupe exactement la zone visible au-dessus
+      el.style.setProperty('height', `${Math.round(vv.height)}px`, 'important')
+      el.style.setProperty(
+        'bottom',
+        `${Math.round(keyboardHeight + vv.offsetTop)}px`,
+        'important',
+      )
+    } else {
+      el.style.removeProperty('height')
+      el.style.removeProperty('bottom')
+    }
+  }
+  vv.addEventListener('resize', update)
+  vv.addEventListener('scroll', update)
+  window.addEventListener('resize', update)
+  keyboardUpdate = update
 }
 
 // ============================================================
@@ -273,6 +305,7 @@ function init(): void {
   createFrame()
   createBubble()
   window.addEventListener('message', onWidgetMessage)
+  initKeyboardFix()
   exposeApi()
 }
 
