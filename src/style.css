@@ -29,10 +29,19 @@
   box-sizing: border-box;
 }
 
+/* Iframe plein écran mobile : immobiliser le document de l'iframe.
+   Sur iOS, l'ouverture du clavier fait DÉFILER le document pour amener
+   l'input au-dessus du clavier → l'interface se décale et se casse.
+   Un body position:fixed ne peut pas défiler : seul .ep-messages scrolle. */
 html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
   font-family: var(--ep-font-body);
   background: var(--ep-bg);
   color: var(--ep-text);
@@ -40,7 +49,7 @@ body {
 
 /* Le widget tourne en iframe : plein écran de son viewport */
 #app {
-  height: 100dvh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }

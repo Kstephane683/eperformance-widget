@@ -7,6 +7,8 @@
       :placeholder="placeholder"
       :disabled="disabled"
       aria-label="Votre message"
+      @focus="notifyFocus(true)"
+      @blur="notifyFocus(false)"
       @keydown.enter.exact.prevent="submit"
     />
     <button type="submit" class="ep-send" :disabled="disabled || !draft.trim()" aria-label="Envoyer">
@@ -25,10 +27,17 @@
 // attachments reportés v2 (contrat V2, décision #5)
 import { ref } from 'vue'
 
+import { postToSdk } from '@/helpers/sdkBridge'
+
 defineProps<{ disabled?: boolean; placeholder?: string }>()
 const emit = defineEmits<{ send: [content: string] }>()
 
 const draft = ref('')
+
+// Focus/blur → le SDK relance son fix clavier au bon moment (iOS)
+function notifyFocus(focused: boolean) {
+  postToSdk({ event: focused ? 'input-focus' : 'input-blur' })
+}
 
 function submit() {
   const content = draft.value.trim()

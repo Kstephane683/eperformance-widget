@@ -146,6 +146,7 @@ const CLOSE_ICON = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" 
 let config: SdkConfig = { ...DEFAULTS }
 let isOpen = false
 let keyboardUpdate: (() => void) | null = null
+let keyboardForceUpdate: (() => void) | null = null
 const listeners: Record<'open' | 'close', SdkListener[]> = { open: [], close: [] }
 
 // ============================================================
@@ -165,6 +166,12 @@ function onWidgetMessage(e: MessageEvent) {
     const message = JSON.parse(e.data.slice(MESSAGE_PREFIX.length)) as { event: string }
     if (message.event === 'close' && isOpen) {
       close()
+    }
+    // Le widget signale le focus/blur de son input : fiabilise le timing iOS
+    // (le visualViewport resize peut arriver tard pendant l'animation clavier)
+    if (message.event === 'input-focus' && isOpen) {
+      keyboardUpdate?.()
+      keyboardForceUpdate?.()
     }
   } catch {
     // Ignoré
@@ -253,7 +260,10 @@ function toggle(): void {
 }
 
 // ============================================================
-// Fix clavier mobile (iOS : le clavier ne redimensionne pas le viewport)
+// Fix clavier mobile (iOS : le clavier ne redimensionne pas le viewport
+// et scrolle la page hôte de force → éléments fixed instables).
+// Stratégie : ancrer le holder par le HAUT (top = début de la zone
+// visible) — stable pendant la frappe — et re-vérifier au focus input.
 // ============================================================
 
 function initKeyboardFix(): void {
@@ -262,16 +272,17 @@ function initKeyboardFix(): void {
   const update = () => {
     const el = document.getElementById(HOLDER_ID)
     if (!el || !isOpen) return
+    // Fix mobile uniquement — le desktop garde son ancrage bas fixe
+    if (!window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches) return
     const keyboardHeight = window.innerHeight - vv.height
-    if (keyboardHeight > 150) {
-      // Clavier visible : le holder occupe exactement la zone visible au-dessus
+    if (keyboardHeight > 150 || vv.offsetTop > 4) {
+      // Zone visible réduite (clavier) ou page hôte décalée par iOS :
+      // ancrage par le haut = la seule coordonnée stable
+      el.style.setProperty('top', `${Math.round(vv.offsetTop)}px`, 'important')
       el.style.setProperty('height', `${Math.round(vv.height)}px`, 'important')
-      el.style.setProperty(
-        'bottom',
-        `${Math.round(keyboardHeight + vv.offsetTop)}px`,
-        'important',
-      )
+      el.style.setProperty('bottom', 'auto', 'important')
     } else {
+      el.style.removeProperty('top')
       el.style.removeProperty('height')
       el.style.removeProperty('bottom')
     }
@@ -279,7 +290,14 @@ function initKeyboardFix(): void {
   vv.addEventListener('resize', update)
   vv.addEventListener('scroll', update)
   window.addEventListener('resize', update)
+  // L'animation du clavier iOS étale ses changements ~400ms : re-vérifier
+  const updateAfterKeyboard = () => {
+    setTimeout(update, 350)
+    setTimeout(update, 800)
+  }
+  vv.addEventListener('resize', updateAfterKeyboard)
   keyboardUpdate = update
+  keyboardForceUpdate = updateAfterKeyboard
 }
 
 // ============================================================
