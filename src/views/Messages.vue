@@ -11,7 +11,9 @@
         :quick-replies="messages.quickReplies"
         :is-typing="messages.isTyping"
         :is-sending="messages.isSending"
+        :failed-content="messages.failedContent"
         @quick-reply="messages.sendQuickReply($event)"
+        @retry="messages.retryLast()"
       />
       <ChatInput :disabled="messages.isSending" @send="messages.sendMessage($event)" />
     </template>

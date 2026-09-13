@@ -243,6 +243,23 @@ describe('messages store', () => {
 
     expect(messages.messages.at(-1)?.content).toContain('délai de réponse est dépassé')
   })
+
+  it('retryLast retire fallback + doublon user et renvoie exactement une fois', async () => {
+    mockedSendMessage.mockRejectedValueOnce(new Error('Failed to fetch'))
+    const messages = useMessagesStore()
+    await expect(messages.sendMessage('Mon message perdu')).rejects.toThrow()
+    expect(messages.failedContent).toBe('Mon message perdu')
+
+    mockedSendMessage.mockResolvedValueOnce(makeResponse())
+    await messages.retryLast()
+
+    const userMsgs = messages.messages.filter(
+      (m) => m.role === 'user' && m.content === 'Mon message perdu',
+    )
+    expect(userMsgs).toHaveLength(1) // pas de doublon dans l'historique
+    expect(messages.failedContent).toBeNull()
+    expect(messages.messages.at(-1)?.content).toBe('Réponse IA') // pas le fallback
+  })
 })
 
 describe('sanitize (contrat V2 §Normalisations)', () => {

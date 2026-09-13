@@ -6,10 +6,9 @@
 // Widget ePerformance — root component (extraction Chatwoot, adapté Railway)
 // Le SDK (site hôte) pilote open/close via postMessage : le router suit.
 import { onMounted, onUnmounted } from 'vue'
-
 import { useRouter } from 'vue-router'
 
-import { initSdkBridge, notifyReady } from '@/helpers/sdkBridge'
+import { initSdkBridge, notifyReady, postToSdk } from '@/helpers/sdkBridge'
 import { useConversationStore } from '@/stores/conversation'
 
 const router = useRouter()
@@ -23,8 +22,19 @@ onMounted(() => {
     onClose: () => router.push({ name: 'home' }),
     onIdentify: (userId, userData) => conversation.identify(userId, userData),
   })
+  // Échap ferme le widget (le focus est souvent dans l'iframe)
+  window.addEventListener('keydown', onEscape)
   notifyReady()
 })
 
-onUnmounted(() => cleanup?.())
+onUnmounted(() => {
+  cleanup?.()
+  window.removeEventListener('keydown', onEscape)
+})
+
+function onEscape(e: KeyboardEvent) {
+  if (e.key === 'Escape' && router.currentRoute.value.name === 'messages') {
+    postToSdk({ event: 'close' })
+  }
+}
 </script>

@@ -59,7 +59,11 @@ const BASE_Z_INDEX = 2147483000
 const FRAME_ID = 'eperformance-widget-frame'
 const HOLDER_ID = 'eperformance-widget-holder'
 const BUBBLE_ID = 'eperformance-widget-bubble'
+const TEASER_ID = 'eperformance-widget-teaser'
+const OPEN_KEY = 'eperf_widget_open'
+const TEASER_KEY = 'eperf_teaser_done'
 const MOBILE_BREAKPOINT = 668
+const TEASER_DELAY_MS = 20_000
 
 // ============================================================
 // CSS embarqué (pattern Chatwoot loadCSS — pas de fichier externe)
@@ -131,6 +135,55 @@ const SDK_CSS = `
   /* Widget ouvert en plein écran : la bubble-croix masquerait l'input —
      le bouton fermer est dans le header du widget */
   #${BUBBLE_ID}.ep-bubble--open { display: none !important; }
+  #${TEASER_ID} { right: 16px; bottom: 88px; }
+}
+
+/* Accessibilité : réduire les animations si demandé par le système */
+@media (prefers-reduced-motion: reduce) {
+  #${HOLDER_ID}, #${BUBBLE_ID}, #${TEASER_ID} {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Teaser proactif (pattern Intercom/Drift — héritage v6.0) */
+#${TEASER_ID} {
+  position: fixed !important;
+  bottom: 88px;
+  right: 20px;
+  z-index: ${BASE_Z_INDEX + 2} !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 280px;
+  padding: 12px 14px;
+  border-radius: 14px 14px 4px 14px;
+  background: #14141a;
+  color: #edeae3;
+  font-family: inherit;
+  font-size: 13.5px;
+  line-height: 1.45;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 169, 110, 0.25);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#${TEASER_ID}.ep-teaser--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#${TEASER_ID} button {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.15);
+  color: #c9a96e;
+  font-size: 11px;
+  cursor: pointer;
 }
 `
 
@@ -238,6 +291,8 @@ function setIcon(icon: string) {
 function open(): void {
   if (isOpen) return
   isOpen = true
+  dismissTeaser()
+  sessionStorage.setItem(OPEN_KEY, '1')
   document.getElementById(HOLDER_ID)?.classList.add('ep-holder--visible')
   document.getElementById(HOLDER_ID)?.removeAttribute('aria-hidden')
   document.getElementById(BUBBLE_ID)?.classList.add('ep-bubble--open')
@@ -250,6 +305,7 @@ function open(): void {
 function close(): void {
   if (!isOpen) return
   isOpen = false
+  sessionStorage.removeItem(OPEN_KEY)
   document.getElementById(HOLDER_ID)?.classList.remove('ep-holder--visible')
   document.getElementById(HOLDER_ID)?.setAttribute('aria-hidden', 'true')
   document.getElementById(BUBBLE_ID)?.classList.remove('ep-bubble--open')
@@ -325,6 +381,47 @@ function exposeApi(): void {
   }
 }
 
+// ============================================================
+// Teaser proactif + raccourci Échap + persistance état ouvert
+// ============================================================
+
+function dismissTeaser(): void {
+  sessionStorage.setItem(TEASER_KEY, '1')
+  document.getElementById(TEASER_ID)?.remove()
+}
+
+/** Bulle d'accroche après 20s de visite, une fois par session (v6.0) */
+function initTeaser(): void {
+  if (sessionStorage.getItem(TEASER_KEY)) return
+  setTimeout(() => {
+    if (isOpen || sessionStorage.getItem(TEASER_KEY)) return
+    const teaser = document.createElement('div')
+    teaser.id = TEASER_ID
+    teaser.setAttribute('role', 'button')
+    teaser.setAttribute('tabindex', '0')
+    teaser.innerHTML =
+      '<span>Une question sur votre business ? 👋</span>' +
+      '<button type="button" aria-label="Masquer">✕</button>'
+    teaser.addEventListener('click', (e) => {
+      const onDismiss = (e.target as HTMLElement).tagName === 'BUTTON'
+      if (onDismiss) {
+        dismissTeaser()
+      } else {
+        open() // open() retire aussi le teaser
+      }
+    })
+    document.body.appendChild(teaser)
+    sessionStorage.setItem(TEASER_KEY, '1')
+    requestAnimationFrame(() => teaser.classList.add('ep-teaser--visible'))
+  }, TEASER_DELAY_MS)
+}
+
+function initShortcuts(): void {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) close()
+  })
+}
+
 function init(): void {
   config = { ...DEFAULTS, ...window.ePerformanceConfig }
   loadCss()
@@ -332,7 +429,14 @@ function init(): void {
   createBubble()
   window.addEventListener('message', onWidgetMessage)
   initKeyboardFix()
+  initShortcuts()
   exposeApi()
+  // État ouvert persistant (refresh → widget réouvert, même conversation)
+  if (sessionStorage.getItem(OPEN_KEY) === '1') {
+    open()
+  } else {
+    initTeaser()
+  }
 }
 
 /** Exposé pour les tests (ré-initialisation DOM contrôlée) */

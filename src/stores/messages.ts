@@ -36,6 +36,8 @@ export const useMessagesStore = defineStore('messages', {
     isTyping: false,
     isSending: false,
     lastError: null as string | null,
+    /** Contenu du dernier message qui a échoué (bouton Réessayer) */
+    failedContent: null as string | null,
   }),
 
   actions: {
@@ -93,9 +95,11 @@ export const useMessagesStore = defineStore('messages', {
           config.config.siteId,
           conversation.identity?.userId ?? null,
         )
+        this.failedContent = null
         this.applyResponse(response, conversationId)
       } catch (err) {
         this.lastError = err instanceof Error ? err.message : 'Erreur réseau'
+        this.failedContent = trimmed
         // NB: DOMException (AbortError) n'hérite pas Error en Node — vérifier name
         const isTimeout = (err as { name?: string })?.name === 'AbortError'
         // Fallback WhatsApp : jamais laisser le visiteur sans issue (héritage v6.0)
@@ -149,6 +153,23 @@ export const useMessagesStore = defineStore('messages', {
 
     sendQuickReply(value: string) {
       return this.sendMessage(value)
+    },
+
+    /** Réessayer le dernier message échoué : retire le fallback + la bulle
+     *  user du message perdu (jamais parvenu au backend), puis renvoie. */
+    async retryLast(): Promise<void> {
+      const text = this.failedContent
+      if (!text || this.isSending) return
+      this.failedContent = null
+      const last = this.messages.at(-1)
+      if (last?.role === 'agent' && last.content.includes('WhatsApp')) {
+        this.messages.pop()
+      }
+      const secondLast = this.messages.at(-1)
+      if (secondLast?.role === 'user' && secondLast.content === text) {
+        this.messages.pop()
+      }
+      await this.sendMessage(text)
     },
 
     clear() {

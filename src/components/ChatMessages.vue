@@ -1,7 +1,22 @@
 <template>
   <div ref="scroller" class="ep-messages">
-    <MessageBubble v-for="message in messages" :key="message.id" :message="message" />
+    <template v-for="(message, index) in messages" :key="message.id">
+      <!-- Séparateur de jour (pattern Intercom) quand le jour change -->
+      <div v-if="dayLabel(index)" class="ep-day-separator">
+        <span>{{ dayLabel(index) }}</span>
+      </div>
+      <MessageBubble :message="message" />
+    </template>
+
     <TypingIndicator v-if="isTyping" />
+
+    <!-- Réessayer après échec réseau (avant le fallback WhatsApp silencieux) -->
+    <div v-if="failedContent && !isSending" class="ep-retry">
+      <button type="button" class="ep-retry__btn" @click="$emit('retry')">
+        ↻ Réessayer
+      </button>
+    </div>
+
     <QuickReplies
       v-if="!isTyping && !isSending"
       :quick-replies="quickReplies"
@@ -12,7 +27,8 @@
 </template>
 
 <script setup lang="ts">
-// Adaptation de ConversationWrap.vue (Chatwoot) — scroll auto vers le bas
+// Adaptation de ConversationWrap.vue (Chatwoot) — scroll auto vers le bas,
+// séparateurs de jour, bouton Réessayer après échec réseau.
 import { nextTick, ref, watch } from 'vue'
 
 import MessageBubble from './MessageBubble.vue'
@@ -25,14 +41,36 @@ const props = defineProps<{
   quickReplies: string[]
   isTyping: boolean
   isSending: boolean
+  failedContent: string | null
 }>()
 
-defineEmits<{ 'quick-reply': [value: string] }>()
+defineEmits<{ 'quick-reply': [value: string]; retry: [] }>()
 
 const scroller = ref<HTMLElement | null>(null)
 
+/** "Aujourd'hui" / "Hier" / date locale — null si même jour que le message précédent */
+function dayLabel(index: number): string | null {
+  const current = new Date(props.messages[index]?.created_at ?? '')
+  if (Number.isNaN(current.getTime())) return null
+  if (index > 0) {
+    const previous = new Date(props.messages[index - 1]?.created_at ?? '')
+    if (
+      !Number.isNaN(previous.getTime()) &&
+      current.toDateString() === previous.toDateString()
+    ) {
+      return null
+    }
+  }
+  const today = new Date()
+  const yesterday = new Date(today)
+  yesterday.setDate(today.getDate() - 1)
+  if (current.toDateString() === today.toDateString()) return "Aujourd'hui"
+  if (current.toDateString() === yesterday.toDateString()) return 'Hier'
+  return current.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })
+}
+
 watch(
-  () => [props.messages.length, props.isTyping, props.quickReplies.length],
+  () => [props.messages.length, props.isTyping, props.quickReplies.length, props.failedContent],
   async () => {
     await nextTick()
     scroller.value?.scrollTo({ top: scroller.value.scrollHeight, behavior: 'smooth' })
@@ -53,5 +91,40 @@ watch(
   gap: 10px;
   padding: 16px 12px 20px;
   overflow-y: auto;
+}
+
+.ep-day-separator {
+  display: flex;
+  justify-content: center;
+  margin: 6px 0 2px;
+}
+
+.ep-day-separator span {
+  font-size: 11px;
+  color: var(--ep-text-muted);
+  background: var(--ep-surface-raised);
+  border: 1px solid var(--ep-border-soft);
+  border-radius: var(--ep-radius-full);
+  padding: 3px 12px;
+}
+
+.ep-retry {
+  display: flex;
+  justify-content: center;
+}
+
+.ep-retry__btn {
+  padding: 8px 18px;
+  border-radius: var(--ep-radius-full);
+  border: 1px solid var(--ep-border);
+  background: rgba(201, 169, 110, 0.1);
+  color: var(--ep-gold);
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.ep-retry__btn:hover {
+  background: rgba(201, 169, 110, 0.2);
 }
 </style>
