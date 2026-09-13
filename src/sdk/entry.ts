@@ -125,6 +125,9 @@ const SDK_CSS = `
   }
   #${FRAME_ID} { border-radius: 0; }
   #${BUBBLE_ID}.ep-bubble--right, #${BUBBLE_ID}.ep-bubble--left { right: 16px; }
+  /* Widget ouvert en plein écran : la bubble-croix masquerait l'input —
+     le bouton fermer est dans le header du widget */
+  #${BUBBLE_ID}.ep-bubble--open { display: none !important; }
 }
 `
 
@@ -227,6 +230,7 @@ function open(): void {
   isOpen = true
   document.getElementById(HOLDER_ID)?.classList.add('ep-holder--visible')
   document.getElementById(HOLDER_ID)?.removeAttribute('aria-hidden')
+  document.getElementById(BUBBLE_ID)?.classList.add('ep-bubble--open')
   setIcon(CLOSE_ICON)
   postToWidget({ event: 'open' })
   keyboardUpdate?.()
@@ -238,6 +242,7 @@ function close(): void {
   isOpen = false
   document.getElementById(HOLDER_ID)?.classList.remove('ep-holder--visible')
   document.getElementById(HOLDER_ID)?.setAttribute('aria-hidden', 'true')
+  document.getElementById(BUBBLE_ID)?.classList.remove('ep-bubble--open')
   setIcon(CHAT_ICON)
   postToWidget({ event: 'close' })
   listeners.close.forEach((fn) => fn())

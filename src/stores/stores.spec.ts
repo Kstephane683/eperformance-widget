@@ -269,7 +269,7 @@ describe('sanitize (contrat V2 §Normalisations)', () => {
     expect(out).toContain('<strong>un point clé</strong>')
     expect(out).toContain('<em>une nuance</em>')
     expect(out).toContain('<code>du code</code>')
-    expect(out).toContain('<br>')
+    expect(out).toContain('<p>Suite</p>')
     // Pas de ** résiduel
     expect(out).not.toContain('**')
   })
@@ -279,5 +279,26 @@ describe('sanitize (contrat V2 §Normalisations)', () => {
     expect(out).not.toContain('<script>')
     expect(out).toContain('&lt;script&gt;')
     expect(out).toContain('<strong>gras</strong>')
+  })
+
+  it('renderMarkdown convertit les listes ordonnées et à puces', () => {
+    const out = renderMarkdown('Intro :\n1. Premier point\n2. Deuxième point\n- Puce A\n- Puce B')
+    expect(out).toContain('<ol>')
+    expect(out).toContain('<li>Premier point</li>')
+    expect(out).toContain('<li>Deuxième point</li>')
+    expect(out).toContain('<ul>')
+    expect(out).toContain('<li>Puce A</li>')
+    expect(out).toContain('<li>Puce B</li>')
+    expect(out).toContain('<p>Intro :</p>')
+  })
+
+  it('renderMarkdown convertit les liens https mais pas javascript:', () => {
+    const ok = renderMarkdown('[Nos offres](https://eperformance.pro/offres)')
+    expect(ok).toContain('<a href="https://eperformance.pro/offres"')
+    expect(ok).toContain('target="_blank"')
+
+    const unsafe = renderMarkdown('[clic](javascript:alert(1))')
+    expect(unsafe).not.toContain('<a ')
+    expect(unsafe).toContain('javascript:alert(1)') // reste du texte brut
   })
 })

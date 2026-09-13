@@ -36,18 +36,75 @@ export function htmlToText(html: string): string {
 }
 
 /**
- * Rendu markdown minimal (le backend renvoie du markdown dans le texte :
- * **gras**, *italique*, `code`). Le texte est déjà purifié via htmlToText,
- * donc on échappe puis on transforme — sortie HTML sûre.
+ * Rendu markdown minimal (le backend renvoie du markdown dans le texte) :
+ * **gras**, *italique*, `code`, listes ordonnées "1. ", listes à puces "- ",
+ * liens [texte](https://…) . Le texte est échappé AVANT transformation —
+ * sortie HTML sûre (les URLs javascript: ne matchent pas et restent du texte).
  */
 export function renderMarkdown(text: string): string {
   const escaped = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-  return escaped
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
-    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
-    .replace(/\n/g, '<br>')
+
+  const inline = (line: string): string =>
+    line
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+      .replace(
+        /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener">$1</a>',
+      )
+
+  const htmlLines: string[] = []
+  let listType: 'ol' | 'ul' | null = null
+
+  const closeList = () => {
+    if (listType) {
+      htmlLines.push(`</${listType}>`)
+      listType = null
+    }
+  }
+
+  for (const rawLine of escaped.split('\n')) {
+    const line = rawLine.trim()
+
+    // Ligne vide → fermer la liste en cours (séparateur visuel)
+    if (!line) {
+      closeList()
+      continue
+    }
+
+    // Liste ordonnée : "1. item" / "1) item"
+    const ordered = line.match(/^(\d+)[.)]\s+(.*)$/)
+    if (ordered) {
+      if (listType !== 'ol') {
+        closeList()
+        htmlLines.push('<ol>')
+        listType = 'ol'
+      }
+      htmlLines.push(`<li>${inline(ordered[2])}</li>`)
+      continue
+    }
+
+    // Liste à puces : "- item" / "* item" / "• item"
+    const bullet = line.match(/^[-*•]\s+(.*)$/)
+    if (bullet) {
+      if (listType !== 'ul') {
+        closeList()
+        htmlLines.push('<ul>')
+        listType = 'ul'
+      }
+      htmlLines.push(`<li>${inline(bullet[1])}</li>`)
+      continue
+    }
+
+    // Paragraphe normal
+    closeList()
+    htmlLines.push(`<p>${inline(line)}</p>`)
+  }
+  closeList()
+
+  return htmlLines.join('')
 }

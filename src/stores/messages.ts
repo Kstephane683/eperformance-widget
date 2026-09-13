@@ -11,6 +11,7 @@
 import { defineStore } from 'pinia'
 
 import { sendMessage } from '@/api/railway'
+import { playNotificationSound } from '@/helpers/notificationSound'
 import type {
   BackendMessage,
   ChatbotMessageResponse,
@@ -129,6 +130,8 @@ export const useMessagesStore = defineStore('messages', {
       const text = response.text ?? ''
       this.addLocal('agent', text, response.html, response.metadata?.agent_used)
       this.quickReplies = response.metadata?.suggestions ?? []
+      // Son discret de réception (héritage v6.0)
+      playNotificationSound()
     },
 
     /** Reprise après refresh — hydrate depuis GET /conversation (roles 'user'|'assistant') */
