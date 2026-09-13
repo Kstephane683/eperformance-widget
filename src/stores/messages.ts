@@ -90,11 +90,29 @@ export const useMessagesStore = defineStore('messages', {
         this.applyResponse(response, conversationId)
       } catch (err) {
         this.lastError = err instanceof Error ? err.message : 'Erreur réseau'
+        // NB: DOMException (AbortError) n'hérite pas Error en Node — vérifier name
+        const isTimeout = (err as { name?: string })?.name === 'AbortError'
+        // Fallback WhatsApp : jamais laisser le visiteur sans issue (héritage v6.0)
+        this.addWhatsAppFallback(isTimeout)
         throw err
       } finally {
         this.isTyping = false
         this.isSending = false
       }
+    },
+
+    /** Message de secours + redirection WhatsApp si l'IA est indisponible */
+    addWhatsAppFallback(isTimeout: boolean) {
+      const config = useConfigStore()
+      const message = isTimeout
+        ? 'Le délai de réponse est dépassé. Pour ne pas vous faire attendre, contactez-nous directement sur WhatsApp — nous vous répondons rapidement.'
+        : 'Notre assistante IA est momentanément indisponible. Pour ne pas vous faire attendre, contactez-nous directement sur WhatsApp — nous vous répondons rapidement.'
+      const waLink = `https://wa.me/${config.config.whatsappNumber.replace(/[^0-9]/g, '')}`
+      const html =
+        `<div style="line-height: 1.6;">${message}</div>` +
+        `<div style="margin-top: 10px;"><a href="${waLink}" target="_blank" rel="noopener" style="color: #c9a96e; font-weight: 600;">Continuer sur WhatsApp →</a></div>`
+      this.addLocal('agent', message, html, null)
+      this.quickReplies = []
     },
 
     /** Applique une réponse backend normalisée (utilisé aussi par les tests) */

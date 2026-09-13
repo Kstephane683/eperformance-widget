@@ -8,6 +8,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { ConversationNotFoundError, getConversation, sendMessage } from '@/api/railway'
 import type { ChatbotMessageResponse } from '@/types/api'
+import { htmlToText, sanitizeMessageHtml } from '@/helpers/sanitize'
 import { useConfigStore } from '@/stores/config'
 import { useConversationStore } from '@/stores/conversation'
 import { useMessagesStore } from '@/stores/messages'
@@ -218,5 +219,48 @@ describe('messages store', () => {
 
     const payload = mockedSendMessage.mock.calls[0][0]
     expect(payload.messages.at(-1)?.text).toBe('Faire un diagnostic')
+  })
+
+  it('erreur réseau → fallback WhatsApp avec lien wa.me (héritage v6.0)', async () => {
+    mockedSendMessage.mockRejectedValue(new Error('Failed to fetch'))
+    const messages = useMessagesStore()
+
+    await expect(messages.sendMessage('Bonjour')).rejects.toThrow()
+
+    const fallback = messages.messages.at(-1)
+    expect(fallback?.role).toBe('agent')
+    expect(fallback?.content).toContain('WhatsApp')
+    expect(fallback?.html).toContain('https://wa.me/2250151170666')
+    expect(messages.quickReplies).toEqual([])
+  })
+
+  it('timeout (AbortError) → fallback WhatsApp mentionne le délai', async () => {
+    const abortError = new DOMException('The operation was aborted', 'AbortError')
+    mockedSendMessage.mockRejectedValue(abortError)
+    const messages = useMessagesStore()
+
+    await expect(messages.sendMessage('Bonjour')).rejects.toThrow()
+
+    expect(messages.messages.at(-1)?.content).toContain('délai de réponse est dépassé')
+  })
+})
+
+describe('sanitize (contrat V2 §Normalisations)', () => {
+  it('retire les boutons backend et leurs onclick, garde le texte', () => {
+    const html =
+      '<div style="line-height: 1.6;"><p>Bonjour ! Je suis Aminata.</p>' +
+      '<button onclick="window.deepChatSendMessage(\'Diagnostic\')">Diagnostic</button></div>'
+
+    const clean = sanitizeMessageHtml(html)
+
+    expect(clean).toContain('Bonjour ! Je suis Aminata.')
+    expect(clean).not.toContain('<button')
+    expect(clean).not.toContain('deepChatSendMessage')
+    expect(clean).not.toContain('onclick')
+  })
+
+  it('htmlToText extrait le texte brut après sanitization', () => {
+    const html = '<div><p>Tu es dans quel secteur ?</p><script>alert(1)</script></div>'
+    expect(htmlToText(html)).toBe('Tu es dans quel secteur ?')
   })
 })
