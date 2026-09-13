@@ -60,6 +60,8 @@ export interface ChatbotMetadata {
   /** Suggestions = source des boutons natifs Vue (ne JAMAIS parser le HTML) */
   suggestions: string[] | null
   processing_time?: number
+  /** Un humain a pris la main: le LLM est en pause sur cette conversation */
+  human_active?: boolean
   error?: string
 }
 

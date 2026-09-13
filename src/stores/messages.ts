@@ -10,7 +10,7 @@
 
 import { defineStore } from 'pinia'
 
-import { sendMessage } from '@/api/railway'
+import { getConversation, sendMessage } from '@/api/railway'
 import { playNotificationSound } from '@/helpers/notificationSound'
 import type {
   BackendMessage,
@@ -29,6 +29,10 @@ function localId(): string {
   return `msg_${Date.now().toString(36)}_${messageCounter}`
 }
 
+const HUMAN_POLL_MS = 8_000
+let humanPollTimer: ReturnType<typeof setInterval> | null = null
+let humanDbCount = 0
+
 export const useMessagesStore = defineStore('messages', {
   state: () => ({
     messages: [] as WidgetMessage[],
@@ -38,6 +42,8 @@ export const useMessagesStore = defineStore('messages', {
     lastError: null as string | null,
     /** Contenu du dernier message qui a échoué (bouton Réessayer) */
     failedContent: null as string | null,
+    /** Un conseiller humain a pris la main (polling des réponses actif) */
+    humanMode: false,
   }),
 
   actions: {
@@ -131,11 +137,92 @@ export const useMessagesStore = defineStore('messages', {
       conversation.setServerId(response.metadata?.conversation_id ?? fallbackConversationId)
 
       this.isTyping = false
+
+      // Takeover humain: pas de réponse LLM — basculer en mode conseiller
+      if (response.metadata?.human_active) {
+        this.enterHumanMode()
+        return
+      }
+
       const text = response.text ?? ''
       this.addLocal('agent', text, response.html, response.metadata?.agent_used)
       this.quickReplies = response.metadata?.suggestions ?? []
       // Son discret de réception (héritage v6.0)
       playNotificationSound()
+    },
+
+    // ============================================================
+    // Mode conseiller humain (takeover dashboard)
+    // ============================================================
+
+    /** Bascule en mode humain: bulle d'info + polling des réponses (8s) */
+    enterHumanMode(showNotice = true) {
+      this.quickReplies = []
+      if (this.humanMode) return
+      this.humanMode = true
+      if (showNotice) {
+        this.addLocal('agent', '✍️ Votre message a été transmis à un conseiller. Il vous répond ici même.', null, 'conseiller')
+      }
+
+      // Nombre de messages déjà connus côté DB pour ne rajouter que les nouveaux
+      const conversation = useConversationStore()
+      const config = useConfigStore()
+      const conversationId = conversation.conversationId
+      if (!conversationId) return
+      getConversation(conversationId, config.config.apiUrl)
+        .then((history) => {
+          humanDbCount = history.messages.length
+        })
+        .catch(() => {
+          humanDbCount = this.messages.length
+        })
+
+      if (humanPollTimer) clearInterval(humanPollTimer)
+      humanPollTimer = setInterval(() => {
+        void this.pollHumanReply()
+      }, HUMAN_POLL_MS)
+    },
+
+    /** Polling: nouveaux messages humains depuis la DB + détection du release */
+    async pollHumanReply() {
+      const conversation = useConversationStore()
+      const config = useConfigStore()
+      if (!conversation.conversationId || !this.humanMode) return
+      try {
+        const history = await getConversation(conversation.conversationId, config.config.apiUrl)
+
+        // Release: l'humain a rendu la main → l'IA reprend
+        if (history.status !== 'escalated') {
+          this.exitHumanMode()
+          this.addLocal('agent', '🤖 L\'assistant IA reprend la main. Comment puis-je continuer à vous aider ?', null, null)
+          return
+        }
+
+        const fresh = history.messages.slice(humanDbCount)
+        for (const msg of fresh) {
+          if (msg.role === 'assistant' || msg.role === 'user') {
+            this.addLocal(
+              msg.role === 'user' ? 'user' : 'agent',
+              msg.content,
+              null,
+              msg.role === 'assistant' ? 'conseiller' : null,
+            )
+            if (msg.role === 'assistant') playNotificationSound()
+          }
+          humanDbCount += 1
+        }
+      } catch {
+        // Erreur de poll — silencieuse, on retentera au prochain tick
+      }
+    },
+
+    /** Fin du mode conseiller (release découvert ou reset) */
+    exitHumanMode() {
+      this.humanMode = false
+      if (humanPollTimer) {
+        clearInterval(humanPollTimer)
+        humanPollTimer = null
+      }
     },
 
     /** Reprise après refresh — hydrate depuis GET /conversation (roles 'user'|'assistant') */
@@ -173,6 +260,7 @@ export const useMessagesStore = defineStore('messages', {
     },
 
     clear() {
+      this.exitHumanMode()
       this.$reset()
     },
   },

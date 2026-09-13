@@ -18,6 +18,14 @@ export default defineConfig({
     target: 'es2019',
     // Objectif bundle < 150 KB (doc maître) — surveiller à chaque sprint
     chunkSizeWarningLimit: 150,
+    // Sprint 9 : 2e entrée HTML pour le dashboard admin (GitHub Pages :
+    // /eperformance-widget/admin.html), à côté de l'entrée widget.
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        admin: fileURLToPath(new URL('./admin.html', import.meta.url)),
+      },
+    },
   },
   test: {
     environment: 'jsdom',

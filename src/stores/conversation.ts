@@ -81,6 +81,11 @@ export const useConversationStore = defineStore('conversation', {
         const history = await getConversation(this.conversationId, config.config.apiUrl)
         this.status = history.status
         useMessagesStore().hydrateFromHistory(history.messages)
+        // Conversation déjà prise en charge par un conseiller: reprendre le mode
+        // humain (polling) sans réafficher la bulle d'info
+        if (history.status === 'escalated') {
+          useMessagesStore().enterHumanMode(false)
+        }
         return true
       } catch (err) {
         if (err instanceof ConversationNotFoundError) {
@@ -99,7 +104,7 @@ export const useConversationStore = defineStore('conversation', {
       this.status = 'active'
       this.hasRestored = true
       localStorage.removeItem(CONVERSATION_KEY)
-      useMessagesStore().$reset()
+      useMessagesStore().clear()
     },
   },
 })
