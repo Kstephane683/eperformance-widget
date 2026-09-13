@@ -79,8 +79,8 @@ const SDK_CSS = `
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
   pointer-events: none;
 }
-#${HOLDER_ID}--right { right: 20px; }
-#${HOLDER_ID}--left { left: 20px; }
+#${HOLDER_ID}.ep-holder--right { right: 20px; }
+#${HOLDER_ID}.ep-holder--left { left: 20px; }
 #${HOLDER_ID}.ep-holder--visible {
   opacity: 1;
   visibility: visible;
@@ -184,7 +184,7 @@ function createFrame(): void {
 
   const holder = document.createElement('div')
   holder.id = HOLDER_ID
-  holder.className = `${HOLDER_ID}--${config.position}`
+  holder.className = `ep-holder--${config.position}`
   holder.setAttribute('aria-hidden', 'true')
 
   const iframe = document.createElement('iframe')
