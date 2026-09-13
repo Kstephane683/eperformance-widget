@@ -264,6 +264,17 @@ describe('sanitize (contrat V2 §Normalisations)', () => {
     expect(htmlToText(html)).toBe('Tu es dans quel secteur ?')
   })
 
+  it('htmlToText ne fuit PAS le texte des boutons backend (suggestions = quick replies natifs)', () => {
+    const html =
+      '<div style="line-height:1.6">Bonjour ! Je suis Aminata.</div>' +
+      '<div style="display:flex"><button onclick="window.deepChatSendMessage(\'Faire un diagnostic\')">Faire un diagnostic</button>' +
+      '<button>Voir nos services</button></div>'
+    const text = htmlToText(html)
+    expect(text).toBe('Bonjour ! Je suis Aminata.')
+    expect(text).not.toContain('Faire un diagnostic')
+    expect(text).not.toContain('Voir nos services')
+  })
+
   it('renderMarkdown convertit gras/italique/code en HTML sûr', () => {
     const out = renderMarkdown('Voici **un point clé** et *une nuance* et `du code`\nSuite')
     expect(out).toContain('<strong>un point clé</strong>')

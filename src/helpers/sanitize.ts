@@ -27,9 +27,11 @@ export function sanitizeMessageHtml(html: string): string {
   return host.innerHTML
 }
 
-/** Extrait le texte brut d'un html backend (fallback affichage sans rendu riche) */
+/** Extrait le texte brut d'un html backend (fallback affichage sans rendu riche).
+ *  Même exclusion que sanitizeMessageHtml : les boutons backend (suggestions
+ *  remplacées par les quick replies natifs) ne doivent PAS fuir dans le texte. */
 export function htmlToText(html: string): string {
-  const clean = DOMPurify.sanitize(html, { FORBID_TAGS: ['script', 'style'] })
+  const clean = DOMPurify.sanitize(html, { FORBID_TAGS })
   const host = document.createElement('div')
   host.innerHTML = clean
   return host.textContent?.trim() ?? ''
