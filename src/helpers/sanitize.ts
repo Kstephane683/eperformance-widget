@@ -4,20 +4,32 @@
  * Le backend renvoie le texte du message dans `html` (quand il y a des
  * suggestions), avec des boutons onclick="window.deepChatSendMessage(...)"
  * qui n'existent pas dans ce widget. On utilise metadata.suggestions (JSON)
- * pour les boutons natifs, donc le HTML est nettoyé : boutons retirés,
- * event handlers supprimés, styles inline du dark theme conservés.
+ * pour les boutons natifs, donc le HTML est nettoyé : boutons retirés
+ * AVEC leur texte (DOMPurify seul garde le contenu textuel), event
+ * handlers supprimés, styles inline du dark theme conservés.
  */
 
 import DOMPurify from 'dompurify'
 
-const FORBID_TAGS = ['script', 'style', 'iframe', 'form', 'button', 'input', 'object', 'embed']
+/**
+ * Source fiable relative (notre backend) : on retire d'abord du DOM les
+ * éléments non désirés AVEC leur contenu, PUIS on sanitize le résultat.
+ * innerHTML sur un conteneur détaché n'exécute rien.
+ */
+function stripBackendHtml(html: string): HTMLDivElement {
+  const host = document.createElement('div')
+  host.innerHTML = html
+  host
+    .querySelectorAll('button, input, form, iframe, object, embed, script, style')
+    .forEach((el) => el.remove())
+  host.innerHTML = DOMPurify.sanitize(host.innerHTML)
+  return host
+}
 
 export function sanitizeMessageHtml(html: string): string {
-  const clean = DOMPurify.sanitize(html, { FORBID_TAGS })
+  const host = stripBackendHtml(html)
 
   // Retirer les conteneurs devenus vides (ex: div des boutons supprimés)
-  const host = document.createElement('div')
-  host.innerHTML = clean
   host.querySelectorAll('div').forEach((el) => {
     if (!el.textContent?.trim() && !el.querySelector('img, a, video')) {
       el.remove()
@@ -28,13 +40,9 @@ export function sanitizeMessageHtml(html: string): string {
 }
 
 /** Extrait le texte brut d'un html backend (fallback affichage sans rendu riche).
- *  Même exclusion que sanitizeMessageHtml : les boutons backend (suggestions
- *  remplacées par les quick replies natifs) ne doivent PAS fuir dans le texte. */
+ *  Les boutons backend (suggestions → quick replies natifs) ne fuient pas. */
 export function htmlToText(html: string): string {
-  const clean = DOMPurify.sanitize(html, { FORBID_TAGS })
-  const host = document.createElement('div')
-  host.innerHTML = clean
-  return host.textContent?.trim() ?? ''
+  return stripBackendHtml(html).textContent?.trim() ?? ''
 }
 
 /**
