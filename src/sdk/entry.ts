@@ -223,6 +223,11 @@ function onWidgetMessage(e: MessageEvent) {
     if (message.event === 'close' && isOpen) {
       close()
     }
+    // Widget prêt après un refresh : resynchroniser son état avec celui du SDK
+    // (l'open() initial peut arriver avant le montage du bridge dans l'iframe)
+    if (message.event === 'ready') {
+      postToWidget({ event: isOpen ? 'open' : 'close' })
+    }
     // Le widget signale le focus/blur de son input : fiabilise le timing iOS
     // (le visualViewport resize peut arriver tard pendant l'animation clavier)
     if (message.event === 'input-focus' && isOpen) {
