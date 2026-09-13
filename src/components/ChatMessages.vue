@@ -36,6 +36,11 @@ watch(
   async () => {
     await nextTick()
     scroller.value?.scrollTo({ top: scroller.value.scrollHeight, behavior: 'smooth' })
+    // Rattrapage : les quick replies rendus après le smooth peuvent laisser
+    // quelques px — on force le bas une fois l'animation terminée
+    setTimeout(() => {
+      scroller.value?.scrollTo({ top: scroller.value.scrollHeight })
+    }, 400)
   },
 )
 </script>
@@ -46,7 +51,7 @@ watch(
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 16px 12px;
+  padding: 16px 12px 20px;
   overflow-y: auto;
 }
 </style>
