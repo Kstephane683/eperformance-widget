@@ -24,12 +24,19 @@ function newClientId(): string {
   return `conv_${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`
 }
 
+export interface WidgetIdentity {
+  userId: number | string | null
+  userData: Record<string, unknown>
+}
+
 export const useConversationStore = defineStore('conversation', {
   state: () => ({
     conversationId: localStorage.getItem(CONVERSATION_KEY) as string | null,
     status: 'active' as ConversationStatus,
     isRestoring: false,
     hasRestored: false,
+    /** Identification posée via window.ePerformance.identify() (SDK) */
+    identity: null as WidgetIdentity | null,
   }),
 
   getters: {
@@ -52,6 +59,11 @@ export const useConversationStore = defineStore('conversation', {
         this.conversationId = id
         localStorage.setItem(CONVERSATION_KEY, id)
       }
+    },
+
+    /** window.ePerformance.identify(userId, userData) — lié à visitor_info à l'envoi */
+    identify(userId: number | string | null, userData: Record<string, unknown> = {}) {
+      this.identity = { userId, userData }
     },
 
     /**

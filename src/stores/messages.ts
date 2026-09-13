@@ -83,9 +83,14 @@ export const useMessagesStore = defineStore('messages', {
       try {
         // 2. Appel backend — contrat V2 (timeout 30s géré par le client API)
         const response = await sendMessage(
-          { messages: this.toBackendMessages(), conversationId },
+          {
+            messages: this.toBackendMessages(),
+            conversationId,
+            extraVisitorInfo: conversation.identity?.userData,
+          },
           config.config.apiUrl,
           config.config.siteId,
+          conversation.identity?.userId ?? null,
         )
         this.applyResponse(response, conversationId)
       } catch (err) {

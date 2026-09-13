@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Démo — site hôte ePerformance</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #f6f4ef;
+        color: #1a1a1e;
+      }
+      .hero {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 80px 24px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 42px;
+        margin-bottom: 8px;
+      }
+      .hero p {
+        color: #6b675e;
+        line-height: 1.6;
+      }
+      .hero code {
+        background: #edeae3;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>Site hôte — simulation ePerformance.pro</h1>
+      <p>
+        Cette page simule un site client. Le SDK est chargé en bas de page : la
+        <strong>bubble dorée en bas à droite</strong> ouvre le widget en iframe.
+      </p>
+      <p>
+        API console :
+        <code>ePerformance.open()</code> · <code>ePerformance.close()</code> ·
+        <code>ePerformance.toggle()</code> ·
+        <code>ePerformance.identify(1, {name: 'Jean'})</code>
+      </p>
+    </div>
+
+    <script>
+      // Config SDK — widgetUrl = même origine (le widget buildé est servi ici)
+      window.ePerformanceConfig = {
+        widgetUrl: window.location.origin,
+        apiUrl: 'https://web-production-4ab53.up.railway.app',
+        siteId: 'eperformance_vitrine',
+        position: 'right',
+      };
+    </script>
+    <script src="/eperformance-sdk.js" defer></script>
+  </body>
+</html>

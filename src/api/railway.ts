@@ -28,12 +28,15 @@ export interface SendMessagePayload {
   /** Historique complet du store — le DERNIER élément est le message courant (role 'user') */
   messages: BackendMessage[]
   conversationId: string
+  /** Infos visiteur additionnelles (identity du SDK, page courante…) */
+  extraVisitorInfo?: Record<string, unknown>
 }
 
-function visitorInfo() {
+function visitorInfo(extra: Record<string, unknown> = {}) {
   return {
     page_url: window.location.href,
     referrer: document.referrer || undefined,
+    ...extra,
   }
 }
 
@@ -51,12 +54,14 @@ export async function sendMessage(
   payload: SendMessagePayload,
   apiBase: string,
   siteId: string,
+  userId: number | string | null = null,
 ): Promise<ChatbotMessageResponse> {
   const body: ChatbotMessageRequest = {
     messages: payload.messages,
     site_id: siteId,
     conversation_id: payload.conversationId,
-    visitor_info: visitorInfo(),
+    user_id: typeof userId === 'number' ? userId : null,
+    visitor_info: visitorInfo(payload.extraVisitorInfo),
   }
 
   const res = await fetchWithTimeout(`${apiBase}/api/chatbot/message`, {
