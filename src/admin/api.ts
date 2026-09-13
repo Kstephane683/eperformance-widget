@@ -278,3 +278,62 @@ function normalizeAgents(data: unknown): AdminAgent[] {
   }
   return agents
 }
+
+// ============================================================
+// COCKPIT UNIFIÉ — stats, users, candidats (jalon unification)
+// ============================================================
+
+export interface AdminStats {
+  conversations: number
+  conversations_en_attente: number
+  leads_chatbot: number
+  candidats: number
+  candidats_en_attente: number
+  users: number
+}
+
+export async function fetchAdminStats(): Promise<AdminStats> {
+  const res = await adminFetch('/admin/stats')
+  if (!res.ok) throw new ApiError(res.status, await errorDetail(res))
+  return (await res.json()) as AdminStats
+}
+
+export interface AdminUser {
+  id: number
+  email: string
+  nom: string | null
+  role: string
+  is_active: boolean
+  last_login: string | null
+  created_at: string | null
+}
+
+export async function fetchAdminUsers(limit = 200): Promise<{ users: AdminUser[]; total: number }> {
+  const res = await adminFetch(`/admin/users?limit=${encodeURIComponent(String(limit))}`)
+  if (!res.ok) throw new ApiError(res.status, await errorDetail(res))
+  return (await res.json()) as { users: AdminUser[]; total: number }
+}
+
+export interface AdminCandidat {
+  id: number
+  nom: string
+  email: string
+  whatsapp: string | null
+  entreprise: string | null
+  secteur: string | null
+  score: number
+  statut: string | null
+  niveau_accompagnement: string | null
+  created_at: string | null
+}
+
+export async function fetchAdminCandidats(
+  statut?: string,
+  limit = 200,
+): Promise<{ candidats: AdminCandidat[]; total: number }> {
+  const params = new URLSearchParams({ limit: String(limit) })
+  if (statut) params.set('statut', statut)
+  const res = await adminFetch(`/admin/candidats?${params.toString()}`)
+  if (!res.ok) throw new ApiError(res.status, await errorDetail(res))
+  return (await res.json()) as { candidats: AdminCandidat[]; total: number }
+}

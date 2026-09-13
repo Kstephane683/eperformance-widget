@@ -1,8 +1,9 @@
 /**
- * Point d'entrée du dashboard admin chatbot (Sprint 9).
+ * Point d'entrée du cockpit admin unifié (Sprint 9 + unification).
  *
  * Entrée Vite séparée (admin.html → #admin) : aucune influence sur le
  * bundle widget (#app). Réutilise le design system Chime (style.css).
+ * Modules: Chatbot / Utilisateurs / Candidats / Portail CRM LWS.
  */
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
@@ -11,8 +12,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import { setUnauthorizedHandler } from './api'
 import { useAdminAuthStore } from './stores/auth'
+import CandidatsView from './views/CandidatsView.vue'
+import CrmPortalView from './views/CrmPortalView.vue'
 import DashboardView from './views/DashboardView.vue'
 import LoginView from './views/LoginView.vue'
+import UsersView from './views/UsersView.vue'
 
 import '../style.css'
 
@@ -25,22 +29,29 @@ app.use(pinia)
 setUnauthorizedHandler(() => useAdminAuthStore(pinia).logout())
 
 const router = createRouter({
-  // Hash history : GitHub Pages ne réécrit pas les URLs (sous-chemin
-  // /eperformance-widget/) — le hash évite les 404 au refresh,
   // createWebHashHistory() sans argument dérive la base de
   // location.pathname : robuste quel que soit le sous-chemin de déploiement.
   history: createWebHashHistory(),
   routes: [
-    { path: '/', name: 'dashboard', component: DashboardView, meta: { requiresAuth: true } },
+    { path: '/', redirect: '/chatbot' },
+    { path: '/chatbot', name: 'chatbot', component: DashboardView, meta: { requiresAuth: true } },
+    { path: '/users', name: 'users', component: UsersView, meta: { requiresAuth: true } },
+    {
+      path: '/candidats',
+      name: 'candidats',
+      component: CandidatsView,
+      meta: { requiresAuth: true },
+    },
+    { path: '/crm', name: 'crm', component: CrmPortalView, meta: { requiresAuth: true } },
     { path: '/login', name: 'login', component: LoginView },
-    { path: '/:pathMatch(.*)*', redirect: '/' },
+    { path: '/:pathMatch(.*)*', redirect: '/chatbot' },
   ],
 })
 
 router.beforeEach((to) => {
   const auth = useAdminAuthStore(pinia)
   if (to.meta.requiresAuth === true && !auth.isAuthenticated) return { name: 'login' }
-  if (to.name === 'login' && auth.isAuthenticated) return { name: 'dashboard' }
+  if (to.name === 'login' && auth.isAuthenticated) return { name: 'chatbot' }
   return true
 })
 
