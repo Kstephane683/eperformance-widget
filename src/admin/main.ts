@@ -57,3 +57,22 @@ router.beforeEach((to) => {
 
 app.use(router)
 app.mount('#admin')
+
+// Intégration LWS (admin2/chatbot.php) : le shell PHP injecte le JWT
+// FastAPI via postMessage — auth partagée sans double login.
+// Origine stricte : uniquement le shell admin sur api.eperformance.pro.
+window.addEventListener('message', (e) => {
+  if (e.origin !== 'https://api.eperformance.pro') return
+  try {
+    const raw = typeof e.data === 'string' ? e.data : ''
+    if (!raw.startsWith('{')) return
+    const data = JSON.parse(raw) as { type?: string; token?: unknown }
+    if (data.type === 'ep-admin-auth' && typeof data.token === 'string' && data.token.length > 0) {
+      localStorage.setItem('eperf_admin_token', data.token)
+      window.location.hash = '#/chatbot'
+      window.location.reload()
+    }
+  } catch {
+    /* message non JSON — ignoré */
+  }
+})
