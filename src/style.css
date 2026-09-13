@@ -203,26 +203,37 @@ a {
   display: flex;
   gap: 10px;
   padding: 12px;
-  border-top: 1px solid var(--ep-border-soft);
-  background: var(--ep-glass);
+  border-top: 1px solid var(--ep-border);
+  background: #101014;
   backdrop-filter: blur(12px);
+  /* Élévation : la barre flotte au-dessus des messages qui défilent dessous */
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
 }
 
 .ep-input {
   flex: 1;
   padding: 12px 16px;
   border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border-soft);
-  background: var(--ep-surface-raised);
+  border: 1px solid var(--ep-border);
+  background: #060609;
   color: var(--ep-text);
   font-family: inherit;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ep-input::placeholder {
+  color: var(--ep-text-muted);
+}
+
+.ep-input:hover {
+  border-color: rgba(201, 169, 110, 0.45);
 }
 
 .ep-input:focus-visible {
   border-color: var(--ep-gold);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
 }
 
 /* Plein écran mobile (iframe) : respecter la barre home de l'iPhone */
