@@ -121,13 +121,13 @@ onMounted(load)
 
 .users__title {
   margin: 0;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 22px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .users__count {
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -135,39 +135,39 @@ onMounted(load)
   margin-left: auto;
   padding: 8px 14px;
   border-radius: 10px;
-  border: 1px solid var(--ep-border-soft);
+  border: 1px solid var(--border);
   background: transparent;
-  color: var(--ep-text);
+  color: var(--text);
   font-size: 13px;
   cursor: pointer;
 }
 
 .users__refresh:hover {
-  border-color: var(--ep-border);
+  border-color: var(--gold-border);
 }
 
 .users__search {
   max-width: 340px;
   padding: 10px 14px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border-soft);
-  background: #060609;
-  color: var(--ep-text);
+  border-radius: var(--arrondi-bouton);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
   font-size: 13px;
   outline: none;
 }
 
 .users__search:focus-visible {
-  border-color: var(--ep-gold);
+  border-color: var(--gold);
 }
 
 .users__error {
-  color: #e07070;
+  color: var(--red-text);
 }
 
 .users__empty {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .users__table {
@@ -178,13 +178,13 @@ onMounted(load)
 
 .users__table th {
   text-align: left;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-weight: 500;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 8px 10px;
-  border-bottom: 1px solid var(--ep-border-soft);
+  border-bottom: 1px solid var(--border);
 }
 
 .users__table td {
@@ -193,32 +193,32 @@ onMounted(load)
 }
 
 .users__email {
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .users__role {
   padding: 2px 10px;
-  border-radius: var(--ep-radius-full);
+  border-radius: var(--arrondi-bouton);
   font-size: 12px;
   font-weight: 600;
 }
 
 .users__role--admin {
   background: rgba(201, 169, 110, 0.15);
-  color: var(--ep-gold-light);
-  border: 1px solid var(--ep-border);
+  color: var(--gold2);
+  border: 1px solid var(--gold-border);
 }
 
 .users__role--lead {
   background: rgba(154, 150, 140, 0.12);
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .users__on {
-  color: #34c77b;
+  color: var(--green-text);
 }
 
 .users__off {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 </style>

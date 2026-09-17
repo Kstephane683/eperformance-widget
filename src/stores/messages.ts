@@ -126,7 +126,7 @@ export const useMessagesStore = defineStore('messages', {
       const waLink = `https://wa.me/${config.config.whatsappNumber.replace(/[^0-9]/g, '')}`
       const html =
         `<div style="line-height: 1.6;">${message}</div>` +
-        `<div style="margin-top: 10px;"><a href="${waLink}" target="_blank" rel="noopener" style="color: #c9a96e; font-weight: 600;">Continuer sur WhatsApp →</a></div>`
+        `<div style="margin-top: 10px;"><a href="${waLink}" target="_blank" rel="noopener" style="color: var(--gold); font-weight: 600;">Continuer sur WhatsApp →</a></div>`
       this.addLocal('agent', message, html, null)
       this.quickReplies = []
     },

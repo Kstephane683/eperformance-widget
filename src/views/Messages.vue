@@ -51,12 +51,12 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  background: var(--ep-bg);
+  background: var(--bg);
 }
 
 .ep-chat__notice {
   margin: auto;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 14px;
 }
 </style>

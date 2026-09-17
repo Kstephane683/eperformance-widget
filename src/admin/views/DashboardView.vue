@@ -556,7 +556,7 @@ watch(
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at 50% -10%, #16141c 0%, var(--ep-bg) 55%);
+  background: radial-gradient(1100px 620px at 82% -8%, var(--gold-bg), transparent 62%), radial-gradient(900px 520px at 4% 4%, var(--gold-bg), transparent 58%);
 }
 
 .ep-adm__topbar {
@@ -565,8 +565,8 @@ watch(
   justify-content: space-between;
   gap: 12px;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--ep-border-soft);
-  background: var(--ep-glass);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   backdrop-filter: blur(12px);
 }
 
@@ -582,11 +582,11 @@ watch(
   height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
   display: grid;
   place-items: center;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-weight: 700;
   font-size: 16px;
 }
@@ -597,17 +597,17 @@ watch(
 
 .ep-adm__title {
   margin: 0;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 18px;
   font-weight: 600;
   line-height: 1.15;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .ep-adm__subtitle {
   margin: 0;
   font-size: 11px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -616,10 +616,10 @@ watch(
 .ep-adm__logout {
   flex-shrink: 0;
   padding: 8px 14px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border);
+  border-radius: var(--arrondi-bouton);
+  border: 1px solid var(--gold-border);
   background: transparent;
-  color: var(--ep-gold);
+  color: var(--gold);
   font-size: 12px;
   font-weight: 600;
   transition: background 0.2s ease;
@@ -644,7 +644,7 @@ watch(
 }
 
 .ep-adm__pane--list {
-  border-right: 1px solid var(--ep-border-soft);
+  border-right: 1px solid var(--border);
   background: rgba(12, 12, 16, 0.6);
 }
 
@@ -654,16 +654,16 @@ watch(
   display: flex;
   gap: 8px;
   padding: 12px;
-  border-bottom: 1px solid var(--ep-border-soft);
+  border-bottom: 1px solid var(--border);
 }
 
 .ep-adm__search,
 .ep-adm__select {
   padding: 10px 12px;
-  border-radius: var(--ep-radius-md);
-  border: 1px solid var(--ep-border);
-  background: #060609;
-  color: var(--ep-text);
+  border-radius: var(--arrondi-input);
+  border: 1px solid var(--gold-border);
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
   font-size: 13px;
   outline: none;
@@ -676,12 +676,12 @@ watch(
 }
 
 .ep-adm__search::placeholder {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-adm__search:focus-visible,
 .ep-adm__select:focus-visible {
-  border-color: var(--ep-gold);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
 }
 
@@ -704,10 +704,10 @@ watch(
   gap: 3px;
   padding: 10px 12px;
   text-align: left;
-  border-radius: var(--ep-radius-md);
+  border-radius: var(--arrondi-input);
   border: 1px solid transparent;
   background: transparent;
-  color: var(--ep-text);
+  color: var(--text);
   font-family: inherit;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
@@ -718,7 +718,7 @@ watch(
 
 .ep-adm__item--active {
   background: rgba(201, 169, 110, 0.1);
-  border-color: var(--ep-border);
+  border-color: var(--gold-border);
 }
 
 .ep-adm__item-top {
@@ -731,7 +731,7 @@ watch(
 
 .ep-adm__time {
   font-size: 11px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   white-space: nowrap;
 }
 
@@ -742,12 +742,12 @@ watch(
 
 .ep-adm__item-phone {
   font-size: 12px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .ep-adm__item-last {
   font-size: 12.5px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -756,7 +756,7 @@ watch(
 
 .ep-adm__item-meta {
   font-size: 10.5px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   opacity: 0.8;
 }
 
@@ -766,7 +766,7 @@ watch(
   display: inline-flex;
   align-items: center;
   padding: 3px 10px;
-  border-radius: var(--ep-radius-full);
+  border-radius: var(--arrondi-bouton);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -775,11 +775,14 @@ watch(
 }
 
 .ep-adm__badge--active {
-  color: #4ade80;
+  color: var(--green-text);
   background: rgba(74, 222, 128, 0.12);
   border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
+/* Hors canon assumé : eperf.css n'a aucun jeton d'alerte (le noyau en a un,
+   `--alerte`, « noyau seulement » — DESIGN-SYSTEM-UNIFIE §2.5) ; sa promotion
+   dans eperf.css est recommandée en §6.3. Ambre littéral en attendant. */
 .ep-adm__badge--escalated {
   color: #fbbf24;
   background: rgba(251, 191, 36, 0.12);
@@ -793,13 +796,13 @@ watch(
 }
 
 .ep-adm__badge--resolved {
-  color: var(--ep-text-muted);
+  color: var(--muted);
   background: rgba(154, 150, 140, 0.12);
   border: 1px solid rgba(154, 150, 140, 0.3);
 }
 
 .ep-adm__badge--abandoned {
-  color: #7a766c;
+  color: var(--muted);
   background: rgba(122, 118, 108, 0.15);
   border: 1px solid rgba(122, 118, 108, 0.3);
 }
@@ -811,8 +814,8 @@ watch(
   flex-direction: column;
   gap: 8px;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--ep-border-soft);
-  background: var(--ep-glass);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   backdrop-filter: blur(12px);
 }
 
@@ -820,10 +823,10 @@ watch(
   display: none;
   align-self: flex-start;
   padding: 6px 12px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border);
+  border-radius: var(--arrondi-bouton);
+  border: 1px solid var(--gold-border);
   background: transparent;
-  color: var(--ep-gold);
+  color: var(--gold);
   font-size: 12px;
   font-weight: 600;
 }
@@ -837,23 +840,23 @@ watch(
 
 .ep-adm__chip {
   padding: 3px 10px;
-  border-radius: var(--ep-radius-full);
+  border-radius: var(--arrondi-bouton);
   font-size: 11px;
   font-weight: 600;
-  color: var(--ep-gold);
+  color: var(--gold);
   background: rgba(201, 169, 110, 0.1);
-  border: 1px solid var(--ep-border-soft);
+  border: 1px solid var(--border);
 }
 
 .ep-adm__chip--muted {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-adm__lead-name {
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 20px;
   font-weight: 600;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
   line-height: 1.2;
 }
 
@@ -862,7 +865,7 @@ watch(
   flex-wrap: wrap;
   gap: 12px;
   font-size: 12.5px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-adm__actions {
@@ -879,10 +882,10 @@ watch(
 
 .ep-adm__btn {
   padding: 9px 16px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border);
+  border-radius: var(--arrondi-bouton);
+  border: 1px solid var(--gold-border);
   background: rgba(201, 169, 110, 0.12);
-  color: var(--ep-gold);
+  color: var(--gold);
   font-weight: 600;
   font-size: 13px;
   transition: background 0.2s ease, border-color 0.2s ease;
@@ -890,7 +893,7 @@ watch(
 
 .ep-adm__btn:hover:not(:disabled) {
   background: rgba(201, 169, 110, 0.22);
-  border-color: var(--ep-gold);
+  border-color: var(--gold);
 }
 
 .ep-adm__btn:disabled {
@@ -900,13 +903,13 @@ watch(
 
 .ep-adm__btn--takeover {
   border: none;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
   font-weight: 700;
 }
 
 .ep-adm__btn--takeover:hover:not(:disabled) {
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
+  background: var(--gold);
   filter: brightness(1.05);
 }
 
@@ -928,7 +931,7 @@ watch(
   flex-direction: column;
   gap: 4px;
   padding: 10px 14px;
-  border-radius: var(--ep-radius-md);
+  border-radius: var(--arrondi-input);
   font-size: 14px;
   line-height: 1.55;
   word-break: break-word;
@@ -937,30 +940,30 @@ watch(
 /* Visiteur à gauche */
 .ep-adm-msg--user {
   align-self: flex-start;
-  background: var(--ep-surface-raised);
-  border: 1px solid var(--ep-border-soft);
+  background: var(--card2);
+  border: 1px solid var(--border);
 }
 
 /* IA à droite */
 .ep-adm-msg--ia {
   align-self: flex-end;
   background: rgba(201, 169, 110, 0.08);
-  border: 1px solid var(--ep-border-soft);
+  border: 1px solid var(--border);
 }
 
 /* Conseiller humain à droite, or + badge "Conseiller" */
 .ep-adm-msg--human {
   align-self: flex-end;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
 }
 
 .ep-adm-msg__badge {
   align-self: flex-start;
   padding: 2px 8px;
-  border-radius: var(--ep-radius-full);
+  border-radius: var(--arrondi-bouton);
   background: rgba(10, 10, 14, 0.18);
-  color: #0a0a0e;
+  color: var(--on-gold);
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -984,8 +987,8 @@ watch(
   align-items: flex-end;
   gap: 10px;
   padding: 12px;
-  border-top: 1px solid var(--ep-border);
-  background: #101014;
+  border-top: 1px solid var(--gold-border);
+  background: var(--card);
   backdrop-filter: blur(12px);
   box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
 }
@@ -995,10 +998,10 @@ watch(
   min-width: 0;
   resize: none;
   padding: 10px 14px;
-  border-radius: var(--ep-radius-md);
-  border: 1px solid var(--ep-border);
-  background: #060609;
-  color: var(--ep-text);
+  border-radius: var(--arrondi-input);
+  border: 1px solid var(--gold-border);
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
   font-size: 14px;
   line-height: 1.5;
@@ -1007,11 +1010,11 @@ watch(
 }
 
 .ep-adm__textarea::placeholder {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-adm__textarea:focus-visible {
-  border-color: var(--ep-gold);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
 }
 
@@ -1019,9 +1022,9 @@ watch(
   flex-shrink: 0;
   padding: 11px 20px;
   border: none;
-  border-radius: var(--ep-radius-md);
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  border-radius: var(--arrondi-input);
+  background: var(--gold);
+  color: var(--on-gold);
   font-weight: 700;
   font-size: 14px;
   transition: transform 0.15s ease, opacity 0.2s ease;
@@ -1039,9 +1042,9 @@ watch(
 .ep-adm__composer-off {
   margin: 0;
   padding: 10px 16px;
-  border-top: 1px solid var(--ep-border-soft);
+  border-top: 1px solid var(--border);
   background: rgba(12, 12, 16, 0.6);
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 12px;
 }
 
@@ -1050,7 +1053,7 @@ watch(
 .ep-adm__hint {
   margin: 0;
   padding: 14px 16px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -1062,10 +1065,10 @@ watch(
 .ep-adm__error {
   margin: 0;
   padding: 10px 12px;
-  border-radius: var(--ep-radius-md);
+  border-radius: var(--arrondi-input);
   background: rgba(220, 38, 38, 0.12);
   border: 1px solid rgba(220, 38, 38, 0.35);
-  color: #fca5a5;
+  color: var(--red-text);
   font-size: 12.5px;
 }
 
@@ -1082,16 +1085,16 @@ watch(
 
 .ep-adm__empty-title {
   margin: 0;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 20px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .ep-adm__empty-sub {
   margin: 0;
   max-width: 320px;
   font-size: 13px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 /* ==================== Mobile (mobile-first <= 900px) ==================== */

@@ -1,50 +1,295 @@
-/* ============================================================
-   DESIGN SYSTEM ePERFORMANCE — Chime Protocol v2
-   Dark #0a0a0e + Gold #c9a96e + Glassmorphism + Cormorant/DM Sans
-   ============================================================ */
+/* ==========================================================================
+   ePerformance — Design System du widget
+   source/style.css
+
+   AUCUNE valeur propre : chaque jeton est copié de
+     /home/ballo/OX6A/site-eperformance/assets/css/eperf.css  (couche tokens)
+   et chaque composant reprend la recette de la couche components du site.
+   Les références `eperf.css:NNN` citées en commentaire sont les lignes exactes.
+
+   Thème : CLAIR par défaut, comme le site (`index.html` → data-theme="light").
+   L'iframe est un document séparé : elle n'hérite pas des variables du site,
+   donc elle les redéclare à l'identique — c'est le SDK qui transmet le thème
+   (query param au chargement, postMessage ensuite). Voir DESIGN-SYSTEM-UNIFIE §5.1.
+
+   Aucun nom `--ep-*` ne subsiste : la palette maison a été remplacée par les
+   jetons canoniques du site (mêmes noms, mêmes valeurs qu'eperf.css).
+   Correspondance complète jeton → jeton : DESIGN-SYSTEM-UNIFIE §5.2.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Polices — auto-hébergées, sous-ensemble latin, aucun appel à Google Fonts.
+   Neuf déclarations pour trois fichiers réels (les fichiers sont variables),
+   strictement les mêmes que le site : eperf.css:37-134 / theme.py:66.
+   Préchargement des deux graisses du premier écran dans index.html
+   (cormorant-garamond-700 + dm-sans-400), comme le site.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-500-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-600-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/dm-sans-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/dm-sans-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/dm-sans-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/dm-sans-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+                 U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
+   JETONS CANONIQUES — thème clair (défaut)
+   Valeurs copiées de eperf.css:136-225. `--gold`/`--gold2` suivent la DÉCISION
+   D6 du DESIGN-SYSTEM-UNIFIE (§2.3) : l'accent clair du site (#8a6f38) mesure
+   4,37:1 sur --bg2, sous le seuil AA ; #856b37 le remet au-dessus (NOYAU-1:67-79).
+   ========================================================================== */
 
 :root {
-  --ep-bg: #0a0a0e;
-  --ep-surface: #0c0c10;
-  --ep-surface-raised: #1a1a1e;
-  --ep-border: rgba(201, 169, 110, 0.25);
-  --ep-border-soft: rgba(201, 169, 110, 0.12);
-  --ep-gold: #c9a96e;
-  --ep-gold-light: #e2c07a;
-  --ep-text: #edeae3;
-  --ep-text-muted: #9a968c;
+  /* Surfaces — eperf.css:157-160 */
+  --bg: #fdfcfa;
+  --bg2: #f7f5f1;
+  --card: #ffffff;
+  --card2: #faf8f4;
 
-  --ep-radius-lg: 20px;
-  --ep-radius-md: 14px;
-  --ep-radius-full: 999px;
+  /* Texte — eperf.css:163-165 (17,71:1 / 9,60:1 / 5,41:1 sur --bg) */
+  --text: #16151a;
+  --soft: #45424b;
+  --muted: #6a676f;
 
-  --ep-font-title: 'Cormorant Garamond', Georgia, serif;
-  --ep-font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Accent or — eperf.css:167-172, valeurs du noyau (D6) */
+  --gold: #856b37;
+  --gold2: #735d32;
+  --gold-bg: color-mix(in srgb, var(--gold) 7%, transparent);
+  --gold-border: color-mix(in srgb, var(--gold) 22%, transparent);
+  --gold-glow: color-mix(in srgb, var(--gold) 28%, transparent);
 
-  --ep-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-  --ep-glass: rgba(12, 12, 16, 0.92);
+  /* Filets — eperf.css:175-177. --border sépare (décoratif),
+     --border-strong délimite un contrôle (3:1 obligatoire, WCAG 1.4.11) */
+  --border: #e5e1d9;
+  --border2: #d5cfc3;
+  --border-strong: #8f8a7e;
+
+  /* Texte posé sur un remplissage — eperf.css:180-181 */
+  --on-gold: #ffffff;
+  --on-wa: #0a0a0e;
+
+  /* WhatsApp — eperf.css:184-185 (marque : ne se rethématise pas) */
+  --wa: #25d366;
+  --wa-text: #0f7a41;
+
+  /* Sémantique — eperf.css:188-193 */
+  --red-text: #a8302f;
+  --red-border: rgba(180, 45, 45, 0.28);
+  --red-bg: rgba(180, 45, 45, 0.06);
+  --green-text: #12703f;
+  --green-border: rgba(20, 125, 70, 0.28);
+  --green-bg: rgba(20, 125, 70, 0.06);
+
+  /* Élévations — eperf.css:196-199 */
+  --shadow-sm: 0 1px 2px rgba(22, 21, 26, 0.04), 0 1px 3px rgba(22, 21, 26, 0.06);
+  --shadow-md: 0 4px 12px rgba(22, 21, 26, 0.06), 0 12px 28px rgba(22, 21, 26, 0.07);
+  --shadow-lg: 0 12px 32px rgba(22, 21, 26, 0.08), 0 32px 64px rgba(22, 21, 26, 0.09);
+  --shadow-gold: 0 6px 24px rgba(138, 111, 56, 0.14);
+
+  /* Rayons — échelle 12 / 20 / 28 / 36 / 999 (eperf.css:146-149,202-206).
+     --arrondi-bloc vaut 12px dans eperf.css:148 (et non 20px) : c'est la
+     valeur retenue pour les blocs du widget (bulles, cadre de l'iframe). */
+  --arrondi-input: 12px;
+  --arrondi-bloc: 12px;
+  --arrondi-carte: 28px;
+  --arrondi-bouton: 999px;
+
+  /* Typographie — eperf.css:144-145 */
+  --police-titres: 'Cormorant Garamond', Georgia, serif;
+  --police-corps: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* Mouvement — eperf.css:214-218 */
+  --t-fast: 150ms;
+  --t: 300ms;
+  --t-slow: 600ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+/* Thème sombre — eperf.css:228-274, valeurs identiques */
+[data-theme='dark'] {
+  --bg: #08080c;
+  --bg2: #0c0c10;
+  --card: #101014;
+  --card2: #14141a;
+
+  --text: #edeae3;
+  --soft: #b0aaa0;
+  --muted: #8b8b96;
+
+  --gold: #c9a96e;
+  --gold2: #e2c07a;
+  --gold-bg: color-mix(in srgb, var(--gold) 8%, transparent);
+  --gold-border: color-mix(in srgb, var(--gold) 22%, transparent);
+  --gold-glow: color-mix(in srgb, var(--gold) 40%, transparent);
+
+  --border: #1c1c22;
+  --border2: #282830;
+  --border-strong: #646470;
+
+  --on-gold: #0a0a0e;
+  --on-wa: #0a0a0e;
+
+  --wa: #25d366;
+  --wa-text: #25d366;
+
+  --red-text: #e07070;
+  --red-border: rgba(220, 60, 60, 0.3);
+  --red-bg: rgba(220, 60, 60, 0.12);
+  --green-text: #6fcf8a;
+  --green-border: rgba(60, 180, 100, 0.3);
+  --green-bg: rgba(60, 180, 100, 0.1);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-gold: 0 8px 32px rgba(201, 169, 110, 0.15);
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   SOCLE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 * {
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* Iframe plein écran mobile : immobiliser le document de l'iframe.
    Sur iOS, l'ouverture du clavier fait DÉFILER le document pour amener
    l'input au-dessus du clavier → l'interface se décale et se casse.
-   Un body position:fixed ne peut pas défiler : seul .ep-messages scrolle. */
+   Un body position:fixed ne peut pas défiler : seul .ep-messages scrolle.
+   Exception technique assumée (DESIGN-SYSTEM-UNIFIE §5.4). */
 html,
 body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: fixed;
   inset: 0;
-  font-family: var(--ep-font-body);
-  background: var(--ep-bg);
-  color: var(--ep-text);
+  font-family: var(--police-corps);
+  font-size: 1rem;
+  line-height: 1.65; /* interligne corps du site — eperf.css:304 */
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Anneau de focus du site (eperf.css:371-375), appliqué aux éléments
+   actionnables de l'iframe — les champs ont le leur (bordure + halo). */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--on-gold);
 }
 
 /* Le widget tourne en iframe : plein écran de son viewport */
@@ -60,7 +305,7 @@ button {
 }
 
 a {
-  color: var(--ep-gold);
+  color: var(--gold);
 }
 
 /* ---------- Bulles de message ---------- */
@@ -68,24 +313,28 @@ a {
 .ep-bubble {
   max-width: 82%;
   padding: 12px 16px;
-  border-radius: var(--ep-radius-md);
+  border-radius: var(--arrondi-bloc);
   font-size: 14px;
   line-height: 1.6;
   word-break: break-word;
 }
 
+/* Bulle utilisateur : or plein + --on-gold (jamais de dégradé — ADR-0003:57,
+   « un accent unique, aucun dégradé d'accent »). */
 .ep-bubble--user {
   align-self: flex-end;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
   border-bottom-right-radius: 4px;
 }
 
+/* Bulle agent : recette de .card (eperf.css:737-745) sans l'ombre —
+   fond --card, filet décoratif --border. */
 .ep-bubble--agent {
   align-self: flex-start;
-  background: var(--ep-surface-raised);
-  border: 1px solid var(--ep-border-soft);
-  color: var(--ep-text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
   border-bottom-left-radius: 4px;
 }
 
@@ -93,33 +342,29 @@ a {
   display: block;
   margin-top: 6px;
   font-size: 11px;
-  opacity: 0.65;
+  color: var(--muted);
 }
 
 /* Rendu markdown dans les bulles agent */
 .ep-bubble--agent strong {
-  color: var(--ep-gold-light);
+  color: var(--gold2);
   font-weight: 700;
 }
 
 .ep-bubble--agent em {
-  opacity: 0.9;
+  font-style: italic;
 }
 
 .ep-bubble--agent code {
-  background: rgba(201, 169, 110, 0.12);
-  border: 1px solid var(--ep-border-soft);
-  border-radius: 6px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--arrondi-input);
   padding: 1px 6px;
   font-size: 13px;
 }
 
-.ep-bubble--agent p {
-  margin: 0 0 8px;
-}
-
-.ep-bubble--agent p:last-child {
-  margin-bottom: 0;
+.ep-bubble--agent p:not(:last-child) {
+  margin-bottom: 8px;
 }
 
 .ep-bubble--agent ol,
@@ -134,16 +379,49 @@ a {
 
 .ep-bubble--agent ol::marker,
 .ep-bubble--agent li::marker {
-  color: var(--ep-gold);
+  color: var(--gold);
   font-weight: 600;
 }
 
 .ep-bubble--agent a {
-  color: var(--ep-gold-light);
+  color: var(--gold2);
   font-weight: 600;
 }
 
-/* ---------- Quick replies ---------- */
+/* Heure + copier dans le pied de bulle — --muted remplace les opacités :
+   une opacité n'est pas mesurable en contraste, un jeton l'est (NOYAU-2:44-49). */
+.ep-bubble__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.ep-bubble--user .ep-bubble__time {
+  color: var(--on-gold);
+}
+
+.ep-bubble__copy {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 2px;
+  transition: color var(--t-fast) var(--ease-out);
+}
+
+.ep-bubble__copy:hover {
+  color: var(--gold);
+}
+
+.ep-bubble--user .ep-bubble__copy:hover {
+  color: var(--on-gold);
+}
+
+/* ---------- Réponses rapides ---------- */
 
 .ep-quick-replies {
   display: flex;
@@ -152,23 +430,35 @@ a {
   padding: 4px 12px;
 }
 
+/* Variante de .btn-outline (eperf.css:518-523) : pilule, filet d'accent */
 .ep-quick-reply {
-  padding: 9px 16px;
-  border-radius: var(--ep-radius-full);
-  background: rgba(201, 169, 110, 0.12);
-  color: var(--ep-gold);
-  border: 1px solid var(--ep-border);
+  padding: 8px 16px;
+  border-radius: var(--arrondi-bouton);
+  background: var(--gold-bg);
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
   font-weight: 600;
   font-size: 13px;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background-color var(--t) var(--ease-out),
+              border-color var(--t) var(--ease-out),
+              color var(--t) var(--ease-out);
 }
 
 .ep-quick-reply:hover {
-  background: rgba(201, 169, 110, 0.2);
-  border-color: var(--ep-gold);
+  background: var(--card2);
+  border-color: var(--gold);
 }
 
-/* ---------- Typing indicator ---------- */
+.ep-quick-reply:disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+  border-color: var(--border);
+  background: transparent;
+}
+
+/* ---------- Indicateur de saisie ---------- */
+/* L'animation est conservée : elle porte un état, pas une décoration
+   (DESIGN-SYSTEM-UNIFIE §4, règle 4). */
 
 .ep-typing {
   display: inline-flex;
@@ -181,7 +471,7 @@ a {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ep-gold);
+  background: var(--gold);
   animation: ep-typing-bounce 1.2s infinite ease-in-out;
 }
 
@@ -206,60 +496,68 @@ a {
   }
 }
 
-/* ---------- Input bar ---------- */
+/* ---------- Zone de saisie ---------- */
 
 .ep-input-bar {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   padding: 12px;
-  border-top: 1px solid var(--ep-border);
-  background: #101014;
-  backdrop-filter: blur(12px);
-  /* Élévation : la barre flotte au-dessus des messages qui défilent dessous */
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
+  align-items: center;
 }
 
 .ep-input {
   flex: 1;
   padding: 12px 16px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border);
-  background: #060609;
-  color: var(--ep-text);
+  border-radius: var(--arrondi-input);
+  /* --border-strong et non --border : un champ est un Contrôle au sens de
+     WCAG 1.4.11 (3:1 obligatoire) — eperf.css:1032-1034, NOYAU-2:74-82. */
+  border: 1px solid var(--border-strong);
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color var(--t) var(--ease-out), box-shadow var(--t) var(--ease-out);
 }
 
 .ep-input::placeholder {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-input:hover {
-  border-color: rgba(201, 169, 110, 0.45);
+  border-color: var(--gold);
 }
 
 .ep-input:focus-visible {
-  border-color: var(--ep-gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-bg);
+  outline: none;
 }
 
+/* Bouton d'envoi : recette de .btn-gold (eperf.css:511-516) */
 .ep-send {
   width: 44px;
   height: 44px;
   flex-shrink: 0;
   border: none;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
+  box-shadow: var(--shadow-gold);
   display: grid;
   place-items: center;
-  transition: transform 0.15s ease, opacity 0.2s ease;
+  transition: background-color var(--t) var(--ease-out),
+              transform var(--t-fast) var(--ease-out);
 }
 
+/* Le site ne grossit jamais un bouton au survol : il change la couleur
+   (eperf.css:516) et décale de 1px à l'appui (eperf.css:509). */
 .ep-send:hover:not(:disabled) {
-  transform: scale(1.05);
+  background: var(--gold2);
+}
+
+.ep-send:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .ep-send:disabled {
@@ -267,40 +565,16 @@ a {
   cursor: not-allowed;
 }
 
-/* Heure + copier dans le pied de bulle */
-.ep-bubble__time {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
-  font-size: 10.5px;
-  opacity: 0.55;
-}
-
-.ep-bubble__copy {
-  border: none;
-  background: transparent;
-  color: inherit;
-  font-size: 12px;
-  cursor: pointer;
-  padding: 0 2px;
-  opacity: 0.7;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
-
-.ep-bubble__copy:hover {
-  opacity: 1;
-  transform: scale(1.15);
-}
-
-/* Accessibilité : réduire les animations si demandé par le système */
+/* Accessibilité : réduire les animations si demandé par le système.
+   Durées à 1ms et non 0 : une transition nulle ne déclenche pas
+   `transitionend` (NOYAU-2:340-345, eperf.css:1440-1444). */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 1ms !important;
   }
 }
 
@@ -310,34 +584,45 @@ a {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--ep-border-soft);
-  background: var(--ep-glass);
-  backdrop-filter: blur(12px);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  /* Même recette que .site-header (eperf.css:543-551) : surface à 92 % + flou */
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
 }
 
 .ep-header__avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
   display: grid;
   place-items: center;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-weight: 700;
   font-size: 17px;
   flex-shrink: 0;
 }
 
 .ep-header__name {
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  line-height: 1.08; /* interligne titre du site — eperf.css:344 */
+  letter-spacing: -0.02em; /* eperf.css:345 */
 }
 
 .ep-header__status {
   font-size: 12px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
+
+/* ---------- Fin du design system du widget ----------
+   Aucun nom `--ep-*` ne subsiste : l'ancienne palette maison a été remplacée
+   par les jetons canoniques ci-dessus (vérification :
+   `grep -rn 'var(--ep-[a-z-]*)' src/` doit rester vide). Les seules variables
+   `--ep-sdk-*` restantes vivent dans src/sdk/entry.ts : ce sont les **replis**
+   des jetons pour un site hôte qui ne les déclare pas (le SDK n'est pas dans
+   l'iframe et ne peut donc pas hériter des variables de la page). */

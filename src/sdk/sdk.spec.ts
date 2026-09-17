@@ -156,3 +156,112 @@ describe('sdkBridge (côté widget)', () => {
     document.documentElement.removeAttribute('data-theme')
   })
 })
+
+describe('SDK — jetons canoniques (tâche 6.2)', () => {
+  const tick = () => new Promise((resolve) => setTimeout(resolve, 0))
+
+  function bubbleEl() {
+    return document.getElementById('eperformance-widget-bubble') as HTMLElement
+  }
+
+  it("la bulle prend l'accent canonique clair par défaut (#856b37, D6)", () => {
+    // Aucun data-theme : le défaut du site est clair (SDK:266)
+    expect(document.documentElement.getAttribute('data-theme')).toBeNull()
+    expect(bubbleEl().style.getPropertyValue('--ep-sdk-gold')).toBe('#856b37')
+    expect(bubbleEl().style.getPropertyValue('--ep-sdk-gold-hover')).toBe('#735d32')
+    expect(bubbleEl().style.getPropertyValue('--ep-sdk-on-gold')).toBe('#ffffff')
+  })
+
+  it('la bulle suit la bascule sombre du site (#c9a96e / #e2c07a)', async () => {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    await tick() // le MutationObserver du pont de thème pousse le changement
+
+    expect(bubbleEl().style.getPropertyValue('--ep-sdk-gold')).toBe('#c9a96e')
+    expect(bubbleEl().style.getPropertyValue('--ep-sdk-gold-hover')).toBe('#e2c07a')
+    expect(bubbleEl().style.getPropertyValue('--ep-sdk-on-gold')).toBe('#0a0a0e')
+    document.documentElement.removeAttribute('data-theme')
+  })
+
+  it("une couleur explicite de l'hôte gagne sur le jeton du thème", () => {
+    window.ePerformanceConfig = { color: '#ff0000' }
+    document.body.innerHTML = ''
+    document.head.innerHTML = ''
+    try {
+      initSdk()
+      expect(bubbleEl().getAttribute('style') ?? '').toMatch(/#ff0000|255,\s*0,\s*0/i)
+      // le paramètre est aussi transmis à l'iframe
+      const frame = document.getElementById('eperformance-widget-frame') as HTMLIFrameElement
+      expect(decodeURIComponent(frame.src)).toContain('color=#ff0000')
+    } finally {
+      window.ePerformanceConfig = undefined
+    }
+  })
+
+  it("l'iframe reçoit le thème détecté (anti-flash de index.html)", () => {
+    const frame = document.getElementById('eperformance-widget-frame') as HTMLIFrameElement
+    expect(frame.src).toContain('theme=light')
+  })
+})
+
+describe('SDK — bandeau de consentement (D9)', () => {
+  const tick = () => new Promise((resolve) => setTimeout(resolve, 0))
+
+  function ids() {
+    return {
+      bubble: document.getElementById('eperformance-widget-bubble') as HTMLElement,
+      holder: document.getElementById('eperformance-widget-holder') as HTMLElement,
+    }
+  }
+
+  function addConsentBanner(): HTMLElement {
+    const banner = document.createElement('div')
+    banner.className = 'consent'
+    banner.id = 'consent-banner'
+    document.body.appendChild(banner)
+    return banner
+  }
+
+  it('masque la bulle et abaisse le holder sous z-index 120 tant que le bandeau est affiché', async () => {
+    const banner = addConsentBanner()
+    initSdk() // le bandeau est déjà dans le DOM → l'état doit être appliqué tout de suite
+
+    expect(ids().bubble.classList.contains('ep-consent-visible')).toBe(true)
+    expect(ids().holder.classList.contains('ep-consent-visible')).toBe(true)
+
+    // La règle CSS abaisse le holder sous .consent (z-index: 120, eperf.css:1215)
+    const css = Array.from(document.querySelectorAll('style'))
+      .map((s) => s.textContent ?? '')
+      .join('\n')
+    expect(css).toContain('z-index: 119 !important')
+    expect(css).toContain('display: none !important')
+
+    // L'utilisateur a exprimé son choix : consent.js pose `hidden`
+    banner.hidden = true
+    await tick()
+
+    expect(ids().bubble.classList.contains('ep-consent-visible')).toBe(false)
+    expect(ids().holder.classList.contains('ep-consent-visible')).toBe(false)
+  })
+
+  it('réagit à un bandeau injecté après le chargement du SDK', async () => {
+    expect(ids().bubble.classList.contains('ep-consent-visible')).toBe(false)
+
+    const banner = addConsentBanner()
+    await tick()
+
+    expect(ids().bubble.classList.contains('ep-consent-visible')).toBe(true)
+
+    banner.remove()
+    await tick()
+    expect(ids().bubble.classList.contains('ep-consent-visible')).toBe(false)
+  })
+
+  it('ne masque rien quand le bandeau est présent mais déjà [hidden]', async () => {
+    const banner = addConsentBanner()
+    banner.hidden = true
+    await tick()
+
+    expect(ids().bubble.classList.contains('ep-consent-visible')).toBe(false)
+    expect(ids().holder.classList.contains('ep-consent-visible')).toBe(false)
+  })
+})

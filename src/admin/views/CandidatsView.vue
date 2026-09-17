@@ -133,13 +133,13 @@ onMounted(load)
 
 .cand__title {
   margin: 0;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 22px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .cand__count {
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -147,34 +147,34 @@ onMounted(load)
   margin-left: auto;
   padding: 8px 14px;
   border-radius: 10px;
-  border: 1px solid var(--ep-border-soft);
+  border: 1px solid var(--border);
   background: transparent;
-  color: var(--ep-text);
+  color: var(--text);
   font-size: 13px;
   cursor: pointer;
 }
 
 .cand__refresh:hover {
-  border-color: var(--ep-border);
+  border-color: var(--gold-border);
 }
 
 .cand__select {
   max-width: 240px;
   padding: 10px 14px;
   border-radius: 10px;
-  border: 1px solid var(--ep-border-soft);
-  background: #060609;
-  color: var(--ep-text);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
   font-size: 13px;
 }
 
 .cand__error {
-  color: #e07070;
+  color: var(--red-text);
 }
 
 .cand__empty {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .cand__grid {
@@ -188,9 +188,9 @@ onMounted(load)
   flex-direction: column;
   gap: 8px;
   padding: 14px;
-  border: 1px solid var(--ep-border-soft);
-  border-radius: var(--ep-radius-md);
-  background: var(--ep-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-input);
+  background: var(--bg2);
 }
 
 .cand__card-head {
@@ -206,7 +206,7 @@ onMounted(load)
 
 .cand__score {
   padding: 3px 10px;
-  border-radius: var(--ep-radius-full);
+  border-radius: var(--arrondi-bouton);
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
@@ -214,19 +214,19 @@ onMounted(load)
 
 .cand__score--high {
   background: rgba(52, 199, 123, 0.15);
-  color: #34c77b;
+  color: var(--green-text);
   border: 1px solid rgba(52, 199, 123, 0.3);
 }
 
 .cand__score--mid {
   background: rgba(201, 169, 110, 0.15);
-  color: var(--ep-gold-light);
-  border: 1px solid var(--ep-border);
+  color: var(--gold2);
+  border: 1px solid var(--gold-border);
 }
 
 .cand__score--low {
   background: rgba(154, 150, 140, 0.12);
-  color: var(--ep-text-muted);
+  color: var(--muted);
   border: 1px solid rgba(154, 150, 140, 0.25);
 }
 
@@ -235,11 +235,11 @@ onMounted(load)
   flex-direction: column;
   gap: 3px;
   font-size: 13px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .cand__contact a {
-  color: var(--ep-gold);
+  color: var(--gold);
   text-decoration: none;
 }
 
@@ -254,16 +254,18 @@ onMounted(load)
   flex-wrap: wrap;
   margin-top: auto;
   padding-top: 8px;
-  border-top: 1px solid var(--ep-border-soft);
+  border-top: 1px solid var(--border);
   font-size: 12px;
 }
 
 .cand__statut {
   padding: 2px 10px;
-  border-radius: var(--ep-radius-full);
+  border-radius: var(--arrondi-bouton);
   font-weight: 600;
 }
 
+/* Hors canon assumé (même raison que DashboardView.vue : ni --alerte ni --info
+   dans eperf.css — DESIGN-SYSTEM-UNIFIE §2.5, promotion §6.3). */
 .cand__statut--en_attente {
   background: rgba(226, 141, 62, 0.15);
   color: #e28d3e;
@@ -271,12 +273,12 @@ onMounted(load)
 
 .cand__statut--accepte {
   background: rgba(52, 199, 123, 0.15);
-  color: #34c77b;
+  color: var(--green-text);
 }
 
 .cand__statut--refuse {
   background: rgba(154, 150, 140, 0.12);
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .cand__statut--alumni {
@@ -285,12 +287,12 @@ onMounted(load)
 }
 
 .cand__niveau {
-  color: var(--ep-gold);
+  color: var(--gold);
   font-weight: 600;
 }
 
 .cand__date {
   margin-left: auto;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 </style>

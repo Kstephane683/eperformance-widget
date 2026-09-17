@@ -37,49 +37,53 @@ function close() {
   min-width: 0;
 }
 
+/* Mise en page seule : la typographie et la couleur du statut viennent du
+   design system global (.ep-header__status dans src/style.css → --muted). */
 .ep-header__status {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-  color: var(--ep-text-muted);
 }
 
+/* Pastille « en ligne » : état de succès → --green-text (eperf.css:192,265).
+   L'animation porte l'information « en direct » : elle est légitime
+   (DESIGN-SYSTEM-UNIFIE §4, règle 4). */
 .ep-header__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #34c77b;
-  box-shadow: 0 0 0 0 rgba(52, 199, 123, 0.5);
+  background: var(--green-text);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--green-text) 50%, transparent);
   animation: ep-online-pulse 2s infinite;
 }
 
 @keyframes ep-online-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(52, 199, 123, 0.5);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--green-text) 50%, transparent);
   }
   70% {
-    box-shadow: 0 0 0 7px rgba(52, 199, 123, 0);
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--green-text) 0%, transparent);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(52, 199, 123, 0);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--green-text) 0%, transparent);
   }
 }
 
+/* Bouton icône : recette .theme-toggle du site (eperf.css:623-637) */
 .ep-header__close {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(201, 169, 110, 0.12);
-  color: var(--ep-gold);
+  background: var(--gold-bg);
+  color: var(--gold);
   display: grid;
   place-items: center;
-  transition: background 0.2s ease;
+  transition: background-color var(--t) var(--ease-out), color var(--t) var(--ease-out);
 }
 
 .ep-header__close:hover {
-  background: rgba(201, 169, 110, 0.25);
+  background: var(--gold-border);
 }
 </style>

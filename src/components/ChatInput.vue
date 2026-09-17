@@ -89,17 +89,20 @@ function submit() {
 </script>
 
 <style scoped>
+/* Surface de la zone de saisie : recette de barre du site — fond --card,
+   filet décoratif --border en haut, ombre --shadow-md (l'ancien dégradé
+   d'ombre et le backdrop-filter inutile sont retirés : DESIGN-SYSTEM-UNIFIE
+   §5.4). Le reste (.ep-input-bar, .ep-input, .ep-send) est global. */
 .ep-input-zone {
-  border-top: 1px solid var(--ep-border);
-  background: #101014;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
+  border-top: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-md);
 }
 
 .ep-emoji-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 4px;
   padding: 8px 12px 0;
 }
 
@@ -107,24 +110,17 @@ function submit() {
   width: 36px;
   height: 36px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--arrondi-input);
   background: transparent;
+  color: inherit;
   font-size: 20px;
   line-height: 1;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: background-color var(--t) var(--ease-out);
 }
 
 .ep-emoji:hover {
-  background: rgba(201, 169, 110, 0.12);
-  transform: scale(1.15);
-}
-
-.ep-input-bar {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  align-items: center;
+  background: var(--gold-bg);
 }
 
 .ep-emoji-toggle {
@@ -133,62 +129,18 @@ function submit() {
   flex-shrink: 0;
   border: none;
   background: transparent;
+  color: var(--muted);
   font-size: 20px;
   cursor: pointer;
-  border-radius: 10px;
-  transition: transform 0.15s ease;
+  border-radius: var(--arrondi-input);
+  transition: color var(--t) var(--ease-out), background-color var(--t) var(--ease-out);
 }
 
+/* Le site ne grossit pas ses boutons au survol : il change la couleur
+   (eperf.css:617, 637). */
 .ep-emoji-toggle:hover {
-  transform: scale(1.15);
-}
-
-.ep-input {
-  flex: 1;
-  padding: 12px 16px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border);
-  background: #060609;
-  color: var(--ep-text);
-  font-family: inherit;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.ep-input::placeholder {
-  color: var(--ep-text-muted);
-}
-
-.ep-input:hover {
-  border-color: rgba(201, 169, 110, 0.45);
-}
-
-.ep-input:focus-visible {
-  border-color: var(--ep-gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
-}
-
-.ep-send {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
-  display: grid;
-  place-items: center;
-  transition: transform 0.15s ease, opacity 0.2s ease;
-}
-
-.ep-send:hover:not(:disabled) {
-  transform: scale(1.05);
-}
-
-.ep-send:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+  color: var(--gold);
+  background: var(--gold-bg);
 }
 
 /* Plein écran mobile (iframe) : respecter la barre home de l'iPhone */

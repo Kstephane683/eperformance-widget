@@ -27,7 +27,12 @@ interface SdkConfig {
   widgetUrl: string
   apiUrl: string
   siteId: string
-  color: string
+  /**
+   * Couleur de la bulle. **Paramètre d'hôte, pas un jeton** : s'il est fourni,
+   * il gagne toujours. Omis, la bulle prend `--gold` canonique selon le thème
+   * détecté (DESIGN-SYSTEM-UNIFIE §5.5).
+   */
+  color?: string
   position: 'left' | 'right'
   /** 'auto' suit le thème du site (data-theme + localStorage eperf-theme) */
   theme?: 'auto' | 'light' | 'dark'
@@ -52,12 +57,30 @@ const DEFAULTS: SdkConfig = {
   widgetUrl: 'http://localhost:4173',
   apiUrl: 'https://web-production-4ab53.up.railway.app',
   siteId: 'eperformance_vitrine',
-  color: '#c9a96e',
   position: 'right',
 }
 
+/**
+ * Jetons canoniques dupliqués dans le SDK — l'iframe et la page hôte peuvent
+ * ne pas être ePerformance, et `var(--gold)` d'une page tierce n'a pas de sens.
+ * Sur un hôte ePerformance, le jeton de la page gagne (`var(--gold, …)`) ;
+ * ailleurs, ces valeurs servent de repli. Source : eperf.css:167-185,245-259.
+ */
+const CANON_GOLD = { light: '#856b37', dark: '#c9a96e' } // D6 / eperf.css:168,245
+const CANON_GOLD_HOVER = { light: '#735d32', dark: '#e2c07a' } // eperf.css:169,246
+const CANON_ON_GOLD = { light: '#ffffff', dark: '#0a0a0e' } // eperf.css:180,255
+const CANON_CARD2 = { light: '#faf8f4', dark: '#14141a' } // eperf.css:160,239
+const CANON_TEXT = { light: '#16151a', dark: '#edeae3' } // eperf.css:163,241
+
 const MESSAGE_PREFIX = 'eperformance-widget:'
 const BASE_Z_INDEX = 2147483000
+/* Le bandeau `.consent` du site est un overlay légal (z-index: 120,
+   eperf.css:1215) : le widget ne doit jamais le recouvrir. Même règle que le
+   bouton WhatsApp du site (« body:has(.consent:not([hidden])) .wa-float
+   { display: none } », eperf.css:1179). DÉCISION D9. */
+const CONSENT_SELECTOR = '.consent'
+const CONSENT_VISIBLE_CLASS = 'ep-consent-visible'
+const CONSENT_SAFE_Z_INDEX = 119
 const FRAME_ID = 'eperformance-widget-frame'
 const HOLDER_ID = 'eperformance-widget-holder'
 const BUBBLE_ID = 'eperformance-widget-bubble'
@@ -67,8 +90,16 @@ const TEASER_KEY = 'eperf_teaser_done'
 const MOBILE_BREAKPOINT = 668
 const TEASER_DELAY_MS = 20_000
 
+/** Courbe et durées canoniques (eperf.css:214-218) — repli hors ePerformance */
+const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
+
 // ============================================================
 // CSS embarqué (pattern Chatwoot loadCSS — pas de fichier externe)
+//
+// Aucune valeur propre : chaque couleur est `var(--jeton-canonique, repli)`,
+// le repli étant le jeton eperf.css recopié (la page hôte peut être tierce).
+// Rayons : échelle 12 / 20 / 28 / 36 / 999 (eperf.css:146-149,202-206).
+// Durées : --t / --t-fast + --ease-out (eperf.css:214-218).
 // ============================================================
 
 const SDK_CSS = `
@@ -82,9 +113,14 @@ const SDK_CSS = `
   opacity: 0;
   visibility: hidden;
   transform: translateY(24px) scale(0.98);
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  transition: opacity var(--t, 300ms) var(--ease-out, ${EASE}),
+              transform var(--t, 300ms) var(--ease-out, ${EASE}),
+              visibility var(--t, 300ms);
   pointer-events: none;
 }
+/* Le bandeau de consentement du site (z-index: 120) passe devant le widget :
+   tant qu'il est affiché, le holder redescend sous 120 (DÉCISION D9). */
+#${HOLDER_ID}.${CONSENT_VISIBLE_CLASS} { z-index: ${CONSENT_SAFE_Z_INDEX} !important; }
 #${HOLDER_ID}.ep-holder--right { right: 20px; }
 #${HOLDER_ID}.ep-holder--left { left: 20px; }
 #${HOLDER_ID}.ep-holder--visible {
@@ -97,8 +133,10 @@ const SDK_CSS = `
   width: 100%;
   height: 100%;
   border: 0;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  /* --arrondi-bloc vaut 12px dans eperf.css:148 (bloc, et non 20px comme le
+     laissait croire le tableau §5.5 du document d'audit). */
+  border-radius: var(--arrondi-bloc, 12px);
+  box-shadow: var(--shadow-lg, 0 12px 32px rgba(22, 21, 26, 0.08), 0 32px 64px rgba(22, 21, 26, 0.09));
 }
 #${BUBBLE_ID} {
   position: fixed !important;
@@ -112,13 +150,22 @@ const SDK_CSS = `
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 0 6px rgba(201, 169, 110, 0.15);
-  transition: transform 0.15s ease;
-  color: #0a0a0e;
+  /* 2e ombre : le halo d'accent, comme le bouton WhatsApp du site */
+  box-shadow: var(--shadow-lg, 0 12px 32px rgba(22, 21, 26, 0.08), 0 32px 64px rgba(22, 21, 26, 0.09)),
+              0 0 0 6px var(--gold-bg, rgba(133, 107, 55, 0.07));
+  background: var(--gold, var(--ep-sdk-gold));
+  color: var(--on-gold, var(--ep-sdk-on-gold));
+  transition: background-color var(--t, 300ms) var(--ease-out, ${EASE}),
+              transform var(--t-fast, 150ms) var(--ease-out, ${EASE});
 }
-#${BUBBLE_ID}:hover { transform: scale(1.06); }
+#${BUBBLE_ID}:hover { background: var(--gold2, var(--ep-sdk-gold-hover)); }
+#${BUBBLE_ID}:active { transform: translateY(1px); }
 #${BUBBLE_ID}.ep-bubble--right { right: 20px; }
 #${BUBBLE_ID}.ep-bubble--left { left: 20px; }
+/* Consentement affiché : la bulle (et la bulle d'accroche) s'effacent, comme
+   le bouton WhatsApp du site — eperf.css:1179. */
+#${BUBBLE_ID}.${CONSENT_VISIBLE_CLASS},
+#${TEASER_ID}.${CONSENT_VISIBLE_CLASS} { display: none !important; }
 @media (max-width: ${MOBILE_BREAKPOINT}px) {
   #${HOLDER_ID} {
     right: 0 !important;
@@ -159,18 +206,21 @@ const SDK_CSS = `
   align-items: center;
   gap: 10px;
   max-width: 280px;
-  padding: 12px 14px;
-  border-radius: 14px 14px 4px 14px;
-  background: #14141a;
-  color: #edeae3;
+  padding: 12px 16px;
+  /* 4px : queue de bulle, seule valeur hors échelle admise (DESIGN-SYSTEM-UNIFIE §5.5) */
+  border-radius: var(--arrondi-bloc, 12px) var(--arrondi-bloc, 12px) 4px var(--arrondi-bloc, 12px);
+  background: var(--card2, var(--ep-sdk-card2));
+  color: var(--text, var(--ep-sdk-text));
   font-family: inherit;
   font-size: 13.5px;
   line-height: 1.45;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 169, 110, 0.25);
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(22, 21, 26, 0.06), 0 12px 28px rgba(22, 21, 26, 0.07)),
+              0 0 0 1px var(--gold-border, rgba(133, 107, 55, 0.22));
   cursor: pointer;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity var(--t, 300ms) var(--ease-out, ${EASE}),
+              transform var(--t, 300ms) var(--ease-out, ${EASE});
 }
 #${TEASER_ID}.ep-teaser--visible {
   opacity: 1;
@@ -182,8 +232,8 @@ const SDK_CSS = `
   height: 22px;
   border: none;
   border-radius: 50%;
-  background: rgba(201, 169, 110, 0.15);
-  color: #c9a96e;
+  background: var(--gold-bg, rgba(133, 107, 55, 0.07));
+  color: var(--gold, var(--ep-sdk-gold));
   font-size: 11px;
   cursor: pointer;
 }
@@ -265,9 +315,15 @@ function detectTheme(): 'light' | 'dark' {
   return 'light' // défaut du site
 }
 
-/** Observe le toggle du site et propage le changement à l'iframe */
+/**
+ * Observe le toggle du site et propage le changement à l'iframe.
+ * La bulle, elle, n'est pas dans l'iframe : son accent est recalculé ici.
+ */
 function initThemeBridge(): void {
-  const push = () => postToWidget({ event: 'theme', theme: detectTheme() })
+  const push = () => {
+    applyBubbleColor()
+    postToWidget({ event: 'theme', theme: detectTheme() })
+  }
   new MutationObserver(push).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['data-theme'],
@@ -277,11 +333,47 @@ function initThemeBridge(): void {
   })
 }
 
+/**
+ * Accent de la bulle. `config.color` (paramètre d'hôte) gagne s'il est fourni ;
+ * sinon on suit le thème détecté — DÉCISION §5.5 : `#856b37` en clair,
+ * `#c9a96e` en sombre. Les valeurs sont posées en variables locales que le CSS
+ * utilise en repli de `var(--gold)`, donc sur eperformance.pro le jeton du site
+ * (thème compris) reste maître (DESIGN-SYSTEM-UNIFIE §5.5).
+ */
+function applyBubbleColor(): void {
+  const bubble = document.getElementById(BUBBLE_ID)
+  if (!bubble) return
+  if (config.color) {
+    // Couleur de marque explicite : elle prime sur tout jeton (paramètre d'hôte)
+    bubble.style.background = config.color
+    return
+  }
+  bubble.style.removeProperty('background')
+  const theme = detectTheme()
+  bubble.style.setProperty('--ep-sdk-gold', CANON_GOLD[theme])
+  bubble.style.setProperty('--ep-sdk-gold-hover', CANON_GOLD_HOVER[theme])
+  bubble.style.setProperty('--ep-sdk-on-gold', CANON_ON_GOLD[theme])
+}
+
+/** Pose les replis de jetons du thème courant sur un élément du SDK (teaser) */
+function applyThemeTokens(el: HTMLElement): void {
+  const theme = detectTheme()
+  el.style.setProperty('--ep-sdk-gold', CANON_GOLD[theme])
+  el.style.setProperty('--ep-sdk-gold-hover', CANON_GOLD_HOVER[theme])
+  el.style.setProperty('--ep-sdk-card2', CANON_CARD2[theme])
+  el.style.setProperty('--ep-sdk-text', CANON_TEXT[theme])
+}
+
+/** Couleur effective transmise à l'iframe (query param `color`) */
+function effectiveColor(): string {
+  return config.color ?? CANON_GOLD[detectTheme()]
+}
+
 function buildFrameSrc(): string {
   const url = new URL(config.widgetUrl, window.location.href)
   url.searchParams.set('apiUrl', config.apiUrl)
   url.searchParams.set('siteId', config.siteId)
-  url.searchParams.set('color', config.color)
+  url.searchParams.set('color', effectiveColor())
   url.searchParams.set('theme', detectTheme())
   return url.toString()
 }
@@ -312,11 +404,84 @@ function createBubble(): void {
   bubble.type = 'button'
   bubble.className = `ep-bubble--${config.position}`
   bubble.setAttribute('aria-label', 'Ouvrir le chat')
-  bubble.style.background = `linear-gradient(135deg, ${config.color} 0%, #e2c07a 100%)`
   bubble.innerHTML = CHAT_ICON
   bubble.addEventListener('click', toggle)
 
   document.body.appendChild(bubble)
+  applyBubbleColor()
+}
+
+// ============================================================
+// Garde du bandeau de consentement (DÉCISION D9)
+//
+// Le bandeau `.consent` du site (z-index: 120, eperf.css:1215) est un overlay
+// légal : il ne doit JAMAIS être recouvert par le widget. Le site applique
+// déjà la règle au bouton WhatsApp :
+//   body:has(.consent:not([hidden])) .wa-float { display: none }  (eperf.css:1179)
+// On la reproduit côté SDK : tant que le bandeau est visible, la bulle (et la
+// bulle d'accroche) sont masquées et le holder redescend sous 120 ; dès qu'il
+// disparaît, tout est réactivé.
+// ============================================================
+
+/**
+ * Le bandeau de consentement est-il affiché ?
+ * `hidden` (ce que pose consent.js) + visibilité calculée, pour couvrir un
+ * bandeau masqué par CSS plutôt que par l'attribut.
+ */
+function isConsentVisible(): boolean {
+  if (typeof document === 'undefined') return false // environnement détruit (tests)
+  const el = document.querySelector<HTMLElement>(CONSENT_SELECTOR)
+  if (!el || el.hidden) return false
+  const style = window.getComputedStyle(el)
+  return style.display !== 'none' && style.visibility !== 'hidden'
+}
+
+/** Applique (ou retire) l'état « consentement affiché » sur tout le widget */
+function applyConsentState(): void {
+  if (typeof document === 'undefined') return
+  const visible = isConsentVisible()
+  for (const id of [BUBBLE_ID, TEASER_ID, HOLDER_ID]) {
+    document.getElementById(id)?.classList.toggle(CONSENT_VISIBLE_CLASS, visible)
+  }
+}
+
+let consentObserver: MutationObserver | null = null
+let consentIntersectionObserver: IntersectionObserver | null = null
+
+/**
+ * Surveillance : MutationObserver sur `hidden` (et sur l'insertion/retrait du
+ * bandeau), IntersectionObserver en secours pour une disparition visuelle qui
+ * ne produirait aucune mutation. Aucun réseau, aucun impact sur le widget.
+ */
+function initConsentGuard(): void {
+  // Une seule surveillance active, même si init() est rappelé (tests)
+  consentObserver?.disconnect()
+  consentIntersectionObserver?.disconnect()
+
+  applyConsentState()
+
+  const body = document.body
+  if (!body) return
+
+  consentObserver = new MutationObserver(() => applyConsentState())
+  consentObserver.observe(body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['hidden', 'style', 'class'],
+  })
+
+  /* Secours : le bandeau peut devenir invisible (display:none par une règle
+     CSS, déplacement) sans mutation d'attribut observable. */
+  if (typeof IntersectionObserver !== 'undefined') {
+    const el = document.querySelector<HTMLElement>(CONSENT_SELECTOR)
+    if (el) {
+      consentIntersectionObserver = new IntersectionObserver(() => applyConsentState(), {
+        threshold: [0, 1],
+      })
+      consentIntersectionObserver.observe(el)
+    }
+  }
 }
 
 function setIcon(icon: string) {
@@ -339,6 +504,7 @@ function open(): void {
   setIcon(CLOSE_ICON)
   postToWidget({ event: 'open', theme: detectTheme() })
   keyboardUpdate?.()
+  applyConsentState()
   listeners.open.forEach((fn) => fn())
 }
 
@@ -351,6 +517,7 @@ function close(): void {
   document.getElementById(BUBBLE_ID)?.classList.remove('ep-bubble--open')
   setIcon(CHAT_ICON)
   postToWidget({ event: 'close' })
+  applyConsentState()
   listeners.close.forEach((fn) => fn())
 }
 
@@ -450,9 +617,11 @@ function initTeaser(): void {
         open() // open() retire aussi le teaser
       }
     })
+    applyThemeTokens(teaser)
     document.body.appendChild(teaser)
     sessionStorage.setItem(TEASER_KEY, '1')
     requestAnimationFrame(() => teaser.classList.add('ep-teaser--visible'))
+    applyConsentState()
   }, TEASER_DELAY_MS)
 }
 
@@ -471,6 +640,7 @@ function init(): void {
   initKeyboardFix()
   initShortcuts()
   initThemeBridge()
+  initConsentGuard()
   exposeApi()
   // État ouvert persistant (refresh → widget réouvert, même conversation)
   if (sessionStorage.getItem(OPEN_KEY) === '1') {

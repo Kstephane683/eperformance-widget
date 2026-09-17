@@ -92,21 +92,21 @@ const LINKS = [
 
 .crm__title {
   margin: 0;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 22px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .crm__note {
   margin: 0;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 13.5px;
   max-width: 640px;
   line-height: 1.6;
 }
 
 .crm__note strong {
-  color: var(--ep-text);
+  color: var(--text);
 }
 
 .crm__grid {
@@ -120,16 +120,16 @@ const LINKS = [
   flex-direction: column;
   gap: 6px;
   padding: 16px;
-  border: 1px solid var(--ep-border-soft);
-  border-radius: var(--ep-radius-md);
-  background: var(--ep-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-input);
+  background: var(--bg2);
   text-decoration: none;
-  color: var(--ep-text);
+  color: var(--text);
   transition: border-color 0.2s ease, transform 0.15s ease;
 }
 
 .crm__card:hover {
-  border-color: var(--ep-gold);
+  border-color: var(--gold);
   transform: translateY(-2px);
 }
 
@@ -140,18 +140,18 @@ const LINKS = [
 .crm__name {
   font-weight: 600;
   font-size: 15px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .crm__desc {
   font-size: 13px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   line-height: 1.5;
 }
 
 .crm__path {
   font-size: 11.5px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   opacity: 0.7;
   font-family: monospace;
 }

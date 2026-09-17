@@ -88,24 +88,24 @@ watch(
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 16px 12px 20px;
+  gap: 12px;
+  padding: 16px 12px 24px;
   overflow-y: auto;
 }
 
 .ep-day-separator {
   display: flex;
   justify-content: center;
-  margin: 6px 0 2px;
+  margin: 6px 0 4px;
 }
 
 .ep-day-separator span {
   font-size: 11px;
-  color: var(--ep-text-muted);
-  background: var(--ep-surface-raised);
-  border: 1px solid var(--ep-border-soft);
-  border-radius: var(--ep-radius-full);
-  padding: 3px 12px;
+  color: var(--muted);
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-bouton);
+  padding: 4px 12px;
 }
 
 .ep-retry {
@@ -113,18 +113,21 @@ watch(
   justify-content: center;
 }
 
+/* Variante de .btn-outline (eperf.css:518-523) : filet d'accent, texte or */
 .ep-retry__btn {
-  padding: 8px 18px;
-  border-radius: var(--ep-radius-full);
-  border: 1px solid var(--ep-border);
-  background: rgba(201, 169, 110, 0.1);
-  color: var(--ep-gold);
+  padding: 8px 16px;
+  border-radius: var(--arrondi-bouton);
+  border: 1px solid var(--gold-border);
+  background: var(--gold-bg);
+  color: var(--gold);
   font-weight: 600;
   font-size: 13px;
-  transition: background 0.2s ease;
+  transition: background-color var(--t) var(--ease-out),
+              border-color var(--t) var(--ease-out);
 }
 
 .ep-retry__btn:hover {
-  background: rgba(201, 169, 110, 0.2);
+  background: var(--card2);
+  border-color: var(--gold);
 }
 </style>

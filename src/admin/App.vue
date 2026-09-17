@@ -110,8 +110,8 @@ function logout() {
   min-height: 0;
   display: flex;
   flex-direction: row;
-  background: var(--ep-bg);
-  color: var(--ep-text);
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* ---------- Navigation ---------- */
@@ -122,8 +122,8 @@ function logout() {
   flex-direction: column;
   gap: 8px;
   padding: 16px 12px;
-  border-right: 1px solid var(--ep-border-soft);
-  background: #0c0c10;
+  border-right: 1px solid var(--border);
+  background: var(--bg2);
 }
 
 .cockpit__brand {
@@ -137,18 +137,18 @@ function logout() {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
   display: grid;
   place-items: center;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-weight: 700;
 }
 
 .cockpit__brand-name {
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 17px;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .cockpit__modules {
@@ -164,7 +164,7 @@ function logout() {
   gap: 10px;
   padding: 10px 12px;
   border-radius: 10px;
-  color: var(--ep-text);
+  color: var(--text);
   text-decoration: none;
   font-size: 14px;
   transition: background 0.15s ease;
@@ -176,7 +176,7 @@ function logout() {
 
 .cockpit__link--active {
   background: rgba(201, 169, 110, 0.15);
-  color: var(--ep-gold-light);
+  color: var(--gold2);
   font-weight: 600;
 }
 
@@ -188,9 +188,9 @@ function logout() {
   margin-left: auto;
   min-width: 20px;
   padding: 1px 6px;
-  border-radius: var(--ep-radius-full);
-  background: #e07070;
-  color: #fff;
+  border-radius: var(--arrondi-bouton);
+  background: var(--red-text);
+  color: var(--bg);
   font-size: 11px;
   font-weight: 700;
   text-align: center;
@@ -198,18 +198,18 @@ function logout() {
 
 .cockpit__logout {
   padding: 10px 12px;
-  border: 1px solid var(--ep-border-soft);
+  border: 1px solid var(--border);
   border-radius: 10px;
   background: transparent;
-  color: var(--ep-text-muted);
+  color: var(--muted);
   font-size: 13px;
   cursor: pointer;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .cockpit__logout:hover {
-  color: var(--ep-text);
-  border-color: var(--ep-border);
+  color: var(--text);
+  border-color: var(--gold-border);
 }
 
 /* ---------- Zone principale ---------- */
@@ -232,7 +232,7 @@ function logout() {
     align-items: center;
     padding: 10px 12px;
     border-right: none;
-    border-bottom: 1px solid var(--ep-border-soft);
+    border-bottom: 1px solid var(--border);
   }
 
   .cockpit__brand {

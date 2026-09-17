@@ -83,7 +83,7 @@ async function onSubmit(): Promise<void> {
   flex-direction: column;
   overflow-y: auto;
   padding: 24px 16px;
-  background: radial-gradient(circle at 50% 20%, #16141c 0%, var(--ep-bg) 60%);
+  background: radial-gradient(1100px 620px at 82% -8%, var(--gold-bg), transparent 62%), radial-gradient(900px 520px at 4% 4%, var(--gold-bg), transparent 58%);
 }
 
 .ep-login__card {
@@ -93,11 +93,11 @@ async function onSubmit(): Promise<void> {
   flex-direction: column;
   gap: 6px;
   padding: 32px 28px;
-  border-radius: var(--ep-radius-lg);
-  border: 1px solid var(--ep-border);
-  background: var(--ep-glass);
+  border-radius: var(--arrondi-carte);
+  border: 1px solid var(--gold-border);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   backdrop-filter: blur(12px);
-  box-shadow: var(--ep-shadow);
+  box-shadow: var(--shadow-lg);
 }
 
 .ep-login__avatar {
@@ -105,11 +105,11 @@ async function onSubmit(): Promise<void> {
   height: 64px;
   margin: 0 auto 8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  background: var(--gold);
+  color: var(--on-gold);
   display: grid;
   place-items: center;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-weight: 700;
   font-size: 28px;
   box-shadow: 0 0 0 6px rgba(201, 169, 110, 0.15);
@@ -118,17 +118,17 @@ async function onSubmit(): Promise<void> {
 .ep-login__title {
   margin: 0;
   text-align: center;
-  font-family: var(--ep-font-title);
+  font-family: var(--police-titres);
   font-size: 28px;
   font-weight: 600;
-  color: var(--ep-gold-light);
+  color: var(--gold2);
 }
 
 .ep-login__subtitle {
   margin: 0 0 16px;
   text-align: center;
   font-size: 13px;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-login__label {
@@ -137,15 +137,15 @@ async function onSubmit(): Promise<void> {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-login__input {
   padding: 12px 14px;
-  border-radius: var(--ep-radius-md);
-  border: 1px solid var(--ep-border);
-  background: #060609;
-  color: var(--ep-text);
+  border-radius: var(--arrondi-input);
+  border: 1px solid var(--gold-border);
+  background: var(--card);
+  color: var(--text);
   font-family: inherit;
   font-size: 14px;
   outline: none;
@@ -153,21 +153,21 @@ async function onSubmit(): Promise<void> {
 }
 
 .ep-login__input::placeholder {
-  color: var(--ep-text-muted);
+  color: var(--muted);
 }
 
 .ep-login__input:focus-visible {
-  border-color: var(--ep-gold);
+  border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
 }
 
 .ep-login__error {
   margin: 12px 0 0;
   padding: 10px 12px;
-  border-radius: var(--ep-radius-md);
+  border-radius: var(--arrondi-input);
   background: rgba(220, 38, 38, 0.12);
   border: 1px solid rgba(220, 38, 38, 0.35);
-  color: #fca5a5;
+  color: var(--red-text);
   font-size: 13px;
 }
 
@@ -175,9 +175,9 @@ async function onSubmit(): Promise<void> {
   margin-top: 18px;
   padding: 13px;
   border: none;
-  border-radius: var(--ep-radius-full);
-  background: linear-gradient(135deg, #c9a96e 0%, #e2c07a 100%);
-  color: #0a0a0e;
+  border-radius: var(--arrondi-bouton);
+  background: var(--gold);
+  color: var(--on-gold);
   font-weight: 700;
   font-size: 15px;
   transition: transform 0.15s ease, opacity 0.2s ease;
