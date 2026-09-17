@@ -89,8 +89,8 @@
 
             <div class="ep-adm__lead-name">{{ detailLead?.name ?? 'Visiteur' }}</div>
             <div class="ep-adm__lead-contact">
-              <span v-if="detailLead?.phone">📞 {{ detailLead.phone }}</span>
-              <span v-if="detailLead?.email">✉️ {{ detailLead.email }}</span>
+              <span v-if="detailLead?.phone">{{ detailLead.phone }}</span>
+              <span v-if="detailLead?.email">{{ detailLead.email }}</span>
             </div>
 
             <div class="ep-adm__actions">
@@ -101,7 +101,7 @@
                 :disabled="actionBusy"
                 @click="takeover"
               >
-                ✋ Prendre la main
+                Prendre la main
               </button>
               <button
                 v-else
@@ -110,7 +110,7 @@
                 :disabled="actionBusy"
                 @click="release"
               >
-                🤖 Rendre la main à l’IA
+                Rendre la main à l’IA
               </button>
 
               <template v-if="agents.length > 0">

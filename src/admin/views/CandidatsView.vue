@@ -1,7 +1,7 @@
 <template>
   <section class="cand">
     <header class="cand__head">
-      <h1 class="cand__title">🎓 Candidats &amp; Diagnostics</h1>
+      <h1 class="cand__title">Candidats &amp; Diagnostics</h1>
       <span v-if="total !== null" class="cand__count">{{ total }} candidat(s)</span>
       <button type="button" class="cand__refresh" @click="load" :disabled="loading">
         ↻ Actualiser
@@ -38,10 +38,10 @@
             target="_blank"
             rel="noopener"
           >
-            📱 {{ c.whatsapp }}
+            {{ c.whatsapp }}
           </a>
-          <span v-if="c.entreprise">🏢 {{ c.entreprise }}</span>
-          <span v-if="c.secteur">🏷️ {{ c.secteur }}</span>
+          <span v-if="c.entreprise">{{ c.entreprise }}</span>
+          <span v-if="c.secteur">{{ c.secteur }}</span>
         </div>
         <div class="cand__foot">
           <span class="cand__statut" :class="`cand__statut--${c.statut}`">
@@ -74,10 +74,10 @@ function scoreClass(score: number): string {
 
 function statutLabel(s: string | null): string {
   const map: Record<string, string> = {
-    en_attente: '⏳ En attente',
-    accepte: '✓ Accepté',
-    refuse: '✕ Refusé',
-    alumni: '🎓 Alumni',
+    en_attente: 'En attente',
+    accepte: 'Accepté',
+    refuse: 'Refusé',
+    alumni: 'Alumni',
   }
   return s ? (map[s] ?? s) : '—'
 }

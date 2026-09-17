@@ -1,7 +1,7 @@
 <template>
   <section class="users">
     <header class="users__head">
-      <h1 class="users__title">👥 Utilisateurs</h1>
+      <h1 class="users__title">Utilisateurs</h1>
       <span v-if="total !== null" class="users__count">{{ total }} compte(s)</span>
       <button type="button" class="users__refresh" @click="load" :disabled="loading">
         ↻ Actualiser

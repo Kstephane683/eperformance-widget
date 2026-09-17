@@ -405,7 +405,7 @@ function initTeaser(): void {
     teaser.setAttribute('role', 'button')
     teaser.setAttribute('tabindex', '0')
     teaser.innerHTML =
-      '<span>Une question sur votre business ? 👋</span>' +
+      '<span>Une question sur votre business ?</span>' +
       '<button type="button" aria-label="Masquer">✕</button>'
     teaser.addEventListener('click', (e) => {
       const onDismiss = (e.target as HTMLElement).tagName === 'BUTTON'
