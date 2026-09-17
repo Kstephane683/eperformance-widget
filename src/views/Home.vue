@@ -1,8 +1,8 @@
 <template>
   <div class="ep-home">
     <div class="ep-home__avatar" aria-hidden="true">A</div>
-    <h1 class="ep-home__title">Aminata</h1>
-    <p class="ep-home__subtitle">Coach en acquisition client — ePerformance</p>
+    <h1 class="ep-home__title">Mia</h1>
+    <p class="ep-home__subtitle">Agent IA ePerformance</p>
     <button type="button" class="ep-home__cta" @click="start">
       Démarrer la conversation
     </button>

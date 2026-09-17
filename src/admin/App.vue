@@ -4,7 +4,7 @@
     (réactive, y compris sur 401 → logout automatique).
 
     Cockpit unifié : navigation par modules (sidebar desktop, tabs
-    horizontales mobiles) → router-view. Le badge 💬 affiche les
+    horizontales mobiles) → router-view. Le badge affiche les
     conversations en attente humaine (rafraîchi 30s).
   -->
   <LoginView v-if="!auth.isAuthenticated" />
@@ -23,7 +23,7 @@
           class="cockpit__link"
           :class="{ 'cockpit__link--active': isActive(mod.to) }"
         >
-          <span class="cockpit__icon" aria-hidden="true">{{ mod.icon }}</span>
+          <span class="cockpit__icon" aria-hidden="true" v-html="mod.icon"></span>
           <span class="cockpit__label">{{ mod.label }}</span>
           <span v-if="mod.badge && stats && stats[mod.badge] > 0" class="cockpit__badge">
             {{ stats[mod.badge] }}
@@ -59,10 +59,10 @@ interface ModuleEntry {
 }
 
 const modules: ModuleEntry[] = [
-  { to: 'chatbot', icon: '💬', label: 'Chatbot', badge: 'conversations_en_attente' },
-  { to: 'candidats', icon: '🎓', label: 'Candidats', badge: 'candidats_en_attente' },
-  { to: 'users', icon: '👥', label: 'Utilisateurs' },
-  { to: 'crm', icon: '🧭', label: 'CRM LWS' },
+  { to: 'chatbot', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 1 1 21 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`, label: 'Chatbot', badge: 'conversations_en_attente' },
+  { to: 'candidats', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5" stroke="currentColor" stroke-width="1.8"/></svg>`, label: 'Candidats', badge: 'candidats_en_attente' },
+  { to: 'users', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 5.6a3 3 0 0 1 0 5.8M18 14.8c2.1.6 3.5 2.2 3.5 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`, label: 'Utilisateurs' },
+  { to: 'crm', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`, label: 'CRM LWS' },
 ]
 
 const isActive = (name: string) => route.name === name

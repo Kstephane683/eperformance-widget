@@ -82,6 +82,8 @@ export type ConversationStatus = 'active' | 'resolved' | 'escalated' | 'abandone
 export interface ConversationHistoryMessage {
   role: BackendRecvRole
   content: string
+  /** Nom du conseiller humain (Phase 2 — Tâche 5.3) */
+  human_name?: string | null
   intent: string | null
   agent_used: string | null
   actions: unknown

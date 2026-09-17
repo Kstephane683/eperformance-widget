@@ -68,19 +68,9 @@ window.addEventListener('message', (e) => {
     if (!raw.startsWith('{')) return
     const data = JSON.parse(raw) as { type?: string; token?: unknown }
     if (data.type === 'ep-admin-auth' && typeof data.token === 'string' && data.token.length > 0) {
-      // 1. Stocker le token dans localStorage
       localStorage.setItem('eperf_admin_token', data.token)
-
-      // 2. Mettre à jour le store Pinia (au lieu de reload)
-      const auth = useAdminAuthStore(pinia)
-      auth.token = data.token
-
-      // 3. Naviguer vers /chatbot si nécessaire
-      if (router.currentRoute.value.name !== 'chatbot') {
-        router.push({ name: 'chatbot' })
-      }
-
-      // 4. PAS de window.location.reload() — c'est ce qui causait la boucle infinie
+      window.location.hash = '#/chatbot'
+      window.location.reload()
     }
   } catch {
     /* message non JSON — ignoré */

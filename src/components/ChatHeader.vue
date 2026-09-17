@@ -2,10 +2,10 @@
   <header class="ep-header">
     <div class="ep-header__avatar" aria-hidden="true">A</div>
     <div class="ep-header__id">
-      <div class="ep-header__name">Aminata</div>
+      <div class="ep-header__name">Mia</div>
       <div class="ep-header__status">
         <span class="ep-header__dot" aria-hidden="true" />
-        En ligne · répond en quelques instants
+        Mia • Agent IA • En ligne
       </div>
     </div>
     <button type="button" class="ep-header__close" aria-label="Fermer le chat" @click="close">
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 // Adaptation de ChatHeader.vue (Chatwoot) — identité IA ePerformance
-// (persona Aminata servie par le backend Railway).
+// (persona Mia servie par le backend Railway).
 // Pastille "En ligne" : pattern Intercom/Crisp (confiance instantanée).
 // Le bouton fermer est indispensable en mobile plein écran : la bubble
 // est masquée quand le widget est ouvert (chevauchait l'input).

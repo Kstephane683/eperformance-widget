@@ -161,7 +161,9 @@ export const useMessagesStore = defineStore('messages', {
       if (this.humanMode) return
       this.humanMode = true
       if (showNotice) {
-        this.addLocal('agent', '✍️ Votre message a été transmis à un conseiller. Il vous répond ici même.', null, 'conseiller')
+        this.addLocal('agent', 'Votre message a été transmis à un conseiller. Il vous répond ici même.',
+        null,
+        'Conseiller ePerformance')
       }
 
       // Nombre de messages déjà connus côté DB pour ne rajouter que les nouveaux
@@ -194,7 +196,7 @@ export const useMessagesStore = defineStore('messages', {
         // Release: l'humain a rendu la main → l'IA reprend
         if (history.status !== 'escalated') {
           this.exitHumanMode()
-          this.addLocal('agent', '🤖 L\'assistant IA reprend la main. Comment puis-je continuer à vous aider ?', null, null)
+          this.addLocal('agent', 'Mia reprend la main. Comment puis-je continuer à vous aider ?', null, 'Mia')
           return
         }
 
@@ -205,7 +207,7 @@ export const useMessagesStore = defineStore('messages', {
               msg.role === 'user' ? 'user' : 'agent',
               msg.content,
               null,
-              msg.role === 'assistant' ? 'conseiller' : null,
+              msg.role === 'assistant' ? (msg.human_name || 'Conseiller ePerformance') : null,
             )
             if (msg.role === 'assistant') playNotificationSound()
           }

@@ -21,7 +21,12 @@
         aria-label="Emojis"
         @click="emojiOpen = !emojiOpen"
       >
-        😊
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+          <path d="M8.5 14.5a4.5 4.5 0 0 0 7 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          <circle cx="9" cy="10" r="1.1" fill="currentColor" />
+          <circle cx="15" cy="10" r="1.1" fill="currentColor" />
+        </svg>
       </button>
       <input
         ref="inputEl"

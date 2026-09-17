@@ -39,7 +39,7 @@ onMounted(() => {
     if (!restored && !messages.messages.length) {
       messages.addLocal(
         'agent',
-        "Bonjour 👋 Je suis Aminata, coach en acquisition client chez ePerformance.\n\nDites-moi : c'est quoi votre plus gros défi en ce moment ?",
+        "Bonjour 👋 Vous parlez maintenant avec Mia. Comment puis-je vous aider ?",
       )
     }
   })
