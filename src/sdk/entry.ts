@@ -29,6 +29,8 @@ interface SdkConfig {
   siteId: string
   color: string
   position: 'left' | 'right'
+  /** 'auto' suit le thème du site (data-theme + localStorage eperf-theme) */
+  theme?: 'auto' | 'light' | 'dark'
 }
 
 type SdkListener = (payload?: Record<string, unknown>) => void
@@ -243,11 +245,44 @@ function onWidgetMessage(e: MessageEvent) {
 // DOM : iframe + bubble
 // ============================================================
 
+const THEME_STORAGE_KEY = 'eperf-theme'
+
+/**
+ * Thème du site hôte. L'iframe est cross-origin : elle ne peut pas lire le
+ * localStorage de la page — c'est le SDK (même origine que le site) qui le
+ * détecte et le lui transmet (query param au chargement + postMessage ensuite).
+ */
+function detectTheme(): 'light' | 'dark' {
+  if (config.theme === 'light' || config.theme === 'dark') return config.theme
+  const attr = document.documentElement.getAttribute('data-theme')
+  if (attr === 'dark' || attr === 'light') return attr
+  try {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY)
+    if (stored === 'dark' || stored === 'light') return stored
+  } catch {
+    /* stockage bloqué */
+  }
+  return 'light' // défaut du site
+}
+
+/** Observe le toggle du site et propage le changement à l'iframe */
+function initThemeBridge(): void {
+  const push = () => postToWidget({ event: 'theme', theme: detectTheme() })
+  new MutationObserver(push).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  })
+  window.addEventListener('storage', (e) => {
+    if (e.key === THEME_STORAGE_KEY) push()
+  })
+}
+
 function buildFrameSrc(): string {
   const url = new URL(config.widgetUrl, window.location.href)
   url.searchParams.set('apiUrl', config.apiUrl)
   url.searchParams.set('siteId', config.siteId)
   url.searchParams.set('color', config.color)
+  url.searchParams.set('theme', detectTheme())
   return url.toString()
 }
 
@@ -302,7 +337,7 @@ function open(): void {
   document.getElementById(HOLDER_ID)?.removeAttribute('aria-hidden')
   document.getElementById(BUBBLE_ID)?.classList.add('ep-bubble--open')
   setIcon(CLOSE_ICON)
-  postToWidget({ event: 'open' })
+  postToWidget({ event: 'open', theme: detectTheme() })
   keyboardUpdate?.()
   listeners.open.forEach((fn) => fn())
 }
@@ -435,6 +470,7 @@ function init(): void {
   window.addEventListener('message', onWidgetMessage)
   initKeyboardFix()
   initShortcuts()
+  initThemeBridge()
   exposeApi()
   // État ouvert persistant (refresh → widget réouvert, même conversation)
   if (sessionStorage.getItem(OPEN_KEY) === '1') {

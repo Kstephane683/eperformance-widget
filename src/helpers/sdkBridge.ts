@@ -14,12 +14,13 @@ import type { WidgetIdentity } from '@/stores/conversation'
 export const MESSAGE_PREFIX = 'eperformance-widget:'
 
 export type SdkEvent =
-  | { event: 'open' }
+  | { event: 'open'; theme?: 'light' | 'dark' }
   | { event: 'close' }
+  | { event: 'theme'; theme: 'light' | 'dark' }
   | { event: 'identify'; userId: WidgetIdentity['userId']; userData: Record<string, unknown> }
 
 export interface SdkBridgeHandlers {
-  onOpen: () => void
+  onOpen: (theme?: 'light' | 'dark') => void
   onClose: () => void
   onIdentify: (userId: WidgetIdentity['userId'], userData: Record<string, unknown>) => void
 }
@@ -44,7 +45,11 @@ export function initSdkBridge(handlers: SdkBridgeHandlers): () => void {
       const message = JSON.parse(e.data.slice(MESSAGE_PREFIX.length)) as SdkEvent
       switch (message.event) {
         case 'open':
-          handlers.onOpen()
+          handlers.onOpen((message as { theme?: 'light' | 'dark' }).theme)
+          break
+        case 'theme':
+          // Le site a basculé clair/sombre : l'iframe suit (cohérence design)
+          document.documentElement.setAttribute('data-theme', message.theme)
           break
         case 'close':
           handlers.onClose()

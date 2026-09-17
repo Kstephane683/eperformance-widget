@@ -24,9 +24,13 @@ function configureFromQuery() {
   const apiUrl = params.get('apiUrl')
   const siteId = params.get('siteId')
   const color = params.get('color')
+  const theme = params.get('theme')
   if (apiUrl) overrides.apiUrl = apiUrl
   if (siteId) overrides.siteId = siteId
   if (color) overrides.color = color
+  if (theme === 'dark' || theme === 'light') {
+    document.documentElement.setAttribute('data-theme', theme)
+  }
   if (Object.keys(overrides).length) {
     useConfigStore(pinia).configure(overrides)
   }

@@ -129,4 +129,30 @@ describe('sdkBridge (côté widget)', () => {
     expect(() => postToSdk({ event: 'ready' })).not.toThrow()
     expect(() => notifyReady()).not.toThrow()
   })
+
+  it("détecte le thème du site et le transmet à l'iframe (data-theme)", () => {
+    // Thème sombre posé par le site hôte
+    document.documentElement.setAttribute('data-theme', 'dark')
+    const frame = document.getElementById('eperformance-widget-frame') as HTMLIFrameElement
+    const postMessage = vi.fn()
+    Object.defineProperty(frame, 'contentWindow', { value: { postMessage } })
+
+    window.ePerformance!.open()
+
+    const raw = postMessage.mock.calls.map((c) => String(c[0])).join(' ')
+    expect(raw).toContain('"theme":"dark"')
+    document.documentElement.removeAttribute('data-theme')
+  })
+
+  it("le widget suit le basculement clair/sombre du site (événement 'theme')", () => {
+    const onOpen = vi.fn()
+    initSdkBridge({ onOpen, onClose: vi.fn(), onIdentify: vi.fn() })
+
+    postFromWidget({ event: 'theme', theme: 'dark' })
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark')
+
+    postFromWidget({ event: 'theme', theme: 'light' })
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light')
+    document.documentElement.removeAttribute('data-theme')
+  })
 })
