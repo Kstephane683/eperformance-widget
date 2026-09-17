@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<!-- Page de démonstration : simule un site hôte ePerformance.
+     Palette alignée sur les jetons canoniques (eperf.css, couche tokens) —
+     cette page n'est pas le widget, elle n'embarque donc pas la feuille du
+     design system : les valeurs sont recopiées, comme sur un site client. -->
+<html lang="fr" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +11,10 @@
     <style>
       body {
         margin: 0;
-        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-        background: #f6f4ef;
-        color: #1a1a1e;
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        background: #fdfcfa; /* --bg, eperf.css:157 */
+        color: #16151a; /* --text, eperf.css:163 */
+        line-height: 1.65;
       }
       .hero {
         max-width: 720px;
@@ -20,16 +25,20 @@
       .hero h1 {
         font-family: 'Cormorant Garamond', Georgia, serif;
         font-size: 42px;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
         margin-bottom: 8px;
       }
       .hero p {
-        color: #6b675e;
+        color: #6a676f; /* --muted, eperf.css:165 */
         line-height: 1.6;
       }
       .hero code {
-        background: #edeae3;
+        background: #faf8f4; /* --card2, eperf.css:160 */
+        border: 1px solid #e5e1d9; /* --border, eperf.css:175 */
         padding: 2px 8px;
-        border-radius: 6px;
+        border-radius: 12px; /* --arrondi-input, eperf.css:202 */
         font-size: 0.9em;
       }
     </style>
