@@ -1,0 +1,248 @@
+{
+  "version": "6.6.1",
+  "objet": "Configuration du harnais de maquettes finales (tâche 6.6). Le script captures.py lit CE fichier : la liste des écrans, les gabarits, les thèmes et l'échelle ne sont pas dans le code. Une maquette se régénère en modifiant ce fichier, jamais le script.",
+  "echelle": 2,
+  "echelle_note": "device_scale_factor de Playwright. 2 = exigence minimale de la consigne ; les images font donc 2 fois la taille CSS (780x1688 pour un gabarit 390x844).",
+  "gabarits": {
+    "mobile-390x844": {
+      "largeur": 390,
+      "hauteur": 844,
+      "famille": "mobile"
+    },
+    "desktop-1440x900": {
+      "largeur": 1440,
+      "hauteur": 900,
+      "famille": "desktop"
+    }
+  },
+  "themes": [
+    "clair",
+    "sombre"
+  ],
+  "nomenclature": "<ecran>-<gabarit>-<theme>.png",
+  "delais_ms": {
+    "chargement": 1600,
+    "polices": 1200,
+    "stabilisation": 450,
+    "conversation": 12000
+  },
+  "entrees": {
+    "widget": "/dist/index.html",
+    "console": "/dist/admin.html",
+    "portail": "/dist/application/index.html",
+    "page_mia": "/dist/application/mia/index.html",
+    "hote": "/docs/phase3-tache-6-4/hote-6-4.html"
+  },
+  "series": {
+    "widget": {
+      "libelle": "Widget visiteur — intégré sur un site hôte (iframe)",
+      "entree": "hote",
+      "note": "Le widget est capturé DANS la page du site hôte, à sa largeur réelle d'intégration. C'est le contexte de production : un site tiers, un panneau de 400 px.",
+      "ecrans": [
+        {
+          "nom": "accueil",
+          "route": "#/",
+          "selecteur": "#ep-panel-home",
+          "onglet": "home",
+          "attendu": ""
+        },
+        {
+          "nom": "messages",
+          "route": "#/messages",
+          "selecteur": "#ep-panel-messages",
+          "onglet": "messages",
+          "attendu": ""
+        },
+        {
+          "nom": "aide",
+          "route": "#/aide",
+          "selecteur": "#ep-panel-aide",
+          "onglet": "aide",
+          "attendu": ""
+        },
+        {
+          "nom": "actualites",
+          "route": "#/actualites",
+          "selecteur": "#ep-panel-actualites",
+          "onglet": "actualites",
+          "attendu": ""
+        },
+        {
+          "nom": "conversation",
+          "route": "#/conversation",
+          "selecteur": ".ep-chat",
+          "note": "Onglet inexistant : on entre par la carte « Poser une question » de l'accueil, qui pose la route.",
+          "attendu": "paniers abandonnés"
+        }
+      ]
+    },
+    "console": {
+      "libelle": "Console d'administration — 11 modules",
+      "entree": "console",
+      "note": "Chaque module est un écran distinct du registre de navigation. L'API est simulée depuis jeux-essai.json : les maquettes sont reproductibles à l'octet.",
+      "ecrans": [
+        {
+          "nom": "tableau-de-bord",
+          "route": "#/tableau-de-bord",
+          "selecteur": ".adm-kpi",
+          "attendu": "Awa Traoré"
+        },
+        {
+          "nom": "activite",
+          "route": "#/activite",
+          "selecteur": ".adm-jour",
+          "attendu": "Journal des"
+        },
+        {
+          "nom": "performance",
+          "route": "#/performance",
+          "selecteur": ".adm-graphe",
+          "attendu": "Performance"
+        },
+        {
+          "nom": "boite-de-reception",
+          "route": "#/conversations",
+          "selecteur": ".adm-boite__item",
+          "attendu": "Awa Traoré"
+        },
+        {
+          "nom": "prospects",
+          "route": "#/prospects",
+          "selecteur": ".adm-prospect",
+          "attendu": "Awa Traoré"
+        },
+        {
+          "nom": "candidatures",
+          "route": "#/candidatures",
+          "selecteur": ".adm-candidat__nom, .adm-grille",
+          "attendu": "Ibrahim Koné"
+        },
+        {
+          "nom": "base-de-connaissances",
+          "route": "#/connaissances",
+          "selecteur": ".adm-grille",
+          "attendu": ""
+        },
+        {
+          "nom": "publications",
+          "route": "#/publications",
+          "selecteur": ".adm-article",
+          "attendu": ""
+        },
+        {
+          "nom": "competences-de-mia",
+          "route": "#/competences",
+          "selecteur": ".adm-competence",
+          "attendu": ""
+        },
+        {
+          "nom": "utilisateurs",
+          "route": "#/utilisateurs",
+          "selecteur": ".adm-tableau",
+          "attendu": "stephane@eperformance.pro"
+        },
+        {
+          "nom": "integrations",
+          "route": "#/integrations",
+          "selecteur": ".adm-carte--lien",
+          "attendu": ""
+        },
+        {
+          "nom": "conversation-ouverte",
+          "route": "#/conversations",
+          "selecteur": ".adm-boite__item",
+          "action": "clic",
+          "selecteur_apres": ".adm-boite__prospect",
+          "note": "Douzième capture, hors registre : l'état ouvert de la boîte de réception.",
+          "attendu": "paniers abandonnés"
+        },
+        {
+          "nom": "menu-mobile",
+          "route": "#/tableau-de-bord",
+          "selecteur": ".adm-entete__burger",
+          "action": "clic",
+          "selecteur_apres": ".adm-barre--ouverte",
+          "gabarits": [
+            "mobile-390x844"
+          ],
+          "note": "Le tiroir n'existe qu'en mobile.",
+          "attendu": "Tableau de bord"
+        }
+      ]
+    },
+    "application": {
+      "libelle": "Application Mia — document de premier niveau (mode application)",
+      "entree": "widget",
+      "mode_application": true,
+      "note": "Les MÊMES cinq vues que la série « widget », mais en mode application : colonne centrée de 760 px, sans page hôte. C'est ce que voit l'utilisateur de la PWA installée.",
+      "ecrans": [
+        {
+          "nom": "accueil",
+          "route": "#/",
+          "selecteur": "#ep-panel-home",
+          "onglet": "home",
+          "attendu": ""
+        },
+        {
+          "nom": "messages",
+          "route": "#/messages",
+          "selecteur": "#ep-panel-messages",
+          "onglet": "messages",
+          "attendu": ""
+        },
+        {
+          "nom": "aide",
+          "route": "#/aide",
+          "selecteur": "#ep-panel-aide",
+          "onglet": "aide",
+          "attendu": ""
+        },
+        {
+          "nom": "actualites",
+          "route": "#/actualites",
+          "selecteur": "#ep-panel-actualites",
+          "onglet": "actualites",
+          "attendu": ""
+        },
+        {
+          "nom": "conversation",
+          "route": "#/conversation",
+          "selecteur": ".ep-chat",
+          "note": "Onglet inexistant : on entre par la carte « Poser une question » de l'accueil, qui pose la route.",
+          "attendu": "paniers abandonnés"
+        }
+      ]
+    },
+    "pages": {
+      "libelle": "Pages publiques",
+      "entree": "pages",
+      "note": "Deux documents sans Vue : le contenu est dans le balisage, lisible sans JavaScript. Chaque page est capturée en haut et en bas.",
+      "ecrans": [
+        {
+          "nom": "portail",
+          "chemin": "/dist/application/index.html"
+        },
+        {
+          "nom": "mia",
+          "chemin": "/dist/application/mia/index.html"
+        }
+      ],
+      "sections": [
+        "haut",
+        "bas"
+      ]
+    }
+  },
+  "controles": {
+    "termes_internes": [
+      "sales-coach",
+      "closer-pro",
+      "seo-expert",
+      "Coach commercial",
+      "Expert SEO",
+      "Spécialiste closing"
+    ],
+    "note_controle": "Les jeux d'essai portent VOLONTAIREMENT les clés d'agent internes : le texte rendu est analysé à chaque capture pour prouver qu'aucune n'apparaît. Le contrôle des emoji du document est fait par la tâche 6.9 (mesures.py), pas ici — un seul compteur, une seule vérité.",
+    "attendu": "Fragment de texte qui doit apparaître dans le rendu. Un écran dont le fragment manque n'est pas une maquette : c'est un écran sans données, et le harnais échoue au lieu de l'écrire."
+  }
+}

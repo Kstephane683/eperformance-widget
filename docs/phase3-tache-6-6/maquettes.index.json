@@ -1,0 +1,2824 @@
+{
+  "version": "6.6.1",
+  "echelle": 2,
+  "nomenclature": "<ecran>-<gabarit>-<theme>.png",
+  "gabarits": {
+    "mobile-390x844": {
+      "largeur": 390,
+      "hauteur": 844,
+      "famille": "mobile"
+    },
+    "desktop-1440x900": {
+      "largeur": 1440,
+      "hauteur": 900,
+      "famille": "desktop"
+    }
+  },
+  "themes": [
+    "clair",
+    "sombre"
+  ],
+  "total": 112,
+  "images": [
+    {
+      "fichier": "application-accueil-desktop-1440x900-clair.png",
+      "md5": "26b47225e35a0aefb0402cb2fa46ef7b",
+      "octets": 145542,
+      "serie": "application",
+      "ecran": "accueil",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-accueil-desktop-1440x900-sombre.png",
+      "md5": "55391e1f4526045dd1f425f5a41d954a",
+      "octets": 145302,
+      "serie": "application",
+      "ecran": "accueil",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-accueil-mobile-390x844-clair.png",
+      "md5": "88ac15b977a6c60face8e49024b8cc31",
+      "octets": 110042,
+      "serie": "application",
+      "ecran": "accueil",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-accueil-mobile-390x844-sombre.png",
+      "md5": "867a59d42d3719744eaafe17d70bf6de",
+      "octets": 111331,
+      "serie": "application",
+      "ecran": "accueil",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-actualites-desktop-1440x900-clair.png",
+      "md5": "b3668288da649f33bb4610d4a6c63b96",
+      "octets": 243660,
+      "serie": "application",
+      "ecran": "actualites",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-actualites-desktop-1440x900-sombre.png",
+      "md5": "ccdaca66410e40853695a87acb27278f",
+      "octets": 240341,
+      "serie": "application",
+      "ecran": "actualites",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-actualites-mobile-390x844-clair.png",
+      "md5": "7f3993eb5a0d6eeb61cafe630590e5bd",
+      "octets": 160350,
+      "serie": "application",
+      "ecran": "actualites",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-actualites-mobile-390x844-sombre.png",
+      "md5": "5f376cf4f5dd7026a32af16c3261dfb9",
+      "octets": 158056,
+      "serie": "application",
+      "ecran": "actualites",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-aide-desktop-1440x900-clair.png",
+      "md5": "a5bf6c12ad58e01c7df7a57b2dde886f",
+      "octets": 161744,
+      "serie": "application",
+      "ecran": "aide",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-aide-desktop-1440x900-sombre.png",
+      "md5": "3dd62008d3a697c8fa290544bf650378",
+      "octets": 159988,
+      "serie": "application",
+      "ecran": "aide",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-aide-mobile-390x844-clair.png",
+      "md5": "e4c48fa94076a527314609b5e26d8468",
+      "octets": 130264,
+      "serie": "application",
+      "ecran": "aide",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-aide-mobile-390x844-sombre.png",
+      "md5": "fbcd1edc95b371e7edf4a4fa97cb485f",
+      "octets": 130642,
+      "serie": "application",
+      "ecran": "aide",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-conversation-desktop-1440x900-clair.png",
+      "md5": "e74678ce4ec8267f12eb89a281f65356",
+      "octets": 119548,
+      "serie": "application",
+      "ecran": "conversation",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 649,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-conversation-desktop-1440x900-sombre.png",
+      "md5": "a8781a98f0df0361ec22c974e5888c19",
+      "octets": 118233,
+      "serie": "application",
+      "ecran": "conversation",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 649,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-conversation-mobile-390x844-clair.png",
+      "md5": "ad57a5d710a1f04d98c284ef62db4d54",
+      "octets": 115960,
+      "serie": "application",
+      "ecran": "conversation",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 683,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-conversation-mobile-390x844-sombre.png",
+      "md5": "bfa62e1a22f1ccd1c7140128855ec96b",
+      "octets": 115426,
+      "serie": "application",
+      "ecran": "conversation",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 683,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-messages-desktop-1440x900-clair.png",
+      "md5": "097278924809e54bc02da4a985558a14",
+      "octets": 70132,
+      "serie": "application",
+      "ecran": "messages",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-messages-desktop-1440x900-sombre.png",
+      "md5": "b6c1f3469e7f54009bdb94fee516733c",
+      "octets": 69680,
+      "serie": "application",
+      "ecran": "messages",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-messages-mobile-390x844-clair.png",
+      "md5": "0d3af82cc437f9d5790464ecc5fad9b8",
+      "octets": 51338,
+      "serie": "application",
+      "ecran": "messages",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "application-messages-mobile-390x844-sombre.png",
+      "md5": "c4da9fc469d4072fc232b26e77c187ab",
+      "octets": 51500,
+      "serie": "application",
+      "ecran": "messages",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "mode": "application"
+    },
+    {
+      "fichier": "console-activite-desktop-1440x900-clair.png",
+      "md5": "43dac4d49ed04f63a79e73338a87bd95",
+      "octets": 280282,
+      "serie": "console",
+      "ecran": "activite",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1538,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-activite-desktop-1440x900-sombre.png",
+      "md5": "42b1fcd4388036bcddf01bd32be5ce10",
+      "octets": 275578,
+      "serie": "console",
+      "ecran": "activite",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1538,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-activite-mobile-390x844-clair.png",
+      "md5": "953f76fd6e3b3c3206dd2d3d3dfbdf56",
+      "octets": 153647,
+      "serie": "console",
+      "ecran": "activite",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1478,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-activite-mobile-390x844-sombre.png",
+      "md5": "c6affd2ce94d0982a721255def5b5944",
+      "octets": 150060,
+      "serie": "console",
+      "ecran": "activite",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1478,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-base-de-connaissances-desktop-1440x900-clair.png",
+      "md5": "69d7a2bb43e7a59e98f1d116eeed9778",
+      "octets": 262745,
+      "serie": "console",
+      "ecran": "base-de-connaissances",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1296,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-base-de-connaissances-desktop-1440x900-sombre.png",
+      "md5": "811be82bf93808b557b619a49ff3dc22",
+      "octets": 258719,
+      "serie": "console",
+      "ecran": "base-de-connaissances",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1296,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-base-de-connaissances-mobile-390x844-clair.png",
+      "md5": "f10737d9df134cab77527d63f4b8794a",
+      "octets": 129903,
+      "serie": "console",
+      "ecran": "base-de-connaissances",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1231,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-base-de-connaissances-mobile-390x844-sombre.png",
+      "md5": "d2bdc965ef97984dd7ec3af75e58d96e",
+      "octets": 126046,
+      "serie": "console",
+      "ecran": "base-de-connaissances",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1231,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-boite-de-reception-desktop-1440x900-clair.png",
+      "md5": "8088593e7658229f9d5fffb1a92d6fc4",
+      "octets": 275046,
+      "serie": "console",
+      "ecran": "boite-de-reception",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1254,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-boite-de-reception-desktop-1440x900-sombre.png",
+      "md5": "1ef2321da2f86a1be6faee73f6c0cb46",
+      "octets": 269993,
+      "serie": "console",
+      "ecran": "boite-de-reception",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1254,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-boite-de-reception-mobile-390x844-clair.png",
+      "md5": "d523d844f75a3ccdf6fb18f0dbeffb5d",
+      "octets": 148248,
+      "serie": "console",
+      "ecran": "boite-de-reception",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1067,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-boite-de-reception-mobile-390x844-sombre.png",
+      "md5": "20018702ed52ddce1c143e8e42a1a45f",
+      "octets": 144953,
+      "serie": "console",
+      "ecran": "boite-de-reception",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1067,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-candidatures-desktop-1440x900-clair.png",
+      "md5": "02add2622c1422268ce433fa89d052b5",
+      "octets": 218710,
+      "serie": "console",
+      "ecran": "candidatures",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 871,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/candidats?limit=200",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-candidatures-desktop-1440x900-sombre.png",
+      "md5": "2fd1059b74afebfe7b91ddc302a8b736",
+      "octets": 214953,
+      "serie": "console",
+      "ecran": "candidatures",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 871,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/candidats?limit=200",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-candidatures-mobile-390x844-clair.png",
+      "md5": "8b7c891d55e87c0b19a2fc89d16c5577",
+      "octets": 130283,
+      "serie": "console",
+      "ecran": "candidatures",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 808,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/candidats?limit=200",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-candidatures-mobile-390x844-sombre.png",
+      "md5": "f235012b8ab6baeb87af6b9b10dc948a",
+      "octets": 128515,
+      "serie": "console",
+      "ecran": "candidatures",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 808,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/candidats?limit=200",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-competences-de-mia-desktop-1440x900-clair.png",
+      "md5": "9409740b68793c9dcfbc09ce3602d288",
+      "octets": 234637,
+      "serie": "console",
+      "ecran": "competences-de-mia",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1109,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-competences-de-mia-desktop-1440x900-sombre.png",
+      "md5": "7bfc9c32bed4736ef60d3c4a7b95112d",
+      "octets": 231864,
+      "serie": "console",
+      "ecran": "competences-de-mia",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1109,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-competences-de-mia-mobile-390x844-clair.png",
+      "md5": "8215be30891c72c3b37d9c424391d547",
+      "octets": 114939,
+      "serie": "console",
+      "ecran": "competences-de-mia",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1047,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-competences-de-mia-mobile-390x844-sombre.png",
+      "md5": "2651aecf218c4f8fa6cc77e49cedc06e",
+      "octets": 112408,
+      "serie": "console",
+      "ecran": "competences-de-mia",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1047,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-conversation-ouverte-desktop-1440x900-clair.png",
+      "md5": "85cc3238e009fd4a9c8e63235a48cf85",
+      "octets": 364083,
+      "serie": "console",
+      "ecran": "conversation-ouverte",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1853,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 5,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations/conv_9f31ac02",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-conversation-ouverte-desktop-1440x900-sombre.png",
+      "md5": "a92636de0b436b99d7cc2545754373fc",
+      "octets": 358122,
+      "serie": "console",
+      "ecran": "conversation-ouverte",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1853,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 5,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations/conv_9f31ac02",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-conversation-ouverte-mobile-390x844-clair.png",
+      "md5": "689d01bf30e1329ccb6ef4ad09810810",
+      "octets": 140110,
+      "serie": "console",
+      "ecran": "conversation-ouverte",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1191,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 5,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations/conv_9f31ac02",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-conversation-ouverte-mobile-390x844-sombre.png",
+      "md5": "71474d1c064092ca5df7154e72ef5a60",
+      "octets": 135862,
+      "serie": "console",
+      "ecran": "conversation-ouverte",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1191,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 5,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations/conv_9f31ac02",
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-integrations-desktop-1440x900-clair.png",
+      "md5": "f940da15f10d4df45d9537899e1e4c76",
+      "octets": 211751,
+      "serie": "console",
+      "ecran": "integrations",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 951,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-integrations-desktop-1440x900-sombre.png",
+      "md5": "3955019b0274fa97635e58ddfaf210b4",
+      "octets": 208139,
+      "serie": "console",
+      "ecran": "integrations",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 951,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-integrations-mobile-390x844-clair.png",
+      "md5": "eefb89a42c4c8acd25aefcbd36363c7e",
+      "octets": 106907,
+      "serie": "console",
+      "ecran": "integrations",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 894,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-integrations-mobile-390x844-sombre.png",
+      "md5": "1bd5c54543ea12ed96f77a814f0352ac",
+      "octets": 104181,
+      "serie": "console",
+      "ecran": "integrations",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 894,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-menu-mobile-mobile-390x844-clair.png",
+      "md5": "855e0377af8dfb28180842798514c5a2",
+      "octets": 102910,
+      "serie": "console",
+      "ecran": "menu-mobile",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1421,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-menu-mobile-mobile-390x844-sombre.png",
+      "md5": "93909c927bf86763a8857a05bb80b579",
+      "octets": 99778,
+      "serie": "console",
+      "ecran": "menu-mobile",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1421,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-performance-desktop-1440x900-clair.png",
+      "md5": "ec1b5c8830b16809e25c56bb060d3d13",
+      "octets": 225802,
+      "serie": "console",
+      "ecran": "performance",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1162,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-performance-desktop-1440x900-sombre.png",
+      "md5": "29bf0068fa3784ce8cce2ea24368074f",
+      "octets": 222222,
+      "serie": "console",
+      "ecran": "performance",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1162,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-performance-mobile-390x844-clair.png",
+      "md5": "c82cbad7cf8d0daa16adcee30840fbfb",
+      "octets": 100704,
+      "serie": "console",
+      "ecran": "performance",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1090,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-performance-mobile-390x844-sombre.png",
+      "md5": "f5b6f5d412e4bd17c4a3101080c442d7",
+      "octets": 98883,
+      "serie": "console",
+      "ecran": "performance",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1090,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-prospects-desktop-1440x900-clair.png",
+      "md5": "23f506148dd3c10483d86100967d5f23",
+      "octets": 234946,
+      "serie": "console",
+      "ecran": "prospects",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 913,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-prospects-desktop-1440x900-sombre.png",
+      "md5": "8f32ade1e62777b7e0f28c03bb4f7e20",
+      "octets": 230894,
+      "serie": "console",
+      "ecran": "prospects",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 913,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-prospects-mobile-390x844-clair.png",
+      "md5": "d5c94f1f0c5b5208f4f43fd7a69f4a26",
+      "octets": 134886,
+      "serie": "console",
+      "ecran": "prospects",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 853,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-prospects-mobile-390x844-sombre.png",
+      "md5": "c93ac606ec436843cb471f53cd05becd",
+      "octets": 131625,
+      "serie": "console",
+      "ecran": "prospects",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 853,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-publications-desktop-1440x900-clair.png",
+      "md5": "733b7b5c029c536ee119f4700bef0a70",
+      "octets": 348055,
+      "serie": "console",
+      "ecran": "publications",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3269,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-publications-desktop-1440x900-sombre.png",
+      "md5": "1d6d6f9b8dad5ed0938b9f300aeda601",
+      "octets": 341084,
+      "serie": "console",
+      "ecran": "publications",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3269,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-publications-mobile-390x844-clair.png",
+      "md5": "e0d56c3fdcbda7ac83017462a3e2c7a8",
+      "octets": 170965,
+      "serie": "console",
+      "ecran": "publications",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3212,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-publications-mobile-390x844-sombre.png",
+      "md5": "61d1a830256fab918e094039f5f53880",
+      "octets": 168321,
+      "serie": "console",
+      "ecran": "publications",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3212,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-tableau-de-bord-desktop-1440x900-clair.png",
+      "md5": "9efeb6c71ccf13e7ec24c84b36d015de",
+      "octets": 282554,
+      "serie": "console",
+      "ecran": "tableau-de-bord",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1483,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-tableau-de-bord-desktop-1440x900-sombre.png",
+      "md5": "0598bb2292731e5291e64d70fbc1406a",
+      "octets": 277477,
+      "serie": "console",
+      "ecran": "tableau-de-bord",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1483,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-tableau-de-bord-mobile-390x844-clair.png",
+      "md5": "74851d45f2b36b169aaa0fe1b21444eb",
+      "octets": 95008,
+      "serie": "console",
+      "ecran": "tableau-de-bord",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1421,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-tableau-de-bord-mobile-390x844-sombre.png",
+      "md5": "f363688a8fdb0cf99609aad3f3102751",
+      "octets": 92068,
+      "serie": "console",
+      "ecran": "tableau-de-bord",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1421,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 3,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-utilisateurs-desktop-1440x900-clair.png",
+      "md5": "05c1322262213718feffdedac7d454d0",
+      "octets": 202196,
+      "serie": "console",
+      "ecran": "utilisateurs",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 745,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats",
+        "/api/chatbot/admin/users?limit=200"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-utilisateurs-desktop-1440x900-sombre.png",
+      "md5": "d84e9ad7abf4a82c7649a68db544df7d",
+      "octets": 198507,
+      "serie": "console",
+      "ecran": "utilisateurs",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 745,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats",
+        "/api/chatbot/admin/users?limit=200"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-utilisateurs-mobile-390x844-clair.png",
+      "md5": "1502f3f88d97a086f868805c89bad84c",
+      "octets": 74615,
+      "serie": "console",
+      "ecran": "utilisateurs",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 690,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats",
+        "/api/chatbot/admin/users?limit=200"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "console-utilisateurs-mobile-390x844-sombre.png",
+      "md5": "4afabafc5f5ce4096f518282f06c7645",
+      "octets": 71855,
+      "serie": "console",
+      "ecran": "utilisateurs",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 690,
+      "termes_internes_presents": [],
+      "appels_api_interceptes": 4,
+      "chemins_api": [
+        "/api/chatbot/admin/conversations?limit=1",
+        "/api/chatbot/admin/conversations?limit=50",
+        "/api/chatbot/admin/stats",
+        "/api/chatbot/admin/users?limit=200"
+      ],
+      "modules_atteignables": [
+        "activite",
+        "candidatures",
+        "competences",
+        "connaissances",
+        "conversations",
+        "integrations",
+        "performance",
+        "prospects",
+        "publications",
+        "tableau-de-bord",
+        "utilisateurs"
+      ]
+    },
+    {
+      "fichier": "pages-mia-bas-desktop-1440x900-clair.png",
+      "md5": "8e9baae8f5dff4a3604df7fc69aa69cb",
+      "octets": 134716,
+      "serie": "pages",
+      "ecran": "mia-bas",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-bas-desktop-1440x900-sombre.png",
+      "md5": "601b4025fcd5b25edb1674df12bf9d42",
+      "octets": 136653,
+      "serie": "pages",
+      "ecran": "mia-bas",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-bas-mobile-390x844-clair.png",
+      "md5": "70b8ffcbb0de2d9bb14dbe7bd1f6a52a",
+      "octets": 116550,
+      "serie": "pages",
+      "ecran": "mia-bas",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-bas-mobile-390x844-sombre.png",
+      "md5": "5c75d72dac32b23bd73fd44affacf58b",
+      "octets": 117318,
+      "serie": "pages",
+      "ecran": "mia-bas",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-haut-desktop-1440x900-clair.png",
+      "md5": "8cdc25510e7a59c2e5be278e8a230066",
+      "octets": 440182,
+      "serie": "pages",
+      "ecran": "mia-haut",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-haut-desktop-1440x900-sombre.png",
+      "md5": "d09ab10b1a88184e8e1a21185c69f53f",
+      "octets": 438324,
+      "serie": "pages",
+      "ecran": "mia-haut",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-haut-mobile-390x844-clair.png",
+      "md5": "61920c063bfa3a55d5f8f80b48aac715",
+      "octets": 182452,
+      "serie": "pages",
+      "ecran": "mia-haut",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-mia-haut-mobile-390x844-sombre.png",
+      "md5": "e4ad8adda0bad8acb289433a71ae52b6",
+      "octets": 182451,
+      "serie": "pages",
+      "ecran": "mia-haut",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3443,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-bas-desktop-1440x900-clair.png",
+      "md5": "f09d519171158af98bf0e9ce3b4994ea",
+      "octets": 147660,
+      "serie": "pages",
+      "ecran": "portail-bas",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-bas-desktop-1440x900-sombre.png",
+      "md5": "f372a1b212be5b29f2540d0db707e09d",
+      "octets": 146732,
+      "serie": "pages",
+      "ecran": "portail-bas",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-bas-mobile-390x844-clair.png",
+      "md5": "569ddc32097ebd50f84f5ae6f5cc0e6d",
+      "octets": 124570,
+      "serie": "pages",
+      "ecran": "portail-bas",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-bas-mobile-390x844-sombre.png",
+      "md5": "818a05a29f07402e56ca430a54f7277d",
+      "octets": 123734,
+      "serie": "pages",
+      "ecran": "portail-bas",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-haut-desktop-1440x900-clair.png",
+      "md5": "46df61c02e551a4935bed01e43829fc3",
+      "octets": 186348,
+      "serie": "pages",
+      "ecran": "portail-haut",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-haut-desktop-1440x900-sombre.png",
+      "md5": "191df288b52da690eb97c6f250804300",
+      "octets": 187672,
+      "serie": "pages",
+      "ecran": "portail-haut",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-haut-mobile-390x844-clair.png",
+      "md5": "f3f94c2953c465660e63fb24c90c2478",
+      "octets": 124349,
+      "serie": "pages",
+      "ecran": "portail-haut",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "pages-portail-haut-mobile-390x844-sombre.png",
+      "md5": "bd073d5a228725687f72b2df3fdcf463",
+      "octets": 124679,
+      "serie": "pages",
+      "ecran": "portail-haut",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 1629,
+      "termes_internes_presents": []
+    },
+    {
+      "fichier": "widget-accueil-desktop-1440x900-clair.png",
+      "md5": "8383280678089fcfda66edc2900b0e65",
+      "octets": 88348,
+      "serie": "widget",
+      "ecran": "accueil",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-accueil-desktop-1440x900-sombre.png",
+      "md5": "ffbc5a0792393287b509da5af8ec5334",
+      "octets": 89346,
+      "serie": "widget",
+      "ecran": "accueil",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-accueil-mobile-390x844-clair.png",
+      "md5": "b56fdf48496b7ceb9cb9572278c7a3e8",
+      "octets": 111219,
+      "serie": "widget",
+      "ecran": "accueil",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-accueil-mobile-390x844-sombre.png",
+      "md5": "799becffea9ff8de2e4e62df48bb163b",
+      "octets": 112826,
+      "serie": "widget",
+      "ecran": "accueil",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 937,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-actualites-desktop-1440x900-clair.png",
+      "md5": "584e288bda59a2b1d0cff7a2d374c2c7",
+      "octets": 126009,
+      "serie": "widget",
+      "ecran": "actualites",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-actualites-desktop-1440x900-sombre.png",
+      "md5": "c0f96d97776db5e4f38925e0f1c12d42",
+      "octets": 125912,
+      "serie": "widget",
+      "ecran": "actualites",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-actualites-mobile-390x844-clair.png",
+      "md5": "708ab6ecc888275ea7c0a19a57fc1be6",
+      "octets": 159762,
+      "serie": "widget",
+      "ecran": "actualites",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-actualites-mobile-390x844-sombre.png",
+      "md5": "7c140d751807d08b0337c39689ad14f4",
+      "octets": 157822,
+      "serie": "widget",
+      "ecran": "actualites",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 3089,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-aide-desktop-1440x900-clair.png",
+      "md5": "1ddebbf7047cafdc3efca77f088f6d9c",
+      "octets": 99075,
+      "serie": "widget",
+      "ecran": "aide",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-aide-desktop-1440x900-sombre.png",
+      "md5": "ffd33258c522cf1f02939fe182f728b5",
+      "octets": 99568,
+      "serie": "widget",
+      "ecran": "aide",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-aide-mobile-390x844-clair.png",
+      "md5": "769641dd6fe64fd69481fff387771fb8",
+      "octets": 131389,
+      "serie": "widget",
+      "ecran": "aide",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-aide-mobile-390x844-sombre.png",
+      "md5": "c639ba9a2ec415768173fb8e92b2e902",
+      "octets": 132103,
+      "serie": "widget",
+      "ecran": "aide",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 730,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-conversation-desktop-1440x900-clair.png",
+      "md5": "06e4921c34be1bec509e43b6baac5e8b",
+      "octets": 93571,
+      "serie": "widget",
+      "ecran": "conversation",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 649,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-conversation-desktop-1440x900-sombre.png",
+      "md5": "12668d17c5f346e1822c2e326148960a",
+      "octets": 93698,
+      "serie": "widget",
+      "ecran": "conversation",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 649,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-conversation-mobile-390x844-clair.png",
+      "md5": "b4b522da4ddb0aaeb4e4941b63817ea3",
+      "octets": 118520,
+      "serie": "widget",
+      "ecran": "conversation",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 683,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-conversation-mobile-390x844-sombre.png",
+      "md5": "db098b9efe05e1503f94a64dc832f845",
+      "octets": 118161,
+      "serie": "widget",
+      "ecran": "conversation",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 683,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-en-contexte-ferme-desktop-1440x900-clair.png",
+      "md5": "c28d884ef983b11230e11e61dc15b114",
+      "octets": 78397,
+      "serie": "widget",
+      "ecran": "en-contexte-ferme",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 168,
+      "termes_internes_presents": [],
+      "contexte": "page du site hôte, widget fermé (bulle visible)"
+    },
+    {
+      "fichier": "widget-en-contexte-ferme-desktop-1440x900-sombre.png",
+      "md5": "956fb0c2223db74a8d42b4fa3c586c14",
+      "octets": 75183,
+      "serie": "widget",
+      "ecran": "en-contexte-ferme",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 168,
+      "termes_internes_presents": [],
+      "contexte": "page du site hôte, widget fermé (bulle visible)"
+    },
+    {
+      "fichier": "widget-en-contexte-ferme-mobile-390x844-clair.png",
+      "md5": "583e4af3f6c127c54144d15efecfb2ab",
+      "octets": 68547,
+      "serie": "widget",
+      "ecran": "en-contexte-ferme",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 168,
+      "termes_internes_presents": [],
+      "contexte": "page du site hôte, widget fermé (bulle visible)"
+    },
+    {
+      "fichier": "widget-en-contexte-ferme-mobile-390x844-sombre.png",
+      "md5": "7376df102987ed6f2e9831d7ceb78617",
+      "octets": 65873,
+      "serie": "widget",
+      "ecran": "en-contexte-ferme",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 168,
+      "termes_internes_presents": [],
+      "contexte": "page du site hôte, widget fermé (bulle visible)"
+    },
+    {
+      "fichier": "widget-en-contexte-ouvert-desktop-1440x900-clair.png",
+      "md5": "47de22c0f7ad76e817adf3ac1bdebfe6",
+      "octets": 179547,
+      "serie": "widget",
+      "ecran": "en-contexte-ouvert",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 168,
+      "termes_internes_presents": [],
+      "contexte": "page du site hôte entière, widget ouvert"
+    },
+    {
+      "fichier": "widget-en-contexte-ouvert-desktop-1440x900-sombre.png",
+      "md5": "cc7fc3749650933dc58a70daa0e99444",
+      "octets": 167948,
+      "serie": "widget",
+      "ecran": "en-contexte-ouvert",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 168,
+      "termes_internes_presents": [],
+      "contexte": "page du site hôte entière, widget ouvert"
+    },
+    {
+      "fichier": "widget-messages-desktop-1440x900-clair.png",
+      "md5": "55dde984f8bd66843be60dfe1a1ff2fc",
+      "octets": 50871,
+      "serie": "widget",
+      "ecran": "messages",
+      "gabarit": "desktop-1440x900",
+      "theme": "clair",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-messages-desktop-1440x900-sombre.png",
+      "md5": "2049bebf4c1c1f43f33ea26675284993",
+      "octets": 51481,
+      "serie": "widget",
+      "ecran": "messages",
+      "gabarit": "desktop-1440x900",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-messages-mobile-390x844-clair.png",
+      "md5": "cb91bbf8f98036d5f806996e0f72ea44",
+      "octets": 52475,
+      "serie": "widget",
+      "ecran": "messages",
+      "gabarit": "mobile-390x844",
+      "theme": "clair",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    },
+    {
+      "fichier": "widget-messages-mobile-390x844-sombre.png",
+      "md5": "74af7846f6dbae20a53354a8b5c801b8",
+      "octets": 52970,
+      "serie": "widget",
+      "ecran": "messages",
+      "gabarit": "mobile-390x844",
+      "theme": "sombre",
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "echelle": 2,
+      "longueur_texte": 275,
+      "termes_internes_presents": [],
+      "contexte": "page d'un site hôte, widget ouvert"
+    }
+  ]
+}
