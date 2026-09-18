@@ -85,7 +85,7 @@
             Politique de confidentialité
           </a>
         </li>
-        <li role="none">
+        <li v-if="!estApplication" role="none">
           <button type="button" role="menuitem" class="ep-menu__item" @click="fermer">
             Fermer le chat
           </button>
@@ -93,7 +93,15 @@
       </ul>
     </div>
 
-    <button type="button" class="ep-header__icone" aria-label="Fermer le chat" @click="fermer">
+    <!-- Le bouton de fermeture n'a pas de sens en mode application : le
+         document EST l'application, il n'y a pas de widget à refermer. -->
+    <button
+      v-if="!estApplication"
+      type="button"
+      class="ep-header__icone"
+      aria-label="Fermer le chat"
+      @click="fermer"
+    >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path
           d="M6 6l12 12M18 6L6 18"
@@ -113,12 +121,21 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import BrandLogo from '@/components/BrandLogo.vue'
+import { estDansIframe } from '@/helpers/environnement'
 import { postToSdk } from '@/helpers/sdkBridge'
 import { useConversationStore } from '@/stores/conversation'
 
 const route = useRoute()
 const router = useRouter()
 const conversation = useConversationStore()
+
+/**
+ * Mode application (tâche 6.4) : le document est de premier niveau — c'est
+ * l'application Mia installée ou ouverte directement, et non le panneau
+ * injecté dans un site hôte. Le bouton « Fermer le chat » y disparaît : il n'y
+ * a pas de widget à refermer, seulement un onglet ou une fenêtre à quitter.
+ */
+const estApplication = !estDansIframe()
 
 /** La variante suit l'écran affiché : un seul header, toujours visible. */
 const estConversation = computed(() => route.name === 'conversation')
