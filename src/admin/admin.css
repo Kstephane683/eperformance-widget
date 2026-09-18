@@ -284,11 +284,24 @@ select.adm-champ {
   cursor: not-allowed;
 }
 
-/* Action principale : or plein, texte sur or (5,05:1 en clair, 8,83:1 en sombre) */
+/* Action principale : or plein, texte sur or (5,05:1 en clair, 8,83:1 en sombre).
+
+   DÉCISION D7b — l'ombre d'accent manquait ici. Le noyau ne pose
+   `--ombre-accent` que sur DEUX rôles, et l'un est le bouton d'accent
+   (`.btn-accent`, `40-components.css:111`) ; le widget (`.ep-send`) et les
+   pages publiques (`.btn-gold`) l'appliquent tous les deux. La console faisait
+   le même travail sans la marque qui va avec, et c'était la seule des trois à
+   ne pas l'avoir.
+
+   L'argument de densité ne tient pas devant la mesure : `.adm-btn--or` est le
+   bouton d'action PRINCIPAL, et il n'apparaît que deux fois dans les onze
+   modules (tous deux dans la boîte de réception). La densité d'une console
+   vient de ses tableaux et de ses listes, pas de son unique action. */
 .adm-btn--or {
   border-color: var(--gold);
   background: var(--gold);
   color: var(--on-gold);
+  box-shadow: var(--shadow-gold);
   font-weight: 700;
 }
 

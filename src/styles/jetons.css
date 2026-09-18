@@ -128,7 +128,18 @@
   --shadow-sm: 0 1px 2px rgba(22, 21, 26, 0.04), 0 1px 3px rgba(22, 21, 26, 0.06);
   --shadow-md: 0 4px 12px rgba(22, 21, 26, 0.06), 0 12px 28px rgba(22, 21, 26, 0.07);
   --shadow-lg: 0 12px 32px rgba(22, 21, 26, 0.08), 0 32px 64px rgba(22, 21, 26, 0.09);
-  --shadow-gold: 0 6px 24px rgba(138, 111, 56, 0.14);
+
+  /* DÉCISION D7b — l'ombre d'accent compose le halo, elle ne l'écrit plus.
+     Elle portait `rgba(138, 111, 56, 0.14)` : l'ACCENT D'AVANT la décision
+     D6 (`#8a6f38`), à 14 %, alors que le noyau compose `--accent-halo`,
+     c'est-à-dire l'accent retenu, à 28 % — `--ombre-accent: 0 6px 24px
+     var(--accent-halo)`, `20-semantic.css:160`.
+     `--gold-glow` EST ce halo côté widget : même teinte (`--gold` = l'accent
+     du noyau) et mêmes pourcentages (28 % en clair, 40 % en sombre),
+     `jetons.css:64` et `:171`. La déclaration est donc écrite UNE fois, ici,
+     et le thème sombre ne la redéfinit plus : au noyau, seule la teinte du
+     halo change d'un thème à l'autre, jamais la géométrie de l'ombre. */
+  --shadow-gold: 0 6px 24px var(--gold-glow);
 
   /* Rayons — échelle 12 / 20 / 28 / 36 / 999 (eperf.css:146-149,202-206).
      --arrondi-bloc vaut 12px dans eperf.css:148 (et non 20px) : c'est la
@@ -215,7 +226,11 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 8px 32px rgba(201, 169, 110, 0.15);
+  /* `--shadow-gold` n'est PAS redéclarée ici (décision D7b) : au noyau, la
+     géométrie de l'ombre d'accent ne change pas d'un thème à l'autre, seul le
+     halo change — et `--gold-glow` est déjà redéfini plus haut. La redéclarer
+     ici faisait diverger le widget du noyau sur une géométrie (8 px / 32 px
+     contre 6 px / 24 px) que le noyau n'a jamais eue. */
 
   color-scheme: dark;
 }
