@@ -1,0 +1,812 @@
+/* ==========================================================================
+   Pages publiques de l'application Mia — /application et /application/mia
+   source/application.css
+
+   POURQUOI UNE FEUILLE SÉPARÉE. `src/style.css` est la feuille du WIDGET :
+   elle pose `html, body { position: fixed; overflow: hidden }` parce que
+   l'iframe ne doit jamais défiler (le clavier iOS décalerait l'interface).
+   Une page publique, elle, défile normalement. Les deux ne peuvent pas
+   partager le même socle — mais elles partagent les JETONS
+   (`src/styles/jetons.css`, importé ci-dessous) et recopient les recettes des
+   composants canoniques du site (`eperformance.pro/assets/css/eperf.css`),
+   référencées ligne par ligne, comme le fait déjà le widget.
+
+   Aucune valeur propre : chaque couleur, rayon, durée ou police vient des
+   jetons. Les seules valeurs littérales sont des mesures de mise en page
+   (largeurs, gouttières), reprises du site : --maxw 1200px, --gutter-x 24px,
+   --reading 68ch (eperf.css:209-211).
+
+   Les polices sont déclarées ici en `../fonts/…` : ce chemin est résolu par
+   rapport à la FEUILLE COMPILÉE (dist/assets/… → dist/fonts/…), pas par
+   rapport à ce fichier source — ne pas le « corriger » en `../../fonts/`.
+   ========================================================================== */
+
+@import './styles/jetons.css';
+
+/* --------------------------------------------------------------------------
+   Polices — mêmes fichiers que le widget (public/fonts/), sous-ensemble du
+   premier écran. Aucun appel à Google Fonts (règle de cohérence #9).
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/dm-sans-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/dm-sans-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/dm-sans-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/dm-sans-700.woff2') format('woff2');
+}
+
+/* --------------------------------------------------------------------------
+   SOCLE DE PAGE — un document qui défile, comme le site
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--police-corps);
+  font-size: 1rem;
+  line-height: 1.65;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--police-titres);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 6vw, 4.25rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-family: var(--police-corps);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--gold);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--on-gold);
+}
+
+/* Contenu réservé aux lecteurs d'écran (motif .skip-link du site) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lien d'évitement — recette .skip-link (eperf.css:24-41). Il sort du flux par
+   un `translate` et non par `left: -9999px` : un élément hors écran à 9999 px
+   agrandit la zone de défilement du document. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  padding: 12px 20px;
+  background: var(--gold);
+  color: var(--on-gold);
+  border-radius: 0 0 var(--arrondi-input) 0;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-110%);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   MISE EN PAGE
+   -------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* --maxw, eperf.css:209 */
+  margin-inline: auto;
+  padding-inline: 24px; /* --gutter-x, eperf.css:210 */
+}
+
+.container-narrow {
+  max-width: 880px;
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.section-tight {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Filet de section : hairline or + graduations — eperf.css:401-416 */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-rule::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-border) 22%,
+    var(--gold-border) 78%,
+    transparent
+  );
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+  .grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   EN-TÊTE DE PAGE
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 68px;
+}
+
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.marque__monogramme {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--arrondi-input);
+}
+
+.marque__nom {
+  font-family: var(--police-titres);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.marque__retour {
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.marque__retour:hover {
+  color: var(--gold);
+}
+
+/* Bouton de thème — recette .theme-toggle, eperf.css:623-637 */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  margin-left: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-bouton);
+  color: var(--soft);
+  transition: border-color var(--t) var(--ease-out), color var(--t) var(--ease-out);
+}
+
+.theme-toggle:hover {
+  border-color: var(--gold-border);
+  color: var(--gold);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle .icon-lune {
+  display: none;
+}
+
+[data-theme='dark'] .theme-toggle .icon-soleil {
+  display: none;
+}
+
+[data-theme='dark'] .theme-toggle .icon-lune {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   BOUTONS — recette .btn / .btn-gold / .btn-outline (eperf.css:497-523)
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 13px 26px;
+  border: 1px solid transparent;
+  border-radius: var(--arrondi-bouton);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--t) var(--ease-out), border-color var(--t) var(--ease-out),
+    color var(--t) var(--ease-out), transform var(--t-fast) var(--ease-out),
+    box-shadow var(--t) var(--ease-out);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* L'icône d'un bouton a une taille fixe (leçon S2 : un SVG sans dimensions
+   gonflait les boutons à 114 px). */
+.btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--on-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-gold:hover {
+  background: var(--gold2);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-lg {
+  min-height: 54px;
+  padding: 16px 32px;
+  font-size: 1rem;
+}
+
+.btn-sm {
+  min-height: 40px;
+  padding: 10px 18px;
+  font-size: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   SUR-TITRE ET TITRES DE SECTION — recette .eyebrow (eperf.css:474-484)
+   -------------------------------------------------------------------------- */
+
+.eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.titre-section {
+  margin-bottom: 18px;
+}
+
+.chapeau {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--soft);
+  max-width: 68ch; /* --reading, eperf.css:211 */
+}
+
+/* --------------------------------------------------------------------------
+   HÉROS — le contenu qui doit tenir au-dessus de la ligne de flottaison
+   -------------------------------------------------------------------------- */
+
+.hero {
+  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 4vw, 3.5rem);
+}
+
+.hero__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .hero__grille {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero h1 {
+  max-width: 22ch;
+}
+
+/* Titre du portail : deux lignes au plus sur grand écran */
+.titre-portail {
+  max-width: 24ch;
+}
+
+.hero__promesse {
+  margin-top: 18px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--soft);
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.hero__note {
+  margin-top: 14px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Bandeau d'installation : état de l'application, annoncé sans emphase */
+.etat-installation {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border: 1px solid var(--green-border);
+  border-radius: var(--arrondi-bouton);
+  background: var(--green-bg);
+  color: var(--green-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.etat-installation[hidden] {
+  display: none;
+}
+
+/* Cadre d'aperçu de l'application */
+.apercu {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-carte);
+  background: var(--card2);
+  padding: 14px;
+  box-shadow: var(--shadow-md);
+}
+
+.apercu img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--arrondi-bloc);
+  border: 1px solid var(--border);
+}
+
+.apercu__legende {
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Téléphone : l'aperçu est un cadre de la largeur du contenu, centré */
+.apercu--telephone {
+  max-width: 320px;
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   CARTES — recette .card (eperf.css:737-745) + survol .card-hover
+   -------------------------------------------------------------------------- */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-carte);
+  padding: 28px;
+  transition: border-color var(--t) var(--ease-out), box-shadow var(--t) var(--ease-out),
+    transform var(--t) var(--ease-out);
+}
+
+.card-hover:hover {
+  border-color: var(--gold-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.card-title {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+
+.card-text {
+  font-size: 0.9375rem;
+  color: var(--soft);
+  line-height: 1.6;
+}
+
+.card-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+/* Icône d'application posée en tête de carte (portail) */
+.card-icon-app {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--arrondi-input);
+  margin-bottom: 18px;
+}
+
+/* Liste des capacités : deux colonnes sur grand écran, une seule ensuite */
+.capacites {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 700px) {
+  .capacites {
+    grid-template-columns: 1fr;
+  }
+}
+
+.capacite {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-bloc);
+  background: var(--card);
+  font-size: 0.9375rem;
+}
+
+.capacite svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--gold);
+}
+
+.capacite__famille {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+}
+
+.capacite__famille:first-child {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   ÉTAPES D'INSTALLATION
+   -------------------------------------------------------------------------- */
+
+.etapes {
+  list-style: none;
+  counter-reset: etape;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.etapes li {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--soft);
+}
+
+.etapes li::before {
+  counter-increment: etape;
+  content: counter(etape);
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   FAQ — recette .faq (eperf.css:898-929) : <details>/<summary> natifs
+   -------------------------------------------------------------------------- */
+
+.faq {
+  border-top: 1px solid var(--border);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 0;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--t) var(--ease-out);
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary:hover {
+  color: var(--gold);
+}
+
+.faq summary::after {
+  content: '';
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform var(--t) var(--ease-out);
+}
+
+.faq details[open] summary::after {
+  transform: rotate(-135deg) translateY(-3px);
+}
+
+.faq .faq-answer {
+  padding: 0 0 22px;
+  color: var(--soft);
+  max-width: 68ch;
+}
+
+/* --------------------------------------------------------------------------
+   PIED DE PAGE
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--card2);
+  padding-block: 36px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.site-footer__liens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 12px;
+  list-style: none;
+}
+
+.site-footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--gold);
+}
+
+.mention-legal {
+  margin-top: 18px;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   UTILITAIRES — les seuls nécessaires à ces deux pages, repris de la couche
+   utilitaires du noyau (50-utilities.css:60-77). Échelle d'espacement du
+   noyau : 8 / 16 / 24 / 32 px (10-primitives.css:148-152).
+   -------------------------------------------------------------------------- */
+
+.text-center {
+  text-align: center;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.mt-1 {
+  margin-top: 8px;
+}
+
+.mt-2 {
+  margin-top: 16px;
+}
+
+.mt-3 {
+  margin-top: 24px;
+}
+
+.mt-4 {
+  margin-top: 32px;
+}
+
+.mb-1 {
+  margin-bottom: 8px;
+}
+
+.mb-2 {
+  margin-bottom: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITÉ : réduire les animations si le système le demande.
+   Durées à 1 ms et non 0 : une transition nulle ne déclenche pas
+   `transitionend` (eperf.css:1440-1444).
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

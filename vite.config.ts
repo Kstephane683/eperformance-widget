@@ -20,10 +20,16 @@ export default defineConfig({
     chunkSizeWarningLimit: 150,
     // Sprint 9 : 2e entrée HTML pour le dashboard admin (GitHub Pages :
     // /eperformance-widget/admin.html), à côté de l'entrée widget.
+    // Tâche 6.4 : le portail `/application` et la page de présentation
+    // `/application/mia` sont des documents à part entière — leur contenu doit
+    // être dans le HTML (indexable, lisible sans JavaScript), et non dans une
+    // route du routeur à hash du widget.
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         admin: fileURLToPath(new URL('./admin.html', import.meta.url)),
+        application: fileURLToPath(new URL('./application/index.html', import.meta.url)),
+        applicationMia: fileURLToPath(new URL('./application/mia/index.html', import.meta.url)),
       },
     },
   },

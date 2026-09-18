@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mia, l’assistante IA d’ePerformance — poser une question, obtenir une réponse</title>
+    <meta
+      name="description"
+      content="Mia répond aux questions qui bloquent votre activité : trouver des clients, gagner en visibilité, automatiser avec l’IA. Dans le navigateur, ou installée sur votre téléphone."
+    />
+    <!--
+      Canonique : l'adresse RÉELLE de cette page aujourd'hui. Le jour où le
+      chemin public `eperformance.pro/application/mia` est publié (voir la DEMANDE de coordination consignée au journal), cette ligne et les URL Open Graph
+      ci-dessous basculent sur ce chemin — et rien d'autre ne change.
+    -->
+    <link
+      rel="canonical"
+      href="https://kstephane683.github.io/eperformance-widget/application/mia/"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="K. Stéphane" />
+    <meta name="theme-color" content="#fdfcfa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08080c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="ePerformance" />
+    <meta
+      property="og:url"
+      content="https://kstephane683.github.io/eperformance-widget/application/mia/"
+    />
+    <meta property="og:title" content="Mia, l’assistante IA d’ePerformance" />
+    <meta
+      property="og:description"
+      content="Posez votre question : Mia répond avec un angle, un exemple et la prochaine étape. À utiliser dans le navigateur ou à installer sur votre téléphone."
+    />
+    <meta
+      property="og:image"
+      content="https://kstephane683.github.io/eperformance-widget/preuves/mia-partage.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="../../favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+    <!-- Le manifeste de l'application : c'est ce qui rend CETTE page
+         installable, et l'application Mia installée. -->
+    <link rel="manifest" href="../../mia-manifest.webmanifest" />
+
+    <!-- Antiflash de thème — même logique que l'application (index.html) et le
+         site : la préférence mémorisée d'abord, sinon celle du système. -->
+    <script>
+      ;(function () {
+        try {
+          var t = null
+          try {
+            t = window.localStorage.getItem('eperf-theme')
+          } catch (e) {
+            t = null
+          }
+          if (t !== 'dark' && t !== 'light') {
+            t =
+              window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          }
+          document.documentElement.setAttribute('data-theme', t)
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="../../fonts/cormorant-garamond-700.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="../../fonts/dm-sans-400.woff2"
+    />
+
+    <!-- Données structurées : ce que la page décrit, exactement — l'application,
+         son éditeur, et les questions réellement affichées plus bas. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Mia",
+            "alternateName": "Mia — assistante ePerformance",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web, Android, iOS",
+            "inLanguage": "fr",
+            "url": "https://kstephane683.github.io/eperformance-widget/application/mia/",
+            "description": "L’assistante IA d’ePerformance : elle répond aux questions d’acquisition, de visibilité et d’automatisation, avec une réponse actionnable.",
+            "isAccessibleForFree": true,
+            "publisher": {
+              "@type": "Organization",
+              "name": "ePerformance",
+              "url": "https://eperformance.pro/"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Mia est-elle une personne ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Non. Mia est l’assistante IA d’ePerformance : elle répond seule, à partir de la base de connaissances et des méthodes d’ePerformance. Quand un conseiller humain reprend une conversation, son nom s’affiche à la place de celui de Mia."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Faut-il créer un compte pour parler à Mia ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Non. Vous ouvrez Mia et vous écrivez. Aucun compte n’est nécessaire pour poser une question, ni pour lire la réponse."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Que devient ma conversation ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Elle est conservée douze mois, puis supprimée automatiquement. Le détail des données traitées figure dans la politique de confidentialité d’ePerformance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "L’application a-t-elle besoin d’une connexion ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Oui pour répondre : Mia rédige ses réponses côté serveur. Hors ligne, l’application affiche un écran d’attente clair et reprend d’elle-même dès que la connexion revient."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Mia remplace-t-elle un conseiller ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Non. Mia débloque une question précise ; quand le sujet demande une étude, un devis ou un accompagnement, elle oriente vers un conseiller ePerformance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Sur quels appareils puis-je utiliser Mia ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sur iPhone, iPad, Android et ordinateur, dans un navigateur récent. Elle s’installe comme une application sur les quatre, sans passer par un magasin d’applications."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="marque" href="https://eperformance.pro/">
+          <img
+            class="marque__monogramme"
+            src="../../icons/mia-192.png"
+            width="34"
+            height="34"
+            alt=""
+          />
+          <span class="marque__nom">ePerformance</span>
+        </a>
+        <a class="marque__retour" href="../">Toutes les applications</a>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-bascule-theme
+          aria-label="Passer au thème sombre"
+        >
+          <svg class="icon-soleil" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7" />
+            <path
+              d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <svg class="icon-lune" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4z"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <!-- ================= LIGNE DE FLOTTAISON =================
+           À 390 px comme à 1440 px, le titre, la promesse et les DEUX boutons
+           tiennent dans le premier écran (mesuré : docs/phase3-tache-6-4). -->
+      <section class="hero">
+        <div class="container hero__grille">
+          <div>
+            <span class="eyebrow">Application Mia</span>
+            <h1>Mia répond à la question qui bloque votre activité.</h1>
+            <p class="hero__promesse">
+              L’assistante IA d’ePerformance. Vous écrivez ce qui vous bloque — trouver des
+              clients, gagner en visibilité, automatiser — et Mia répond avec un angle, un
+              exemple et la prochaine étape.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn-gold btn-lg" href="../../index.html?app=1">Ouvrir Mia</a>
+              <button type="button" class="btn btn-outline btn-lg" data-installer>
+                Installer l’application
+              </button>
+            </div>
+            <p class="hero__note">
+              Aucun compte, aucune carte bancaire. Elle s’ouvre dans le navigateur ; vous pouvez
+              l’installer pour l’avoir sous la main.
+            </p>
+            <p class="etat-installation" data-etat-installation hidden>
+              Mia est installée sur cet appareil
+            </p>
+            <p class="visually-hidden" data-message-installation role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="apercu apercu--telephone">
+            <img
+              src="../../preuves/mia-application-mobile.png"
+              width="390"
+              height="844"
+              alt="L’application Mia sur téléphone : l’écran d’accueil, ses neuf capacités et la zone de saisie."
+              fetchpriority="high"
+            />
+            <p class="apercu__legende">L’application Mia, écran d’accueil</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="section-rule"></div>
+      </div>
+
+      <section class="section" aria-labelledby="titre-conversation">
+        <div class="container">
+          <span class="eyebrow">Ce que c’est</span>
+          <h2 id="titre-conversation" class="titre-section">Une conversation, pas un formulaire</h2>
+          <p class="chapeau">
+            Mia ne demande pas de remplir un questionnaire avant de répondre. Vous posez votre
+            question en une phrase ; la réponse arrive dans le fil, et vous pouvez enchaîner.
+          </p>
+
+          <div class="grid grid-3 mt-4">
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 6.5h15v9.5h-8.2L7.5 19v-3H4.5z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <h3 class="card-title">Elle répond dans le fil</h3>
+              <p class="card-text">
+                Une question, une réponse rédigée pour votre situation : un angle, un ordre de
+                grandeur, une prochaine étape. Pas de catalogue à parcourir.
+              </p>
+            </article>
+
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 3.5v2.2M12 18.3v2.2M4.2 12H2M22 12h-2.2M6.2 6.2 4.7 4.7M19.3 19.3l-1.5-1.5M17.8 6.2l1.5-1.5M4.7 19.3l1.5-1.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+              <h3 class="card-title">Clair ou sombre, comme votre appareil</h3>
+              <p class="card-text">
+                Mia suit le thème de votre appareil, et la bascule est à un bouton. La lecture
+                reste confortable de jour comme de nuit.
+              </p>
+            </article>
+
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect
+                  x="7"
+                  y="3"
+                  width="10"
+                  height="18"
+                  rx="2.4"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path d="M10.5 17.6h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+              <h3 class="card-title">Sur téléphone comme sur ordinateur</h3>
+              <p class="card-text">
+                La même application du petit au grand écran : barre d’onglets sur téléphone,
+                colonne centrée sur ordinateur — et l’installation possible sur les deux.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight" aria-labelledby="titre-ordinateur">
+        <div class="container">
+          <div class="apercu">
+            <img
+              src="../../preuves/mia-application-ordinateur.png"
+              width="1440"
+              height="900"
+              alt="Mia ouverte sur un ordinateur : l’onglet Accueil, les neuf capacités de Mia et l’article le plus récent."
+              loading="lazy"
+            />
+            <p class="apercu__legende">Mia sur ordinateur — même application, colonne centrée</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LES NEUF CAPACITÉS =================
+           Source unique : src/data/capacites.ts (libellés et familles). Le test
+           `src/application/pages.spec.ts` compare ce balisage au fichier — un
+           libellé modifié d'un côté doit l'être des deux. -->
+      <section class="section section-tight" aria-labelledby="titre-capacites">
+        <div class="container">
+          <span class="eyebrow">Ce que Mia sait faire</span>
+          <h2 id="titre-capacites" class="titre-section">Neuf sujets, un seul interlocuteur</h2>
+          <p class="chapeau">
+            Ce sont les neuf domaines sur lesquels Mia est entraînée à répondre. Ils sont aussi
+            proposés en un clic à l’ouverture de l’application.
+          </p>
+
+          <ul class="capacites mt-4">
+            <li class="capacite__famille"><span class="eyebrow">Développer mon activité</span></li>
+            <li class="capacite" data-capacite="clients">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Trouver plus de clients</span>
+            </li>
+            <li class="capacite" data-capacite="mlm">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Développer mon MLM / parrainage</span>
+            </li>
+            <li class="capacite" data-capacite="ventes">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Améliorer mes ventes</span>
+            </li>
+
+            <li class="capacite__famille"><span class="eyebrow">Visibilité &amp; Acquisition</span></li>
+            <li class="capacite" data-capacite="site_web">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Créer un site web qui convertit</span>
+            </li>
+            <li class="capacite" data-capacite="seo">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Améliorer mon référencement</span>
+            </li>
+            <li class="capacite" data-capacite="ads">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Lancer une campagne publicitaire</span>
+            </li>
+            <li class="capacite" data-capacite="social">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Gérer mes réseaux sociaux</span>
+            </li>
+
+            <li class="capacite__famille"><span class="eyebrow">Automatisation &amp; IA</span></li>
+            <li class="capacite" data-capacite="ia_auto">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Exploiter l’IA et l’automatisation</span>
+            </li>
+            <li class="capacite" data-capacite="funnel">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4.5 12.5 9 17l10.5-10.5"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Optimiser mon tunnel de conversion</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= INSTALLATION ================= -->
+      <section
+        class="section"
+        id="installation"
+        data-etapes-installation
+        aria-labelledby="titre-installation"
+      >
+        <div class="container">
+          <span class="eyebrow">Installer</span>
+          <h2 id="titre-installation" class="titre-section">Trois gestes, selon votre appareil</h2>
+          <p class="chapeau">
+            Installée, Mia s’ouvre en plein écran, comme une application, et se lance depuis
+            votre écran d’accueil. Rien n’est envoyé à un magasin d’applications : c’est votre
+            navigateur qui l’installe, et vous la désinstallez quand vous voulez.
+          </p>
+
+          <div class="grid grid-3 mt-4">
+            <article class="card">
+              <h3 class="card-title">iPhone et iPad</h3>
+              <p class="card-text mb-2">Depuis Safari :</p>
+              <ol class="etapes">
+                <li>Ouvrez Mia dans Safari.</li>
+                <li>Touchez le bouton Partager, en bas de l’écran.</li>
+                <li>Choisissez « Sur l’écran d’accueil », puis « Ajouter ».</li>
+              </ol>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">Android</h3>
+              <p class="card-text mb-2">Depuis Chrome :</p>
+              <ol class="etapes">
+                <li>Ouvrez Mia dans Chrome.</li>
+                <li>Touchez le menu, en haut à droite.</li>
+                <li>Choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil ».</li>
+              </ol>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">Ordinateur</h3>
+              <p class="card-text mb-2">Depuis Chrome ou Edge :</p>
+              <ol class="etapes">
+                <li>Ouvrez Mia.</li>
+                <li>Cliquez sur l’icône d’installation, dans la barre d’adresse.</li>
+                <li>Confirmez « Installer ».</li>
+              </ol>
+            </article>
+          </div>
+
+          <p class="chapeau mt-3">
+            Votre navigateur ne propose rien de tout cela ? Mia fonctionne quand même : elle
+            s’utilise dans l’onglet, et votre conversation est conservée.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <section class="section" aria-labelledby="titre-faq">
+        <div class="container container-narrow">
+          <span class="eyebrow">Questions fréquentes</span>
+          <h2 id="titre-faq" class="titre-section">Ce qu’on nous demande le plus</h2>
+
+          <div class="faq">
+            <details>
+              <summary>Mia est-elle une personne ?</summary>
+              <p class="faq-answer">
+                Non. Mia est l’assistante IA d’ePerformance : elle répond seule, à partir de la
+                base de connaissances et des méthodes d’ePerformance. Quand un conseiller humain
+                reprend une conversation, son nom s’affiche à la place de celui de Mia.
+              </p>
+            </details>
+
+            <details>
+              <summary>Faut-il créer un compte pour parler à Mia ?</summary>
+              <p class="faq-answer">
+                Non. Vous ouvrez Mia et vous écrivez. Aucun compte n’est nécessaire pour poser
+                une question, ni pour lire la réponse.
+              </p>
+            </details>
+
+            <details>
+              <summary>Que devient ma conversation ?</summary>
+              <p class="faq-answer">
+                Elle est conservée douze mois, puis supprimée automatiquement. Le détail des
+                données traitées figure dans la
+                <a href="https://eperformance.pro/politique-confidentialite.html"
+                  >politique de confidentialité</a
+                >.
+              </p>
+            </details>
+
+            <details>
+              <summary>L’application a-t-elle besoin d’une connexion ?</summary>
+              <p class="faq-answer">
+                Oui pour répondre : Mia rédige ses réponses côté serveur. Hors ligne,
+                l’application affiche un écran d’attente clair et reprend d’elle-même dès que la
+                connexion revient.
+              </p>
+            </details>
+
+            <details>
+              <summary>Mia remplace-t-elle un conseiller ?</summary>
+              <p class="faq-answer">
+                Non. Mia débloque une question précise ; quand le sujet demande une étude, un
+                devis ou un accompagnement, elle oriente vers un conseiller ePerformance.
+              </p>
+            </details>
+
+            <details>
+              <summary>Sur quels appareils puis-je utiliser Mia ?</summary>
+              <p class="faq-answer">
+                Sur iPhone, iPad, Android et ordinateur, dans un navigateur récent. Elle
+                s’installe comme une application sur les quatre, sans passer par un magasin
+                d’applications.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight" aria-labelledby="titre-ouvrir">
+        <div class="container container-narrow text-center">
+          <h2 id="titre-ouvrir" class="titre-section">Une question à poser ?</h2>
+          <p class="chapeau mx-auto">
+            Mia répond en quelques secondes. Vous pourrez toujours reprendre la conversation
+            plus tard.
+          </p>
+          <p class="mt-3">
+            <a class="btn btn-gold btn-lg" href="../../index.html?app=1">Ouvrir Mia</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Mia est une application <a href="https://eperformance.pro/">ePerformance</a> —
+          acquisition, IA et automatisation pour les PME et les e-commerces.
+        </p>
+        <ul class="site-footer__liens">
+          <li><a href="../">Toutes les applications</a></li>
+          <li>
+            <a href="https://eperformance.pro/politique-confidentialite.html"
+              >Politique de confidentialité</a
+            >
+          </li>
+          <li><a href="https://eperformance.pro/cookies.html">Cookies</a></li>
+          <li><a href="https://eperformance.pro/cgv.html">Conditions générales de vente</a></li>
+          <li><a href="https://eperformance.pro/mentions-legales.html">Mentions légales</a></li>
+        </ul>
+        <p class="mention-legal">
+          Les conversations avec Mia sont conservées douze mois puis supprimées automatiquement.
+          Aucune donnée n’est revendue.
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/application/mia.ts"></script>
+  </body>
+</html>
