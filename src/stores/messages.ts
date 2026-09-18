@@ -49,9 +49,14 @@ let humanDbCount = 0
  * garantit qu'il n'est pas redéclenché à chaque ouverture du widget dans la
  * même session ; une session expirée (conversation inconnue du serveur)
  * remet le compteur à zéro, et Mia se présente de nouveau.
+ *
+ * Il ne porte AUCUN emoji : c'est une chaîne d'INTERFACE, écrite par le
+ * produit, et la règle n°8 s'y applique sans exception (tâche 6.9, point 4).
+ * Le texte que Mia génère en conversation relève de sa personnalité, pas de
+ * cette règle — la distinction est faite dans le rapport 6.9.
  */
 export const MESSAGE_ACCUEIL =
-  'Bonjour 👋 Vous parlez maintenant avec Mia. Comment puis-je vous aider ?'
+  'Bonjour, vous parlez maintenant avec Mia. Comment puis-je vous aider ?'
 const ACCUEIL_KEY = 'eperf_mia_accueil'
 
 /**

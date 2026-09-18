@@ -21,10 +21,12 @@
 
     <TypingIndicator v-if="isTyping" />
 
-    <!-- Réessayer après échec réseau (avant le fallback WhatsApp silencieux) -->
+    <!-- Réessayer après échec réseau (avant le fallback WhatsApp silencieux).
+         Sans caractère décoratif : « ↻ » est un emoji d'interface au sens de
+         la règle n°8 (tâche 6.9, point 4), et le libellé dit déjà l'action. -->
     <div v-if="failedContent && !isSending" class="ep-retry">
       <button type="button" class="ep-retry__btn" @click="$emit('retry')">
-        ↻ Réessayer
+        Réessayer
       </button>
     </div>
 
