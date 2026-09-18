@@ -13,6 +13,7 @@ import type {
   ChatbotMessageRequest,
   ChatbotMessageResponse,
   ConversationHistoryResponse,
+  ImagePayload,
 } from '@/types/api'
 
 export class ConversationNotFoundError extends Error {
@@ -28,8 +29,10 @@ export interface SendMessagePayload {
   /** Historique complet du store — le DERNIER élément est le message courant (role 'user') */
   messages: BackendMessage[]
   conversationId: string
-  /** Infos visiteur additionnelles (identity du SDK, page courante…) */
+  /** Infos visiteur additionnelles (identity du SDK, clic de suggestion…) */
   extraVisitorInfo?: Record<string, unknown>
+  /** Image jointe au message courant (A.1) — posée sur le DERNIER message */
+  image?: ImagePayload | null
 }
 
 function visitorInfo(extra: Record<string, unknown> = {}) {
@@ -62,6 +65,13 @@ export async function sendMessage(
     conversation_id: payload.conversationId,
     user_id: typeof userId === 'number' ? userId : null,
     visitor_info: visitorInfo(payload.extraVisitorInfo),
+  }
+
+  // Image jointe (A.1) : elle voyage SUR LE DERNIER MESSAGE, à côté du texte.
+  // Le backend ne lit que celle du message courant (il refuse un message vide
+  // sans image) — d'où la pose ici plutôt qu'un champ racine.
+  if (payload.image && body.messages.length) {
+    body.messages[body.messages.length - 1].image = payload.image
   }
 
   const res = await fetchWithTimeout(`${apiBase}/api/chatbot/message`, {

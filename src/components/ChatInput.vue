@@ -48,8 +48,9 @@
     <p v-if="messageDictee" class="ep-dictee" role="status">{{ messageDictee }}</p>
 
     <form class="ep-input-bar" @submit.prevent="submit">
-      <!-- Pièce jointe : aucun endpoint d'upload (contrat V2, décision #5).
-           Le fichier reste local ; seul son nom part dans le message. -->
+      <!-- Pièce jointe : une IMAGE est transmise au backend (base64, A.1) et
+           Mia la commente ; les autres fichiers restent locaux — seul leur
+           nom part dans le message. -->
       <input
         ref="fileEl"
         type="file"
@@ -246,9 +247,18 @@ async function onFichier(evenement: Event) {
   const champ = evenement.target as HTMLInputElement
   const fichier = champ.files?.[0]
   if (!fichier) return
-  // Une image porte un aperçu local ; tout autre fichier n'affiche que son nom.
-  const dataUrl = fichier.type.startsWith('image/') ? await lireDataUrl(fichier) : null
-  attachment.value = { name: fichier.name, dataUrl }
+  // A.1 — une IMAGE part au backend (base64) : Mia la regarde et la commente.
+  // Les autres fichiers restent locaux : aucun endpoint d'upload au contrat,
+  // seul leur nom voyage dans le texte du message.
+  const estImage = fichier.type.startsWith('image/')
+  const dataUrl = estImage ? await lireDataUrl(fichier) : null
+  attachment.value = {
+    name: fichier.name,
+    dataUrl,
+    mediaType: estImage ? fichier.type || null : null,
+    estImage,
+    taille: fichier.size ?? null,
+  }
   champ.value = ''
   inputEl.value?.focus()
 }

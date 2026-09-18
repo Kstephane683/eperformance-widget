@@ -10,7 +10,9 @@
       <span class="ep-bubble__auteur">{{ message.human_name }}</span>
     </p>
 
-    <!-- Pièce jointe locale : aperçu data URL (jamais envoyé au backend) -->
+    <!-- Pièce jointe du message : aperçu data URL conservé le temps de la
+         session. Une image est AUSSI partie au backend en base64 (A.1) ;
+         les autres fichiers restent locaux (seul leur nom a voyagé). -->
     <figure v-if="message.attachment?.dataUrl" class="ep-bubble__piece">
       <img :src="message.attachment.dataUrl" :alt="`Aperçu de ${message.attachment.name}`" />
     </figure>
@@ -18,16 +20,22 @@
     <!-- Rendu riche : markdown rendu (gras/italique/listes/liens) OU html conservé
          s'il porte des liens (fallback WhatsApp). Boutons backend toujours retirés. -->
     <div v-if="!isUser && displayHtml" class="ep-bubble__html" v-html="displayHtml" />
-    <!-- Rendu texte simple -->
-    <template v-else>{{ message.content }}</template>
-
-    <span v-if="!isUser && message.agent_used && !estConseiller" class="ep-bubble__meta">
-      {{ agentLabel }}
-    </span>
+    <!-- Rendu texte simple — élément de BLOC : le texte et la signature ne
+         partagent jamais une ligne (défaut A.3 corrigé) -->
+    <p v-else class="ep-bubble__texte">{{ message.content }}</p>
 
     <!--
-      Signature sous chaque message : auteur • qualité • ancienneté, comme
-      Intercom. L'heure exacte reste accessible en infobulle.
+      A.6 — AUCUN nom d'agent n'est rendu ici.
+      `message.agent_used` reste dans le fil (observabilité, tests, analytics)
+      mais il n'est jamais affiché : la clé technique « discovery coach » a
+      fuité à l'écran jusqu'à la tâche 6.3-BIS. Le seul nom visible est Mia,
+      et le badge « Conseiller » + nom réel pour un humain (voulu).
+    -->
+
+    <!--
+      Signature sous chaque message : auteur · qualité · ancienneté, comme
+      Intercom. Elle est TOUJOURS sous la bulle, jamais dans le flux du texte.
+      L'heure exacte reste accessible en infobulle.
     -->
     <span class="ep-bubble__signature">
       <span :title="heureExacte">{{ signature }}</span>
@@ -91,7 +99,13 @@ const heureExacte = computed(() => {
   return d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 })
 
-/** « Mia • Agent IA • il y a 2 minutes » — ou « Vous • il y a 2 minutes » */
+/**
+ * « Vous · à l'instant » / « Mia • Agent IA • il y a 2 minutes ».
+ *
+ * Le séparateur suit la spécification : `·` pour le visiteur (A.3),
+ * `•` pour Mia (A.4, forme déjà en place depuis 6.2-bis). Les deux disent la
+ * même chose — auteur, qualité, ancienneté — dans l'ordre demandé.
+ */
 const signature = computed(() => {
   const auteur = isUser.value
     ? 'Vous'
@@ -100,7 +114,9 @@ const signature = computed(() => {
       : 'Mia'
   const qualite = isUser.value ? null : estConseiller.value ? 'Conseiller' : 'Agent IA'
   const quand = tempsRelatif(props.message.created_at, props.maintenant)
-  return [auteur, qualite, quand].filter(Boolean).join(' • ')
+  return [auteur, qualite, quand]
+    .filter(Boolean)
+    .join(isUser.value ? ' · ' : ' • ')
 })
 
 const copied = ref(false)
@@ -116,11 +132,4 @@ async function copy() {
     // Clipboard indisponible (permissions) — silencieux
   }
 }
-
-const agentLabel = computed(() => {
-  const key = props.message.agent_used ?? ''
-  return key
-    .replace(/^sales-|^marketing-|^design-|^product-|^research-/, '')
-    .replace(/-/g, ' ')
-})
 </script>

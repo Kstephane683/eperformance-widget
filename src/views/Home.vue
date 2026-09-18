@@ -19,25 +19,73 @@
       </svg>
     </button>
 
-    <!-- Article vedette : le dernier publié du blog (aide + actualités
-         partagent la même source, chatbot-index.json) -->
-    <section v-if="vedette" class="ep-accueil__bloc" aria-labelledby="ep-vedette-titre">
-      <span id="ep-vedette-titre" class="ep-eyebrow">Dernier article</span>
-      <ArticleCard :article="vedette" />
+    <!--
+      Recherche libre, en tête : « Trouver une réponse » n'est pas une
+      capacité de Mia, c'est la porte d'entrée quand le visiteur ne sait pas
+      ce qu'il cherche. Elle ouvre l'onglet Aide avec le champ de recherche
+      actif (A.8).
+    -->
+    <section class="ep-accueil__bloc">
+      <button type="button" class="ep-suggestion ep-suggestion--recherche" @click="chercher">
+        <span class="ep-suggestion__icone" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M11 4.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.8 15.8 20 20"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <span class="ep-suggestion__texte">Trouver une réponse</span>
+        <svg
+          class="ep-suggestion__fleche"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M9 6l6 6-6 6"
+            stroke="currentColor"
+            stroke-width="1.9"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </section>
 
-    <p v-else-if="blog.isLoading" class="ep-etat">Chargement des articles…</p>
-
-    <!-- Suggestions : chacune envoie son libellé comme message à Mia -->
-    <section class="ep-accueil__bloc" aria-labelledby="ep-suggestions-titre">
-      <span id="ep-suggestions-titre" class="ep-eyebrow">Suggestions</span>
+    <!-- Article vedette : le dernier publié du blog (aide + actualités
+         partagent la même source, chatbot-index.json) -->
+    <!--
+      Les neuf capacités de Mia, par famille (A.8). Chaque clic envoie
+      `[intent:<clé>] <libellé>` à Mia : la bulle affiche le libellé, le
+      backend route vers l'expertise correspondante — sans jamais nommer
+      l'agent. Le clic est tracé (capacité, horodatage, session).
+      `data-suggestion` / `data-label` sont posés pour la mesure et les tests.
+    -->
+    <section
+      v-for="famille in FAMILLES"
+      :key="famille.titre"
+      class="ep-accueil__bloc"
+      :aria-labelledby="`ep-famille-${slug(famille.titre)}`"
+    >
+      <span :id="`ep-famille-${slug(famille.titre)}`" class="ep-eyebrow">{{ famille.titre }}</span>
       <ul class="ep-suggestions">
-        <li v-for="suggestion in SUGGESTIONS" :key="suggestion.libelle">
-          <button type="button" class="ep-suggestion" @click="envoyer(suggestion.libelle)">
+        <li v-for="capacite in famille.capacites" :key="capacite.intent">
+          <button
+            type="button"
+            class="ep-suggestion"
+            :data-suggestion="capacite.intent"
+            :data-label="capacite.libelle"
+            @click="envoyer(capacite)"
+          >
             <span class="ep-suggestion__icone" aria-hidden="true">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                 <path
-                  v-for="(trace, i) in suggestion.traces"
+                  v-for="(trace, i) in capacite.traces"
                   :key="i"
                   :d="trace"
                   stroke="currentColor"
@@ -47,7 +95,7 @@
                 />
               </svg>
             </span>
-            <span class="ep-suggestion__texte">{{ suggestion.libelle }}</span>
+            <span class="ep-suggestion__texte">{{ capacite.libelle }}</span>
             <svg
               class="ep-suggestion__fleche"
               width="15"
@@ -68,17 +116,36 @@
         </li>
       </ul>
     </section>
+
+    <!--
+      Article vedette : le dernier publié du blog (aide + actualités
+      partagent la même source, chatbot-index.json).
+      Placé APRÈS les capacités (tâche 6.3-BIS A.8) : le panneau desktop fait
+      650 px de haut et la carte d'article en occupe près de 300 — placée
+      avant, elle repoussait les neuf capacités sous la ligne de flottaison,
+      alors que ce sont elles qui montrent ce que Mia sait faire. La structure
+      Intercom est conservée (titre, saisie, suggestions, article), seul
+      l'ordre change.
+    -->
+    <section v-if="vedette" class="ep-accueil__bloc" aria-labelledby="ep-vedette-titre">
+      <span id="ep-vedette-titre" class="ep-eyebrow">Dernier article</span>
+      <ArticleCard :article="vedette" />
+    </section>
+
+    <p v-else-if="blog.isLoading" class="ep-etat">Chargement des articles…</p>
   </div>
 </template>
 
 <script setup lang="ts">
-// Écran d'accueil du widget (tâche 6.2-bis) — remplace l'écran minimal
-// « Mia / Démarrer la conversation » par la structure Intercom : titre,
-// carte de saisie, article vedette, suggestions.
+// Écran d'accueil du widget — structure Intercom (titre, carte de saisie,
+// suggestions, article vedette) et, depuis la tâche 6.3-BIS (A.8), les NEUF
+// capacités de Mia réparties en trois familles.
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 import ArticleCard from '@/components/ArticleCard.vue'
+import { FAMILLES, payloadSuggestion, type Capacite } from '@/data/capacites'
+import { tracerClicSuggestion } from '@/helpers/tracking'
 import { useBlogStore } from '@/stores/blog'
 import { useIntentStore } from '@/stores/intent'
 
@@ -89,41 +156,35 @@ const intent = useIntentStore()
 /** Article vedette : le plus récent publié, servi par l'index du blog */
 const vedette = computed(() => blog.dernierArticle)
 
-/**
- * Suggestions de l'accueil — chaque libellé est envoyé tel quel à Mia
- * (comportement Intercom : la suggestion EST le message).
- */
-const SUGGESTIONS = [
-  {
-    libelle: 'Trouver une réponse',
-    traces: ['M11 4.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z', 'M15.8 15.8 20 20'],
-  },
-  {
-    libelle: 'Exploiter l’IA et l’automatisation',
-    traces: ['M12 4.2l1.7 4.3 4.3 1.7-4.3 1.7L12 16.2l-1.7-4.3L6 10.2l4.3-1.7z'],
-  },
-  {
-    libelle: 'Créer un site web qui convertit',
-    traces: ['M3.5 5.5h17v13h-17z', 'M3.5 9.5h17', 'M7 13h10'],
-  },
-  {
-    libelle: 'Améliorer mon acquisition',
-    traces: ['M4 19.5V13M9.6 19.5V8.5M15.2 19.5v-5M20.8 19.5V5', 'M3 21h18'],
-  },
-  {
-    libelle: 'Parler à un conseiller',
-    traces: ['M12 4.2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z', 'M5 20.2a7 7 0 0 1 14 0'],
-  },
-] as const
+/** Identifiant DOM stable à partir d'un titre de famille (aria-labelledby) */
+function slug(titre: string): string {
+  return titre
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
 
 function poserQuestion() {
   intent.demanderFocus()
   router.push({ name: 'conversation' })
 }
 
-/** Suggestion cliquée → conversation ouverte + message envoyé à Mia */
-function envoyer(message: string) {
-  intent.envoyerDansConversation(message)
+/** « Trouver une réponse » : ouvre l'aide, champ de recherche prêt */
+function chercher() {
+  intent.demanderFocus()
+  router.push({ name: 'aide' })
+}
+
+/**
+ * Capacité cliquée → conversation ouverte + message envoyé à Mia.
+ * Le libellé EST le message ; le préfixe d'intent ne sert qu'au routage
+ * interne du backend (jamais affiché, jamais nommé d'agent).
+ */
+function envoyer(capacite: Capacite) {
+  tracerClicSuggestion(capacite)
+  intent.envoyerDansConversation(capacite.libelle, payloadSuggestion(capacite))
   router.push({ name: 'conversation' })
 }
 
@@ -204,6 +265,12 @@ onMounted(() => {
 .ep-suggestion:hover {
   border-color: var(--gold-border);
   background: var(--card2);
+}
+
+/* Recherche libre : même ligne, mais posée au-dessus des familles et
+   détachée visuellement (elle n'est pas une compétence de Mia) */
+.ep-suggestion--recherche {
+  border-color: var(--border-strong);
 }
 
 .ep-suggestion__icone {

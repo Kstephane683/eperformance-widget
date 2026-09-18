@@ -338,12 +338,11 @@ a {
   border-bottom-left-radius: 4px;
 }
 
-.ep-bubble__meta {
-  display: block;
-  margin-top: 6px;
-  font-size: 11px;
-  color: var(--muted);
-}
+/* `.ep-bubble__meta` (libellé d'agent sous la bulle) est SUPPRIMÉE —
+   tâche 6.3-BIS A.6 : cette règle servait à afficher la clé d'agent
+   (« discovery coach ») sous les messages de Mia. Aucun nom d'agent ne doit
+   apparaître à l'écran ; le seul nom visible est Mia, et le badge
+   « Conseiller » + nom réel pour un conseiller humain. */
 
 /* Rendu markdown dans les bulles agent */
 .ep-bubble--agent strong {
@@ -388,10 +387,15 @@ a {
   font-weight: 600;
 }
 
-/* Signature + copier dans le pied de bulle — --muted remplace les opacités :
-   une opacité n'est pas mesurable en contraste, un jeton l'est (NOYAU-2:44-49). */
+/* Pied de bulle — signature + bouton copier.
+   DÉFAUT CORRIGÉ (tâche 6.3-BIS A.3) : `display: inline-flex` laissait la
+   signature se poser SUR la même ligne que le texte du visiteur (le contenu
+   d'une bulle user est un simple nœud texte), d'où l'affichage observé
+   « Bonjourvous · il y a 2 minutes ». Le pied est désormais un BLOC, et le
+   texte de la bulle est enveloppé dans `.ep-bubble__texte` (élément de bloc) :
+   la signature est toujours SOUS la bulle, en clair comme en sombre. */
 .ep-bubble__signature {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
   margin-top: 6px;
@@ -400,7 +404,14 @@ a {
 }
 
 .ep-bubble--user .ep-bubble__signature {
+  justify-content: flex-end;
   color: var(--on-gold);
+}
+
+/* Texte de la bulle : bloc, marges nulles (la bulle porte le padding) */
+.ep-bubble__texte {
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 /* En-tête des messages d'un conseiller humain : badge + nom réel */
@@ -639,12 +650,50 @@ a {
 /* ---------- Écrans (Accueil, Messages, Aide, Actualités) ---------- */
 
 /* Chaque écran occupe la zone centrale et défile seul : le header et la
-   barre d'onglets ne bougent jamais (structure Intercom). */
+   barre d'onglets ne bougent jamais (structure Intercom).
+
+   DÉFAUT CORRIGÉ (tâche 6.3-BIS A.2 + A.7) : il manquait `flex: 1`,
+   `min-height: 0` et `overflow-y: auto`. Le parent `.ep-corps` étant en
+   `overflow: hidden`, tout contenu plus haut que la fenêtre était COUPÉ et
+   inaccessible — la liste de l'onglet Actualités s'arrêtait au 2e article
+   (A.2) et, sur desktop (panneau de 650 px), les suggestions de l'accueil
+   passaient sous le bord bas sans moyen de les atteindre (A.7). Ces trois
+   propriétés sont la seule raison pour laquelle le contenu long reste
+   accessible : ne pas les retirer. */
 .ep-vue {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 18px 16px 24px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  /* Défilement doux (molette, clavier, ancres) sans saut de mise en page */
+  scroll-behavior: smooth;
+  /* Le rebond de fin de liste ne se propage pas à la page hôte */
+  overscroll-behavior: contain;
+  /* Scrollbar discrète (Firefox) — variante WebKit juste après */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Scrollbar discrète (WebKit/Blink) : fine, sans fond, un peu plus
+   contrastée au survol. 8 px = largeur minimale confortable au doigt. */
+.ep-vue::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ep-vue::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ep-vue::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--arrondi-bouton);
+}
+
+.ep-vue::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }
 
 .ep-vue__titre {

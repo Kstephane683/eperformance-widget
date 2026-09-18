@@ -34,6 +34,30 @@ export function fromBackendRole(role: BackendRecvRole): WidgetRole {
 export interface BackendMessage {
   role: BackendSendRole
   text: string
+  /**
+   * Image jointe à CE message (extension A.1 du contrat V2).
+   * Le backend ne la lit que sur le dernier message ; les messages
+   * précédents n'en portent pas (les images ne sont pas conservées).
+   */
+  image?: ImagePayload | null
+}
+
+/**
+ * Image transmise au backend — base64 sans préfixe de type.
+ *
+ * Le type MIME déclaré est **documentaire** : le serveur détecte le format
+ * réel par les premiers octets (magic bytes). Un `.png` qui contient du JPEG
+ * est traité comme du JPEG. Formats acceptés : JPEG, PNG, GIF, WebP.
+ */
+export interface ImagePayload {
+  /** Image encodée en base64 (sans préfixe `data:`) */
+  data: string
+  /** Type MIME déclaré — informatif, écrasé par la détection de contenu */
+  media_type: string | null
+  /** low | high | auto — `auto` si absent */
+  detail: 'low' | 'high' | 'auto'
+  /** Nom de fichier d'origine — informatif */
+  name: string | null
 }
 
 export interface VisitorInfo {
@@ -105,17 +129,23 @@ export interface ConversationHistoryResponse {
 // ============================================================
 
 /**
- * Pièce jointe d'un message (tâche 6.2-bis).
+ * Pièce jointe d'un message (tâche 6.2-bis, étendue A.1).
  *
- * Aucun endpoint d'upload n'existe au contrat V2 (décision #5) : le fichier
- * n'est JAMAIS transmis au backend. Seul son nom part dans le texte du
- * message ; si c'est une image, l'aperçu local (data URL) est conservé pour
- * l'affichage dans la bulle, le temps de la session.
+ * Une IMAGE est transmise au backend (base64) et analysée par Mia : c'est le
+ * seul type de pièce jointe que le contrat V2 sait transporter. Les autres
+ * fichiers restent locaux — leur nom part dans le texte du message, rien de
+ * plus (aucun endpoint d'upload au contrat).
  */
 export interface MessageAttachment {
   name: string
-  /** Data URL de l'aperçu — uniquement pour une image, jamais envoyé au serveur */
+  /** Data URL de l'aperçu — affichée dans la bulle, et décodée pour l'envoi */
   dataUrl: string | null
+  /** Type MIME du fichier (celui du navigateur) */
+  mediaType?: string | null
+  /** Vrai si c'est une image : seule catégorie envoyée au backend (A.1) */
+  estImage?: boolean
+  /** Taille en octets (garde-fou d'envoi) */
+  taille?: number | null
 }
 
 export interface WidgetMessage {

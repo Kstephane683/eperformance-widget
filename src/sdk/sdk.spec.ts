@@ -391,3 +391,110 @@ describe('SDK — gabarit de l’écran hôte (tâche 6.2-bis)', () => {
     expect(envoyes).toContain('"viewport":"desktop"')
   })
 })
+
+// ============================================================
+// CONTRAT N3 — événements de mesure rediffusés sur la page hôte
+//
+// Le noyau (agent-ia-web) et le site écoutent `eperf:chatbot:message` et
+// `eperf:chatbot:lead` sur le document. Le SDK les rediffuse à partir des
+// postMessage du widget. Forme imposée : `detail.intent` (catégorie) et
+// `detail.type` (énumération), jamais de donnée personnelle.
+// ============================================================
+
+describe('Contrat N3 — événements de mesure', () => {
+  function capter(nom: string): Array<Record<string, unknown>> {
+    const recus: Array<Record<string, unknown>> = []
+    document.addEventListener(nom, (e) => recus.push((e as CustomEvent).detail))
+    return recus
+  }
+
+  it('rediffuse `eperf:chatbot:message` avec la catégorie d’intent', () => {
+    const recus = capter('eperf:chatbot:message')
+
+    postFromWidget({ event: 'message', intent: 'seo' })
+
+    expect(recus).toHaveLength(1)
+    expect(recus[0]).toEqual({ intent: 'seo' })
+  })
+
+  it('retombe sur `non_detecte` quand l’intent est absent', () => {
+    const recus = capter('eperf:chatbot:message')
+
+    postFromWidget({ event: 'message', intent: null })
+
+    expect(recus[0]).toEqual({ intent: 'non_detecte' })
+  })
+
+  it('rejette un intent qui n’est pas une catégorie', () => {
+    const recus = capter('eperf:chatbot:message')
+
+    // Une page hôte ne doit pas pouvoir faire transiter du texte libre
+    postFromWidget({ event: 'message', intent: 'Je veux un devis, je suis Fatou' })
+    postFromWidget({ event: 'message', intent: 'a'.repeat(80) })
+
+    expect(recus.map((d) => d.intent)).toEqual(['non_detecte', 'non_detecte'])
+  })
+
+  it('rediffuse `eperf:chatbot:lead` avec un type d’énumération', () => {
+    const recus = capter('eperf:chatbot:lead')
+
+    postFromWidget({ event: 'lead', leadType: 'whatsapp_clic' })
+    postFromWidget({ event: 'lead', leadType: 'formulaire' })
+
+    expect(recus).toEqual([{ type: 'whatsapp_clic' }, { type: 'formulaire' }])
+  })
+
+  it('ignore un type de lead hors énumération', () => {
+    const recus = capter('eperf:chatbot:lead')
+
+    postFromWidget({ event: 'lead', leadType: 'Fatou +225 01 51 17 06 66' })
+    postFromWidget({ event: 'lead', leadType: 'autre_chose' })
+
+    expect(recus).toEqual([])
+  })
+
+  it('ne transporte AUCUNE donnée personnelle dans le détail', () => {
+    const messages = capter('eperf:chatbot:message')
+    const leads = capter('eperf:chatbot:lead')
+
+    // Un message contenant des coordonnées : seul l'intent doit sortir
+    postFromWidget({
+      event: 'message',
+      intent: 'clients',
+      label: 'Trouver plus de clients',
+      text: 'Appelle-moi au 01 51 17 06 66',
+      telephone: '+2250151170666',
+      email: 'contact@exemple.com',
+      nom: 'Fatou',
+    })
+    postFromWidget({ event: 'lead', leadType: 'formulaire' })
+
+    const details = JSON.stringify([...messages, ...leads])
+    for (const interdit of [
+      '01 51 17 06 66',
+      '+2250151170666',
+      'contact@exemple.com',
+      'Fatou',
+      'Appelle-moi',
+      'Trouver plus de clients',
+    ]) {
+      expect(details).not.toContain(interdit)
+    }
+    // Les clés elles-mêmes sont fermées
+    expect(Object.keys(messages[0])).toEqual(['intent'])
+    expect(Object.keys(leads[0])).toEqual(['type'])
+  })
+
+  it('n’altère pas l’API existante on(open|close)', () => {
+    const onOpen = vi.fn()
+    // État neutre : open() est idempotent, un vrai changement d'état est
+    // nécessaire pour que les listeners se déclenchent.
+    window.ePerformance!.close()
+    window.ePerformance!.on('open', onOpen)
+
+    postFromWidget({ event: 'message', intent: 'seo' })
+    window.ePerformance!.open()
+
+    expect(onOpen).toHaveBeenCalledTimes(1)
+  })
+})

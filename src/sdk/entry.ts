@@ -293,7 +293,11 @@ function onWidgetMessage(e: MessageEvent) {
     return
   }
   try {
-    const message = JSON.parse(e.data.slice(MESSAGE_PREFIX.length)) as { event: string }
+    const message = JSON.parse(e.data.slice(MESSAGE_PREFIX.length)) as {
+      event: string
+      intent?: string | null
+      leadType?: string
+    }
     if (message.event === 'close' && isOpen) {
       close()
     }
@@ -311,9 +315,58 @@ function onWidgetMessage(e: MessageEvent) {
       keyboardUpdate?.()
       keyboardForceUpdate?.()
     }
+    // Contrat N3 — voir la section « Événements de mesure » plus bas
+    if (message.event === 'message') {
+      relayChatbotMessage(message.intent)
+    }
+    if (message.event === 'lead') {
+      relayChatbotLead(message.leadType)
+    }
   } catch {
     // Ignoré
   }
+}
+
+// ============================================================
+// CONTRAT N3 — ÉVÉNEMENTS DE MESURE POUR LA PAGE HÔTE
+//
+// Le noyau (agent-ia-web, `docs/chatbot-integration-noyau.md`) et le site
+// (`assets/js/tracking.js`) écoutent déjà deux événements personnalisés sur
+// le document de la page :
+//
+//   document.addEventListener('eperf:chatbot:message', …)  → GA4 chatbot_message
+//   document.addEventListener('eperf:chatbot:lead', …)     → GA4 chatbot_lead
+//
+// Le widget est dans une iframe : il ne peut pas les poser lui-même. Il les
+// envoie par postMessage et le SDK les rediffuse ici, sur le document de la
+// page hôte — c'est le seul endroit du SDK qui s'exécute dans la page.
+//
+// VIE PRIVÉE : les `detail` ne contiennent qu'une catégorie (`intent`) ou une
+// valeur d'énumération (`type`). Jamais de nom, d'e-mail, de téléphone ni de
+// contenu de message — les écouteurs du site ne reçoivent rien d'exploitable
+// comme donnée personnelle. Les valeurs non conformes sont REJETÉES ici :
+// un SDK qui relaierait n'importe quoi laisserait une page hôte injecter du
+// texte libre dans un événement de mesure.
+// ============================================================
+
+/** Types de lead admis (énumération fermée, contrat N3) */
+const TYPES_LEAD = ['whatsapp_clic', 'formulaire', 'email_clic']
+/** Catégories d'intent admises : minuscules, chiffres, tirets, soulignés */
+const MOTIF_INTENT = /^[a-z0-9_-]{1,40}$/
+
+/** Rediffuse `eperf:chatbot:message` sur le document de la page hôte */
+function relayChatbotMessage(intent?: string | null) {
+  const valeur = typeof intent === 'string' ? intent.trim().toLowerCase() : ''
+  const detail = { intent: MOTIF_INTENT.test(valeur) ? valeur : 'non_detecte' }
+  document.dispatchEvent(new CustomEvent('eperf:chatbot:message', { detail }))
+}
+
+/** Rediffuse `eperf:chatbot:lead` sur le document de la page hôte */
+function relayChatbotLead(leadType?: string) {
+  if (!leadType || !TYPES_LEAD.includes(leadType)) return
+  document.dispatchEvent(
+    new CustomEvent('eperf:chatbot:lead', { detail: { type: leadType } }),
+  )
 }
 
 // ============================================================

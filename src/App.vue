@@ -36,6 +36,7 @@ import AppHeader from '@/components/AppHeader.vue'
 import TabBar from '@/components/TabBar.vue'
 import { initSdkBridge, notifyReady, postToSdk } from '@/helpers/sdkBridge'
 import { useConversationStore } from '@/stores/conversation'
+import { useMessagesStore } from '@/stores/messages'
 
 /** Les quatre onglets — l'écran Conversation n'en fait pas partie */
 const ONGLETS = ['home', 'messages', 'aide', 'actualites'] as const
@@ -44,6 +45,7 @@ const MOBILE_QUERY = '(max-width: 668px)'
 const route = useRoute()
 const router = useRouter()
 const conversation = useConversationStore()
+const messages = useMessagesStore()
 
 /** Nom de route sous forme de chaîne (un nom peut être un symbole) */
 const nomRoute = computed(() => String(route.name ?? ''))
@@ -96,6 +98,19 @@ onMounted(() => {
       estMobile.value = viewport === 'mobile'
     },
   })
+
+  /**
+   * Message d'ouverture de Mia (A.4) — posé dès l'ouverture du widget, avant
+   * toute interaction, pour qu'il soit déjà là quand le visiteur arrive dans
+   * la conversation. Il n'est PAS posé s'il existe une conversation à
+   * reprendre : dans ce cas c'est la reprise (`Conversation.restore`) qui fait
+   * foi, et une session expirée y redéclenche l'accueil.
+   * La garde « une fois par session » vit dans le store.
+   */
+  if (!conversation.conversationId) {
+    messages.accueillirSiNecessaire()
+  }
+
   // Échap ferme le widget (le focus est souvent dans l'iframe)
   window.addEventListener('keydown', onEscape)
   notifyReady()

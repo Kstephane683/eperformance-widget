@@ -1,0 +1,154 @@
+{
+  "accueil-avant-desktop-clair": {
+    "scrollHeight": 809,
+    "clientHeight": 809,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "actualites-avant-desktop-clair": {
+    "scrollHeight": 2198,
+    "clientHeight": 2198,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "aide-avant-desktop-clair": {
+    "scrollHeight": 502,
+    "clientHeight": 502,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "conversation-avant-desktop-clair": null,
+  "accueil-apres-desktop-clair": {
+    "scrollHeight": 1205,
+    "clientHeight": 541,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "actualites-apres-desktop-clair": {
+    "scrollHeight": 2198,
+    "clientHeight": 541,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "aide-apres-desktop-clair": {
+    "scrollHeight": 1152,
+    "clientHeight": 541,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "conversation-apres-desktop-clair": null,
+  "accueil-avant-desktop-sombre": {
+    "scrollHeight": 809,
+    "clientHeight": 809,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "actualites-avant-desktop-sombre": {
+    "scrollHeight": 2198,
+    "clientHeight": 2198,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "aide-avant-desktop-sombre": {
+    "scrollHeight": 502,
+    "clientHeight": 502,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "conversation-avant-desktop-sombre": null,
+  "accueil-apres-desktop-sombre": {
+    "scrollHeight": 1205,
+    "clientHeight": 541,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "actualites-apres-desktop-sombre": {
+    "scrollHeight": 2198,
+    "clientHeight": 541,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "aide-apres-desktop-sombre": {
+    "scrollHeight": 1152,
+    "clientHeight": 541,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "conversation-apres-desktop-sombre": null,
+  "accueil-avant-mobile-clair": {
+    "scrollHeight": 809,
+    "clientHeight": 809,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "actualites-avant-mobile-clair": {
+    "scrollHeight": 2198,
+    "clientHeight": 2198,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "aide-avant-mobile-clair": {
+    "scrollHeight": 502,
+    "clientHeight": 502,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "conversation-avant-mobile-clair": null,
+  "accueil-apres-mobile-clair": {
+    "scrollHeight": 1205,
+    "clientHeight": 735,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "actualites-apres-mobile-clair": {
+    "scrollHeight": 2198,
+    "clientHeight": 735,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "aide-apres-mobile-clair": {
+    "scrollHeight": 1152,
+    "clientHeight": 735,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "conversation-apres-mobile-clair": null,
+  "accueil-avant-mobile-sombre": {
+    "scrollHeight": 809,
+    "clientHeight": 809,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "actualites-avant-mobile-sombre": {
+    "scrollHeight": 2198,
+    "clientHeight": 2198,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "aide-avant-mobile-sombre": {
+    "scrollHeight": 502,
+    "clientHeight": 502,
+    "defilable": false,
+    "overflowY": "visible"
+  },
+  "conversation-avant-mobile-sombre": null,
+  "accueil-apres-mobile-sombre": {
+    "scrollHeight": 1205,
+    "clientHeight": 735,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "actualites-apres-mobile-sombre": {
+    "scrollHeight": 2198,
+    "clientHeight": 735,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "aide-apres-mobile-sombre": {
+    "scrollHeight": 1152,
+    "clientHeight": 735,
+    "defilable": true,
+    "overflowY": "auto"
+  },
+  "conversation-apres-mobile-sombre": null
+}

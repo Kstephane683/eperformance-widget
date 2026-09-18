@@ -105,6 +105,9 @@ export const useConversationStore = defineStore('conversation', {
       this.hasRestored = true
       localStorage.removeItem(CONVERSATION_KEY)
       useMessagesStore().clear()
+      // Session neuve (ou expirée côté serveur) : Mia se présente de nouveau
+      // à la prochaine ouverture — A.4.
+      useMessagesStore().reprendreAccueil()
     },
   },
 })

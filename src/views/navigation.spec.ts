@@ -59,14 +59,19 @@ beforeEach(async () => {
 })
 
 describe('Widget — structure à 4 onglets', () => {
-  it('ouvre sur l’onglet Accueil (Bonjour, carte de saisie, suggestions)', async () => {
+  it('ouvre sur l’onglet Accueil (Bonjour, carte de saisie, 9 capacités)', async () => {
     const wrapper = await monterWidget('/')
 
     expect(wrapper.find('h1').text()).toBe('Bonjour')
     expect(wrapper.text()).toContain('En quoi pouvons-nous vous être utile ?')
     expect(wrapper.text()).toContain('Poser une question')
     expect(wrapper.text()).toContain('Trouver une réponse')
-    expect(wrapper.text()).toContain('Parler à un conseiller')
+
+    // A.8 — les trois familles et leurs neuf capacités, sans nom d'agent
+    expect(wrapper.text()).toContain('Développer mon activité')
+    expect(wrapper.text()).toContain('Visibilité & Acquisition')
+    expect(wrapper.text()).toContain('Automatisation & IA')
+    expect(wrapper.findAll('[data-suggestion]')).toHaveLength(9)
   })
 
   it('expose quatre onglets role="tab" avec un seul actif', async () => {
@@ -124,14 +129,31 @@ describe('Widget — structure à 4 onglets', () => {
     expect(router.currentRoute.value.name).toBe('actualites')
   })
 
-  it('l’onglet Aide liste les collections et leurs articles (repli embarqué)', async () => {
+  it('l’onglet Aide propose les 9 capacités puis les collections', async () => {
     const wrapper = await monterWidget('/aide')
+
+    // A.9 — « Ce que Mia peut faire pour vous », mêmes intents que l'accueil
+    expect(wrapper.text()).toContain('Ce que Mia peut faire pour vous')
+    const capacites = wrapper.findAll('.ep-ligne--capacite')
+    expect(capacites).toHaveLength(9)
+    expect(capacites.map((c) => c.attributes('data-suggestion'))).toEqual([
+      'clients',
+      'mlm',
+      'ventes',
+      'site_web',
+      'seo',
+      'ads',
+      'social',
+      'ia_auto',
+      'funnel',
+    ])
 
     expect(wrapper.text()).toMatch(/\d+ collections?/)
     expect(wrapper.text()).toContain('IA générative')
 
     // Ouvre une collection : la liste se remplace par ses articles
-    await wrapper.find('.ep-ligne').trigger('click')
+    // (`.ep-ligne` sans modificateur = une collection, pas une capacité)
+    await wrapper.find('.ep-ligne:not(.ep-ligne--capacite)').trigger('click')
     await flushPromises()
     expect(wrapper.text()).toContain('Toutes les collections')
     expect(wrapper.text()).toContain('article')
@@ -155,12 +177,12 @@ describe('Widget — structure à 4 onglets', () => {
     expect(titres[0]).toBe('IA et service client : répondre la nuit sans recruter')
   })
 
-  it('une suggestion de l’accueil ouvre la conversation et envoie le message', async () => {
+  it('une capacité de l’accueil ouvre la conversation et envoie `[intent:…]`', async () => {
     const wrapper = await monterWidget('/')
 
     const suggestion = wrapper
       .findAll('.ep-suggestion')
-      .find((bouton) => bouton.text().includes('Parler à un conseiller'))
+      .find((bouton) => bouton.attributes('data-suggestion') === 'seo')
     expect(suggestion).toBeTruthy()
     await suggestion!.trigger('click')
     await flushPromises()
@@ -168,9 +190,16 @@ describe('Widget — structure à 4 onglets', () => {
     expect(router.currentRoute.value.name).toBe('conversation')
     expect(mockedSendMessage).toHaveBeenCalledTimes(1)
     const premierAppel = mockedSendMessage.mock.calls[0]
+    // Le PAYLOAD porte le préfixe d'intent, interprété par le backend seul
     expect(premierAppel[0].messages.at(-1)).toEqual({
       role: 'user',
-      text: 'Parler à un conseiller',
+      text: '[intent:seo] Améliorer mon référencement',
+    })
+    // Le clic est tracé et voyage avec le message (suggestion_id + session)
+    expect(premierAppel[0].extraVisitorInfo?.suggestion_click).toMatchObject({
+      suggestion_id: 'seo',
+      intent: 'seo',
+      label: 'Améliorer mon référencement',
     })
   })
 

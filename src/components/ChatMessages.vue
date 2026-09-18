@@ -45,6 +45,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import MessageBubble from './MessageBubble.vue'
 import QuickReplies from './QuickReplies.vue'
 import TypingIndicator from './TypingIndicator.vue'
+import { signalerLead, type TypeLead } from '@/helpers/tracking'
 import type { WidgetMessage } from '@/types/api'
 
 const props = defineProps<{
@@ -60,6 +61,27 @@ defineEmits<{ 'quick-reply': [value: string]; retry: [] }>()
 const scroller = ref<HTMLElement | null>(null)
 
 /**
+ * Contrat N3 — capture de contact par clic sur un lien du fil.
+ *
+ * Les liens de contact (fallback WhatsApp) portent `data-ep-lead` avec une
+ * valeur d'énumération. Un seul écouteur délégué sur le fil, donc aucun
+ * écouteur à poser dans du HTML injecté, et rien à nettoyer au re-rendu.
+ * On émet APRÈS le clic (le lien s'ouvre normalement) : la mesure ne doit
+ * jamais empêcher l'action du visiteur.
+ */
+const TYPES_LEAD: TypeLead[] = ['whatsapp_clic', 'formulaire', 'email_clic']
+
+function onClicFil(evenement: MouseEvent) {
+  const cible = evenement.target as HTMLElement | null
+  const lien = cible?.closest?.('[data-ep-lead]') as HTMLElement | null
+  if (!lien) return
+  const type = lien.getAttribute('data-ep-lead') as TypeLead | null
+  if (type && TYPES_LEAD.includes(type)) {
+    signalerLead(type)
+  }
+}
+
+/**
  * Horloge de la vue : les signatures « il y a X minutes » doivent vieillir
  * sans qu'un nouveau message arrive. Un tic par minute suffit (précision de
  * la plus petite unité affichée).
@@ -69,10 +91,12 @@ let horloge: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
   horloge = setInterval(() => (maintenant.value = Date.now()), 60_000)
+  scroller.value?.addEventListener('click', onClicFil)
 })
 
 onBeforeUnmount(() => {
   if (horloge) clearInterval(horloge)
+  scroller.value?.removeEventListener('click', onClicFil)
 })
 
 /** "Aujourd'hui" / "Hier" / date locale — null si même jour que le message précédent */

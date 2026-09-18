@@ -1,0 +1,18 @@
+{
+  "name": "ePerformance — Admin Chatbot",
+  "short_name": "ePerf Admin",
+  "description": "Console d'administration du chatbot ePerformance",
+  "start_url": "./admin.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0e",
+  "theme_color": "#0a0a0e",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

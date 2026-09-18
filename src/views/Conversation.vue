@@ -46,16 +46,19 @@ function envoyer(payload: { content: string; attachment: MessageAttachment | nul
 onMounted(() => {
   // Reprise après refresh : hydrate depuis GET /conversation si session existante
   void conversation.restore().then(async (restored) => {
-    if (!restored && !messages.messages.length) {
-      messages.addLocal(
-        'agent',
-        'Bonjour 👋 Vous parlez maintenant avec Mia. Comment puis-je vous aider ?',
-      )
+    // A.4 — session vierge OU session expirée (conversation inconnue du
+    // serveur) : Mia se présente. La garde « une seule fois par session » est
+    // dans le store (`accueillirSiNecessaire`).
+    if (!restored) {
+      messages.accueillirSiNecessaire()
     }
-    // Intention venue de l'accueil : message pré-rempli (suggestion cliquée)
-    const attente = intent.consommerMessage()
+    // Intention venue de l'accueil ou de l'aide : message pré-rempli.
+    // `payload` porte le préfixe `[intent:…]` que seul le backend interprète.
+    const attente = intent.consommerIntention()
     if (attente) {
-      await messages.sendMessage(attente).catch(() => undefined)
+      await messages
+        .sendMessage(attente.message, null, attente.payload)
+        .catch(() => undefined)
     }
   })
 })
