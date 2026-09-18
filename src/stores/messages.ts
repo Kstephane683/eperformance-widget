@@ -278,9 +278,12 @@ export const useMessagesStore = defineStore('messages', {
       // contact — l'écouteur délégué de ChatMessages émet `eperf:chatbot:lead`
       // avec `whatsapp_clic`. Le type est une énumération, jamais une donnée
       // personnelle (le numéro n'est pas transmis à la page hôte).
+      // Le libellé du lien ne porte AUCUN caractère décoratif : « → » compte
+      // comme un emoji d'interface au sens de la règle n°8 (tâche 6.9,
+      // point 4), et « Continuer sur WhatsApp » dit déjà l'action.
       const html =
         `<div style="line-height: 1.6;">${message}</div>` +
-        `<div style="margin-top: 10px;"><a href="${waLink}" target="_blank" rel="noopener" data-ep-lead="whatsapp_clic" style="color: var(--gold); font-weight: 600;">Continuer sur WhatsApp →</a></div>`
+        `<div style="margin-top: 10px;"><a href="${waLink}" target="_blank" rel="noopener" data-ep-lead="whatsapp_clic" style="color: var(--gold); font-weight: 600;">Continuer sur WhatsApp</a></div>`
       this.addLocal('agent', message, html, null)
       this.quickReplies = []
     },
