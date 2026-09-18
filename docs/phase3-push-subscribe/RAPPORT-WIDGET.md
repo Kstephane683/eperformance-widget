@@ -327,6 +327,24 @@ vers un endpoint inexistant, que l'envoi de notifications tenterait ensuite en
 vain. La route d'abonnement est couverte localement (63 tests backend + les
 tests de ce dépôt).
 
+### 7.2 Après déploiement GitHub Pages
+
+Le commit a été poussé sur `main`, le déclencheur `Deploy widget to GitHub
+Pages` a rejoué l'installation, le build et la suite de tests, puis publié. Le
+site sert bien la nouvelle version :
+
+```
+$ curl -s https://kstephane683.github.io/eperformance-widget/index.html | grep -o 'assets/main-[A-Za-z0-9_-]*\.js'
+assets/main-CAl4em_R.js          ← le bundle construit localement, à l'octet près
+
+$ curl -s .../assets/main-CAl4em_R.js | grep -c 'ep-notifs'                → 1
+$ curl -s .../assets/main-CAl4em_R.js | grep -c '/api/chatbot/push/config' → 1
+$ curl -s .../assets/main-CAl4em_R.js | grep -c 'Notifications refusées'   → 1
+
+$ curl -s https://kstephane683.github.io/eperformance-widget/sw.js | grep -c "VERSION = 'mia-v1'"
+1                                 ← le service worker de la tâche 6.4 est inchangé
+```
+
 ---
 
 ## 8. Ce qui revient au propriétaire, et ce qui est bloqué
@@ -348,8 +366,9 @@ comporte correctement.
    `clé privée PKCS8 (variable inversée ?)`, les deux lignes ont été
    interchangées — le widget ne proposera rien, et la valeur ne sera jamais
    publiée.
-3. **Décider du déploiement** : un push sur `main` de ce dépôt déclenche un
-   déploiement GitHub Pages. Voir §9.
+3. **Rien d'autre à faire côté widget** : le commit a été poussé sur `main`,
+   GitHub Actions a rejoué `npm ci`, `npm run build` et `npm test`, puis publié
+   sur GitHub Pages — vérifié, §7.2.
 4. **Point d'attention sans rapport avec le push** : `GET /api/status` de la
    production annonce `"environment": "/etc/profile"` (`debug` est bien à
    `false`, donc les pages de documentation restent désactivées). La variable
@@ -386,10 +405,25 @@ $ npm run build
 ✓ built in 70ms         (SDK : 13,97 kB · inchangé)
 ```
 
-### Commit
+### Commit et déploiement
 
-Un seul commit, un seul sujet :
+Un seul commit, un seul sujet, poussé sur `main` :
 
 ```
-feat(push): abonnement aux notifications après consentement explicite
+a04869b feat(push): abonnement aux notifications après consentement explicite
 ```
+
+```
+$ git push origin main
+To https://github.com/Kstephane683/eperformance-widget.git
+   a57ece3..a04869b  main -> main
+
+$ gh run list --limit 1
+completed  success  feat(push): abonnement aux notifications après consentement explicite
+                    Deploy widget to GitHub Pages   main   push   45s
+```
+
+Le déclencheur rejoue `npm ci`, `npm run build` **et** `npm test` avant de
+publier : la suite complète est donc rejouée en intégration continue, sur la
+version exacte publiée. Aucune dépendance n'est ajoutée par cette tâche
+(`package.json` n'est pas modifié), donc `npm ci` reste reproductible.
