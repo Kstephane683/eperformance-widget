@@ -77,10 +77,23 @@
   --wa: #25d366;
   --wa-text: #0f7a41;
 
-  /* Sémantique — eperf.css:188-193 */
-  --red-text: #a8302f;
-  --red-border: rgba(180, 45, 45, 0.28);
-  --red-bg: rgba(180, 45, 45, 0.06);
+  /* Sémantique — eperf.css:188-193.
+
+     DÉCISION D7a — les voiles d'erreur composent `--erreur`, ils ne
+     l'écrivent plus. `--red-border` et `--red-bg` portaient un littéral
+     `rgba(180, 45, 45, …)` : une teinte (180, 45, 45) qui n'est celle
+     d'aucun jeton, là où le noyau compose la sienne — `--erreur-trace` et
+     `--erreur-filet` sur `--p-etat-erreur-clair` (168, 48, 47), soit
+     `20-semantic.css:99-101`. Le texte, lui, était déjà juste : la teinte
+     qui se lit était bonne, celle qu'on ne lit pas ne l'était pas.
+     La structure suit désormais celle du noyau, qui déclare l'erreur puis
+     en dérive les trois écritures (`20-semantic.css:228-230`) : la teinte
+     est dite UNE fois, et un changement de teinte ne peut plus en oublier
+     une. Les pourcentages sont ceux du noyau, thème par thème. */
+  --erreur: #a8302f;
+  --red-text: var(--erreur);
+  --red-border: color-mix(in srgb, var(--erreur) 28%, transparent);
+  --red-bg: color-mix(in srgb, var(--erreur) 6%, transparent);
   --green-text: #12703f;
   --green-border: rgba(20, 125, 70, 0.28);
   --green-bg: rgba(20, 125, 70, 0.06);
@@ -167,9 +180,14 @@
   --wa: #25d366;
   --wa-text: #25d366;
 
-  --red-text: #e07070;
-  --red-border: rgba(220, 60, 60, 0.3);
-  --red-bg: rgba(220, 60, 60, 0.12);
+  /* Mêmes jetons, mêmes rôles qu'en clair (décision D7a). Les deux
+     pourcentages sont ceux du noyau sombre — 30 % de filet, 12 % de trace
+     (`20-semantic.css:317-318`) : le voile d'erreur y est plus présent qu'en
+     clair, parce qu'un fond noir avale une trace à 6 %. */
+  --erreur: #e07070;
+  --red-text: var(--erreur);
+  --red-border: color-mix(in srgb, var(--erreur) 30%, transparent);
+  --red-bg: color-mix(in srgb, var(--erreur) 12%, transparent);
   --green-text: #6fcf8a;
   --green-border: rgba(60, 180, 100, 0.3);
   --green-bg: rgba(60, 180, 100, 0.1);
