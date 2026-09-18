@@ -1,11 +1,22 @@
 <template>
-  <div ref="scroller" class="ep-messages">
+  <!--
+    role="log" + aria-live="polite" : chaque réponse de Mia (ou d'un conseiller)
+    est annoncée par les lecteurs d'écran sans interrompre la frappe.
+  -->
+  <div
+    ref="scroller"
+    class="ep-messages"
+    role="log"
+    aria-live="polite"
+    aria-relevant="additions text"
+    aria-label="Conversation avec Mia"
+  >
     <template v-for="(message, index) in messages" :key="message.id">
       <!-- Séparateur de jour (pattern Intercom) quand le jour change -->
       <div v-if="dayLabel(index)" class="ep-day-separator">
         <span>{{ dayLabel(index) }}</span>
       </div>
-      <MessageBubble :message="message" />
+      <MessageBubble :message="message" :maintenant="maintenant" />
     </template>
 
     <TypingIndicator v-if="isTyping" />
@@ -29,7 +40,7 @@
 <script setup lang="ts">
 // Adaptation de ConversationWrap.vue (Chatwoot) — scroll auto vers le bas,
 // séparateurs de jour, bouton Réessayer après échec réseau.
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import MessageBubble from './MessageBubble.vue'
 import QuickReplies from './QuickReplies.vue'
@@ -47,6 +58,22 @@ const props = defineProps<{
 defineEmits<{ 'quick-reply': [value: string]; retry: [] }>()
 
 const scroller = ref<HTMLElement | null>(null)
+
+/**
+ * Horloge de la vue : les signatures « il y a X minutes » doivent vieillir
+ * sans qu'un nouveau message arrive. Un tic par minute suffit (précision de
+ * la plus petite unité affichée).
+ */
+const maintenant = ref(Date.now())
+let horloge: ReturnType<typeof setInterval> | null = null
+
+onMounted(() => {
+  horloge = setInterval(() => (maintenant.value = Date.now()), 60_000)
+})
+
+onBeforeUnmount(() => {
+  if (horloge) clearInterval(horloge)
+})
 
 /** "Aujourd'hui" / "Hier" / date locale — null si même jour que le message précédent */
 function dayLabel(index: number): string | null {
@@ -69,16 +96,22 @@ function dayLabel(index: number): string | null {
   return current.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })
 }
 
+/** Défilement bas — `scrollTo` n'existe pas dans tous les environnements
+ *  (jsdom des tests, anciens moteurs) : on ne casse jamais le fil pour ça. */
+function descendre(comportement: ScrollBehavior = 'smooth') {
+  const cible = scroller.value
+  if (!cible || typeof cible.scrollTo !== 'function') return
+  cible.scrollTo({ top: cible.scrollHeight, behavior: comportement })
+}
+
 watch(
   () => [props.messages.length, props.isTyping, props.quickReplies.length, props.failedContent],
   async () => {
     await nextTick()
-    scroller.value?.scrollTo({ top: scroller.value.scrollHeight, behavior: 'smooth' })
+    descendre()
     // Rattrapage : les quick replies rendus après le smooth peuvent laisser
     // quelques px — on force le bas une fois l'animation terminée
-    setTimeout(() => {
-      scroller.value?.scrollTo({ top: scroller.value.scrollHeight })
-    }, 400)
+    setTimeout(() => descendre('auto'), 400)
   },
 )
 </script>

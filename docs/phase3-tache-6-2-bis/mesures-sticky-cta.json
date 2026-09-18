@@ -1,0 +1,274 @@
+{
+  "iphone-14-pro-max": {
+    "avant": {
+      "fenetre": {
+        "w": 430,
+        "h": 932
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 854,
+        "w": 430,
+        "h": 78,
+        "right": 430,
+        "bottom": 932
+      },
+      "bouton_whatsapp": {
+        "x": 256,
+        "y": 867,
+        "w": 156,
+        "h": 53,
+        "right": 412,
+        "bottom": 920
+      },
+      "bulle": {
+        "x": 358,
+        "y": 856,
+        "w": 56,
+        "h": 56,
+        "right": 414,
+        "bottom": 912
+      },
+      "marge_bas_bulle": "20px",
+      "chevauchement_bulle_whatsapp_px2": 2430,
+      "chevauchement_bulle_barre_px2": 3136
+    },
+    "apres": {
+      "fenetre": {
+        "w": 430,
+        "h": 932
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 854,
+        "w": 430,
+        "h": 78,
+        "right": 430,
+        "bottom": 932
+      },
+      "bouton_whatsapp": {
+        "x": 256,
+        "y": 867,
+        "w": 156,
+        "h": 53,
+        "right": 412,
+        "bottom": 920
+      },
+      "bulle": {
+        "x": 358,
+        "y": 770,
+        "w": 56,
+        "h": 56,
+        "right": 414,
+        "bottom": 826
+      },
+      "marge_bas_bulle": "106px",
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0
+    }
+  },
+  "iphone-se": {
+    "avant": {
+      "fenetre": {
+        "w": 375,
+        "h": 667
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 565,
+        "w": 375,
+        "h": 103,
+        "right": 375,
+        "bottom": 667
+      },
+      "bouton_whatsapp": {
+        "x": 201,
+        "y": 578,
+        "w": 156,
+        "h": 78,
+        "right": 357,
+        "bottom": 655
+      },
+      "bulle": {
+        "x": 303,
+        "y": 591,
+        "w": 56,
+        "h": 56,
+        "right": 359,
+        "bottom": 647
+      },
+      "marge_bas_bulle": "20px",
+      "chevauchement_bulle_whatsapp_px2": 3024,
+      "chevauchement_bulle_barre_px2": 3136
+    },
+    "apres": {
+      "fenetre": {
+        "w": 375,
+        "h": 667
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 565,
+        "w": 375,
+        "h": 103,
+        "right": 375,
+        "bottom": 667
+      },
+      "bouton_whatsapp": {
+        "x": 201,
+        "y": 578,
+        "w": 156,
+        "h": 78,
+        "right": 357,
+        "bottom": 655
+      },
+      "bulle": {
+        "x": 303,
+        "y": 480,
+        "w": 56,
+        "h": 56,
+        "right": 359,
+        "bottom": 536
+      },
+      "marge_bas_bulle": "131px",
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0
+    }
+  },
+  "galaxy-s20": {
+    "avant": {
+      "fenetre": {
+        "w": 360,
+        "h": 800
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 698,
+        "w": 360,
+        "h": 103,
+        "right": 360,
+        "bottom": 800
+      },
+      "bouton_whatsapp": {
+        "x": 186,
+        "y": 711,
+        "w": 156,
+        "h": 78,
+        "right": 342,
+        "bottom": 788
+      },
+      "bulle": {
+        "x": 288,
+        "y": 724,
+        "w": 56,
+        "h": 56,
+        "right": 344,
+        "bottom": 780
+      },
+      "marge_bas_bulle": "20px",
+      "chevauchement_bulle_whatsapp_px2": 3024,
+      "chevauchement_bulle_barre_px2": 3136
+    },
+    "apres": {
+      "fenetre": {
+        "w": 360,
+        "h": 800
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 698,
+        "w": 360,
+        "h": 103,
+        "right": 360,
+        "bottom": 800
+      },
+      "bouton_whatsapp": {
+        "x": 186,
+        "y": 711,
+        "w": 156,
+        "h": 78,
+        "right": 342,
+        "bottom": 788
+      },
+      "bulle": {
+        "x": 288,
+        "y": 613,
+        "w": 56,
+        "h": 56,
+        "right": 344,
+        "bottom": 669
+      },
+      "marge_bas_bulle": "131px",
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0
+    }
+  },
+  "mobile-390x844": {
+    "avant": {
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 766,
+        "w": 390,
+        "h": 78,
+        "right": 390,
+        "bottom": 844
+      },
+      "bouton_whatsapp": {
+        "x": 216,
+        "y": 779,
+        "w": 156,
+        "h": 53,
+        "right": 372,
+        "bottom": 832
+      },
+      "bulle": {
+        "x": 318,
+        "y": 768,
+        "w": 56,
+        "h": 56,
+        "right": 374,
+        "bottom": 824
+      },
+      "marge_bas_bulle": "20px",
+      "chevauchement_bulle_whatsapp_px2": 2430,
+      "chevauchement_bulle_barre_px2": 3136
+    },
+    "apres": {
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 766,
+        "w": 390,
+        "h": 78,
+        "right": 390,
+        "bottom": 844
+      },
+      "bouton_whatsapp": {
+        "x": 216,
+        "y": 779,
+        "w": 156,
+        "h": 53,
+        "right": 372,
+        "bottom": 832
+      },
+      "bulle": {
+        "x": 318,
+        "y": 682,
+        "w": 56,
+        "h": 56,
+        "right": 374,
+        "bottom": 738
+      },
+      "marge_bas_bulle": "106px",
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0
+    }
+  }
+}

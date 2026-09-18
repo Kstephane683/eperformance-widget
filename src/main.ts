@@ -25,9 +25,12 @@ function configureFromQuery() {
   const siteId = params.get('siteId')
   const color = params.get('color')
   const theme = params.get('theme')
+  const indexUrl = params.get('indexUrl')
   if (apiUrl) overrides.apiUrl = apiUrl
   if (siteId) overrides.siteId = siteId
   if (color) overrides.color = color
+  // Racine du blog : l'index des onglets Aide/Actualités y est publié
+  if (indexUrl) overrides.blogIndexUrl = indexUrl
   if (theme === 'dark' || theme === 'light') {
     document.documentElement.setAttribute('data-theme', theme)
   }

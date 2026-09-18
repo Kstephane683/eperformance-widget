@@ -22,6 +22,12 @@ const DEFAULTS: WidgetConfig & { whatsappNumber: string } = {
   siteId: 'eperformance_vitrine',
   locale: 'fr',
   color: defaultGold(),
+  /**
+   * Racine du blog : `chatbot-index.json` y est publié par
+   * blog-eperformance/_build/generer_index_chatbot.py (onglets Aide et
+   * Actualités). Surchargée par le SDK via le query param `indexUrl`.
+   */
+  blogIndexUrl: 'https://blog.eperformance.pro',
   whatsappNumber: '+2250151170666',
 }
 

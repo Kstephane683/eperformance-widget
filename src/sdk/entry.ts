@@ -36,6 +36,11 @@ interface SdkConfig {
   position: 'left' | 'right'
   /** 'auto' suit le thème du site (data-theme + localStorage eperf-theme) */
   theme?: 'auto' | 'light' | 'dark'
+  /**
+   * Racine du blog, où est publié `chatbot-index.json` (onglets Aide et
+   * Actualités du widget). Transmise à l'iframe par le query param `indexUrl`.
+   */
+  blogIndexUrl?: string
 }
 
 type SdkListener = (payload?: Record<string, unknown>) => void
@@ -58,6 +63,7 @@ const DEFAULTS: SdkConfig = {
   apiUrl: 'https://web-production-4ab53.up.railway.app',
   siteId: 'eperformance_vitrine',
   position: 'right',
+  blogIndexUrl: 'https://blog.eperformance.pro',
 }
 
 /**
@@ -81,6 +87,17 @@ const BASE_Z_INDEX = 2147483000
 const CONSENT_SELECTOR = '.consent'
 const CONSENT_VISIBLE_CLASS = 'ep-consent-visible'
 const CONSENT_SAFE_Z_INDEX = 119
+
+/* Barre d'action collante du site — `.sticky-cta` (eperf.css:1189-1210) :
+   fixed, collée en bas, z-index 90, affichée jusqu'à 720 px de large. Elle
+   porte le bouton WhatsApp de la version mobile : le widget ne doit pas le
+   recouvrir. DÉCISION 6.2-bis : quand le chat est FERMÉ, la bulle (et la
+   bulle d'accroche) remontent de la hauteur RÉELLE mesurée de la barre ;
+   quand le chat est OUVERT en mobile, il est plein écran (aucun conflit).
+   Entre 669 et 720 px le panneau n'est pas plein écran : il remonte aussi. */
+const STICKY_CTA_SELECTOR = '.sticky-cta'
+/** Variable posée sur les éléments du SDK : décalage bas dynamique */
+const CTA_OFFSET_VAR = '--ep-sdk-cta-offset'
 const FRAME_ID = 'eperformance-widget-frame'
 const HOLDER_ID = 'eperformance-widget-holder'
 const BUBBLE_ID = 'eperformance-widget-bubble'
@@ -105,7 +122,9 @@ const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
 const SDK_CSS = `
 #${HOLDER_ID} {
   position: fixed !important;
-  bottom: 88px;
+  /* Le décalage bas suit la hauteur réelle de .sticky-cta quand elle est
+     affichée (0 px sinon) : le panneau ne recouvre jamais la barre CTA. */
+  bottom: calc(88px + var(${CTA_OFFSET_VAR}, 0px));
   width: 400px;
   max-width: calc(100vw - 40px);
   height: min(650px, calc(100dvh - 110px));
@@ -140,7 +159,9 @@ const SDK_CSS = `
 }
 #${BUBBLE_ID} {
   position: fixed !important;
-  bottom: 20px;
+  /* Chat fermé : la bulle se pose AU-DESSUS de la barre CTA mobile
+     (hauteur mesurée) — le bouton WhatsApp de la barre reste cliquable. */
+  bottom: calc(20px + var(${CTA_OFFSET_VAR}, 0px));
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -184,7 +205,7 @@ const SDK_CSS = `
   /* Widget ouvert en plein écran : la bubble-croix masquerait l'input —
      le bouton fermer est dans le header du widget */
   #${BUBBLE_ID}.ep-bubble--open { display: none !important; }
-  #${TEASER_ID} { right: 16px; bottom: 88px; }
+  #${TEASER_ID} { right: 16px; bottom: calc(88px + var(${CTA_OFFSET_VAR}, 0px)); }
 }
 
 /* Accessibilité : réduire les animations si demandé par le système */
@@ -199,7 +220,8 @@ const SDK_CSS = `
 /* Teaser proactif (pattern Intercom/Drift — héritage v6.0) */
 #${TEASER_ID} {
   position: fixed !important;
-  bottom: 88px;
+  /* Même décalage que la bulle : l'accroche ne recouvre pas la barre CTA */
+  bottom: calc(88px + var(${CTA_OFFSET_VAR}, 0px));
   right: 20px;
   z-index: ${BASE_Z_INDEX + 2} !important;
   display: flex;
@@ -279,6 +301,9 @@ function onWidgetMessage(e: MessageEvent) {
     // (l'open() initial peut arriver avant le montage du bridge dans l'iframe)
     if (message.event === 'ready') {
       postToWidget({ event: isOpen ? 'open' : 'close' })
+      // Le widget vient de monter : il a besoin du gabarit de l'écran hôte
+      // pour savoir si la barre d'onglets reste visible sur la conversation
+      postToWidget({ event: 'viewport', viewport: detectViewport() })
     }
     // Le widget signale le focus/blur de son input : fiabilise le timing iOS
     // (le visualViewport resize peut arriver tard pendant l'animation clavier)
@@ -319,6 +344,16 @@ function detectTheme(): 'light' | 'dark' {
  * Observe le toggle du site et propage le changement à l'iframe.
  * La bulle, elle, n'est pas dans l'iframe : son accent est recalculé ici.
  */
+/** Prévient l'iframe quand la fenêtre hôte change de gabarit (rotation, etc.) */
+function initViewportBridge(): void {
+  if (typeof window.matchMedia !== 'function') return
+  const requete = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
+  requete.addEventListener('change', () => {
+    postToWidget({ event: 'viewport', viewport: detectViewport() })
+    planifierMesureCta()
+  })
+}
+
 function initThemeBridge(): void {
   const push = () => {
     applyBubbleColor()
@@ -369,12 +404,29 @@ function effectiveColor(): string {
   return config.color ?? CANON_GOLD[detectTheme()]
 }
 
+/**
+ * Gabarit de l'écran HÔTE. L'iframe ne mesure que 400 px de large sur un
+ * desktop : mesurée à l'intérieur de l'iframe, la requête média répondrait
+ * « mobile ». C'est donc la fenêtre du site qui tranche — elle décide déjà du
+ * plein écran (MOBILE_BREAKPOINT) — et le SDK transmet le résultat : query
+ * param au chargement, postMessage à chaque franchissement.
+ */
+function detectViewport(): 'mobile' | 'desktop' {
+  if (typeof window.matchMedia !== 'function') return 'desktop'
+  return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches ? 'mobile' : 'desktop'
+}
+
 function buildFrameSrc(): string {
   const url = new URL(config.widgetUrl, window.location.href)
   url.searchParams.set('apiUrl', config.apiUrl)
   url.searchParams.set('siteId', config.siteId)
   url.searchParams.set('color', effectiveColor())
   url.searchParams.set('theme', detectTheme())
+  url.searchParams.set('viewport', detectViewport())
+  // Racine du blog : l'index des onglets Aide/Actualités y est publié
+  if (config.blogIndexUrl) {
+    url.searchParams.set('indexUrl', config.blogIndexUrl)
+  }
   return url.toString()
 }
 
@@ -484,6 +536,113 @@ function initConsentGuard(): void {
   }
 }
 
+// ============================================================
+// Garde de la barre CTA collante (DÉCISION tâche 6.2-bis)
+//
+// BUG CORRIGÉ : sur mobile, la bulle du widget (bottom: 20px) recouvrait le
+// bouton WhatsApp de `.sticky-cta` (barre fixe en bas, z-index 90,
+// eperf.css:1189-1210). La bulle est au-dessus en z-index : le bouton
+// devenait inutilisable.
+//
+// DÉCISION : la barre CTA reste VISIBLE et CLIQUABLE. La bulle (et la bulle
+// d'accroche) remontent de la hauteur RÉELLE de la barre + 8 px de respiration.
+// Le panneau de chat suit le même décalage tant qu'il n'est pas plein écran
+// (669-720 px) ; en dessous de 668 px il est plein écran, donc sans conflit —
+// et la bulle y est masquée pendant que le chat est ouvert.
+//
+// Mise en œuvre identique à la garde `.consent` (D9) : observation du DOM
+// (MutationObserver), secours par observation de taille et de position, plus
+// les événements de redimensionnement. Aucun réseau, aucun coût mesurable.
+// ============================================================
+
+/** Marge entre la barre CTA et le widget : 8 px (respiration, pas un jeton) */
+const CTA_GAP_PX = 8
+
+/**
+ * Hauteur à réserver sous le widget.
+ * 0 si la barre est absente, masquée, ou pas collée au bas de la fenêtre.
+ */
+function mesurerBarreCta(): number {
+  if (typeof document === 'undefined') return 0
+  const barre = document.querySelector<HTMLElement>(STICKY_CTA_SELECTOR)
+  if (!barre || barre.hidden) return 0
+  const style = window.getComputedStyle(barre)
+  if (style.display === 'none' || style.visibility === 'hidden') return 0
+  const rect = barre.getBoundingClientRect()
+  if (rect.height <= 0) return 0
+  // Seules les barres collées au bas de la fenêtre gênent le widget
+  const colleeEnBas = rect.bottom >= window.innerHeight - 2
+  if (!colleeEnBas) return 0
+  return Math.ceil(rect.height) + CTA_GAP_PX
+}
+
+/** Applique (ou retire) le décalage sur les éléments du SDK */
+function applyCtaOffset(): void {
+  if (typeof document === 'undefined') return
+  const offset = mesurerBarreCta()
+  const valeur = `${offset}px`
+  for (const id of [BUBBLE_ID, TEASER_ID, HOLDER_ID]) {
+    const el = document.getElementById(id)
+    if (!el) continue
+    if (offset > 0) {
+      el.style.setProperty(CTA_OFFSET_VAR, valeur)
+    } else {
+      el.style.removeProperty(CTA_OFFSET_VAR)
+    }
+  }
+}
+
+let ctaObserver: MutationObserver | null = null
+let ctaResizeObserver: ResizeObserver | null = null
+let ctaRafPending = false
+
+/** Regroupe les recalculs d'une même frame (les observers sont bavards) */
+function planifierMesureCta(): void {
+  if (ctaRafPending) return
+  ctaRafPending = true
+  const rappel = () => {
+    ctaRafPending = false
+    applyCtaOffset()
+  }
+  if (typeof requestAnimationFrame === 'function') {
+    requestAnimationFrame(rappel)
+  } else {
+    setTimeout(rappel, 0)
+  }
+}
+
+function initStickyCtaGuard(): void {
+  ctaObserver?.disconnect()
+  ctaResizeObserver?.disconnect()
+
+  applyCtaOffset()
+
+  const body = document.body
+  if (!body) return
+
+  // Apparition/disparition de la barre, changement de hauteur (contenu, police)
+  ctaObserver = new MutationObserver(planifierMesureCta)
+  ctaObserver.observe(body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['hidden', 'style', 'class'],
+  })
+
+  if (typeof ResizeObserver !== 'undefined') {
+    const barre = document.querySelector<HTMLElement>(STICKY_CTA_SELECTOR)
+    if (barre) {
+      ctaResizeObserver = new ResizeObserver(planifierMesureCta)
+      ctaResizeObserver.observe(barre)
+    }
+  }
+
+  // La barre n'existe qu'en dessous de 720 px : le franchissement du seuil
+  // se voit au redimensionnement (et au passage en paysage).
+  window.addEventListener('resize', planifierMesureCta)
+  window.addEventListener('orientationchange', planifierMesureCta)
+}
+
 function setIcon(icon: string) {
   const bubble = document.getElementById(BUBBLE_ID)
   if (bubble) bubble.innerHTML = icon
@@ -502,9 +661,10 @@ function open(): void {
   document.getElementById(HOLDER_ID)?.removeAttribute('aria-hidden')
   document.getElementById(BUBBLE_ID)?.classList.add('ep-bubble--open')
   setIcon(CLOSE_ICON)
-  postToWidget({ event: 'open', theme: detectTheme() })
+  postToWidget({ event: 'open', theme: detectTheme(), viewport: detectViewport() })
   keyboardUpdate?.()
   applyConsentState()
+  applyCtaOffset()
   listeners.open.forEach((fn) => fn())
 }
 
@@ -518,6 +678,8 @@ function close(): void {
   setIcon(CHAT_ICON)
   postToWidget({ event: 'close' })
   applyConsentState()
+  // La bulle réapparaît : elle se repose au-dessus de la barre CTA si présente
+  applyCtaOffset()
   listeners.close.forEach((fn) => fn())
 }
 
@@ -619,6 +781,7 @@ function initTeaser(): void {
     })
     applyThemeTokens(teaser)
     document.body.appendChild(teaser)
+    applyCtaOffset() // la barre CTA mobile peut être sous l'accroche
     sessionStorage.setItem(TEASER_KEY, '1')
     requestAnimationFrame(() => teaser.classList.add('ep-teaser--visible'))
     applyConsentState()
@@ -640,7 +803,9 @@ function init(): void {
   initKeyboardFix()
   initShortcuts()
   initThemeBridge()
+  initViewportBridge()
   initConsentGuard()
+  initStickyCtaGuard()
   exposeApi()
   // État ouvert persistant (refresh → widget réouvert, même conversation)
   if (sessionStorage.getItem(OPEN_KEY) === '1') {

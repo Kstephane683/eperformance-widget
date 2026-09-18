@@ -104,6 +104,20 @@ export interface ConversationHistoryResponse {
 // ÉTAT INTERNE WIDGET
 // ============================================================
 
+/**
+ * Pièce jointe d'un message (tâche 6.2-bis).
+ *
+ * Aucun endpoint d'upload n'existe au contrat V2 (décision #5) : le fichier
+ * n'est JAMAIS transmis au backend. Seul son nom part dans le texte du
+ * message ; si c'est une image, l'aperçu local (data URL) est conservé pour
+ * l'affichage dans la bulle, le temps de la session.
+ */
+export interface MessageAttachment {
+  name: string
+  /** Data URL de l'aperçu — uniquement pour une image, jamais envoyé au serveur */
+  dataUrl: string | null
+}
+
 export interface WidgetMessage {
   id: string
   role: WidgetRole
@@ -111,6 +125,10 @@ export interface WidgetMessage {
   /** HTML raw backend, déjà sanitisé DOMPurify avant stockage */
   html?: string | null
   agent_used?: string | null
+  /** Nom réel du conseiller humain (Phase 2 — tâche 5.3) */
+  human_name?: string | null
+  /** Pièce jointe locale (aperçu) — jamais transmise au backend */
+  attachment?: MessageAttachment | null
   quick_replies?: string[]
   created_at: string
 }
@@ -120,4 +138,6 @@ export interface WidgetConfig {
   siteId: string
   locale: 'fr'
   color: string
+  /** Racine du blog, où est publié chatbot-index.json (onglets Aide/Actualités) */
+  blogIndexUrl: string
 }

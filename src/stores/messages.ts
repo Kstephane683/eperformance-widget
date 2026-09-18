@@ -16,6 +16,7 @@ import type {
   BackendMessage,
   ChatbotMessageResponse,
   ConversationHistoryMessage,
+  MessageAttachment,
   WidgetMessage,
   WidgetRole,
 } from '@/types/api'
@@ -47,11 +48,17 @@ export const useMessagesStore = defineStore('messages', {
   }),
 
   actions: {
+    /**
+     * Ajoute un message local.
+     * @param extra.humanName  nom réel du conseiller (badge « Conseiller »)
+     * @param extra.attachment pièce jointe locale (aperçu uniquement, jamais envoyée)
+     */
     addLocal(
       role: WidgetRole,
       content: string,
       html: string | null = null,
       agentUsed: string | null = null,
+      extra: { humanName?: string | null; attachment?: MessageAttachment | null } = {},
     ): WidgetMessage {
       const message: WidgetMessage = {
         id: localId(),
@@ -59,6 +66,8 @@ export const useMessagesStore = defineStore('messages', {
         content,
         html,
         agent_used: agentUsed,
+        human_name: extra.humanName ?? null,
+        attachment: extra.attachment ?? null,
         created_at: new Date().toISOString(),
       }
       this.messages.push(message)
@@ -73,15 +82,26 @@ export const useMessagesStore = defineStore('messages', {
       }))
     },
 
-    async sendMessage(content: string): Promise<void> {
-      const trimmed = content.trim()
-      if (!trimmed || this.isSending) {
+    /**
+     * Envoie un message. `attachment` (tâche 6.2-bis) reste LOCAL : le contrat
+     * V2 (#5) n'expose aucun endpoint d'upload. Seul le NOM du fichier voyage,
+     * ajouté au texte du message — l'aperçu data URL n'est jamais transmis.
+     */
+    async sendMessage(
+      content: string,
+      attachment: MessageAttachment | null = null,
+    ): Promise<void> {
+      const saisie = content.trim()
+      const texte = attachment
+        ? `${saisie ? `${saisie} — ` : ''}Pièce jointe : ${attachment.name}`
+        : saisie
+      if (!texte || this.isSending) {
         return
       }
       this.lastError = null
 
       // 1. Message user local (devient messages[-1] envoyé au backend)
-      this.addLocal('user', trimmed)
+      this.addLocal('user', texte, null, null, { attachment })
 
       const conversation = useConversationStore()
       const conversationId = conversation.ensureConversation()
@@ -105,7 +125,7 @@ export const useMessagesStore = defineStore('messages', {
         this.applyResponse(response, conversationId)
       } catch (err) {
         this.lastError = err instanceof Error ? err.message : 'Erreur réseau'
-        this.failedContent = trimmed
+        this.failedContent = texte
         // NB: DOMException (AbortError) n'hérite pas Error en Node — vérifier name
         const isTimeout = (err as { name?: string })?.name === 'AbortError'
         // Fallback WhatsApp : jamais laisser le visiteur sans issue (héritage v6.0)
@@ -207,7 +227,10 @@ export const useMessagesStore = defineStore('messages', {
               msg.role === 'user' ? 'user' : 'agent',
               msg.content,
               null,
-              msg.role === 'assistant' ? (msg.human_name || 'Conseiller ePerformance') : null,
+              // Le nom réel du conseiller alimente le badge « Conseiller »
+              // (MessageBubble) — jamais un libellé générique.
+              msg.role === 'assistant' ? msg.human_name || 'Conseiller ePerformance' : null,
+              { humanName: msg.role === 'assistant' ? (msg.human_name ?? null) : null },
             )
             if (msg.role === 'assistant') playNotificationSound()
           }
@@ -235,6 +258,8 @@ export const useMessagesStore = defineStore('messages', {
         role: m.role === 'assistant' ? ('agent' as WidgetRole) : ('user' as WidgetRole),
         content: m.content,
         agent_used: m.agent_used,
+        /** Conseiller humain : le nom réel vient de la DB (Phase 2 — tâche 5.3) */
+        human_name: m.human_name ?? null,
         quick_replies: m.suggestions ?? undefined,
         created_at: m.created_at ?? new Date().toISOString(),
       }))

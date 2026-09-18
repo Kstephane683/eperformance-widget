@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Harnais — hôte ePerformance + widget (tâche 6.2-bis)</title>
+    <!--
+      HARNAIS DE VALIDATION (tâche 6.2-bis).
+
+      Il reproduit une page hôte réelle du site ePerformance : la MÊME feuille
+      de style (assets/css/eperf.css du dépôt site-eperformance), le même
+      balisage `.sticky-cta` (barre CTA collante mobile, avec le bouton
+      WhatsApp), le bouton WhatsApp flottant desktop et le bandeau de
+      consentement. Le widget est chargé par le SDK, exactement comme en
+      production.
+
+      Il sert à deux choses :
+        1. mesurer et capturer le chevauchement bulle ↔ .sticky-cta ;
+        2. produire les captures des 5 écrans sur une vraie page hôte.
+
+      Paramètres d'URL :
+        ?sdk=avant   charge le SDK construit depuis le commit ee30bc4
+                     (AVANT le correctif, bulle à bottom: 20px)
+        ?sdk=apres   charge le SDK courant (dist/, correctif appliqué) — défaut
+        ?theme=dark  force le thème sombre de la page hôte
+
+      Le site et le blog sont servis par le même serveur statique que ce
+      fichier (voir lire_captures.py) : aucune modification n'est apportée
+      aux dépôts site/blog, le harnais ne fait que les lire.
+    -->
+    <script>
+      ;(function () {
+        try {
+          var params = new URLSearchParams(window.location.search)
+          var t = params.get('theme')
+          if (t !== 'dark' && t !== 'light') t = 'light'
+          document.documentElement.setAttribute('data-theme', t)
+          localStorage.setItem('eperf-theme', t)
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="stylesheet" href="/site-eperformance/assets/css/eperf.css" />
+    <style>
+      /* Rien de plus que ce que le site fournit : le harnais n'invente
+         aucune règle de mise en page. */
+      .harnais-note {
+        font-size: 0.8125rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="#">
+          <img
+            class="logo-img-light"
+            src="/site-eperformance/assets/img/logo-light.webp"
+            width="182"
+            height="30"
+            alt="ePerformance"
+          />
+        </a>
+        <nav class="nav" id="primary-nav" aria-label="Navigation principale">
+          <a href="#services">Services</a>
+          <a href="#ia">IA</a>
+          <a href="https://blog.eperformance.pro/">Blog</a>
+        </nav>
+        <div class="header-actions">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Thème">
+            <svg
+              class="icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2" />
+            </svg>
+            <svg
+              class="icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container section" id="services">
+      <span class="eyebrow">Harnais de validation</span>
+      <h1>Une page hôte ePerformance, avec le widget branché</h1>
+      <p class="lead">
+        Cette page charge la feuille de style du site, sa barre CTA collante et le SDK du widget :
+        c'est le terrain de mesure du chevauchement bulle ↔ bouton WhatsApp.
+      </p>
+      <p class="harnais-note">
+        Le contenu ci-dessous n'est là que pour donner du défilement, comme sur une vraie page.
+      </p>
+
+      <div class="grid grid-2 mt-4" style="margin-top: 32px">
+        <article class="card">
+          <h3 class="card-title">Stratégie d'acquisition</h3>
+          <p class="card-text">
+            CAC, LTV, payback : les chiffres qui décident, pas les impressions.
+          </p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">IA et automatisation</h3>
+          <p class="card-text">
+            Ce que l'IA fait mieux que vous, et ce qu'elle ne fera jamais.
+          </p>
+        </article>
+      </div>
+
+      <section class="section" id="ia">
+        <h2>Une seconde section, pour que la page défile</h2>
+        <p class="card-text">
+          La barre CTA collante reste fixée en bas pendant le défilement. Sur mobile, elle contient
+          le bouton WhatsApp : c'est lui qui était recouvert par la bulle du widget avant le
+          correctif.
+        </p>
+      </section>
+    </main>
+
+    <!-- Barre CTA collante : balisage du site, à l'identique (index.html:953) -->
+    <div class="sticky-cta">
+      <a class="btn btn-gold" href="#">Diagnostic gratuit</a>
+      <a
+        class="btn btn-wa"
+        href="https://wa.me/2250151170666"
+        style="flex: 0 0 auto"
+        rel="noopener"
+        data-cta="whatsapp"
+        aria-label="Écrire sur WhatsApp"
+        ><svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M20.4 11.6a8.4 8.4 0 0 1-12.5 7.4L3.6 20.4l1.4-4.3A8.4 8.4 0 1 1 20.4 11.6z" />
+          <path d="M9.4 9.2a4.6 4.6 0 0 0 5.4 5.4" />
+        </svg>
+        WhatsApp</a
+      >
+    </div>
+
+    <!-- Bouton WhatsApp flottant — desktop uniquement (eperf.css:1155-1180) -->
+    <a
+      class="wa-float"
+      href="https://wa.me/2250151170666"
+      data-cta="whatsapp"
+      target="_blank"
+      rel="noopener"
+      aria-label="Écrire sur WhatsApp"
+    >
+      <svg
+        class="icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M20.4 11.6a8.4 8.4 0 0 1-12.5 7.4L3.6 20.4l1.4-4.3A8.4 8.4 0 1 1 20.4 11.6z" />
+        <path d="M9.4 9.2a4.6 4.6 0 0 0 5.4 5.4" />
+      </svg>
+    </a>
+
+    <!-- Bandeau de consentement : présent mais masqué, comme après un choix -->
+    <div class="consent" id="consent-banner" hidden>
+      <div class="consent-inner">
+        <div class="consent-text"><p><strong>Vous choisissez ce que nous mesurons.</strong></p></div>
+      </div>
+    </div>
+
+    <script>
+      ;(function () {
+        var params = new URLSearchParams(window.location.search)
+        var avant = params.get('sdk') === 'avant'
+        window.ePerformanceConfig = {
+          widgetUrl: '/toolkit_eperformance/eperformance-widget/dist/',
+          // L'API Railway n'autorise en CORS que ses origines de production
+          // (eperformance.pro, kstephane683.github.io) : depuis un harnais
+          // local, le navigateur bloque l'appel. `?api=/api-railway` fait
+          // passer la requête par le proxy du serveur de capture (mêmes
+          // requêtes, même backend réel) — sans proxy, le widget affiche son
+          // repli WhatsApp, ce qui reste le comportement attendu hors ligne.
+          apiUrl: params.get('api') || 'https://web-production-4ab53.up.railway.app',
+          siteId: 'eperformance_vitrine',
+          // L'index du blog est servi depuis le dépôt blog lui-même
+          blogIndexUrl: '/blog-eperformance',
+          theme: 'auto',
+        }
+        var script = document.createElement('script')
+        script.src = avant
+          ? './sdk-ee30bc4-avant-correctif.js'
+          : '/toolkit_eperformance/eperformance-widget/dist/eperformance-sdk.js'
+        script.defer = true
+        document.head.appendChild(script)
+      })()
+    </script>
+  </body>
+</html>

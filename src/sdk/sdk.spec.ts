@@ -265,3 +265,129 @@ describe('SDK — bandeau de consentement (D9)', () => {
     expect(ids().holder.classList.contains('ep-consent-visible')).toBe(false)
   })
 })
+
+describe('SDK — barre CTA collante du site (tâche 6.2-bis)', () => {
+  /**
+   * Barre `.sticky-cta` simulée : jsdom ne calcule aucune mise en page, on
+   * pose donc un rectangle réel (hauteur + collage au bas de la fenêtre),
+   * comme le navigateur le ferait sur mobile (eperf.css:1189-1210).
+   */
+  function ajouterBarreCta(hauteur = 68) {
+    const barre = document.createElement('div')
+    barre.className = 'sticky-cta'
+    document.body.appendChild(barre)
+    barre.getBoundingClientRect = () =>
+      ({
+        height: hauteur,
+        width: window.innerWidth,
+        top: window.innerHeight - hauteur,
+        bottom: window.innerHeight,
+      }) as DOMRect
+    return barre
+  }
+
+  function el(id: string) {
+    return document.getElementById(id) as HTMLElement
+  }
+
+  function marge(id: string) {
+    return el(id).style.getPropertyValue('--ep-sdk-cta-offset')
+  }
+
+  it('remonte la bulle de la hauteur réelle de la barre + 8 px', async () => {
+    ajouterBarreCta(68)
+    initSdk() // la barre est déjà dans le DOM → mesure immédiate
+
+    // 68 px de barre + 8 px de respiration
+    expect(marge('eperformance-widget-bubble')).toBe('76px')
+    // Le panneau et l'accroche suivent la même règle
+    expect(marge('eperformance-widget-holder')).toBe('76px')
+
+    // Le CSS injecté consomme bien la variable
+    const css = Array.from(document.querySelectorAll('style'))
+      .map((s) => s.textContent ?? '')
+      .join('\n')
+    expect(css).toContain('bottom: calc(20px + var(--ep-sdk-cta-offset, 0px))')
+    expect(css).toContain('bottom: calc(88px + var(--ep-sdk-cta-offset, 0px))')
+  })
+
+  it('ne décale rien en l’absence de barre CTA (desktop)', () => {
+    initSdk()
+    expect(marge('eperformance-widget-bubble')).toBe('')
+    expect(marge('eperformance-widget-holder')).toBe('')
+  })
+
+  it('ignore une barre masquée ou absente du bas de la fenêtre', async () => {
+    const barre = ajouterBarreCta(68)
+    barre.style.display = 'none'
+    initSdk()
+    expect(marge('eperformance-widget-bubble')).toBe('')
+
+    // Barre visible mais pas collée au bas (contenu en milieu de page)
+    barre.style.display = 'flex'
+    barre.getBoundingClientRect = () =>
+      ({ height: 68, width: 360, top: 100, bottom: 168 }) as DOMRect
+    initSdk()
+    expect(marge('eperformance-widget-bubble')).toBe('')
+  })
+
+  it('suit l’apparition et la disparition de la barre (observation du DOM)', async () => {
+    initSdk()
+    expect(marge('eperformance-widget-bubble')).toBe('')
+
+    // Le site affiche sa barre après coup (ou change de gabarit)
+    const barre = ajouterBarreCta(72)
+    await vi.waitFor(() => expect(marge('eperformance-widget-bubble')).toBe('80px'))
+
+    // Elle disparaît : la bulle redescend à sa position normale
+    barre.remove()
+    await vi.waitFor(() => expect(marge('eperformance-widget-bubble')).toBe(''))
+  })
+
+  it('remesure quand la hauteur de la barre change', async () => {
+    const barre = ajouterBarreCta(60)
+    initSdk()
+    expect(marge('eperformance-widget-bubble')).toBe('68px')
+
+    // La barre grandit (libellé sur deux lignes, safe-area iOS…)
+    barre.getBoundingClientRect = () =>
+      ({ height: 92, width: 360, top: window.innerHeight - 92, bottom: window.innerHeight }) as DOMRect
+    barre.setAttribute('style', '') // mutation observée par le SDK
+
+    await vi.waitFor(() => expect(marge('eperformance-widget-bubble')).toBe('100px'))
+  })
+})
+
+describe('SDK — gabarit de l’écran hôte (tâche 6.2-bis)', () => {
+  it("transmet le gabarit mesuré sur la fenêtre HÔTE, pas sur l'iframe", () => {
+    // Une iframe de widget fait 400 px sur un desktop : si elle mesurait
+    // elle-même, elle se croirait mobile. C'est le SDK qui tranche.
+    const matchMedia = vi.fn().mockReturnValue({ matches: true, addEventListener: vi.fn() })
+    vi.stubGlobal('matchMedia', matchMedia)
+
+    try {
+      document.body.innerHTML = ''
+      document.head.innerHTML = ''
+      initSdk()
+
+      expect(matchMedia).toHaveBeenCalledWith('(max-width: 668px)')
+      const frame = document.getElementById('eperformance-widget-frame') as HTMLIFrameElement
+      expect(frame.src).toContain('viewport=mobile')
+    } finally {
+      vi.unstubAllGlobals()
+    }
+  })
+
+  it('répond au widget prêt en lui envoyant le gabarit courant', () => {
+    const frame = document.getElementById('eperformance-widget-frame') as HTMLIFrameElement
+    const postMessage = vi.fn()
+    Object.defineProperty(frame, 'contentWindow', { value: { postMessage } })
+
+    // jsdom n'expose pas matchMedia → gabarit desktop
+    postFromWidget({ event: 'ready' })
+
+    const envoyes = postMessage.mock.calls.map((c) => String(c[0])).join(' ')
+    expect(envoyes).toContain('"event":"viewport"')
+    expect(envoyes).toContain('"viewport":"desktop"')
+  })
+})
