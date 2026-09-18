@@ -1,0 +1,89 @@
+<!doctype html>
+<!--
+  Gabarit du graphique de présentation Google Play (1024×500).
+
+  Règles respectées (les motifs de rejet les plus fréquents viennent de là) :
+    · 1024×500 exactement, sans transparence ;
+    · AUCUN texte promotionnel (« gratuit », « nouveau », « n°1 ») : le visuel
+      dit ce que fait l'application, il ne la classe pas ;
+    · pas de fond blanc pur ni noir pur : on utilise le fond canonique clair.
+  Le point focal reste centré : les bords peuvent être rognés selon les
+  gabarits d'affichage de la fiche.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: 'Cormorant Garamond';
+        font-style: normal;
+        font-weight: 700;
+        src: url('../../../../public/fonts/cormorant-garamond-700.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../../../../public/fonts/dm-sans-400.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 600;
+        src: url('../../../../public/fonts/dm-sans-600.woff2') format('woff2');
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 1024px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background: #fdfcfa;
+        color: #16151a;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        text-align: center;
+      }
+      .marque {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .marque img {
+        width: 96px;
+        height: 96px;
+        border-radius: 22px;
+      }
+      h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 62px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      p {
+        font-size: 25px;
+        color: #45424b;
+      }
+      .accent {
+        font-weight: 600;
+        color: #856b37;
+        font-size: 21px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="marque">
+      <img src="../../../../public/icons/mia-512.png" width="96" height="96" alt="" />
+      <h1>Mia</h1>
+    </div>
+    <p>L’assistante IA qui répond aux questions d’activité</p>
+    <p class="accent">Clients · Visibilité · IA et automatisation</p>
+  </body>
+</html>
