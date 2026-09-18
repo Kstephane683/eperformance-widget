@@ -1,17 +1,19 @@
 <!doctype html>
-<!-- Console d'administration : DARK-ONLY assumé (exception documentée,
-     DESIGN-SYSTEM-UNIFIE §8 point 5 : « une console et non un contenu lu »).
-     Le thème est posé en dur dans l'attribut — pas de bascule, pas de flash.
-     Le widget (index.html), lui, suit le thème du site via le SDK. -->
-<html lang="fr" data-theme="dark">
+<!-- Console d'administration du chatbot ePerformance.
+     Le thème suit le choix de l'opérateur (clair, sombre ou système) : il est
+     posé AVANT le premier rendu par le script en ligne ci-dessous, à partir de
+     `localStorage['eperf-theme']` — la même clé que le site et le widget
+     (contrat C4), puis suivi en direct s'il n'y a pas de choix explicite.
+     Aucune couleur en dur dans ce document : la couleur de barre du navigateur
+     est calculée depuis le jeton `--bg` par `src/admin/theme.ts`. -->
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
-      content="Console d'administration du chatbot ePerformance : conversations, prises de main humaines et leads."
+      content="Console d'administration du chatbot ePerformance : conversations, prospects, candidatures, contenu de Mia et accès."
     />
-    <meta name="theme-color" content="#08080c" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -26,7 +28,21 @@
       href="./fonts/cormorant-garamond-700.woff2"
     />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="./fonts/dm-sans-400.woff2" />
-    <title>ePerformance — Admin Chatbot</title>
+    <title>ePerformance — Console</title>
+    <script>
+      // Thème appliqué avant le premier rendu (aucun flash). Le choix est celui
+      // de l'opérateur ; sans choix, la préférence du système décide.
+      try {
+        var choix = localStorage.getItem('eperf-theme')
+        var sombre =
+          choix === 'dark' ||
+          (choix !== 'light' &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.setAttribute('data-theme', sombre ? 'dark' : 'light')
+      } catch (e) {
+        /* stockage inaccessible : le thème clair reste appliqué */
+      }
+    </script>
   </head>
   <body>
     <div id="admin"></div>

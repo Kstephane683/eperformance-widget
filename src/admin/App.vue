@@ -1,272 +1,175 @@
 <template>
   <!--
-    Shell admin : bascule Login / Cockpit pilotée par le store auth
-    (réactive, y compris sur 401 → logout automatique).
+    Shell de la console : écran de connexion, ou (une fois authentifié) la
+    structure à deux colonnes — barre latérale groupée à gauche, en-tête et
+    contenu à droite.
 
-    Cockpit unifié : navigation par modules (sidebar desktop, tabs
-    horizontales mobiles) → router-view. Le badge affiche les
-    conversations en attente humaine (rafraîchi 30s).
+    Le shell porte trois responsabilités, et rien d'autre :
+      · la bascule login / console, pilotée par le store d'authentification
+        (un 401 déclenche la déconnexion, l'interface suit immédiatement) ;
+      · le rafraîchissement périodique des données partagées (statistiques et
+        liste des conversations) — en pause quand l'onglet est caché ;
+      · le tiroir mobile (ouverture, fermeture, retour du focus).
   -->
   <LoginView v-if="!auth.isAuthenticated" />
-  <div v-else class="cockpit">
-    <nav class="cockpit__nav">
-      <div class="cockpit__brand">
-        <span class="cockpit__brand-badge" aria-hidden="true">A</span>
-        <span class="cockpit__brand-name">ePerformance</span>
-      </div>
 
-      <div class="cockpit__modules">
-        <RouterLink
-          v-for="mod in modules"
-          :key="mod.to"
-          :to="{ name: mod.to }"
-          class="cockpit__link"
-          :class="{ 'cockpit__link--active': isActive(mod.to) }"
-        >
-          <span class="cockpit__icon" aria-hidden="true" v-html="mod.icon"></span>
-          <span class="cockpit__label">{{ mod.label }}</span>
-          <span v-if="mod.badge && stats && stats[mod.badge] > 0" class="cockpit__badge">
-            {{ stats[mod.badge] }}
-          </span>
-        </RouterLink>
-      </div>
+  <div v-else class="adm">
+    <a class="adm-evitement" href="#adm-contenu" @click.prevent="allerAuContenu">
+      Aller au contenu
+    </a>
 
-      <button type="button" class="cockpit__logout" @click="logout">Déconnexion</button>
-    </nav>
+    <Sidebar :ouvert="tiroirOuvert" @fermer="fermerTiroir" />
 
-    <main class="cockpit__main">
-      <RouterView />
-    </main>
+    <div class="adm__colonne">
+      <Header
+        ref="entete"
+        :module="moduleCourant"
+        :tiroir-ouvert="tiroirOuvert"
+        :jeton="auth.token"
+        @basculer-tiroir="basculerTiroir"
+        @deconnexion="deconnecter"
+      />
+
+      <main id="adm-contenu" ref="contenu" class="adm-contenu" tabindex="-1">
+        <div class="adm-contenu__interieur">
+          <RouterView />
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
-import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { RouterView, useRoute, useRouter } from 'vue-router'
 
-import { fetchAdminStats, type AdminStats } from './api'
+import Header from './components/Header.vue'
+import Sidebar from './components/Sidebar.vue'
+import LoginView from './views/LoginView.vue'
+import { MODULE_PAR_DEFAUT, moduleParNom } from './navigation'
+import { synchroniserCouleurBarre, suivreSysteme } from './theme'
 import { useAdminAuthStore } from './stores/auth'
+import { useConsoleStore } from './stores/console'
 
 const auth = useAdminAuthStore()
+const consoleStore = useConsoleStore()
 const route = useRoute()
 const router = useRouter()
 
-interface ModuleEntry {
-  to: string
-  icon: string
-  label: string
-  badge?: keyof AdminStats
+/** Module actif — le titre et le sous-titre de l'en-tête en découlent. */
+const moduleCourant = computed(() => moduleParNom(route.name))
+
+// ============================================================
+// Tiroir mobile
+// ============================================================
+
+const tiroirOuvert = ref(false)
+const entete = ref<InstanceType<typeof Header> | null>(null)
+const contenu = ref<HTMLElement | null>(null)
+
+function basculerTiroir(): void {
+  tiroirOuvert.value = !tiroirOuvert.value
 }
 
-const modules: ModuleEntry[] = [
-  { to: 'chatbot', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 1 1 21 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`, label: 'Chatbot', badge: 'conversations_en_attente' },
-  { to: 'candidats', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5" stroke="currentColor" stroke-width="1.8"/></svg>`, label: 'Candidats', badge: 'candidats_en_attente' },
-  { to: 'users', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 5.6a3 3 0 0 1 0 5.8M18 14.8c2.1.6 3.5 2.2 3.5 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`, label: 'Utilisateurs' },
-  { to: 'crm', icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`, label: 'CRM LWS' },
-]
-
-const isActive = (name: string) => route.name === name
-
-const stats = ref<AdminStats | null>(null)
-let statsTimer: ReturnType<typeof setInterval> | null = null
-
-async function refreshStats() {
-  try {
-    stats.value = await fetchAdminStats()
-  } catch {
-    // Silencieux : le badge garde la dernière valeur connue
-  }
+/** Ferme le tiroir et rend le focus au bouton qui l'a ouvert (WCAG 2.1.2). */
+function fermerTiroir(rendreFocus = true): void {
+  if (!tiroirOuvert.value) return
+  tiroirOuvert.value = false
+  if (rendreFocus) entete.value?.boutonMenu?.focus()
 }
+
+function allerAuContenu(): void {
+  contenu.value?.focus()
+}
+
+function surToucheDocument(evenement: KeyboardEvent): void {
+  if (evenement.key === 'Escape' && tiroirOuvert.value) fermerTiroir()
+}
+
+// Un changement de module referme le tiroir : sur mobile, rester devant un
+// menu qui recouvre l'écran qu'on vient d'ouvrir serait une impasse.
+watch(() => route.fullPath, () => fermerTiroir(false))
+
+// ============================================================
+// Données partagées — statistiques et liste des conversations
+// ============================================================
+
+const PERIODE_MS = 30_000
+let minuteur: number | null = null
+
+function tic(): void {
+  if (document.hidden) return
+  void consoleStore.chargerStats()
+  void consoleStore.chargerConversations()
+}
+
+function demarrer(): void {
+  tic()
+  minuteur = window.setInterval(tic, PERIODE_MS)
+  document.addEventListener('visibilitychange', tic)
+}
+
+function arreter(): void {
+  if (minuteur !== null) window.clearInterval(minuteur)
+  minuteur = null
+  document.removeEventListener('visibilitychange', tic)
+}
+
+// ============================================================
+// Cycle de vie
+// ============================================================
+
+let arreterSuiviSysteme: (() => void) | null = null
 
 onMounted(() => {
-  void refreshStats()
-  statsTimer = setInterval(refreshStats, 30_000)
+  // Le thème est posé avant le premier rendu (script de admin.html) ; ici on
+  // aligne la couleur de barre du navigateur sur le jeton `--bg`, et on suit la
+  // préférence du système tant que l'opérateur n'a rien choisi.
+  synchroniserCouleurBarre()
+  arreterSuiviSysteme = suivreSysteme()
+  document.addEventListener('keydown', surToucheDocument)
+  if (auth.isAuthenticated) demarrer()
 })
 
-onUnmounted(() => {
-  if (statsTimer) clearInterval(statsTimer)
+onBeforeUnmount(() => {
+  arreter()
+  arreterSuiviSysteme?.()
+  document.removeEventListener('keydown', surToucheDocument)
 })
 
-function logout() {
+// Connexion / déconnexion : le rafraîchissement suit l'état d'authentification.
+watch(
+  () => auth.isAuthenticated,
+  (connecte) => {
+    if (connecte) demarrer()
+    else arreter()
+  },
+)
+
+function deconnecter(): void {
   auth.logout()
-  router.push({ name: 'login' })
+  consoleStore.reinitialiser()
+  void router.push({ name: 'login' })
 }
+
+// Route protégée atteinte sans session : on reste sur le module par défaut.
+watch(
+  () => route.name,
+  (nom) => {
+    if (nom && !moduleParNom(nom) && nom !== 'login') {
+      void router.replace({ name: MODULE_PAR_DEFAUT })
+    }
+  },
+)
 </script>
 
 <style>
 /* Montage dédié #admin (admin.html) — même gabarit plein écran que #app.
-   body est position:fixed (style.css, héritage widget) : le layout admin
-   occupe 100% du viewport et chaque volet scrolle en interne. */
+   body est position:fixed (style.css, héritage widget) : la console occupe
+   100% du viewport et chaque volet défile en interne. */
 #admin {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-</style>
-
-<style scoped>
-.cockpit {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: row;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* ---------- Navigation ---------- */
-.cockpit__nav {
-  width: 220px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px 12px;
-  border-right: 1px solid var(--border);
-  background: var(--bg2);
-}
-
-.cockpit__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 4px 8px 14px;
-}
-
-.cockpit__brand-badge {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--gold);
-  color: var(--on-gold);
-  display: grid;
-  place-items: center;
-  font-family: var(--police-titres);
-  font-weight: 700;
-}
-
-.cockpit__brand-name {
-  font-family: var(--police-titres);
-  font-size: 17px;
-  color: var(--gold2);
-}
-
-.cockpit__modules {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.cockpit__link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 14px;
-  transition: background 0.15s ease;
-}
-
-.cockpit__link:hover {
-  background: rgba(201, 169, 110, 0.1);
-}
-
-.cockpit__link--active {
-  background: rgba(201, 169, 110, 0.15);
-  color: var(--gold2);
-  font-weight: 600;
-}
-
-.cockpit__icon {
-  font-size: 16px;
-}
-
-.cockpit__badge {
-  margin-left: auto;
-  min-width: 20px;
-  padding: 1px 6px;
-  border-radius: var(--arrondi-bouton);
-  background: var(--red-text);
-  color: var(--bg);
-  font-size: 11px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.cockpit__logout {
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: transparent;
-  color: var(--muted);
-  font-size: 13px;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.cockpit__logout:hover {
-  color: var(--text);
-  border-color: var(--gold-border);
-}
-
-/* ---------- Zone principale ---------- */
-.cockpit__main {
-  flex: 1;
-  min-width: 0;
-  overflow: auto;
-  padding: 16px 20px;
-}
-
-/* ---------- Mobile : tabs horizontales scrollables ---------- */
-@media (max-width: 900px) {
-  .cockpit {
-    flex-direction: column;
-  }
-
-  .cockpit__nav {
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 12px;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .cockpit__brand {
-    padding: 0;
-  }
-
-  .cockpit__brand-name {
-    display: none;
-  }
-
-  .cockpit__modules {
-    flex-direction: row;
-    gap: 6px;
-    overflow-x: auto;
-    padding: 0 4px;
-    scrollbar-width: none;
-  }
-
-  .cockpit__modules::-webkit-scrollbar {
-    display: none;
-  }
-
-  .cockpit__link {
-    padding: 8px 12px;
-    white-space: nowrap;
-  }
-
-  .cockpit__logout {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-
-  .cockpit__main {
-    padding: 12px;
-  }
 }
 </style>

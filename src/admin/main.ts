@@ -1,65 +1,55 @@
 /**
- * Point d'entrée du cockpit admin unifié (Sprint 9 + unification).
+ * Point d'entrée de la console d'administration (admin.html → #admin).
  *
- * Entrée Vite séparée (admin.html → #admin) : aucune influence sur le
- * bundle widget (#app). Réutilise le design system Chime (style.css).
- * Modules: Chatbot / Utilisateurs / Candidats / Portail CRM LWS.
+ * Entrée Vite séparée : aucune influence sur le bundle du widget (#app), ni sur
+ * celui des pages publiques `application/`. Les trois entrées partagent en
+ * revanche les MÊMES jetons (`src/styles/jetons.css`) et la même feuille de
+ * socle (`src/style.css`).
+ *
+ * Le routeur est construit dans `router.ts`, à partir du registre
+ * `navigation.ts` : une route ne peut pas exister sans entrée de barre latérale,
+ * ni l'inverse.
  */
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
 
 import App from './App.vue'
 import { setUnauthorizedHandler } from './api'
+import { MODULE_PAR_DEFAUT } from './navigation'
+import { creerRouteur } from './router'
+import { appliquerChoix, lireChoix } from './theme'
 import { useAdminAuthStore } from './stores/auth'
-import CandidatsView from './views/CandidatsView.vue'
-import CrmPortalView from './views/CrmPortalView.vue'
-import DashboardView from './views/DashboardView.vue'
-import LoginView from './views/LoginView.vue'
-import UsersView from './views/UsersView.vue'
 
 import '../style.css'
+import './admin.css'
 
 const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia)
 
-// Tout 401 remonté par api.ts → logout réactif : le shell (App.vue)
-// bascule immédiatement sur l'écran de login.
+// Tout 401 remonté par api.ts → déconnexion réactive : le shell (App.vue)
+// bascule immédiatement sur l'écran de connexion.
 setUnauthorizedHandler(() => useAdminAuthStore(pinia).logout())
 
-const router = createRouter({
-  // createWebHashHistory() sans argument dérive la base de
-  // location.pathname : robuste quel que soit le sous-chemin de déploiement.
-  history: createWebHashHistory(),
-  routes: [
-    { path: '/', redirect: '/chatbot' },
-    { path: '/chatbot', name: 'chatbot', component: DashboardView, meta: { requiresAuth: true } },
-    { path: '/users', name: 'users', component: UsersView, meta: { requiresAuth: true } },
-    {
-      path: '/candidats',
-      name: 'candidats',
-      component: CandidatsView,
-      meta: { requiresAuth: true },
-    },
-    { path: '/crm', name: 'crm', component: CrmPortalView, meta: { requiresAuth: true } },
-    { path: '/login', name: 'login', component: LoginView },
-    { path: '/:pathMatch(.*)*', redirect: '/chatbot' },
-  ],
-})
+const router = creerRouteur()
 
 router.beforeEach((to) => {
   const auth = useAdminAuthStore(pinia)
   if (to.meta.requiresAuth === true && !auth.isAuthenticated) return { name: 'login' }
-  if (to.name === 'login' && auth.isAuthenticated) return { name: 'chatbot' }
+  if (to.name === 'login' && auth.isAuthenticated) return { name: MODULE_PAR_DEFAUT }
   return true
 })
 
 app.use(router)
 app.mount('#admin')
 
-// Intégration LWS (admin2/chatbot.php) : le shell PHP injecte le JWT
-// FastAPI via postMessage — auth partagée sans double login.
+// Thème : le script en ligne de admin.html a déjà posé `data-theme` avant le
+// premier rendu (aucun flash). Ici on aligne la couleur de barre du navigateur
+// sur le jeton `--bg` du thème retenu — aucune couleur en dur, donc.
+appliquerChoix(lireChoix(), false)
+
+// Intégration LWS (admin2/chatbot.php) : le shell PHP injecte le JWT FastAPI
+// via postMessage — authentification partagée, sans double connexion.
 // Origine stricte : uniquement le shell admin sur api.eperformance.pro.
 window.addEventListener('message', (e) => {
   if (e.origin !== 'https://api.eperformance.pro') return
@@ -67,20 +57,22 @@ window.addEventListener('message', (e) => {
     const raw = typeof e.data === 'string' ? e.data : ''
     if (!raw.startsWith('{')) return
     const data = JSON.parse(raw) as { type?: string; token?: unknown }
-    if (data.type === 'ep-admin-auth' && typeof data.token === 'string' && data.token.length > 0) {
-      // 1. Stocker le token dans localStorage
+    if (
+      data.type === 'ep-admin-auth' &&
+      typeof data.token === 'string' &&
+      data.token.length > 0
+    ) {
+      // 1. Mémoriser le jeton (même clé que le store d'authentification)
       localStorage.setItem('eperf_admin_token', data.token)
 
-      // 2. Mettre à jour le store Pinia (au lieu de reload)
+      // 2. Mettre à jour le store Pinia (pas de rechargement de page)
       const auth = useAdminAuthStore(pinia)
       auth.token = data.token
 
-      // 3. Naviguer vers /chatbot si nécessaire
-      if (router.currentRoute.value.name !== 'chatbot') {
-        router.push({ name: 'chatbot' })
+      // 3. Rejoindre le module par défaut si nécessaire
+      if (router.currentRoute.value.name !== MODULE_PAR_DEFAUT) {
+        void router.push({ name: MODULE_PAR_DEFAUT })
       }
-
-      // 4. PAS de window.location.reload() — c'est ce qui causait la boucle infinie
     }
   } catch {
     /* message non JSON — ignoré */
