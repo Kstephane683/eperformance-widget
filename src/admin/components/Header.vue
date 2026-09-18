@@ -84,11 +84,18 @@ defineExpose({ boutonMenu })
   min-width: 40px;
   min-height: 40px;
   padding: 0 8px;
-  border: 1px solid var(--border);
+  /* Bouton secondaire bordé, au même titre que `.adm-btn--discret` — décision
+     D4. Les trois boutons de l'en-tête (menu, notifications, profil) sont des
+     CONTRÔLES : leur frontière les identifie, elle prend donc le filet de
+     contrôle et non le filet décoratif. L'en-tête reste discret — il ne gagne
+     ni aplat de marque ni ombre — mais il cesse d'être à peine visible. */
+  border: 1px solid var(--border-strong);
   border-radius: var(--arrondi-bouton);
   background: var(--card);
   color: var(--soft);
   cursor: pointer;
+  /* `--t-fast` reste : c'est un retour de survol, pas un état actif — la
+     décision D7c ne porte que sur les états de sélection. */
   transition: border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out),
     background-color var(--t-fast) var(--ease-out);
 }

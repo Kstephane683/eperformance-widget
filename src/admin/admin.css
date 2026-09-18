@@ -311,8 +311,18 @@ select.adm-champ {
   color: var(--on-gold);
 }
 
+/* Bouton secondaire BORDÉ — DÉCISION D4.
+   Le filet passe de `--border` (le filet qui SÉPARE, ratio 1,30:1 sur blanc) à
+   `--border-strong` (le filet qui DÉLIMITE un contrôle, 3,44:1 en clair et
+   3,25:1 en sombre — les deux ratios sont donnés par le noyau lui-même,
+   `10-primitives.css:54` et `:162`). Les pages publiques font exactement ce
+   choix pour le même rôle (`.btn-outline`, `application.css:389` : « un champ
+   est un Contrôle au sens de… ») : deux contextes, un seul geste, deux jetons.
+   C'est le seul endroit de la console où `--border` change : il reste le filet
+   des surfaces (`.adm-bloc`, `.adm-ligne`, panneaux, tableaux), qui, lui, est
+   décoratif et n'a pas de seuil à tenir. */
 .adm-btn--discret {
-  border-color: var(--border);
+  border-color: var(--border-strong);
   color: var(--soft);
 }
 
