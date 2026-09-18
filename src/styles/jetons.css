@@ -21,6 +21,20 @@
    dans `src/style.css` et `src/application.css`, au même niveau que les
    feuilles qui les consomment — un chemin `../fonts/…` se résout par rapport
    à la feuille servie, en développement comme après compilation.
+
+   AJOUT de la tâche 6.3 — les jetons d'ÉTAT et les voiles de barre.
+   La console d'administration a besoin de trois états sémantiques (un
+   avertissement « en attente », une information, une réussite) et d'un voile
+   de verre pour ses barres. `eperf.css` ne les porte pas encore : la
+   promotion y est recommandée (DESIGN-SYSTEM-UNIFIE §6.3, NOYAU-2 §2.5), et
+   en attendant, les valeurs sont prises à la SOURCE canonique supérieure —
+   la couche 1 du noyau (`eperf_core/assets/css/10-primitives.css:99-106`) et
+   la couche 2 (`20-semantic.css:91-105`), citées ligne par ligne ci-dessous.
+   Aucune teinte n'est inventée : ce sont exactement les valeurs du noyau, et
+   les déclinaisons `-filet` / `-trace` reprennent ses pourcentages
+   (28/30/28 % de filet, 6/7/6 % de trace en clair ; 30/32/30 % et 10/10/10 %
+   en sombre). Les deux voiles et la trace neutre sont, comme `--gold-bg`,
+   des `color-mix()` de jetons canoniques — jamais une couleur propre.
    ========================================================================== */
 
 /* ==========================================================================
@@ -70,6 +84,32 @@
   --green-text: #12703f;
   --green-border: rgba(20, 125, 70, 0.28);
   --green-bg: rgba(20, 125, 70, 0.06);
+
+  /* États — noyau 10-primitives.css:99-106 + 20-semantic.css:91-105.
+     Le texte porte le sens (il est lisible), le filet le rend visible et le
+     fond n'est qu'une trace : c'est la règle du noyau, un encadré
+     d'information ne doit pas ressembler à une alerte rouge. */
+  --succes: #12703f;
+  --succes-filet: color-mix(in srgb, var(--succes) 28%, transparent);
+  --succes-trace: color-mix(in srgb, var(--succes) 6%, transparent);
+
+  --alerte: #8a5a10;
+  --alerte-filet: color-mix(in srgb, var(--alerte) 30%, transparent);
+  --alerte-trace: color-mix(in srgb, var(--alerte) 7%, transparent);
+
+  --info: #1f5a8a;
+  --info-filet: color-mix(in srgb, var(--info) 28%, transparent);
+  --info-trace: color-mix(in srgb, var(--info) 6%, transparent);
+
+  /* Trace neutre : un statut sans charge (résolu, abandonné, inactif). Elle
+     est dérivée de `--muted` — pas de gris littéral. */
+  --neutre-trace: color-mix(in srgb, var(--muted) 12%, transparent);
+  --neutre-filet: color-mix(in srgb, var(--muted) 26%, transparent);
+
+  /* Voiles de barre — en clair, le verre part de la surface ; le voile de
+     superposition part du fond, sinon il éclaircit au lieu de reculer. */
+  --voile: color-mix(in srgb, var(--card) 82%, transparent);
+  --voile-fort: color-mix(in srgb, var(--bg) 78%, transparent);
 
   /* Élévations — eperf.css:196-199 */
   --shadow-sm: 0 1px 2px rgba(22, 21, 26, 0.04), 0 1px 3px rgba(22, 21, 26, 0.06);
@@ -133,6 +173,26 @@
   --green-text: #6fcf8a;
   --green-border: rgba(60, 180, 100, 0.3);
   --green-bg: rgba(60, 180, 100, 0.1);
+
+  /* États — valeurs sombres du noyau (10-primitives.css:100-106) */
+  --succes: #6fcf8a;
+  --succes-filet: color-mix(in srgb, var(--succes) 30%, transparent);
+  --succes-trace: color-mix(in srgb, var(--succes) 10%, transparent);
+
+  --alerte: #e0b45f;
+  --alerte-filet: color-mix(in srgb, var(--alerte) 32%, transparent);
+  --alerte-trace: color-mix(in srgb, var(--alerte) 10%, transparent);
+
+  --info: #7db4de;
+  --info-filet: color-mix(in srgb, var(--info) 30%, transparent);
+  --info-trace: color-mix(in srgb, var(--info) 10%, transparent);
+
+  --neutre-trace: color-mix(in srgb, var(--muted) 16%, transparent);
+  --neutre-filet: color-mix(in srgb, var(--muted) 30%, transparent);
+
+  /* Voiles — en sombre, la barre part de la surface posée sur le fond */
+  --voile: color-mix(in srgb, var(--card) 82%, transparent);
+  --voile-fort: color-mix(in srgb, var(--bg) 78%, transparent);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
