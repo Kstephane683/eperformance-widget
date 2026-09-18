@@ -1,0 +1,410 @@
+{
+  "total": 50,
+  "non_conformes": [],
+  "themes": {
+    "clair": [
+      {
+        "paire": "texte sur fond de page",
+        "texte": "--text #16151a",
+        "fond": "--bg #fdfcfa",
+        "ratio": 17.71,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte sur surface",
+        "texte": "--text #16151a",
+        "fond": "--card #ffffff",
+        "ratio": 18.16,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte sur surface 2",
+        "texte": "--text #16151a",
+        "fond": "--card2 #faf8f4",
+        "ratio": 17.12,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte doux sur surface",
+        "texte": "--soft #45424b",
+        "fond": "--card #ffffff",
+        "ratio": 9.84,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur fond de page",
+        "texte": "--muted #6a676f",
+        "fond": "--bg #fdfcfa",
+        "ratio": 5.41,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur surface",
+        "texte": "--muted #6a676f",
+        "fond": "--card #ffffff",
+        "ratio": 5.55,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur sidebar",
+        "texte": "--muted #6a676f",
+        "fond": "--bg2 #f7f5f1",
+        "ratio": 5.1,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent sur fond de page",
+        "texte": "--gold #856b37",
+        "fond": "--bg #fdfcfa",
+        "ratio": 4.93,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent sur surface",
+        "texte": "--gold #856b37",
+        "fond": "--card #ffffff",
+        "ratio": 5.05,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent appuyé sur surface",
+        "texte": "--gold2 #735d32",
+        "fond": "--card #ffffff",
+        "ratio": 6.29,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "élément actif sur sa trace",
+        "texte": "--gold2 #735d32",
+        "fond": "--gold-bg color-mix(in srgb, var(--gold) 7%, transparent)",
+        "ratio": 5.62,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte sur accent plein",
+        "texte": "--on-gold #ffffff",
+        "fond": "--gold #856b37",
+        "ratio": 5.05,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état succès sur sa trace",
+        "texte": "--succes #12703f",
+        "fond": "--succes-trace color-mix(in srgb, var(--succes) 6%, transparent)",
+        "ratio": 5.51,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état alerte sur sa trace",
+        "texte": "--alerte #8a5a10",
+        "fond": "--alerte-trace color-mix(in srgb, var(--alerte) 7%, transparent)",
+        "ratio": 5.24,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état info sur sa trace",
+        "texte": "--info #1f5a8a",
+        "fond": "--info-trace color-mix(in srgb, var(--info) 6%, transparent)",
+        "ratio": 6.48,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "erreur sur sa trace",
+        "texte": "--red-text #a8302f",
+        "fond": "--red-bg rgba(180, 45, 45, 0.06)",
+        "ratio": 5.96,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "badge d'alerte sur sidebar",
+        "texte": "--alerte #8a5a10",
+        "fond": "--alerte-trace color-mix(in srgb, var(--alerte) 7%, transparent)",
+        "ratio": 5.24,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "filet de contrôle sur surface",
+        "texte": "--border-strong #8f8a7e",
+        "fond": "--card #ffffff",
+        "ratio": 3.44,
+        "seuil": 3.0,
+        "conforme": true
+      },
+      {
+        "paire": "filet de contrôle sur fond de page",
+        "texte": "--border-strong #8f8a7e",
+        "fond": "--bg #fdfcfa",
+        "ratio": 3.36,
+        "seuil": 3.0,
+        "conforme": true
+      },
+      {
+        "paire": "filet décoratif sur surface",
+        "texte": "--border #e5e1d9",
+        "fond": "--card #ffffff",
+        "ratio": 1.3,
+        "seuil": 1.0,
+        "conforme": true
+      },
+      {
+        "paire": "état succès sur sidebar",
+        "texte": "--succes #12703f",
+        "fond": "--bg2 #f7f5f1",
+        "ratio": 5.65,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état alerte sur sidebar",
+        "texte": "--alerte #8a5a10",
+        "fond": "--bg2 #f7f5f1",
+        "ratio": 5.43,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état info sur sidebar",
+        "texte": "--info #1f5a8a",
+        "fond": "--bg2 #f7f5f1",
+        "ratio": 6.68,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur sidebar",
+        "texte": "--muted #6a676f",
+        "fond": "--bg2 #f7f5f1",
+        "ratio": 5.1,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent appuyé sur sidebar",
+        "texte": "--gold2 #735d32",
+        "fond": "--bg2 #f7f5f1",
+        "ratio": 5.77,
+        "seuil": 4.5,
+        "conforme": true
+      }
+    ],
+    "sombre": [
+      {
+        "paire": "texte sur fond de page",
+        "texte": "--text #edeae3",
+        "fond": "--bg #08080c",
+        "ratio": 16.64,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte sur surface",
+        "texte": "--text #edeae3",
+        "fond": "--card #101014",
+        "ratio": 15.8,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte sur surface 2",
+        "texte": "--text #edeae3",
+        "fond": "--card2 #14141a",
+        "ratio": 15.27,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte doux sur surface",
+        "texte": "--soft #b0aaa0",
+        "fond": "--card #101014",
+        "ratio": 8.23,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur fond de page",
+        "texte": "--muted #8b8b96",
+        "fond": "--bg #08080c",
+        "ratio": 5.93,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur surface",
+        "texte": "--muted #8b8b96",
+        "fond": "--card #101014",
+        "ratio": 5.63,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur sidebar",
+        "texte": "--muted #8b8b96",
+        "fond": "--bg2 #0c0c10",
+        "ratio": 5.79,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent sur fond de page",
+        "texte": "--gold #c9a96e",
+        "fond": "--bg #08080c",
+        "ratio": 8.93,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent sur surface",
+        "texte": "--gold #c9a96e",
+        "fond": "--card #101014",
+        "ratio": 8.48,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent appuyé sur surface",
+        "texte": "--gold2 #e2c07a",
+        "fond": "--card #101014",
+        "ratio": 10.9,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "élément actif sur sa trace",
+        "texte": "--gold2 #e2c07a",
+        "fond": "--gold-bg color-mix(in srgb, var(--gold) 8%, transparent)",
+        "ratio": 10.45,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte sur accent plein",
+        "texte": "--on-gold #0a0a0e",
+        "fond": "--gold #c9a96e",
+        "ratio": 8.83,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état succès sur sa trace",
+        "texte": "--succes #6fcf8a",
+        "fond": "--succes-trace color-mix(in srgb, var(--succes) 10%, transparent)",
+        "ratio": 9.1,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état alerte sur sa trace",
+        "texte": "--alerte #e0b45f",
+        "fond": "--alerte-trace color-mix(in srgb, var(--alerte) 10%, transparent)",
+        "ratio": 9.01,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état info sur sa trace",
+        "texte": "--info #7db4de",
+        "fond": "--info-trace color-mix(in srgb, var(--info) 10%, transparent)",
+        "ratio": 7.93,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "erreur sur sa trace",
+        "texte": "--red-text #e07070",
+        "fond": "--red-bg rgba(220, 60, 60, 0.12)",
+        "ratio": 5.9,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "badge d'alerte sur sidebar",
+        "texte": "--alerte #e0b45f",
+        "fond": "--alerte-trace color-mix(in srgb, var(--alerte) 10%, transparent)",
+        "ratio": 9.01,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "filet de contrôle sur surface",
+        "texte": "--border-strong #646470",
+        "fond": "--card #101014",
+        "ratio": 3.25,
+        "seuil": 3.0,
+        "conforme": true
+      },
+      {
+        "paire": "filet de contrôle sur fond de page",
+        "texte": "--border-strong #646470",
+        "fond": "--bg #08080c",
+        "ratio": 3.43,
+        "seuil": 3.0,
+        "conforme": true
+      },
+      {
+        "paire": "filet décoratif sur surface",
+        "texte": "--border #1c1c22",
+        "fond": "--card #101014",
+        "ratio": 1.12,
+        "seuil": 1.0,
+        "conforme": true
+      },
+      {
+        "paire": "état succès sur sidebar",
+        "texte": "--succes #6fcf8a",
+        "fond": "--bg2 #0c0c10",
+        "ratio": 10.2,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état alerte sur sidebar",
+        "texte": "--alerte #e0b45f",
+        "fond": "--bg2 #0c0c10",
+        "ratio": 10.1,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "état info sur sidebar",
+        "texte": "--info #7db4de",
+        "fond": "--bg2 #0c0c10",
+        "ratio": 8.79,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "texte discret sur sidebar",
+        "texte": "--muted #8b8b96",
+        "fond": "--bg2 #0c0c10",
+        "ratio": 5.79,
+        "seuil": 4.5,
+        "conforme": true
+      },
+      {
+        "paire": "accent appuyé sur sidebar",
+        "texte": "--gold2 #e2c07a",
+        "fond": "--bg2 #0c0c10",
+        "ratio": 11.21,
+        "seuil": 4.5,
+        "conforme": true
+      }
+    ]
+  }
+}

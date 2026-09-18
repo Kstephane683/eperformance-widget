@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Console d'administration : DARK-ONLY assumé (exception documentée,
+     DESIGN-SYSTEM-UNIFIE §8 point 5 : « une console et non un contenu lu »).
+     Le thème est posé en dur dans l'attribut — pas de bascule, pas de flash.
+     Le widget (index.html), lui, suit le thème du site via le SDK. -->
+<html lang="fr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Console d'administration du chatbot ePerformance : conversations, prises de main humaines et leads."
+    />
+    <meta name="theme-color" content="#08080c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="manifest" href="./admin-manifest.webmanifest" />
+    <!-- Polices : auto-hébergées (src/style.css), aucun appel à Google Fonts -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="./fonts/cormorant-garamond-700.woff2"
+    />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="./fonts/dm-sans-400.woff2" />
+    <title>ePerformance — Admin Chatbot</title>
+    <script type="module" crossorigin src="./assets/admin-DCEvK_ec.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-P2Xu9kJm.js">
+    <link rel="modulepreload" crossorigin href="./assets/style-CoISSuqL.js">
+    <link rel="stylesheet" crossorigin href="./assets/style-ihdfxEIV.css">
+    <link rel="stylesheet" crossorigin href="./assets/admin-BGG9rCBN.css">
+  </head>
+  <body>
+    <div id="admin"></div>
+  </body>
+</html>

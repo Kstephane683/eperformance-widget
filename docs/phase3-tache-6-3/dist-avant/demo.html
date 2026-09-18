@@ -1,0 +1,72 @@
+<!doctype html>
+<!-- Page de démonstration : simule un site hôte ePerformance.
+     Palette alignée sur les jetons canoniques (eperf.css, couche tokens) —
+     cette page n'est pas le widget, elle n'embarque donc pas la feuille du
+     design system : les valeurs sont recopiées, comme sur un site client. -->
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Démo — site hôte ePerformance</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        background: #fdfcfa; /* --bg, eperf.css:157 */
+        color: #16151a; /* --text, eperf.css:163 */
+        line-height: 1.65;
+      }
+      .hero {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 80px 24px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 42px;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+      }
+      .hero p {
+        color: #6a676f; /* --muted, eperf.css:165 */
+        line-height: 1.6;
+      }
+      .hero code {
+        background: #faf8f4; /* --card2, eperf.css:160 */
+        border: 1px solid #e5e1d9; /* --border, eperf.css:175 */
+        padding: 2px 8px;
+        border-radius: 12px; /* --arrondi-input, eperf.css:202 */
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>Site hôte — simulation ePerformance.pro</h1>
+      <p>
+        Cette page simule un site client. Le SDK est chargé en bas de page : la
+        <strong>bubble dorée en bas à droite</strong> ouvre le widget en iframe.
+      </p>
+      <p>
+        API console :
+        <code>ePerformance.open()</code> · <code>ePerformance.close()</code> ·
+        <code>ePerformance.toggle()</code> ·
+        <code>ePerformance.identify(1, {name: 'Jean'})</code>
+      </p>
+    </div>
+
+    <script>
+      // Config SDK — widgetUrl = dossier courant (sous-chemin GitHub Pages inclus)
+      window.ePerformanceConfig = {
+        widgetUrl: new URL('.', window.location.href).href,
+        apiUrl: 'https://web-production-4ab53.up.railway.app',
+        siteId: 'eperformance_vitrine',
+        position: 'right',
+      };
+    </script>
+    <script src="./eperformance-sdk.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Favicons de la marque (tâche 6.4) : `favicon.svg` — l'éclair violet du
+         modèle Vite — reste déclaré en dernier recours pour ne rien casser,
+         mais ce sont les PNG ci-dessous que les navigateurs retiennent. -->
+    <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="./favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fdfcfa" />
+    <!-- Thème sombre : barre système assortie (Chromium/Android) -->
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08080c" />
+    <!--
+      Application Mia (tâche 6.4) : ce document est à la fois le widget intégré
+      en iframe sur les sites hôtes ET l'application installable. Le manifeste
+      ne concerne que ce second usage — dans une iframe, un manifeste est
+      ignoré par le navigateur, il ne peut donc rien changer au widget.
+    -->
+    <link rel="manifest" href="./mia-manifest.webmanifest" />
+    <meta
+      name="description"
+      content="Mia, l'assistante IA d'ePerformance : posez votre question et obtenez une réponse actionnable — clients, visibilité, automatisation."
+    />
+    <!-- Document applicatif : il n'a pas vocation à être indexé (le contenu
+         public vit sur eperformance.pro et sur /application/mia). -->
+    <meta name="robots" content="noindex" />
+    <!-- Métadonnées iOS : icône, mode application, barre d'état, écrans de
+         démarrage. `default` et non `black-translucent` : le header du widget
+         est ancré en haut, il ne doit pas passer sous l'horloge. -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Mia" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)"
+      href="./demarrage/mia-1170x2532-clair.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: dark)"
+      href="./demarrage/mia-1170x2532-sombre.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)"
+      href="./demarrage/mia-1179x2556-clair.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: dark)"
+      href="./demarrage/mia-1179x2556-sombre.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)"
+      href="./demarrage/mia-1290x2796-clair.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (prefers-color-scheme: dark)"
+      href="./demarrage/mia-1290x2796-sombre.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2)"
+      href="./demarrage/mia-1640x2360-clair.png"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (prefers-color-scheme: dark)"
+      href="./demarrage/mia-1640x2360-sombre.png"
+    />
+    <!-- Anti-flash (DESIGN-SYSTEM-UNIFIE D3) : le thème est posé AVANT le
+         premier rendu, comme sur le site (index.html:6-10). L'iframe n'a pas
+         accès au localStorage du site : le SDK transmet le thème en query
+         param (?theme=light|dark), et ce paramètre fait foi.
+         Hors iframe (application installée, ouverture directe), il n'y a pas
+         de SDK : on suit le choix mémorisé (`eperf-theme`, même clé que le
+         site — contrat C4), puis la préférence du système ; le défaut du site
+         reste le clair. Ne pas déplacer ce script : il doit rester bloquant. -->
+    <script>
+      ;(function () {
+        try {
+          var racine = document.documentElement
+          var params = new URLSearchParams(window.location.search)
+          /* Mode application : document de premier niveau → mise en page
+             « application » (colonne centrée), et non le panneau de 400 px
+             de l'iframe. */
+          if (window.self === window.top) {
+            racine.setAttribute('data-mode', 'application')
+          }
+          var t = params.get('theme')
+          if (t !== 'dark' && t !== 'light') {
+            var stocke = null
+            try {
+              stocke = window.localStorage.getItem('eperf-theme')
+            } catch (e) {
+              stocke = null
+            }
+            if (stocke === 'dark' || stocke === 'light') {
+              t = stocke
+            } else if (window.matchMedia) {
+              t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            } else {
+              t = 'light'
+            }
+          }
+          racine.setAttribute('data-theme', t)
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
+    <!-- Polices : auto-hébergées, déclarées dans src/style.css.
+         Préchargement des deux graisses du premier écran, comme le site
+         (index.html:60-61) : Cormorant 700 pour les titres, DM Sans 400 pour
+         le corps. Aucun appel à Google Fonts (règle de cohérence #9). -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="./fonts/cormorant-garamond-700.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="./fonts/dm-sans-400.woff2"
+    />
+    <title>Mia — assistante ePerformance</title>
+    <script type="module" crossorigin src="./assets/main-Cs6oXE_Y.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-P2Xu9kJm.js">
+    <link rel="modulepreload" crossorigin href="./assets/style-CoISSuqL.js">
+    <link rel="modulepreload" crossorigin href="./assets/theme-C7lLq5Hp.js">
+    <link rel="stylesheet" crossorigin href="./assets/style-ihdfxEIV.css">
+    <link rel="stylesheet" crossorigin href="./assets/main-_gfTf3tY.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

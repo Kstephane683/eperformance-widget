@@ -1,0 +1,66 @@
+{
+  "apres": {
+    "sources": {
+      "hex": 0,
+      "rgb": 0,
+      "detail": []
+    },
+    "admin_html": [
+      0,
+      0
+    ],
+    "hex_dans_les_tests": 2,
+    "rgb_dans_les_tests": 4
+  },
+  "avant": {
+    "sources": {
+      "hex": 4,
+      "rgb": 43,
+      "detail": [
+        {
+          "fichier": "docs/phase3-tache-6-3/avant/src-admin/App.vue",
+          "hex": 0,
+          "rgb": 2
+        },
+        {
+          "fichier": "docs/phase3-tache-6-3/avant/src-admin/views/CandidatsView.vue",
+          "hex": 2,
+          "rgb": 9
+        },
+        {
+          "fichier": "docs/phase3-tache-6-3/avant/src-admin/views/DashboardView.vue",
+          "hex": 1,
+          "rgb": 25
+        },
+        {
+          "fichier": "docs/phase3-tache-6-3/avant/src-admin/views/LoginView.vue",
+          "hex": 0,
+          "rgb": 4
+        },
+        {
+          "fichier": "docs/phase3-tache-6-3/avant/src-admin/views/UsersView.vue",
+          "hex": 0,
+          "rgb": 3
+        }
+      ]
+    },
+    "admin_html": [
+      1,
+      0
+    ]
+  },
+  "dist_avant": {
+    "hex": 49,
+    "rgb": 0,
+    "fichiers": [
+      "admin-BGG9rCBN.css (48 hex, 0 rgb)"
+    ]
+  },
+  "dist": {
+    "hex": 1,
+    "rgb": 0,
+    "fichiers": [
+      "admin-DAGd3vKw.css (1 hex, 0 rgb)"
+    ]
+  }
+}
