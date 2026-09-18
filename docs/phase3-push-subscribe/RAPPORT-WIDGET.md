@@ -285,7 +285,7 @@ retiré ensuite) :
 
 | | Avant | Après | Delta |
 |---|---|---|---|
-| `main` (widget) | 78,00 kB · gzip 27,97 kB | 86,54 kB · gzip 30,48 kB | +8,54 kB · +2,51 kB gzip |
+| `main` (widget) | 78,00 kB · gzip 27,97 kB | 86,49 kB · gzip 30,45 kB | +8,49 kB · +2,48 kB gzip |
 | `eperformance-sdk.js` | 13,97 kB | 13,97 kB | **0** |
 
 Le bundle reste loin de l'objectif de 150 kB de la documentation maître. Le SDK
@@ -335,15 +335,22 @@ site sert bien la nouvelle version :
 
 ```
 $ curl -s https://kstephane683.github.io/eperformance-widget/index.html | grep -o 'assets/main-[A-Za-z0-9_-]*\.js'
-assets/main-CAl4em_R.js          ← le bundle construit localement, à l'octet près
+assets/main-C_ISfXVy.js          ← le bundle construit localement, à l'octet près (86 490 octets)
 
-$ curl -s .../assets/main-CAl4em_R.js | grep -c 'ep-notifs'                → 1
-$ curl -s .../assets/main-CAl4em_R.js | grep -c '/api/chatbot/push/config' → 1
-$ curl -s .../assets/main-CAl4em_R.js | grep -c 'Notifications refusées'   → 1
+$ curl -s .../assets/main-C_ISfXVy.js | grep -c 'ep-notifs'                     → 1
+$ curl -s .../assets/main-C_ISfXVy.js | grep -c '/api/chatbot/push/config'      → 1
+$ curl -s .../assets/main-C_ISfXVy.js | grep -c 'Notifications refusées'        → 1
+$ curl -s .../assets/main-C_ISfXVy.js | grep -c 'Mia peut vous prévenir'        → 1
+$ curl -s .../assets/main-C_ISfXVy.js | grep -c 'Recevoir les nouvelles de Mia' → 1
 
 $ curl -s https://kstephane683.github.io/eperformance-widget/sw.js | grep -c "VERSION = 'mia-v1'"
 1                                 ← le service worker de la tâche 6.4 est inchangé
 ```
+
+L'empreinte a changé une fois de plus après le nettoyage de deux membres
+inutilisés du store (commit `966d9e5`, sans effet sur le comportement : 296
+tests verts avant comme après). C'est le site publié qui fait foi, et il sert
+exactement le bundle du dépôt.
 
 ---
 
@@ -401,8 +408,8 @@ $ npm test
       Tests  296 passed (296)
 
 $ npm run build
-✓ built in 1.31s        (widget : main 86,54 kB · gzip 30,48 kB)
-✓ built in 70ms         (SDK : 13,97 kB · inchangé)
+✓ built in 1.20s        (widget : main 86,49 kB · gzip 30,45 kB)
+✓ built in 89ms         (SDK : 13,97 kB · inchangé)
 ```
 
 ### Commit et déploiement
