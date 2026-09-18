@@ -542,8 +542,12 @@ watch(
   font-family: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background-color var(--t-fast) var(--ease-out),
-    border-color var(--t-fast) var(--ease-out);
+  /* Même état actif que la barre latérale, donc même durée (décision D7c) :
+     la conversation sélectionnée et le module courant marquent la même chose —
+     « c'est ici que vous êtes ». Deux durées pour un même signal enverraient
+     deux messages différents. */
+  transition: background-color var(--t) var(--ease-out),
+    border-color var(--t) var(--ease-out);
 }
 
 .adm-boite__item:hover {

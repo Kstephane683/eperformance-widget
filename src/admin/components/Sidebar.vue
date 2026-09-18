@@ -226,7 +226,13 @@ function surTouche(evenement: KeyboardEvent): void {
   color: var(--soft);
   font-size: 13.5px;
   text-decoration: none;
-  transition: background-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+  /* DÉCISION D7c — `var(--t)` et non `var(--t-fast)`. Cet élément porte
+     l'ÉTAT ACTIF du module courant, et le geste équivalent du widget (l'onglet
+     actif, `.ep-tab`) dure `var(--t)`. Deux contextes du même produit animaient
+     le même geste l'un en 300 ms, l'autre en 150 ms : c'est la durée du design
+     system qui s'applique, `--t` = `--duree` = 300 ms (jetons.css:16-18).
+     Aucun littéral de durée n'intervient : la valeur est celle du jeton. */
+  transition: background-color var(--t) var(--ease-out), color var(--t) var(--ease-out);
 }
 
 .adm-lien:hover {
