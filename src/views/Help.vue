@@ -170,21 +170,36 @@
         Version hors ligne : les articles sont servis depuis la copie embarquée du widget.
       </p>
     </template>
+
+    <!--
+      Réglage des notifications (P3-PUSH) — placé après le contenu d'aide :
+      c'est un réglage, il ne passe pas devant la base de connaissances. Le
+      bloc décide seul de s'afficher, et ne s'affiche pas du tout quand l'API
+      push est absente de ce contexte ou quand le serveur n'a pas encore de clé
+      publique. Aucune demande de permission n'est émise sans un clic ici.
+    -->
+    <ReglageNotifications />
   </div>
 </template>
 
 <script setup lang="ts">
 /**
- * Onglet Aide — la base de connaissances du blog.
+ * Onglet Aide — la base de connaissances du blog, et le réglage des
+ * notifications.
  *
  * Source : `chatbot-index.json` (collections + articles publiés), chargé par
  * le store blog (réseau puis repli embarqué). Les articles s'ouvrent sur le
  * blog dans un nouvel onglet : le widget ne duplique pas le contenu éditorial.
+ *
+ * Le réglage des notifications (P3-PUSH, `ReglageNotifications`) vit ici parce
+ * que c'est le seul endroit du widget qui ressemble à des réglages — et parce
+ * que l'activation doit rester une action volontaire, jamais une invite.
  */
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 import ArticleCard from '@/components/ArticleCard.vue'
+import ReglageNotifications from '@/components/ReglageNotifications.vue'
 import { CAPACITES, payloadSuggestion, type Capacite } from '@/data/capacites'
 import { tracerClicSuggestion } from '@/helpers/tracking'
 import { vignetteCollection } from '@/helpers/iconesCollections'
