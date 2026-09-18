@@ -42,7 +42,12 @@ DEPOT = Path(__file__).resolve().parents[2]
 DIST = DEPOT / "dist"
 DOSSIER = Path(__file__).resolve().parent / "lighthouse"
 PORT = 8110
-BASE = f"http://127.0.0.1:{PORT}"
+# Deux modes : le build local (par défaut) ou la PRODUCTION déployée, en
+# passant LH_BASE — c'est la mesure de référence, GitHub Pages compressant le
+# texte alors que le serveur de développement ne le fait pas.
+#   LH_BASE=https://kstephane683.github.io/eperformance-widget python3 lighthouse.py
+BASE = os.environ.get("LH_BASE") or f"http://127.0.0.1:{PORT}"
+LOCAL = not os.environ.get("LH_BASE")
 
 CIBLES = [
     ("application", "/index.html?app=1&theme=light&viewport=mobile"),
@@ -89,7 +94,8 @@ def demarrer_serveur() -> socketserver.ThreadingTCPServer:
 
 
 def lancer_lighthouse(version: int, nom: str, chemin: str) -> dict:
-    base = f"{DOSSIER}/lh{version}-{nom}"
+    prefixe = "prod" if not LOCAL else "local"
+    base = f"{DOSSIER}/lh{version}-{prefixe}-{nom}"
     commande = [
         "npx",
         "--yes",
@@ -122,11 +128,11 @@ def lancer_lighthouse(version: int, nom: str, chemin: str) -> dict:
 def main() -> None:
     DOSSIER.mkdir(parents=True, exist_ok=True)
     versions = [int(sys.argv[1])] if len(sys.argv) > 1 else [11, 13]
-    serveur = demarrer_serveur()
+    serveur = demarrer_serveur() if LOCAL else None
     resultats: dict = {}
     try:
         for version in versions:
-            print(f"Lighthouse {version}" + (f" (Chromium {CHROME_PATH})" if CHROME_PATH else ""))
+            print(f"Lighthouse {version} — {'production' if not LOCAL else 'build local'}" + (f" (Chromium {CHROME_PATH})" if CHROME_PATH else ""))
             for nom, chemin in CIBLES:
                 resultats[f"lh{version}-{nom}"] = lancer_lighthouse(version, nom, chemin)
             # Une passe desktop sur la page de présentation : la mise en page
@@ -135,11 +141,13 @@ def main() -> None:
                 version, "portail-desktop", "/application/mia/"
             )
     finally:
-        serveur.shutdown()
-    (DOSSIER / "scores.json").write_text(
+        if serveur:
+            serveur.shutdown()
+    nom_scores = "scores.json" if LOCAL else "scores-production.json"
+    (DOSSIER / nom_scores).write_text(
         json.dumps(resultats, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-    print(f"→ {DOSSIER / 'scores.json'}")
+    print(f"→ {DOSSIER / nom_scores}")
 
 
 if __name__ == "__main__":

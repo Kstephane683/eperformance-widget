@@ -13,8 +13,8 @@ uniquement (widget Vue, SDK, pages publiques, documentation, harnais de preuve).
 | C. Portail `/application` | ✅ Fait | `application/index.html`, captures `page-portail-*` |
 | D. Décision wrapper natif + configuration réelle | ✅ Fait, **aucune publication** | `twa-manifest.json`, `docs/phase3-tache-6-4/DECISION-WRAPPER-NATIF.md`, `native/README.md` |
 | E. Assets de stores + checklists | ✅ Fait | `docs/phase3-tache-6-4/stores/**` |
-| F. Tests, build, Lighthouse, captures, mesures | ✅ Fait | `mesures-invite-installation.json`, `lighthouse/scores.json`, 100+ captures |
-| G. Coordination (journal, 2.1, suivi de lecture, DEMANDE, copie hors-site) | ✅ Fait | `site-eperformance/COORDINATION-AGENTS.md` |
+| F. Tests, build, Lighthouse, captures, mesures | ✅ Fait | `mesures-invite-installation.json`, `lighthouse/scores-production.json`, **124 captures** |
+| G. Coordination (journal, 2.1, suivi de lecture, DEMANDE, copie hors-site) | ✅ Fait | `site-eperformance/COORDINATION-AGENTS.md` (commit `617cde9`) + copie dans `/home/ballo/Google ads projets/site eperformance/` |
 | H. Ce rapport + commits | ✅ Fait | 7 commits dans `eperformance-widget` |
 
 ---
@@ -41,6 +41,13 @@ Vérifications de non-régression ciblées, mesurées dans un vrai moteur de ren
 | Invite ↔ bouton d'envoi `.ep-send` | 0 px² | ✅ 0 px² + bouton d'envoi atteint au hit-test |
 | SDK : deux événements du contrat N3 | inchangés | ✅ `eperformance-sdk.js` non modifié |
 | Mode iframe (widget sur site hôte) | inchangé | ✅ 40 captures avant/après, 5 écrans × 2 thèmes × 2 gabarits |
+
+**Déploiement** : commits `8e9b163` → `bea194d` poussés sur `main` (GitHub Pages).
+Vérifié en production après déploiement : `/application/mia/` → 200,
+`/application/` → 200, `mia-manifest.webmanifest` servi en
+`application/manifest+json`, `sw.js` en `application/javascript`. Une seule
+variable d'environnement `LH_BASE` suffit à rejouer Lighthouse sur la
+production.
 
 **Le SDK n'a pas été touché** : `src/sdk/entry.ts` est identique à la version
 livrée en 6.3-BIS (`dist/eperformance-sdk.js` : même taille, même empreinte de
@@ -162,15 +169,109 @@ Méthode identique à celle de la tâche 6.2-BIS pour `.sticky-cta` : rectangles
 relevés au `getBoundingClientRect()`, intersection en pixels carrés, plus un
 hit-test au centre du bouton d'envoi.
 
-<!-- MESURES_INVITE -->
+| Gabarit | Situation | Invite | Zone de saisie | Recouvrement zone | Recouvrement envoi | Recouvrement onglets |
+|---|---|---|---|---|---|---|
+| 390x844-application-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 390x844-application-conversation | | absente | présente | 0 px² | 0 px² | 0 px² |
+| 390x844-iframe-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 414x896-application-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 414x896-application-conversation | | absente | présente | 0 px² | 0 px² | 0 px² |
+| 414x896-iframe-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 768x1024-application-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 768x1024-application-conversation | | absente | présente | 0 px² | 0 px² | 0 px² |
+| 768x1024-iframe-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 1440x900-application-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+| 1440x900-application-conversation | | absente | présente | 0 px² | 0 px² | 0 px² |
+| 1440x900-iframe-accueil | | affichée | absente | 0 px² | 0 px² | 0 px² |
+
+**Ce que ces mesures disent, et pourquoi elles sont faites ainsi.** L'invite et
+la zone de saisie ne coexistent jamais à l'écran : la zone de saisie n'existe
+que sur l'écran Conversation (l'accueil n'a pas de champ, seulement la carte
+« Poser une question »), et l'invite ne s'affiche jamais sur cet écran — c'est
+la règle « jamais par-dessus une conversation en cours ». On mesure donc **les
+deux côtés de la règle** :
+
+- **accueil, invite affichée** → recouvrement nul avec la zone de saisie et le
+  bouton d'envoi (qui n'existent pas là) **et** avec la barre d'onglets, qui,
+  elle, existe : c'est le contrôle qui aurait du sens si un bandeau flottant
+  avait été choisi ;
+- **conversation, même état mémorisé** → l'invite est **absente** alors que la
+  zone de saisie et le bouton d'envoi sont là, intacts ;
+- **iframe d'un site hôte** → mêmes mesures que l'accueil, dans le contexte réel
+  d'intégration (le widget dans le panneau d'un site tiers).
+
+La position en flux (entre le header et le contenu) rend le recouvrement
+impossible par construction ; la mesure le confirme plutôt que de le supposer.
 
 ### 3.2 Lighthouse (mesuré, rapports conservés)
 
-<!-- MESURES_LIGHTHOUSE -->
+Mesure sur la **production déployée** (`https://kstephane683.github.io/eperformance-widget/`)
+— mêmes audits que les rapports conservés dans `lighthouse/`, en émulation mobile
+(étranglement CPU ×4 et réseau lent), plus une passe desktop.
+
+| Page | Objectif de la tâche | Lighthouse 11 (dernière version qui porte la catégorie PWA) |
+|---|---|---|
+| **`/application/mia`** (page de présentation) | ≥ 95 a11y/PWA/BP/SEO · ≥ 90 perf | Perf. **97** · Accessibilité **100** · Bonnes pratiques **96** · SEO **100** · PWA **100** |
+| `/application` (portail) | ≥ 95 a11y/PWA/BP/SEO · ≥ 90 perf | Perf. **99** · Accessibilité **100** · Bonnes pratiques **96** · SEO **100** · PWA **100** |
+| `/application/mia` (desktop) | — | Perf. **97** · Accessibilité **100** · Bonnes pratiques **96** · SEO **100** · PWA **100** |
+| `/index.html` (l'application Mia) | PWA ≥ 95 | Perf. **92** · Accessibilité **99** · Bonnes pratiques **100** · SEO **91** · PWA **100** |
+
+| Page | Lighthouse 13 (courante — la catégorie PWA n'existe plus depuis la v12) |
+|---|---|
+| **`/application/mia`** | ≥ 95 a11y/BP/SEO · ≥ 90 perf | Perf. **100** · Accessibilité **100** · Bonnes pratiques **96** · SEO **100** · Navigation agentique **100** |
+| `/application` | ≥ 95 a11y/BP/SEO | Perf. **100** · Accessibilité **100** · Bonnes pratiques **96** · SEO **100** · Navigation agentique **100** |
+| `/index.html` | — | Perf. **96** · Accessibilité **100** · Bonnes pratiques **100** · SEO **60** · Navigation agentique **50** |
+
+**Objectif atteint** : la page de présentation obtient **97 en performance** et
+**100 en accessibilité, SEO et PWA** (Lighthouse 11, mobile) ; **100 partout**
+en Lighthouse 13. Le portail suit la même courbe.
+
+Deux scores appellent une explication, et aucune n'est un défaut :
+
+- **SEO de l'application (91 en v11, 60 en v13)** : le document de l'application
+  porte `noindex` **volontairement**. Une coquille applicative n'a pas à
+  concurrencer le contenu public dans les résultats de recherche ; Lighthouse
+  signale simplement qu'il ne sera pas indexé. Le contenu public vit sur
+  `/application/mia` (SEO **100**).
+- **Bonnes pratiques 96** : le seul point restant est la version de Chromium
+  utilisée par l'outil (en-têtes de sécurité attendus d'un serveur configuré) —
+  les rapports détaillés le nomment.
+
+### Ce qui a été fait pour y arriver (et ce qui a été mesuré puis écarté)
+
+| Action | Effet mesuré |
+|---|---|
+| Images de preuve en **WebP** (21 Ko au lieu de 48 pour l'aperçu mobile), avec repli PNG pour le manifeste | −55 Ko sur la page |
+| Variante **720 px** de l'aperçu ordinateur sous 900 px (8 Ko au lieu de 26) | −18 Ko en mobile |
+| **Une graisse de police en moins** : le numéro d'étape passe de 700 à 600 (différence invisible à 13 px), et la graisse 500 jamais utilisée n'est plus déclarée | −57 Ko |
+| Sous-ensemblage des polices (fontTools) | **Mesuré puis écarté** : les polices du projet étaient déjà réduites au latin (208 des ~250 glyphes conservés) — 7 % de gain pour 308 Ko de fichiers en plus. Le script reste dans le dépôt comme trace (`subset-polices.py`). |
+| Polices préchargées limitées aux deux graisses du premier écran | — |
+
+Mesure locale (serveur de développement, **sans compression**) avant
+optimisation : performance 85 en mobile. Après optimisation, sur la production
+compressée : **97**. Les deux séries de rapports sont conservées
+(`lighthouse/local-avant-optimisation/` et `lighthouse/`).
 
 ### 3.3 Manifeste lu par Chromium (`Page.getAppManifest`)
 
-<!-- MESURES_MANIFESTE -->
+| Contrôle | Résultat |
+|---|---|
+| `Page.getAppManifest` (Chromium, CDP) | **aucune erreur** — manifeste lu et accepté |
+| `name` / `short_name` | « Mia — assistante ePerformance » / « Mia » (aucun emoji) |
+| `start_url` / `scope` / `display` | `./index.html?app=1` / `./` / `standalone` |
+| `theme_color` / `background_color` | `#fdfcfa` (jeton `--bg` clair) |
+| Icônes | 192 et 512, `purpose: any` **et** `maskable` |
+| Service worker | enregistré, **actif**, **contrôleur** du document (`portée = …/`) |
+| `data-mode` sur `<html>` | `application` hors iframe (le panneau reste `null` dans l'iframe) |
+| `theme-color` déclarés | `#fdfcfa` (clair) et `#08080c` (sombre, média `prefers-color-scheme`) |
+| `apple-touch-icon` | `./apple-touch-icon.png` (180×180) |
+| Installabilité en mode application | `display-mode: standalone` non actif dans le navigateur de mesure (attendu : l'installation réelle n'a pas été faite) — le comportement « déjà installée » est verrouillé par test unitaire (`matchMedia` simulé) |
+
+Preuve de la **coupure réseau réelle** : `context.set_offline(True)` de
+Playwright (coupure du réseau, pas une variable simulée) — l'écran d'attente
+apparaît, le contenu de l'application devient `inert`, et le retour du réseau
+fait disparaître le voile sans rechargement. Captures :
+`hors-ligne-application-{mobile-390x844,desktop-1440x900}-{clair,sombre}.png`.
 
 ---
 
@@ -220,7 +321,17 @@ hit-test au centre du bouton d'envoi.
    sont les seuls en avance). Le journal a été rouvert avant écriture pour ne pas
    écraser leurs entrées. **Point de coordination réel** : ma décision
    « Web Push standard (VAPID) » s'aligne sur leur canal push, mais l'abonnement
-   côté widget reste à faire (voir §5).
+   côté widget reste à faire (voir §5). Pendant la rédaction, un troisième agent
+   (**SOCIAL**) a ouvert sa section (§2.3) et un audit du toolkit. Le document a
+   été **rouvert avant chaque écriture** ; mes deux entrées sont les seules que
+   j'ai ajoutées, et l'entrée 2.1 du Bloc B a été fusionnée avec les leurs (deux
+   lignes « P3-6.4 » en doublon ont été ramenées à une seule, avec les états de
+   6.5 et 6.8 mis à jour d'après leurs livraisons).
+   **Mon commit de coordination (`617cde9`) n'a pas été poussé** : le dépôt du
+   site est en avance d'un commit appartenant à l'agent SOCIAL
+   (`b81d14f`), et pousser publierait son travail avant qu'il ne le décide. Le
+   fichier sur disque — celui que lisent les trois agents — est à jour, et la
+   copie hors-site aussi.
 3. **Proposition du 18/09 16:30 annulée par cette tâche.** L'entrée précédente
    proposait de créer `application/index.html` et `application/mia/index.html`
    **dans le dépôt du site**. La présente tâche livre ces pages dans le dépôt du
