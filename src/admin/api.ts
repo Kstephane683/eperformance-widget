@@ -77,10 +77,16 @@ export interface AdminConversationDetail {
   messages: AdminMessage[]
 }
 
-export interface AdminAgent {
-  key: string
-  label: string
-}
+/**
+ * NOTE (tâche 6.3) — les appels `GET /agents` et `POST /assign` ont été
+ * retirés du client : leurs valeurs de retour sont des CLÉS D'AGENT INTERNES
+ * (« sales-coach »…), et l'interface les affichait telles quelles sous chaque
+ * message, dans une pastille et dans un sélecteur d'assignation. La règle
+ * produit est stricte : aucun agent interne n'apparaît, jamais — la console ne
+ * parle que de Mia et d'un conseiller humain. Le champ `assigned_agent` reste
+ * lu du contrat (il est typé ci-dessus, il peut être nul) mais n'est PLUS
+ * affiché : la décision de routage appartient au backend.
+ */
 
 // ============================================================
 // ERREURS + WRAPPER FETCH
@@ -226,57 +232,6 @@ export function releaseConversation(conversationId: string): Promise<void> {
 
 export function sendHumanMessage(conversationId: string, content: string): Promise<void> {
   return postAction(conversationId, '/human-message', { content })
-}
-
-export function assignAgent(conversationId: string, agentKey: string): Promise<void> {
-  return postAction(conversationId, '/assign', { agent_key: agentKey })
-}
-
-// ============================================================
-// AGENTS — GET /api/chatbot/agents
-// ============================================================
-
-/**
- * Format de réponse volontairement tolérant : tableau nu ou { agents: [...] },
- * items en chaînes ("sales-coach") ou objets { key|agent_key, name|label }.
- */
-export async function fetchAgents(): Promise<AdminAgent[]> {
-  let res = await apiFetch('/api/chatbot/agents')
-  if (res.status === 404) {
-    // Repli déploiement sans préfixe /api/chatbot
-    res = await apiFetch('/agents')
-  }
-  if (res.status === 404) return []
-  if (!res.ok) throw new ApiError(res.status, await errorDetail(res))
-  return normalizeAgents(await res.json())
-}
-
-function normalizeAgents(data: unknown): AdminAgent[] {
-  let list: unknown[] = []
-  if (Array.isArray(data)) {
-    list = data
-  } else if (
-    typeof data === 'object' &&
-    data !== null &&
-    Array.isArray((data as { agents?: unknown }).agents)
-  ) {
-    list = (data as { agents: unknown[] }).agents
-  }
-
-  const agents: AdminAgent[] = []
-  for (const item of list) {
-    if (typeof item === 'string') {
-      agents.push({ key: item, label: item })
-    } else if (typeof item === 'object' && item !== null) {
-      const obj = item as Record<string, unknown>
-      const key = obj.key ?? obj.agent_key ?? obj.id ?? obj.name
-      if (typeof key === 'string' && key.length > 0) {
-        const label = obj.name ?? obj.label ?? key
-        agents.push({ key, label: typeof label === 'string' ? label : key })
-      }
-    }
-  }
-  return agents
 }
 
 // ============================================================
