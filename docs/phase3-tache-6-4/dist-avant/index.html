@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fdfcfa" />
+    <!-- Anti-flash (DESIGN-SYSTEM-UNIFIE D3) : le thème est posé AVANT le
+         premier rendu, comme sur le site (index.html:6-10). L'iframe n'a pas
+         accès au localStorage du site : le SDK transmet le thème en query
+         param (?theme=light|dark) et le défaut est celui du site (clair).
+         Ne pas déplacer ce script : il doit rester bloquant. -->
+    <script>
+      ;(function () {
+        try {
+          var t = new URLSearchParams(window.location.search).get('theme')
+          if (t !== 'dark' && t !== 'light') {
+            t = 'light'
+          }
+          document.documentElement.setAttribute('data-theme', t)
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
+    <!-- Polices : auto-hébergées, déclarées dans src/style.css.
+         Préchargement des deux graisses du premier écran, comme le site
+         (index.html:60-61) : Cormorant 700 pour les titres, DM Sans 400 pour
+         le corps. Aucun appel à Google Fonts (règle de cohérence #9). -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="./fonts/cormorant-garamond-700.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="./fonts/dm-sans-400.woff2"
+    />
+    <title>ePerformance — Assistant IA</title>
+    <script type="module" crossorigin src="./assets/main-BGI3bbDR.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/style-Bu1tilnq.js">
+    <link rel="stylesheet" crossorigin href="./assets/style-BVXzQ9IM.css">
+    <link rel="stylesheet" crossorigin href="./assets/main-CgusH0A3.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

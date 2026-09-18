@@ -24,8 +24,15 @@
 @import './styles/jetons.css';
 
 /* --------------------------------------------------------------------------
-   Polices — mêmes fichiers que le widget (public/fonts/), sous-ensemble du
-   premier écran. Aucun appel à Google Fonts (règle de cohérence #9).
+   Polices — mêmes fichiers que le widget (public/fonts/), auto-hébergées :
+   aucun appel à Google Fonts (règle de cohérence #9).
+
+   POLITIQUE DE GRAISSES (décision de performance, mesurée) : seules les
+   graisses RÉELLEMENT utilisées par ces deux pages sont déclarées quatre fois
+   moins de fichiers à télécharger. Une graisse déclarée mais inutilisée est un
+   téléchargement évité ; une graisse utilisée une seule fois pour un détail
+   (le numéro d'étape) a été ramenée à la graisse voisine. Détail des mesures :
+   docs/phase3-tache-6-4/RAPPORT-6-4-BLOC-B.md §3.2.
    -------------------------------------------------------------------------- */
 
 @font-face {
@@ -55,25 +62,9 @@
 @font-face {
   font-family: 'DM Sans';
   font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/dm-sans-500.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
   font-weight: 600;
   font-display: swap;
   src: url('../fonts/dm-sans-600.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/dm-sans-700.woff2') format('woff2');
 }
 
 /* --------------------------------------------------------------------------
@@ -664,7 +655,10 @@ button {
   border: 1px solid var(--gold-border);
   color: var(--gold);
   font-size: 0.8125rem;
-  font-weight: 700;
+  /* 600 et non 700 : une graisse de moins à télécharger (57 Ko), différence
+     invisible sur un chiffre de 13 px dans une pastille de 26 px. Mesuré —
+     voir docs/phase3-tache-6-4/RAPPORT-6-4-BLOC-B.md §3.2. */
+  font-weight: 600;
 }
 
 /* --------------------------------------------------------------------------

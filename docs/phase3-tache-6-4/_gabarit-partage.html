@@ -1,0 +1,87 @@
+<!doctype html>
+<!--
+  Gabarit du visuel de partage (1200×630) — tâche 6.4.
+
+  Il n'est pas déployé tel quel : `captures.py` l'ouvre dans un vrai moteur de
+  rendu et en fait une capture, à `public/preuves/mia-partage.png`, déclarée en
+  `og:image`. Composition sobre : le monogramme, le nom, la promesse — fond et
+  accent canoniques (--bg clair, --or).
+
+  Les polices et l'icône sont lues dans `public/` (versionné), pas dans `dist/`
+  (ignoré par git) : le gabarit reste utilisable juste après un `git clone`.
+-->
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: 'Cormorant Garamond';
+        font-style: normal;
+        font-weight: 700;
+        src: url('../public/fonts/cormorant-garamond-700.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../public/fonts/dm-sans-400.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 600;
+        src: url('../public/fonts/dm-sans-600.woff2') format('woff2');
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        display: flex;
+        align-items: center;
+        gap: 56px;
+        padding: 72px;
+        background: #fdfcfa;
+        color: #16151a;
+        font-family: 'DM Sans', system-ui, sans-serif;
+      }
+      .logo {
+        width: 168px;
+        height: 168px;
+        border-radius: 28px;
+        flex-shrink: 0;
+      }
+      h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 78px;
+        font-weight: 700;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+      }
+      p {
+        margin-top: 22px;
+        font-size: 27px;
+        line-height: 1.45;
+        color: #45424b;
+        max-width: 22ch;
+      }
+      .pied {
+        margin-top: 30px;
+        font-size: 21px;
+        font-weight: 600;
+        color: #856b37;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="logo" src="../public/icons/mia-512.png" width="168" height="168" alt="" />
+    <div>
+      <h1>Mia répond à vos questions d’activité</h1>
+      <p>Neuf domaines : clients, visibilité, IA et automatisation.</p>
+      <p class="pied">L’assistante IA d’ePerformance</p>
+    </div>
+  </body>
+</html>

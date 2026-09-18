@@ -1,0 +1,58 @@
+{
+  "lh11-application": {
+    "performance": 72,
+    "accessibility": 99,
+    "best-practices": 100,
+    "seo": 91,
+    "pwa": 100
+  },
+  "lh11-page-mia": {
+    "performance": 85,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100,
+    "pwa": 100
+  },
+  "lh11-portail": {
+    "performance": 95,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100,
+    "pwa": 100
+  },
+  "lh11-page-mia-desktop": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100,
+    "pwa": 100
+  },
+  "lh13-application": {
+    "performance": 68,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 60,
+    "agentic-browsing": 50
+  },
+  "lh13-page-mia": {
+    "performance": 90,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100,
+    "agentic-browsing": 100
+  },
+  "lh13-portail": {
+    "performance": 97,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100,
+    "agentic-browsing": 100
+  },
+  "lh13-page-mia-desktop": {
+    "performance": 100,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100,
+    "agentic-browsing": 100
+  }
+}

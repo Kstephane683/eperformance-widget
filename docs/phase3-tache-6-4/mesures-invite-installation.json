@@ -1,0 +1,794 @@
+{
+  "invite_installation": {
+    "390x844-application-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 390,
+          "h": 844
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 0,
+          "y": 51,
+          "w": 390,
+          "h": 103,
+          "right": 390,
+          "bottom": 154
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 0,
+          "y": 788,
+          "w": 390,
+          "h": 56,
+          "right": 390,
+          "bottom": 844
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": null
+    },
+    "390x844-application-conversation": {
+      "cadre": {
+        "fenetre": {
+          "w": 390,
+          "h": 844
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": false,
+        "invite_position": null,
+        "invite": null,
+        "zone_saisie_presente": true,
+        "bouton_envoi_present": true,
+        "zone_saisie": {
+          "x": 0,
+          "y": 694,
+          "w": 390,
+          "h": 94,
+          "right": 390,
+          "bottom": 788
+        },
+        "bouton_envoi": {
+          "x": 391,
+          "y": 707,
+          "w": 44,
+          "h": 44,
+          "right": 435,
+          "bottom": 751
+        },
+        "champ_message": {
+          "x": 180,
+          "y": 707,
+          "w": 203,
+          "h": 44,
+          "right": 383,
+          "bottom": 751
+        },
+        "barre_onglets": {
+          "x": 0,
+          "y": 788,
+          "w": 390,
+          "h": 56,
+          "right": 390,
+          "bottom": 844
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": null
+    },
+    "390x844-iframe-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 390,
+          "h": 844
+        },
+        "mode": "widget",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 0,
+          "y": 53,
+          "w": 390,
+          "h": 103,
+          "right": 390,
+          "bottom": 156
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 0,
+          "y": 788,
+          "w": 390,
+          "h": 56,
+          "right": 390,
+          "bottom": 844
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": {
+        "fenetre": {
+          "w": 390,
+          "h": 844
+        },
+        "barre_cta": {
+          "x": 0,
+          "y": 766,
+          "w": 390,
+          "h": 78,
+          "right": 390,
+          "bottom": 844
+        },
+        "bouton_whatsapp": {
+          "x": 16,
+          "y": 779,
+          "w": 358,
+          "h": 53,
+          "right": 374,
+          "bottom": 832
+        },
+        "bulle": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "bulle_visible": false,
+        "chevauchement_bulle_whatsapp_px2": 0,
+        "chevauchement_bulle_barre_px2": 0,
+        "z_index_holder": "2147483000"
+      }
+    },
+    "414x896-application-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 414,
+          "h": 896
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 0,
+          "y": 51,
+          "w": 414,
+          "h": 103,
+          "right": 414,
+          "bottom": 154
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 0,
+          "y": 840,
+          "w": 414,
+          "h": 56,
+          "right": 414,
+          "bottom": 896
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": null
+    },
+    "414x896-application-conversation": {
+      "cadre": {
+        "fenetre": {
+          "w": 414,
+          "h": 896
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": false,
+        "invite_position": null,
+        "invite": null,
+        "zone_saisie_presente": true,
+        "bouton_envoi_present": true,
+        "zone_saisie": {
+          "x": 0,
+          "y": 746,
+          "w": 414,
+          "h": 94,
+          "right": 414,
+          "bottom": 840
+        },
+        "bouton_envoi": {
+          "x": 391,
+          "y": 759,
+          "w": 44,
+          "h": 44,
+          "right": 435,
+          "bottom": 803
+        },
+        "champ_message": {
+          "x": 180,
+          "y": 759,
+          "w": 203,
+          "h": 44,
+          "right": 383,
+          "bottom": 803
+        },
+        "barre_onglets": {
+          "x": 0,
+          "y": 840,
+          "w": 414,
+          "h": 56,
+          "right": 414,
+          "bottom": 896
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": "bouton-envoi"
+      },
+      "hote": null
+    },
+    "414x896-iframe-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 414,
+          "h": 896
+        },
+        "mode": "widget",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 0,
+          "y": 53,
+          "w": 414,
+          "h": 103,
+          "right": 414,
+          "bottom": 156
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 0,
+          "y": 840,
+          "w": 414,
+          "h": 56,
+          "right": 414,
+          "bottom": 896
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": {
+        "fenetre": {
+          "w": 414,
+          "h": 896
+        },
+        "barre_cta": {
+          "x": 0,
+          "y": 818,
+          "w": 414,
+          "h": 78,
+          "right": 414,
+          "bottom": 896
+        },
+        "bouton_whatsapp": {
+          "x": 16,
+          "y": 831,
+          "w": 382,
+          "h": 53,
+          "right": 398,
+          "bottom": 884
+        },
+        "bulle": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "bulle_visible": false,
+        "chevauchement_bulle_whatsapp_px2": 0,
+        "chevauchement_bulle_barre_px2": 0,
+        "z_index_holder": "2147483000"
+      }
+    },
+    "768x1024-application-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 768,
+          "h": 1024
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 5,
+          "y": 51,
+          "w": 758,
+          "h": 59,
+          "right": 763,
+          "bottom": 110
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 5,
+          "y": 968,
+          "w": 758,
+          "h": 56,
+          "right": 763,
+          "bottom": 1024
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": null
+    },
+    "768x1024-application-conversation": {
+      "cadre": {
+        "fenetre": {
+          "w": 768,
+          "h": 1024
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": false,
+        "invite_position": null,
+        "invite": null,
+        "zone_saisie_presente": true,
+        "bouton_envoi_present": true,
+        "zone_saisie": {
+          "x": 5,
+          "y": 930,
+          "w": 758,
+          "h": 94,
+          "right": 763,
+          "bottom": 1024
+        },
+        "bouton_envoi": {
+          "x": 707,
+          "y": 943,
+          "w": 44,
+          "h": 44,
+          "right": 751,
+          "bottom": 987
+        },
+        "champ_message": {
+          "x": 185,
+          "y": 943,
+          "w": 514,
+          "h": 44,
+          "right": 699,
+          "bottom": 987
+        },
+        "barre_onglets": null,
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": "bouton-envoi"
+      },
+      "hote": null
+    },
+    "768x1024-iframe-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 400,
+          "h": 650
+        },
+        "mode": "widget",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 0,
+          "y": 53,
+          "w": 400,
+          "h": 103,
+          "right": 400,
+          "bottom": 156
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 0,
+          "y": 594,
+          "w": 400,
+          "h": 56,
+          "right": 400,
+          "bottom": 650
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": {
+        "fenetre": {
+          "w": 768,
+          "h": 1024
+        },
+        "barre_cta": {
+          "x": 0,
+          "y": 946,
+          "w": 768,
+          "h": 78,
+          "right": 768,
+          "bottom": 1024
+        },
+        "bouton_whatsapp": {
+          "x": 16,
+          "y": 959,
+          "w": 736,
+          "h": 53,
+          "right": 752,
+          "bottom": 1012
+        },
+        "bulle": {
+          "x": 692,
+          "y": 862,
+          "w": 56,
+          "h": 56,
+          "right": 748,
+          "bottom": 918
+        },
+        "bulle_visible": true,
+        "chevauchement_bulle_whatsapp_px2": 0,
+        "chevauchement_bulle_barre_px2": 0,
+        "z_index_holder": "2147483000"
+      }
+    },
+    "1440x900-application-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 1440,
+          "h": 900
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 341,
+          "y": 51,
+          "w": 758,
+          "h": 59,
+          "right": 1099,
+          "bottom": 110
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 341,
+          "y": 844,
+          "w": 758,
+          "h": 56,
+          "right": 1099,
+          "bottom": 900
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": null
+    },
+    "1440x900-application-conversation": {
+      "cadre": {
+        "fenetre": {
+          "w": 1440,
+          "h": 900
+        },
+        "mode": "application",
+        "theme": "light",
+        "invite_presente": false,
+        "invite_position": null,
+        "invite": null,
+        "zone_saisie_presente": true,
+        "bouton_envoi_present": true,
+        "zone_saisie": {
+          "x": 341,
+          "y": 806,
+          "w": 758,
+          "h": 94,
+          "right": 1099,
+          "bottom": 900
+        },
+        "bouton_envoi": {
+          "x": 1043,
+          "y": 819,
+          "w": 44,
+          "h": 44,
+          "right": 1087,
+          "bottom": 863
+        },
+        "champ_message": {
+          "x": 521,
+          "y": 819,
+          "w": 514,
+          "h": 44,
+          "right": 1035,
+          "bottom": 863
+        },
+        "barre_onglets": null,
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": "bouton-envoi"
+      },
+      "hote": null
+    },
+    "1440x900-iframe-accueil": {
+      "cadre": {
+        "fenetre": {
+          "w": 400,
+          "h": 650
+        },
+        "mode": "widget",
+        "theme": "light",
+        "invite_presente": true,
+        "invite_position": "static",
+        "invite": {
+          "x": 0,
+          "y": 53,
+          "w": 400,
+          "h": 103,
+          "right": 400,
+          "bottom": 156
+        },
+        "zone_saisie_presente": false,
+        "bouton_envoi_present": false,
+        "zone_saisie": null,
+        "bouton_envoi": null,
+        "champ_message": null,
+        "barre_onglets": {
+          "x": 0,
+          "y": 594,
+          "w": 400,
+          "h": 56,
+          "right": 400,
+          "bottom": 650
+        },
+        "chevauchement_invite_onglets_px2": 0,
+        "chevauchement_invite_zone_px2": 0,
+        "chevauchement_invite_envoi_px2": 0,
+        "envoi_au_hit_test": null
+      },
+      "hote": {
+        "fenetre": {
+          "w": 1440,
+          "h": 900
+        },
+        "barre_cta": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "bouton_whatsapp": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "bulle": {
+          "x": 1364,
+          "y": 824,
+          "w": 56,
+          "h": 56,
+          "right": 1420,
+          "bottom": 880
+        },
+        "bulle_visible": true,
+        "chevauchement_bulle_whatsapp_px2": 0,
+        "chevauchement_bulle_barre_px2": 0,
+        "z_index_holder": "2147483000"
+      }
+    }
+  },
+  "non_regression_bulle": {
+    "390x844": {
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 766,
+        "w": 390,
+        "h": 78,
+        "right": 390,
+        "bottom": 844
+      },
+      "bouton_whatsapp": {
+        "x": 16,
+        "y": 779,
+        "w": 358,
+        "h": 53,
+        "right": 374,
+        "bottom": 832
+      },
+      "bulle": {
+        "x": 318,
+        "y": 682,
+        "w": 56,
+        "h": 56,
+        "right": 374,
+        "bottom": 738
+      },
+      "bulle_visible": true,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "2147483000"
+    },
+    "414x896": {
+      "fenetre": {
+        "w": 414,
+        "h": 896
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 818,
+        "w": 414,
+        "h": 78,
+        "right": 414,
+        "bottom": 896
+      },
+      "bouton_whatsapp": {
+        "x": 16,
+        "y": 831,
+        "w": 382,
+        "h": 53,
+        "right": 398,
+        "bottom": 884
+      },
+      "bulle": {
+        "x": 342,
+        "y": 734,
+        "w": 56,
+        "h": 56,
+        "right": 398,
+        "bottom": 790
+      },
+      "bulle_visible": true,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "2147483000"
+    },
+    "768x1024": {
+      "fenetre": {
+        "w": 768,
+        "h": 1024
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 946,
+        "w": 768,
+        "h": 78,
+        "right": 768,
+        "bottom": 1024
+      },
+      "bouton_whatsapp": {
+        "x": 16,
+        "y": 959,
+        "w": 736,
+        "h": 53,
+        "right": 752,
+        "bottom": 1012
+      },
+      "bulle": {
+        "x": 692,
+        "y": 862,
+        "w": 56,
+        "h": 56,
+        "right": 748,
+        "bottom": 918
+      },
+      "bulle_visible": true,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "2147483000"
+    },
+    "1440x900": {
+      "fenetre": {
+        "w": 1440,
+        "h": 900
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bouton_whatsapp": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bulle": {
+        "x": 1364,
+        "y": 824,
+        "w": 56,
+        "h": 56,
+        "right": 1420,
+        "bottom": 880
+      },
+      "bulle_visible": true,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "2147483000"
+    }
+  },
+  "pwa": {
+    "manifeste": {
+      "url": "http://127.0.0.1:8104/dist/mia-manifest.webmanifest",
+      "erreurs": [],
+      "nom": null,
+      "brut": "{\n  \"id\": \"./index.html\",\n  \"name\": \"Mia — assistante ePerformance\",\n  \"short_name\": \"Mia\",\n  \"description\": \"Posez votre question à Mia, l'assistante IA d'ePerformance : trouver des clients, gagner en visibilité, automatiser votre activité.\",\n  \"lang\": \"fr\",\n  \"dir\": \"ltr\",\n  \"start_url\": \"./index.html?app=1\",\n  \"scope\": \"./\",\n  \"display\": \"standalone\",\n  \"display_override\": [\"standalone\", \"minimal-ui\"],\n  \"orientation\": \"any\",\n  \"theme_color\": \"#fdfcfa\",\n  \"background_color\": \"#fdfcfa\",\n  \"categories\": [\"business\", \"productivity\"],\n  \"icons\": [\n    {\n      \"src\": \"./icons/mia-192.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any\"\n    },\n    {\n      \"src\": \"./icons/mia-512.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any\"\n    },\n    {\n      \"src\": \"./icons/mia-maskable-192.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\",\n      \"purpose\": \"maskable\"\n    },\n    {\n      \"src\": \"./icons/mia-maskable-512.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"maskable\"\n    }\n  ],\n  \"screenshots\": [\n    {\n      \"src\": \"./preuves/mia-application-mobile.png\",\n      \"sizes\": \"390x844\",\n      \"type\": \"image/png\",\n      \"form_factor\": \"narrow\"\n    },\n    {\n      \"src\": \"./preuves/mia-application-ordinateur.png\",\n      \"sizes\": \"1440x900\",\n      \"type\": \"image/png\",\n      \"form_factor\": \"wide\"\n    }\n  ],\n  \"shortcuts\": [\n    {\n      \"name\": \"Poser une question\",\n      \"short_name\": \"Question\",\n      \"description\": \"Ouvrir Mia sur l'écran d'accueil\",\n      \"url\": \"./index.html?app=1#/\",\n      \"icons\": [{ \"src\": \"./icons/mia-192.png\", \"sizes\": \"192x192\", \"type\": \"image/png\" }]\n    },\n    {\n      \"name\": \"Mes conversations\",\n      \"short_name\": \"Conversations\",\n      \"description\": \"Reprendre une conversation commencée\",\n      \"url\": \"./index.html?app=1#/messages\",\n      \"icons\": [{ \"src\": \"./icons/mia-192.png\", \"sizes\": \"192x192\", \"type\": \"image/png\" }]\n    },\n    {\n      \"name\": \"Ce que Mia sait faire\",\n      \"short_name\": \"Aide\",\n      \"description\": \"Les neuf capacités de Mia\",\n      \"url\": \"./index.html?app=1#/aide\",\n      \"icons\": [{ \"src\": \"./icons/mia-192.png\", \"sizes\": \"192x192\", \"type\": \"image/png\" }]\n    }\n  ]\n}\n"
+    },
+    "service_worker": {
+      "enregistre": true,
+      "portee": "http://127.0.0.1:8104/dist/",
+      "actif": true,
+      "controleur": true
+    },
+    "mode_standalone_detecte": false,
+    "mode_document": "application",
+    "theme_color_meta": [
+      "#fdfcfa",
+      "#08080c"
+    ],
+    "apple_touch_icon": "./apple-touch-icon.png",
+    "manifeste_lie": "./mia-manifest.webmanifest"
+  }
+}

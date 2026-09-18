@@ -1,0 +1,176 @@
+<!doctype html>
+<!--
+  Harnais de preuve — tâche 6.4 (Bloc B).
+
+  Il SIMULE un site hôte ePerformance : bandeau de consentement, barre d'action
+  collante `.sticky-cta` avec son bouton WhatsApp, thème, et le SDK d'injection
+  chargé tel qu'il l'est en production. Il sert à mesurer, dans un vrai moteur
+  de rendu, ce que le widget fait sur un site tiers :
+
+    · position de la bulle par rapport à la barre CTA (non-régression 6.2-BIS) ;
+    · affichage de la bulle d'accroche (teaser) ;
+    · invite d'installation : présence, position, et SURFACE DE RECOUVREMENT
+      de la zone de saisie et du bouton d'envoi.
+
+  Ce fichier n'est pas déployé : il vit dans docs/ et n'est lu que par
+  `captures.py`.
+
+  Paramètres :
+    ?widget=<url du build à tester>   (obligatoire)
+    &theme=light|dark                 (défaut : light)
+    &consent=0|1                      (défaut : 0 — bandeau masqué)
+    &api=<url de l'API>               (défaut : la production ; le harnais
+                                       accepte un proxy local pour les captures)
+    &cta=0|1                          (défaut : 1 — barre mobile affichée)
+-->
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hôte de test — widget ePerformance (6.4)</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        background: #fdfcfa;
+        color: #16151a;
+        line-height: 1.65;
+      }
+      [data-theme='dark'] body {
+        background: #08080c;
+        color: #edeae3;
+      }
+      .hero {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 72px 24px 140px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 42px;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+      }
+      .hero p {
+        color: #6a676f;
+        margin: 0 0 8px;
+      }
+      [data-theme='dark'] .hero p {
+        color: #8b8b96;
+      }
+      /* Barre d'action collante du site — eperf.css:1189-1210 : fixe, z-index 90 */
+      .sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        background: #ffffff;
+        border-top: 1px solid #e5e1d9;
+        z-index: 90;
+      }
+      [data-theme='dark'] .sticky-cta {
+        background: #101014;
+        border-top-color: #1c1c22;
+      }
+      /* `[hidden]` de la feuille du navigateur est écrasé par `display: flex`
+         ci-dessus (spécificité) : sans cette règle, la barre resterait visible
+         alors que le script du harnais l'a marquée masquée — et le SDK, qui lit
+         l'attribut, ne lui appliquerait aucun décalage. Incohérence de harnais
+         corrigée : barre masquée = barre absente, dans les deux sens. */
+      .sticky-cta[hidden],
+      .consent[hidden] {
+        display: none !important;
+      }
+      .sticky-cta a {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 53px;
+        border-radius: 999px;
+        background: #25d366;
+        color: #0a0a0e;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      /* Bandeau de consentement — eperf.css:1215, z-index 120 */
+      .consent {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        padding: 18px;
+        border-radius: 12px;
+        background: #ffffff;
+        border: 1px solid #e5e1d9;
+        box-shadow: 0 12px 32px rgba(22, 21, 26, 0.08);
+        z-index: 120;
+        font-size: 14px;
+      }
+      [data-theme='dark'] .consent {
+        background: #101014;
+        border-color: #1c1c22;
+        color: #edeae3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>Site hôte — harnais 6.4</h1>
+      <p>
+        Cette page simule un site ePerformance : le SDK est chargé en bas de page, la bulle
+        dorée ouvre le widget en iframe.
+      </p>
+      <p id="cible"><code>widget : …</code></p>
+    </div>
+
+    <div id="cta" class="sticky-cta" hidden>
+      <a href="https://wa.me/2250151170666" data-cta="whatsapp">Écrire sur WhatsApp</a>
+    </div>
+
+    <div id="consent" class="consent" hidden>
+      <strong>Ce site utilise des cookies.</strong>
+      <p>Mesure d'audience et assistant conversationnel.</p>
+    </div>
+
+    <script>
+      ;(function () {
+        var params = new URLSearchParams(window.location.search)
+        var theme = params.get('theme') === 'dark' ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', theme)
+        var widget = params.get('widget')
+        if (!widget) return
+        // Le paramètre peut être un chemin (/dist/index.html) : on le résout
+        // contre l'URL de la page avant d'en déduire celle du SDK.
+        var urlWidget = new URL(widget, window.location.href).toString()
+        document.getElementById('cible').innerHTML = '<code>widget : ' + urlWidget + '</code>'
+        document.getElementById('cible').innerHTML = '<code>widget : ' + widget + '</code>'
+        // La barre CTA du site n'existe qu'en mobile (eperf.css)
+        if (params.get('cta') !== '0') document.getElementById('cta').hidden = false
+        if (params.get('consent') === '1') document.getElementById('consent').hidden = false
+
+        window.ePerformanceConfig = {
+          widgetUrl: urlWidget,
+          apiUrl: params.get('api') || 'https://web-production-4ab53.up.railway.app',
+          siteId: 'eperformance_vitrine',
+          blogIndexUrl: 'https://blog.eperformance.pro',
+          theme: theme,
+          position: 'right',
+        }
+        var script = document.createElement('script')
+        // Le SDK est cherché à côté du widget testé (dist/, dist-avant/…)
+        script.src = params.get('sdk') || new URL('eperformance-sdk.js', urlWidget).toString()
+        script.defer = true
+        document.body.appendChild(script)
+      })()
+    </script>
+  </body>
+</html>

@@ -241,13 +241,22 @@
           </div>
 
           <div class="apercu apercu--telephone">
-            <img
-              src="../../preuves/mia-application-mobile.png"
-              width="390"
-              height="844"
-              alt="L’application Mia sur téléphone : l’écran d’accueil, ses neuf capacités et la zone de saisie."
-              fetchpriority="high"
-            />
+            <!-- WebP d'abord (21 Ko au lieu de 48), PNG en repli : les deux
+                 existent pour la même image, et le manifeste référence le PNG
+                 (les magasins d'applications n'acceptent pas le WebP). -->
+            <picture>
+              <source
+                type="image/webp"
+                srcset="../../preuves/mia-application-mobile.webp"
+              />
+              <img
+                src="../../preuves/mia-application-mobile.png"
+                width="390"
+                height="844"
+                alt="L’application Mia sur téléphone : l’écran d’accueil, ses neuf capacités et la zone de saisie."
+                fetchpriority="high"
+              />
+            </picture>
             <p class="apercu__legende">L’application Mia, écran d’accueil</p>
           </div>
         </div>
@@ -326,13 +335,24 @@
       <section class="section section-tight" aria-labelledby="titre-ordinateur">
         <div class="container">
           <div class="apercu">
-            <img
-              src="../../preuves/mia-application-ordinateur.png"
-              width="1440"
-              height="900"
-              alt="Mia ouverte sur un ordinateur : l’onglet Accueil, les neuf capacités de Mia et l’article le plus récent."
-              loading="lazy"
-            />
+            <!-- Sous 900 px, la capture 1440 px serait réduite à ~350 px : on
+                 sert une variante de 720 px (8 Ko au lieu de 26) plutôt que de
+                 télécharger des pixels que l'écran ne peut pas afficher. -->
+            <picture>
+              <source
+                media="(max-width: 900px)"
+                type="image/webp"
+                srcset="../../preuves/mia-application-ordinateur-720.webp"
+              />
+              <source type="image/webp" srcset="../../preuves/mia-application-ordinateur.webp" />
+              <img
+                src="../../preuves/mia-application-ordinateur.png"
+                width="1440"
+                height="900"
+                alt="Mia ouverte sur un ordinateur : l’onglet Accueil, les neuf capacités de Mia et l’article le plus récent."
+                loading="lazy"
+              />
+            </picture>
             <p class="apercu__legende">Mia sur ordinateur — même application, colonne centrée</p>
           </div>
         </div>
