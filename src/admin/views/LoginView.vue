@@ -43,6 +43,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { ApiError } from '../api'
+import { MODULE_PAR_DEFAUT } from '../navigation'
 import { useAdminAuthStore } from '../stores/auth'
 
 const auth = useAdminAuthStore()
@@ -59,9 +60,11 @@ async function onSubmit(): Promise<void> {
   error.value = null
   try {
     await auth.login(email.value, password.value)
-    // Le shell (App.vue) affiche le dashboard dès que isAuthenticated passe
-    // à true ; on normalise aussi l'URL vers le dashboard.
-    authRouter.replace({ name: 'dashboard' })
+    // Le shell (App.vue) affiche la console dès que isAuthenticated passe à
+    // true ; on normalise aussi l'URL vers le module par défaut. Le nom est lu
+    // dans le registre des modules — une constante écrite à la main ici avait
+    // déjà divergé du nom réel de la route.
+    void authRouter.replace({ name: MODULE_PAR_DEFAUT })
   } catch (e) {
     if (e instanceof ApiError && (e.status === 400 || e.status === 401)) {
       error.value = 'Email ou mot de passe incorrect.'
@@ -94,9 +97,8 @@ async function onSubmit(): Promise<void> {
   gap: 6px;
   padding: 32px 28px;
   border-radius: var(--arrondi-carte);
-  border: 1px solid var(--gold-border);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  background: var(--card);
   box-shadow: var(--shadow-lg);
 }
 
@@ -112,7 +114,7 @@ async function onSubmit(): Promise<void> {
   font-family: var(--police-titres);
   font-weight: 700;
   font-size: 28px;
-  box-shadow: 0 0 0 6px rgba(201, 169, 110, 0.15);
+  box-shadow: 0 0 0 6px var(--gold-bg);
 }
 
 .ep-login__title {
@@ -143,13 +145,14 @@ async function onSubmit(): Promise<void> {
 .ep-login__input {
   padding: 12px 14px;
   border-radius: var(--arrondi-input);
-  border: 1px solid var(--gold-border);
+  /* Un champ est un Contrôle (WCAG 1.4.11) : filet à 3:1, pas un filet décoratif */
+  border: 1px solid var(--border-strong);
   background: var(--card);
   color: var(--text);
   font-family: inherit;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color var(--t) var(--ease-out), box-shadow var(--t) var(--ease-out);
 }
 
 .ep-login__input::placeholder {
@@ -158,15 +161,15 @@ async function onSubmit(): Promise<void> {
 
 .ep-login__input:focus-visible {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+  box-shadow: 0 0 0 3px var(--gold-bg);
 }
 
 .ep-login__error {
   margin: 12px 0 0;
   padding: 10px 12px;
   border-radius: var(--arrondi-input);
-  background: rgba(220, 38, 38, 0.12);
-  border: 1px solid rgba(220, 38, 38, 0.35);
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
   color: var(--red-text);
   font-size: 13px;
 }
@@ -180,10 +183,11 @@ async function onSubmit(): Promise<void> {
   color: var(--on-gold);
   font-weight: 700;
   font-size: 15px;
-  transition: transform 0.15s ease, opacity 0.2s ease;
+  transition: background-color var(--t) var(--ease-out), transform var(--t-fast) var(--ease-out);
 }
 
 .ep-login__submit:hover:not(:disabled) {
+  background: var(--gold2);
   transform: translateY(-1px);
 }
 

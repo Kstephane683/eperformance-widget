@@ -1,112 +1,154 @@
 <template>
-  <section class="cand">
-    <header class="cand__head">
-      <h1 class="cand__title">Candidats &amp; Diagnostics</h1>
-      <span v-if="total !== null" class="cand__count">{{ total }} candidat(s)</span>
-      <button type="button" class="cand__refresh" @click="load" :disabled="loading">
-        ↻ Actualiser
-      </button>
-    </header>
+  <!--
+    Candidatures — les diagnostics et candidatures reçus du site.
+    Les cartes remplacent le tableau : un score, un statut et un moyen de contact
+    se lisent mieux en carte, et la grille s'adapte au mobile sans défilement
+    horizontal. Le tri place les scores les plus chauds en premier.
+  -->
+  <div class="adm-page">
+    <div class="adm-outils">
+      <div class="adm-recherche adm-candidatures__recherche">
+        <svg
+          class="adm-candidatures__loupe"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="M16 16l4.5 4.5" />
+        </svg>
+        <input
+          v-model.trim="recherche"
+          type="search"
+          placeholder="Rechercher un nom, une entreprise…"
+          aria-label="Rechercher une candidature"
+        />
+      </div>
 
-    <div class="cand__filters">
-      <select v-model="statut" class="cand__select" aria-label="Filtrer par statut">
+      <select v-model="statut" class="adm-champ" aria-label="Filtrer par statut">
         <option value="">Tous les statuts</option>
         <option value="en_attente">En attente</option>
         <option value="accepte">Acceptés</option>
         <option value="refuse">Refusés</option>
         <option value="alumni">Alumni</option>
       </select>
+
+      <div class="adm-outils__fin">
+        <span class="adm-note">
+          {{ filtered.length }} affichée(s)<template v-if="total !== null"> · {{ total }} au total</template>
+        </span>
+        <button type="button" class="adm-btn adm-btn--discret" :disabled="loading" @click="load">
+          {{ loading ? 'Chargement…' : 'Actualiser' }}
+        </button>
+      </div>
     </div>
 
-    <p v-if="error" class="cand__error">{{ error }}</p>
-    <p v-else-if="loading && !candidats.length" class="cand__empty">Chargement…</p>
-    <p v-else-if="!candidats.length" class="cand__empty">
-      Aucun candidat — les diagnostics du site arrivent ici automatiquement.
+    <p v-if="error" class="adm-erreur" role="alert">{{ error }}</p>
+    <p v-else-if="loading && candidats.length === 0" class="adm-note">Chargement…</p>
+    <p v-else-if="candidats.length === 0" class="adm-vide__texte">
+      Aucune candidature pour l’instant — les diagnostics envoyés depuis le site arrivent ici
+      automatiquement.
+    </p>
+    <p v-else-if="filtered.length === 0" class="adm-note">
+      Aucune candidature ne correspond à ce filtre.
     </p>
 
-    <div v-else class="cand__grid">
-      <article v-for="c in candidats" :key="c.id" class="cand__card">
-        <div class="cand__card-head">
-          <strong class="cand__name">{{ c.nom }}</strong>
-          <span class="cand__score" :class="scoreClass(c.score)">Score {{ c.score }}</span>
-        </div>
-        <div class="cand__contact">
-          <a v-if="c.email" :href="`mailto:${c.email}`">{{ c.email }}</a>
-          <a
-            v-if="c.whatsapp"
-            :href="`https://wa.me/${c.whatsapp.replace(/[^0-9]/g, '')}`"
-            target="_blank"
-            rel="noopener"
-          >
-            {{ c.whatsapp }}
-          </a>
-          <span v-if="c.entreprise">{{ c.entreprise }}</span>
-          <span v-if="c.secteur">{{ c.secteur }}</span>
-        </div>
-        <div class="cand__foot">
-          <span class="cand__statut" :class="`cand__statut--${c.statut}`">
-            {{ statutLabel(c.statut) }}
+    <ul v-else class="adm-grille">
+      <li v-for="candidature in filtered" :key="candidature.id" class="adm-carte">
+        <div class="adm-candidature__tete">
+          <p class="adm-candidature__nom">{{ candidature.nom }}</p>
+          <span class="adm-badge" :class="`adm-badge--${tonScore(candidature.score)}`">
+            Score {{ candidature.score }}
           </span>
-          <span class="cand__niveau">{{ niveauLabel(c.niveau_accompagnement) }}</span>
-          <span class="cand__date">{{ shortDate(c.created_at) }}</span>
         </div>
-      </article>
-    </div>
-  </section>
+
+        <ul class="adm-candidature__contact">
+          <li v-if="candidature.email">
+            <a :href="`mailto:${candidature.email}`">{{ candidature.email }}</a>
+          </li>
+          <li v-if="candidature.whatsapp">
+            <a
+              :href="`https://wa.me/${candidature.whatsapp.replace(/[^0-9]/g, '')}`"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ candidature.whatsapp }}
+            </a>
+          </li>
+          <li v-if="candidature.entreprise">{{ candidature.entreprise }}</li>
+          <li v-if="candidature.secteur">{{ candidature.secteur }}</li>
+        </ul>
+
+        <div class="adm-candidature__pied">
+          <span class="adm-badge" :class="`adm-badge--${tonStatutCandidature(candidature.statut)}`">
+            {{ libelleStatutCandidature(candidature.statut) }}
+          </span>
+          <span class="adm-candidature__niveau">
+            {{ libelleNiveau(candidature.niveau_accompagnement) }}
+          </span>
+          <span class="adm-ligne__meta">{{ dateCourteOuTiret(candidature.created_at) }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 import { fetchAdminCandidats, type AdminCandidat } from '@/admin/api'
+import {
+  dateCourteOuTiret,
+  libelleNiveau,
+  libelleStatutCandidature,
+  tonScore,
+  tonStatutCandidature,
+} from '../format'
+
+const route = useRoute()
 
 const candidats = ref<AdminCandidat[]>([])
 const total = ref<number | null>(null)
 const loading = ref(false)
 const error = ref<string | null>(null)
 const statut = ref('')
+const recherche = ref('')
 
-function scoreClass(score: number): string {
-  if (score >= 70) return 'cand__score--high'
-  if (score >= 40) return 'cand__score--mid'
-  return 'cand__score--low'
-}
+/** Filtres reçus par l'URL (recherche globale, notifications). */
+watch(
+  () => route.query,
+  (query) => {
+    const q = query.q
+    if (typeof q === 'string' && q.length > 0) recherche.value = q
+    const filtre = query.statut
+    if (typeof filtre === 'string' && filtre.length > 0) statut.value = filtre
+  },
+  { immediate: true },
+)
 
-function statutLabel(s: string | null): string {
-  const map: Record<string, string> = {
-    en_attente: 'En attente',
-    accepte: 'Accepté',
-    refuse: 'Refusé',
-    alumni: 'Alumni',
-  }
-  return s ? (map[s] ?? s) : '—'
-}
+const filtered = computed(() => {
+  const requete = recherche.value.toLowerCase()
+  if (requete === '') return candidats.value
+  return candidats.value.filter((candidature) =>
+    [candidature.nom, candidature.email, candidature.entreprise, candidature.secteur].some(
+      (champ) => typeof champ === 'string' && champ.toLowerCase().includes(requete),
+    ),
+  )
+})
 
-function niveauLabel(n: string | null): string {
-  const map: Record<string, string> = {
-    essentielle: 'Essentielle',
-    croissance: 'Croissance',
-    acceleration: 'Accélération',
-  }
-  return n ? (map[n] ?? n) : '—'
-}
-
-function shortDate(iso: string | null): string {
-  if (!iso) return '—'
-  const d = new Date(iso)
-  return Number.isNaN(d.getTime())
-    ? '—'
-    : d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: '2-digit' })
-}
-
-async function load() {
+async function load(): Promise<void> {
   loading.value = true
   error.value = null
   try {
-    const res = await fetchAdminCandidats(statut.value || undefined)
-    // Tri score desc (les leads les plus chauds en premier)
-    candidats.value = [...res.candidats].sort((a, b) => b.score - a.score)
-    total.value = res.total
+    const reponse = await fetchAdminCandidats(statut.value || undefined)
+    // Tri par score décroissant : les dossiers les plus chauds d'abord
+    candidats.value = [...reponse.candidats].sort((a, b) => b.score - a.score)
+    total.value = reponse.total
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Erreur de chargement'
   } finally {
@@ -119,180 +161,56 @@ onMounted(load)
 </script>
 
 <style scoped>
-.cand {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.adm-candidatures__recherche {
+  flex: 1;
+  min-width: 180px;
+  max-width: 420px;
 }
 
-.cand__head {
+.adm-candidatures__loupe {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.adm-candidature__tete {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.cand__title {
-  margin: 0;
-  font-family: var(--police-titres);
-  font-size: 22px;
-  color: var(--gold2);
-}
-
-.cand__count {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.cand__refresh {
-  margin-left: auto;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.cand__refresh:hover {
-  border-color: var(--gold-border);
-}
-
-.cand__select {
-  max-width: 240px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 13px;
-}
-
-.cand__error {
-  color: var(--red-text);
-}
-
-.cand__empty {
-  color: var(--muted);
-}
-
-.cand__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 12px;
-}
-
-.cand__card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--arrondi-input);
-  background: var(--bg2);
-}
-
-.cand__card-head {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   gap: 8px;
 }
 
-.cand__name {
+.adm-candidature__nom {
+  margin: 0;
   font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
 }
 
-.cand__score {
-  padding: 3px 10px;
-  border-radius: var(--arrondi-bouton);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.cand__score--high {
-  background: rgba(52, 199, 123, 0.15);
-  color: var(--green-text);
-  border: 1px solid rgba(52, 199, 123, 0.3);
-}
-
-.cand__score--mid {
-  background: rgba(201, 169, 110, 0.15);
-  color: var(--gold2);
-  border: 1px solid var(--gold-border);
-}
-
-.cand__score--low {
-  background: rgba(154, 150, 140, 0.12);
-  color: var(--muted);
-  border: 1px solid rgba(154, 150, 140, 0.25);
-}
-
-.cand__contact {
+.adm-candidature__contact {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
   color: var(--muted);
 }
 
-.cand__contact a {
-  color: var(--gold);
-  text-decoration: none;
-}
-
-.cand__contact a:hover {
-  text-decoration: underline;
-}
-
-.cand__foot {
+.adm-candidature__pied {
   display: flex;
   align-items: center;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 8px;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 10px;
   border-top: 1px solid var(--border);
+}
+
+.adm-candidature__niveau {
   font-size: 12px;
-}
-
-.cand__statut {
-  padding: 2px 10px;
-  border-radius: var(--arrondi-bouton);
   font-weight: 600;
-}
-
-/* Hors canon assumé (même raison que DashboardView.vue : ni --alerte ni --info
-   dans eperf.css — DESIGN-SYSTEM-UNIFIE §2.5, promotion §6.3). */
-.cand__statut--en_attente {
-  background: rgba(226, 141, 62, 0.15);
-  color: #e28d3e;
-}
-
-.cand__statut--accepte {
-  background: rgba(52, 199, 123, 0.15);
-  color: var(--green-text);
-}
-
-.cand__statut--refuse {
-  background: rgba(154, 150, 140, 0.12);
-  color: var(--muted);
-}
-
-.cand__statut--alumni {
-  background: rgba(96, 165, 250, 0.15);
-  color: #60a5fa;
-}
-
-.cand__niveau {
   color: var(--gold);
-  font-weight: 600;
-}
-
-.cand__date {
-  margin-left: auto;
-  color: var(--muted);
 }
 </style>

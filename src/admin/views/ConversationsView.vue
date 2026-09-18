@@ -1,66 +1,90 @@
 <template>
-  <div class="ep-adm" :class="{ 'ep-adm--detail-open': selectedId !== null }">
-    <header class="ep-adm__topbar">
-      <div class="ep-adm__brand">
-        <span class="ep-adm__brand-mark" aria-hidden="true">A</span>
-        <div class="ep-adm__brand-text">
-          <h1 class="ep-adm__title">Admin Chatbot</h1>
-          <p class="ep-adm__subtitle">ePerformance — conversations &amp; leads</p>
-        </div>
+  <div class="adm-boite" :class="{ 'adm-boite--detail-ouvert': selectedId !== null }">
+    <!-- ==================== Barre d'outils ==================== -->
+    <div class="adm-outils">
+      <div class="adm-recherche adm-boite__recherche">
+        <svg
+          class="adm-boite__loupe"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="M16 16l4.5 4.5" />
+        </svg>
+        <input
+          v-model.trim="searchQuery"
+          type="search"
+          placeholder="Rechercher (nom, téléphone, message…)"
+          aria-label="Rechercher une conversation"
+        />
       </div>
-      <button type="button" class="ep-adm__logout" @click="auth.logout()">Déconnexion</button>
-    </header>
 
-    <div class="ep-adm__body">
+      <select v-model="statusFilter" class="adm-champ" aria-label="Filtrer par statut">
+        <option value="all">Tous les statuts</option>
+        <option value="active">Actives</option>
+        <option value="escalated">En attente d’un conseiller</option>
+        <option value="resolved">Résolues</option>
+        <option value="abandoned">Abandonnées</option>
+      </select>
+
+      <div class="adm-outils__fin">
+        <span class="adm-note">{{ filteredConversations.length }} affichée(s)</span>
+        <button
+          type="button"
+          class="adm-btn adm-btn--discret"
+          :disabled="listLoading"
+          @click="refreshList()"
+        >
+          {{ listLoading ? 'Actualisation…' : 'Actualiser' }}
+        </button>
+      </div>
+    </div>
+
+    <p v-if="listError" class="adm-erreur" role="alert">{{ listError }}</p>
+
+    <div class="adm-boite__corps">
       <!-- ==================== Volet liste ==================== -->
-      <section class="ep-adm__pane ep-adm__pane--list" aria-label="Liste des conversations">
-        <div class="ep-adm__filters">
-          <input
-            v-model.trim="searchQuery"
-            type="search"
-            class="ep-adm__search"
-            placeholder="Rechercher (nom, tél, message…)"
-            aria-label="Rechercher une conversation"
-          />
-          <select v-model="statusFilter" class="ep-adm__select" aria-label="Filtrer par statut">
-            <option value="all">Tous</option>
-            <option value="active">Actives</option>
-            <option value="escalated">Escaladées</option>
-            <option value="resolved">Résolues</option>
-            <option value="abandoned">Abandonnées</option>
-          </select>
-        </div>
-
-        <p v-if="listError" class="ep-adm__error" role="alert">{{ listError }}</p>
-        <p v-else-if="listLoading && conversations.length === 0" class="ep-adm__hint">
+      <section class="adm-boite__volet" aria-label="Liste des conversations">
+        <p v-if="listLoading && conversations.length === 0" class="adm-note adm-boite__etat">
           Chargement des conversations…
         </p>
-        <p v-else-if="filteredConversations.length === 0" class="ep-adm__hint">
-          Aucune conversation ne correspond.
+        <p v-else-if="filteredConversations.length === 0" class="adm-note adm-boite__etat">
+          Aucune conversation ne correspond à ce filtre.
         </p>
 
-        <ul class="ep-adm__list">
+        <ul class="adm-liste adm-boite__liste">
           <li v-for="conv in filteredConversations" :key="conv.conversation_id">
             <button
               type="button"
-              class="ep-adm__item"
-              :class="{ 'ep-adm__item--active': conv.conversation_id === selectedId }"
+              class="adm-boite__item"
+              :class="{ 'adm-boite__item--actif': conv.conversation_id === selectedId }"
+              :aria-current="conv.conversation_id === selectedId ? 'true' : undefined"
               @click="select(conv.conversation_id)"
             >
-              <span class="ep-adm__item-top">
-                <span class="ep-adm__badge" :class="badgeClass(conv.status, conv.human_active)">
-                  {{ badgeLabel(conv.status, conv.human_active) }}
+              <span class="adm-boite__item-haut">
+                <span
+                  class="adm-badge"
+                  :class="`adm-badge--${tonStatutConversation(conv.status, conv.human_active)}`"
+                >
+                  {{ libelleStatutConversation(conv.status, conv.human_active) }}
                 </span>
-                <span class="ep-adm__time">
-                  {{ formatRelative(conv.last_message_at ?? conv.created_at) }}
+                <span class="adm-ligne__meta">
+                  {{ tempsRelatifOuTiret(conv.last_message_at ?? conv.created_at) }}
                 </span>
               </span>
-              <span class="ep-adm__item-name">{{ displayName(conv) }}</span>
-              <span v-if="conv.lead_phone" class="ep-adm__item-phone">{{ conv.lead_phone }}</span>
-              <span v-if="conv.last_message" class="ep-adm__item-last">
-                {{ truncate(conv.last_message, 90) }}
+              <span class="adm-boite__item-nom">
+                {{ nomAffichage(conv.lead_name, conv.conversation_id) }}
               </span>
-              <span class="ep-adm__item-meta">
+              <span v-if="conv.lead_phone" class="adm-boite__item-tel">{{ conv.lead_phone }}</span>
+              <span v-if="conv.last_message" class="adm-boite__item-msg">
+                {{ tronquer(conv.last_message, 90) }}
+              </span>
+              <span class="adm-ligne__meta">
                 {{ conv.message_count }} message(s) · {{ conv.site_id }}
               </span>
             </button>
@@ -69,125 +93,112 @@
       </section>
 
       <!-- ==================== Volet détail ==================== -->
-      <section class="ep-adm__pane ep-adm__pane--detail" aria-label="Détail de la conversation">
+      <section
+        class="adm-boite__volet adm-boite__volet--detail"
+        aria-label="Détail de la conversation"
+      >
         <template v-if="detail">
-          <header class="ep-adm__detail-head">
-            <button type="button" class="ep-adm__back" @click="closeDetail">← Retour</button>
+          <header class="adm-boite__detail-entete">
+            <button
+              type="button"
+              class="adm-btn adm-btn--discret adm-boite__retour"
+              @click="closeDetail"
+            >
+              Retour à la liste
+            </button>
 
-            <div class="ep-adm__detail-id">
+            <div class="adm-boite__detail-id">
               <span
-                class="ep-adm__badge"
-                :class="badgeClass(detail.conversation.status, detail.conversation.human_active)"
+                class="adm-badge"
+                :class="`adm-badge--${tonStatutConversation(detail.conversation.status, detail.conversation.human_active)}`"
               >
-                {{ badgeLabel(detail.conversation.status, detail.conversation.human_active) }}
+                {{
+                  libelleStatutConversation(
+                    detail.conversation.status,
+                    detail.conversation.human_active,
+                  )
+                }}
               </span>
-              <span v-if="detail.conversation.assigned_agent" class="ep-adm__chip">
-                Agent : {{ detail.conversation.assigned_agent }}
-              </span>
-              <span class="ep-adm__chip ep-adm__chip--muted">{{ detail.conversation.site_id }}</span>
+              <span class="adm-badge">{{ detail.conversation.site_id }}</span>
+              <span class="adm-badge">{{ detail.messages.length }} message(s)</span>
             </div>
 
-            <div class="ep-adm__lead-name">{{ detailLead?.name ?? 'Visiteur' }}</div>
-            <div class="ep-adm__lead-contact">
-              <span v-if="detailLead?.phone">{{ detailLead.phone }}</span>
-              <span v-if="detailLead?.email">{{ detailLead.email }}</span>
-            </div>
+            <p class="adm-boite__prospect">{{ detailLead?.name ?? 'Visiteur' }}</p>
+            <p v-if="detailLead?.phone || detailLead?.email" class="adm-boite__contact">
+              <a v-if="detailLead?.phone" :href="`tel:${detailLead.phone}`">
+                {{ detailLead.phone }}
+              </a>
+              <a v-if="detailLead?.email" :href="`mailto:${detailLead.email}`">
+                {{ detailLead.email }}
+              </a>
+            </p>
 
-            <div class="ep-adm__actions">
+            <div class="adm-outils">
               <button
                 v-if="!isHumanActive"
                 type="button"
-                class="ep-adm__btn ep-adm__btn--takeover"
+                class="adm-btn adm-btn--or"
                 :disabled="actionBusy"
                 @click="takeover"
               >
                 Prendre la main
               </button>
-              <button
-                v-else
-                type="button"
-                class="ep-adm__btn ep-adm__btn--release"
-                :disabled="actionBusy"
-                @click="release"
-              >
-                Rendre la main à l’IA
+              <button v-else type="button" class="adm-btn" :disabled="actionBusy" @click="release">
+                Rendre la main à Mia
               </button>
-
-              <template v-if="agents.length > 0">
-                <select
-                  v-model="selectedAgentKey"
-                  class="ep-adm__select ep-adm__select--agent"
-                  aria-label="Agent à assigner"
-                >
-                  <option value="" disabled>Assigner à un agent…</option>
-                  <option v-for="agent in agents" :key="agent.key" :value="agent.key">
-                    {{ agent.label }}
-                  </option>
-                </select>
-                <button
-                  type="button"
-                  class="ep-adm__btn"
-                  :disabled="actionBusy || selectedAgentKey === ''"
-                  @click="assign"
-                >
-                  Assigner
-                </button>
-              </template>
-              <p v-else-if="agentsError" class="ep-adm__hint ep-adm__hint--inline">
-                Liste des agents indisponible.
-              </p>
             </div>
 
-            <p v-if="actionError" class="ep-adm__error" role="alert">{{ actionError }}</p>
+            <p v-if="actionError" class="adm-erreur" role="alert">{{ actionError }}</p>
           </header>
 
-          <div ref="threadEl" class="ep-adm__thread" @scroll.passive="onThreadScroll">
+          <div ref="threadEl" class="adm-boite__fil" @scroll.passive="onThreadScroll">
             <div
               v-for="msg in detail.messages"
               :key="String(msg.id)"
-              class="ep-adm-msg"
-              :class="messageClass(msg)"
+              class="adm-message"
+              :class="classeMessage(msg)"
             >
-              <span v-if="msg.human" class="ep-adm-msg__badge">Conseiller</span>
-              <p class="ep-adm-msg__content">{{ msg.content }}</p>
-              <span class="ep-adm-msg__meta">
-                {{ messageAuthor(msg) }} · {{ formatTime(msg.created_at) }}
+              <span v-if="msg.human" class="adm-message__badge">Conseiller</span>
+              <p class="adm-message__contenu">{{ msg.content }}</p>
+              <span class="adm-message__meta">
+                {{ auteurMessage(msg) }} · {{ heure(msg.created_at) }}
               </span>
             </div>
           </div>
 
-          <footer v-if="isHumanActive" class="ep-adm__composer">
+          <footer v-if="isHumanActive" class="adm-boite__redaction">
             <textarea
               v-model="draft"
-              class="ep-adm__textarea"
+              class="adm-champ adm-boite__texte"
               rows="2"
+              aria-label="Répondre en tant que conseiller"
               placeholder="Répondre en tant que conseiller… (Entrée pour envoyer)"
               @keydown.enter.exact.prevent="submitHumanMessage"
             ></textarea>
             <button
               type="button"
-              class="ep-adm__send"
+              class="adm-btn adm-btn--or"
               :disabled="sending || draft.trim().length === 0"
               @click="submitHumanMessage"
             >
               Envoyer
             </button>
           </footer>
-          <p v-else class="ep-adm__composer-off">
-            Le bot gère la conversation — prenez la main pour répondre en tant qu’humain.
+          <p v-else class="adm-boite__hors-main">
+            Mia gère la conversation. Prenez la main pour répondre en tant que conseiller.
           </p>
         </template>
 
-        <div v-else class="ep-adm__empty">
+        <div v-else class="adm-boite__vide">
           <template v-if="selectedId === null">
-            <p class="ep-adm__empty-title">Aucune conversation sélectionnée</p>
-            <p class="ep-adm__empty-sub">
-              Choisissez une conversation dans la liste pour voir le fil et intervenir.
+            <p class="adm-vide__titre">Aucune conversation sélectionnée</p>
+            <p class="adm-vide__texte">
+              Choisissez une conversation dans la liste pour lire le fil et intervenir.
             </p>
           </template>
           <template v-else>
-            <p v-if="detailError" class="ep-adm__error" role="alert">{{ detailError }}</p>
-            <p v-else class="ep-adm__hint">Chargement de la conversation…</p>
+            <p v-if="detailError" class="adm-erreur" role="alert">{{ detailError }}</p>
+            <p v-else class="adm-note">Chargement de la conversation…</p>
           </template>
         </div>
       </section>
@@ -196,210 +207,128 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Boîte de réception — les conversations des visiteurs.
+ *
+ * DEUX CHANGEMENTS DE FOND depuis l'ancien écran « Chatbot » :
+ *
+ * 1. AUCUN NOM D'AGENT. L'écran affichait la clé d'agent interne sous chaque
+ *    message (« IA — sales-coach »), un sélecteur « Assigner à un agent… » et
+ *    une pastille « Agent : <clé> ». C'était une fuite du routage interne : la
+ *    console ne parle plus que de Mia et d'un conseiller humain. Le choix de la
+ *    compétence reste au backend, là où il est déjà décidé.
+ *
+ * 2. Le titre de l'écran n'est plus ici : il est dans l'en-tête de la console.
+ *    Une page qui répète son titre trois fois (barre latérale, en-tête, page)
+ *    dépense la place qui manque au contenu.
+ *
+ * La liste est partagée (store de la console) : l'en-tête, les pastilles et
+ * cette vue lisent la même donnée, sans second appel réseau.
+ */
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 import {
   ApiError,
-  assignAgent,
-  fetchAgents,
   fetchConversationDetail,
-  fetchConversations,
   releaseConversation,
   sendHumanMessage,
   takeoverConversation,
 } from '../api'
-import type {
-  AdminAgent,
-  AdminConversationDetail,
-  AdminConversationStatus,
-  AdminConversationSummary,
-  AdminMessage,
-} from '../api'
-import { useAdminAuthStore } from '../stores/auth'
+import type { AdminConversationDetail, AdminConversationStatus, AdminMessage } from '../api'
+import {
+  heure,
+  libelleStatutConversation,
+  nomAffichage,
+  tempsRelatifOuTiret,
+  tonStatutConversation,
+  tronquer,
+} from '../format'
+import { useConsoleStore } from '../stores/console'
 
 const REFRESH_MS = 10_000
-const LIST_LIMIT = 50
 
-const auth = useAdminAuthStore()
+const route = useRoute()
+const consoleStore = useConsoleStore()
 
-// ============================================================
-// ÉTAT — liste
-// ============================================================
+const conversations = computed(() => consoleStore.conversations)
+const listLoading = computed(() => consoleStore.conversationsEnCours)
+const listError = computed(() => consoleStore.conversationsErreur)
 
-const conversations = ref<AdminConversationSummary[]>([])
-const listLoading = ref(false)
-const listError = ref<string | null>(null)
 const searchQuery = ref('')
-/** Filtre statut côté client (la liste est déjà chargée, limit=50). */
 const statusFilter = ref<string>('all')
 
+/** Filtres reçus par l'URL : liens de notification et de recherche globale. */
+function appliquerRequete(): void {
+  const q = route.query.q
+  if (typeof q === 'string' && q.length > 0) searchQuery.value = q
+  const statut = route.query.statut
+  if (typeof statut === 'string' && statut.length > 0) statusFilter.value = statut
+}
+
+watch(() => route.query, appliquerRequete)
+
 const filteredConversations = computed(() => {
-  const query = searchQuery.value.toLowerCase()
-  const filter = statusFilter.value as 'all' | AdminConversationStatus
+  const requete = searchQuery.value.toLowerCase()
+  const filtre = statusFilter.value as 'all' | AdminConversationStatus
   return conversations.value.filter((conv) => {
-    if (filter !== 'all' && conv.status !== filter) return false
-    if (query === '') return true
+    if (filtre !== 'all' && conv.status !== filtre) return false
+    if (requete === '') return true
     return [
       conv.lead_name,
       conv.lead_phone,
       conv.last_message,
       conv.conversation_id,
       conv.site_id,
-      conv.assigned_agent,
-    ].some((field) => typeof field === 'string' && field.toLowerCase().includes(query))
+    ].some((champ) => typeof champ === 'string' && champ.toLowerCase().includes(requete))
   })
 })
 
 // ============================================================
-// ÉTAT — détail
+// Détail
 // ============================================================
 
 const selectedId = ref<string | null>(null)
 const detail = ref<AdminConversationDetail | null>(null)
-const detailLoading = ref(false)
 const detailError = ref<string | null>(null)
 const draft = ref('')
 const sending = ref(false)
-
-const agents = ref<AdminAgent[]>([])
-const agentsError = ref(false)
-const selectedAgentKey = ref('')
 const actionBusy = ref(false)
 const actionError = ref<string | null>(null)
 
 const selectedSummary = computed(
   () => conversations.value.find((c) => c.conversation_id === selectedId.value) ?? null,
 )
-
 const isHumanActive = computed(() => detail.value?.conversation.human_active === true)
 
 const detailLead = computed(() => {
   if (!detail.value) return null
-  const lead = detail.value.lead
-  const summary = selectedSummary.value
-  const name = lead?.name ?? summary?.lead_name ?? null
-  const phone = lead?.phone ?? summary?.lead_phone ?? null
-  const email = lead?.email ?? null
-  if (name === null && phone === null && email === null) return null
-  return { name: name ?? 'Visiteur', phone, email }
+  const prospect = detail.value.lead
+  const resume = selectedSummary.value
+  const nom = prospect?.name ?? resume?.lead_name ?? null
+  const telephone = prospect?.phone ?? resume?.lead_phone ?? null
+  const courriel = prospect?.email ?? null
+  if (nom === null && telephone === null && courriel === null) return null
+  return { name: nom ?? 'Visiteur', phone: telephone, email: courriel }
 })
 
-// ============================================================
-// HELPERS AFFICHAGE
-// ============================================================
-
-function badgeLabel(status: string, humanActive: boolean): string {
-  if (status === 'escalated') return humanActive ? 'Humain actif' : 'En attente humain'
-  if (status === 'active') return 'Active'
-  if (status === 'resolved') return 'Résolue'
-  if (status === 'abandoned') return 'Abandonnée'
-  return status
-}
-
-function badgeClass(status: string, humanActive: boolean): string {
-  const base = 'ep-adm__badge'
-  if (status === 'active') return `${base} ${base}--active`
-  if (status === 'escalated') {
-    return humanActive ? `${base} ${base}--escalated ${base}--human-active` : `${base} ${base}--escalated`
-  }
-  if (status === 'resolved') return `${base} ${base}--resolved`
-  if (status === 'abandoned') return `${base} ${base}--abandoned`
-  return base
-}
-
-function displayName(conv: AdminConversationSummary): string {
-  return conv.lead_name ?? `Visiteur ${conv.conversation_id.slice(-6)}`
-}
-
-function truncate(text: string, max: number): string {
-  return text.length > max ? `${text.slice(0, max - 1)}…` : text
-}
-
-function formatRelative(iso: string | null): string {
-  if (!iso) return '—'
-  const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return '—'
-  const minutes = Math.floor((Date.now() - date.getTime()) / 60_000)
-  if (minutes < 1) return "à l'instant"
-  if (minutes < 60) return `il y a ${minutes} min`
-  const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `il y a ${hours} h`
-  const days = Math.floor(hours / 24)
-  if (days === 1) return 'hier'
-  if (days < 7) return `il y a ${days} j`
-  return date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })
-}
-
-function formatTime(iso: string | null): string {
-  if (!iso) return ''
-  const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return ''
-  return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-}
-
-function messageClass(msg: AdminMessage): string {
-  if (msg.role === 'user') return 'ep-adm-msg ep-adm-msg--user'
-  return msg.human ? 'ep-adm-msg ep-adm-msg--human' : 'ep-adm-msg ep-adm-msg--ia'
-}
-
-function messageAuthor(msg: AdminMessage): string {
-  if (msg.role === 'user') return 'Visiteur'
-  if (msg.human) return 'Conseiller'
-  return msg.agent_used ? `IA — ${msg.agent_used}` : 'IA'
-}
-
 function messageOf(e: unknown): string {
-  if (e instanceof ApiError) {
-    if (e.status === 401) return 'Session expirée — veuillez vous reconnecter.'
-    if (e.status === 403) return 'Accès refusé : ce compte n’est pas administrateur.'
-    return e.message
-  }
+  if (e instanceof ApiError) return e.message
   if (e instanceof Error) return `Erreur réseau : ${e.message}`
   return 'Erreur inconnue.'
 }
 
-// ============================================================
-// CHARGEMENT — liste + détail (protection contre les réponses périmées)
-// ============================================================
-
-let listReqSeq = 0
-async function refreshList(silent = false): Promise<void> {
-  const seq = ++listReqSeq
-  if (!silent) listLoading.value = true
-  try {
-    const data = await fetchConversations(LIST_LIMIT)
-    if (seq !== listReqSeq) return
-    conversations.value = data.conversations ?? []
-    listError.value = null
-  } catch (e) {
-    if (seq !== listReqSeq) return
-    listError.value = messageOf(e)
-  } finally {
-    if (seq === listReqSeq) listLoading.value = false
-  }
-}
-
 let detailReqSeq = 0
-async function loadDetail(conversationId: string, silent = false): Promise<void> {
+async function loadDetail(conversationId: string, silencieux = false): Promise<void> {
   const seq = ++detailReqSeq
-  if (!silent) {
-    detailLoading.value = true
-    detailError.value = null
-  }
   try {
-    const data = await fetchConversationDetail(conversationId)
+    const donnees = await fetchConversationDetail(conversationId)
     if (seq !== detailReqSeq) return
-    detail.value = data
+    detail.value = donnees
     detailError.value = null
-    const assigned = data.conversation.assigned_agent
-    if (assigned && agents.value.some((a) => a.key === assigned)) {
-      selectedAgentKey.value = assigned
-    }
   } catch (e) {
     if (seq !== detailReqSeq) return
-    detailError.value = messageOf(e)
-  } finally {
-    if (seq === detailReqSeq) detailLoading.value = false
+    if (!silencieux) detailError.value = messageOf(e)
   }
 }
 
@@ -408,7 +337,6 @@ function select(conversationId: string): void {
   selectedId.value = conversationId
   detail.value = null
   draft.value = ''
-  selectedAgentKey.value = ''
   actionError.value = null
   stickToBottom.value = true
   void loadDetail(conversationId)
@@ -420,47 +348,40 @@ function closeDetail(): void {
   detailError.value = null
 }
 
-async function loadAgents(): Promise<void> {
-  agentsError.value = false
-  try {
-    agents.value = await fetchAgents()
-  } catch {
-    agents.value = []
-    agentsError.value = true
-  }
+function refreshList(): Promise<void> {
+  return consoleStore.chargerConversations()
 }
 
 // ============================================================
-// AUTO-REFRESH 10 s — pausé quand l'onglet est caché
+// Rafraîchissement 10 s — en pause quand l'onglet est caché
 // ============================================================
 
-let pollInterval: number | null = null
+let intervalle: number | null = null
 
-function pollTick(): void {
+function tic(): void {
   if (document.hidden) return
-  void refreshList(true)
-  const id = selectedId.value
-  if (id !== null) void loadDetail(id, true)
+  void consoleStore.chargerConversations()
+  const identifiant = selectedId.value
+  if (identifiant !== null) void loadDetail(identifiant, true)
 }
 
 onMounted(() => {
-  void refreshList()
-  void loadAgents()
-  pollInterval = window.setInterval(pollTick, REFRESH_MS)
-  // Retour sur l'onglet → rafraîchissement immédiat (pollTick ignore hidden)
-  document.addEventListener('visibilitychange', pollTick)
+  appliquerRequete()
+  void consoleStore.chargerConversations()
+  intervalle = window.setInterval(tic, REFRESH_MS)
+  document.addEventListener('visibilitychange', tic)
 })
 
 onBeforeUnmount(() => {
-  if (pollInterval !== null) window.clearInterval(pollInterval)
-  document.removeEventListener('visibilitychange', pollTick)
+  if (intervalle !== null) window.clearInterval(intervalle)
+  document.removeEventListener('visibilitychange', tic)
 })
 
 // ============================================================
-// ACTIONS — takeover / release / assign / message humain
+// Actions — prise en main, retour à Mia, message de conseiller
 // ============================================================
 
-async function withAction(run: () => Promise<void>): Promise<void> {
+async function avecAction(run: () => Promise<void>): Promise<void> {
   if (actionBusy.value) return
   actionBusy.value = true
   actionError.value = null
@@ -474,45 +395,35 @@ async function withAction(run: () => Promise<void>): Promise<void> {
 }
 
 function takeover(): void {
-  const id = selectedId.value
-  if (!id) return
-  void withAction(async () => {
-    await takeoverConversation(id)
-    await Promise.all([loadDetail(id, true), refreshList(true)])
+  const identifiant = selectedId.value
+  if (!identifiant) return
+  void avecAction(async () => {
+    await takeoverConversation(identifiant)
+    await Promise.all([loadDetail(identifiant, true), consoleStore.chargerConversations()])
   })
 }
 
 function release(): void {
-  const id = selectedId.value
-  if (!id) return
-  void withAction(async () => {
-    await releaseConversation(id)
-    await Promise.all([loadDetail(id, true), refreshList(true)])
-  })
-}
-
-function assign(): void {
-  const id = selectedId.value
-  const key = selectedAgentKey.value
-  if (!id || key === '') return
-  void withAction(async () => {
-    await assignAgent(id, key)
-    await Promise.all([loadDetail(id, true), refreshList(true)])
+  const identifiant = selectedId.value
+  if (!identifiant) return
+  void avecAction(async () => {
+    await releaseConversation(identifiant)
+    await Promise.all([loadDetail(identifiant, true), consoleStore.chargerConversations()])
   })
 }
 
 function submitHumanMessage(): void {
-  const id = selectedId.value
-  const content = draft.value.trim()
-  if (!id || content === '' || sending.value || !isHumanActive.value) return
+  const identifiant = selectedId.value
+  const contenu = draft.value.trim()
+  if (!identifiant || contenu === '' || sending.value || !isHumanActive.value) return
   sending.value = true
   actionError.value = null
   void (async () => {
     try {
-      await sendHumanMessage(id, content)
+      await sendHumanMessage(identifiant, contenu)
       draft.value = ''
       stickToBottom.value = true
-      await Promise.all([loadDetail(id, true), refreshList(true)])
+      await Promise.all([loadDetail(identifiant, true), consoleStore.chargerConversations()])
     } catch (e) {
       actionError.value = messageOf(e)
     } finally {
@@ -522,206 +433,130 @@ function submitHumanMessage(): void {
 }
 
 // ============================================================
-// SCROLL DU FIL — coller en bas si l'utilisateur est déjà en bas
+// Auteur d'un message — Mia, un conseiller, ou le visiteur
+// ============================================================
+
+function classeMessage(msg: AdminMessage): string {
+  if (msg.role === 'user') return 'adm-message--visiteur'
+  return msg.human ? 'adm-message--conseiller' : 'adm-message--mia'
+}
+
+function auteurMessage(msg: AdminMessage): string {
+  if (msg.role === 'user') return 'Visiteur'
+  return msg.human ? 'Conseiller' : 'Mia'
+}
+
+// ============================================================
+// Défilement du fil — coller en bas si l'opérateur y est déjà
 // ============================================================
 
 const threadEl = ref<HTMLElement | null>(null)
 const stickToBottom = ref(true)
 
 function onThreadScroll(): void {
-  const el = threadEl.value
-  if (!el) return
-  stickToBottom.value = el.scrollTop + el.clientHeight >= el.scrollHeight - 80
+  const element = threadEl.value
+  if (!element) return
+  stickToBottom.value = element.scrollTop + element.clientHeight >= element.scrollHeight - 80
 }
 
 async function scrollToBottom(force = false): Promise<void> {
   if (!force && !stickToBottom.value) return
   await nextTick()
-  const el = threadEl.value
-  if (el) el.scrollTop = el.scrollHeight
+  const element = threadEl.value
+  if (element) element.scrollTop = element.scrollHeight
 }
 
 watch(
   () => detail.value?.messages.length ?? 0,
-  (count, prev) => {
-    if (count !== prev) void scrollToBottom(prev === 0)
+  (nombre, precedent) => {
+    if (nombre !== precedent) void scrollToBottom(precedent === 0)
   },
 )
 </script>
 
 <style scoped>
-/* ==================== Gabarit général ==================== */
-
-.ep-adm {
-  height: 100%;
+.adm-boite {
   display: flex;
   flex-direction: column;
-  background: radial-gradient(1100px 620px at 82% -8%, var(--gold-bg), transparent 62%), radial-gradient(900px 520px at 4% 4%, var(--gold-bg), transparent 58%);
-}
-
-.ep-adm__topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  backdrop-filter: blur(12px);
+  /* La boîte de réception vit dans la hauteur disponible : la liste et le fil
+     défilent en interne, comme dans une boîte de réception de messagerie. */
+  flex: 1;
+  min-height: 0;
 }
 
-.ep-adm__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
+.adm-boite__recherche {
+  flex: 1;
+  min-width: 180px;
+  max-width: 420px;
 }
 
-.ep-adm__brand-mark {
-  width: 36px;
-  height: 36px;
+.adm-boite__loupe {
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--gold);
-  color: var(--on-gold);
-  display: grid;
-  place-items: center;
-  font-family: var(--police-titres);
-  font-weight: 700;
-  font-size: 16px;
 }
 
-.ep-adm__brand-text {
-  min-width: 0;
-}
-
-.ep-adm__title {
-  margin: 0;
-  font-family: var(--police-titres);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--gold2);
-}
-
-.ep-adm__subtitle {
-  margin: 0;
-  font-size: 11px;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ep-adm__logout {
-  flex-shrink: 0;
-  padding: 8px 14px;
-  border-radius: var(--arrondi-bouton);
-  border: 1px solid var(--gold-border);
-  background: transparent;
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 600;
-  transition: background 0.2s ease;
-}
-
-.ep-adm__logout:hover {
-  background: rgba(201, 169, 110, 0.12);
-}
-
-.ep-adm__body {
+.adm-boite__corps {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(320px, 400px) 1fr;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  gap: 14px;
 }
 
-.ep-adm__pane {
+.adm-boite__volet {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--arrondi-bloc);
+  background: var(--card);
   overflow: hidden;
 }
 
-.ep-adm__pane--list {
-  border-right: 1px solid var(--border);
-  background: rgba(12, 12, 16, 0.6);
+.adm-boite__etat {
+  padding: 14px;
 }
 
-/* ==================== Filtres + liste ==================== */
-
-.ep-adm__filters {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-.ep-adm__search,
-.ep-adm__select {
-  padding: 10px 12px;
-  border-radius: var(--arrondi-input);
-  border: 1px solid var(--gold-border);
-  background: var(--card);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.ep-adm__search {
-  flex: 1;
-  min-width: 0;
-}
-
-.ep-adm__search::placeholder {
-  color: var(--muted);
-}
-
-.ep-adm__search:focus-visible,
-.ep-adm__select:focus-visible {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
-}
-
-.ep-adm__list {
+.adm-boite__liste {
   flex: 1;
   overflow-y: auto;
-  margin: 0;
   padding: 8px;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
 
-.ep-adm__item {
+.adm-boite__item {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 3px;
   padding: 10px 12px;
-  text-align: left;
-  border-radius: var(--arrondi-input);
   border: 1px solid transparent;
+  border-radius: var(--arrondi-input);
   background: transparent;
   color: var(--text);
   font-family: inherit;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
 }
 
-.ep-adm__item:hover {
-  background: rgba(201, 169, 110, 0.06);
+.adm-boite__item:hover {
+  background: var(--neutre-trace);
 }
 
-.ep-adm__item--active {
-  background: rgba(201, 169, 110, 0.1);
+/* Sélection : fond d'accent ET filet — l'état se lit sans la teinte seule */
+.adm-boite__item--actif {
+  background: var(--gold-bg);
   border-color: var(--gold-border);
 }
 
-.ep-adm__item-top {
+.adm-boite__item-haut {
   width: 100%;
   display: flex;
   align-items: center;
@@ -729,193 +564,66 @@ watch(
   gap: 8px;
 }
 
-.ep-adm__time {
-  font-size: 11px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-.ep-adm__item-name {
-  font-weight: 600;
+.adm-boite__item-nom {
   font-size: 14px;
+  font-weight: 600;
 }
 
-.ep-adm__item-phone {
+.adm-boite__item-tel {
   font-size: 12px;
   color: var(--gold2);
 }
 
-.ep-adm__item-last {
+.adm-boite__item-msg {
   font-size: 12.5px;
   color: var(--muted);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.ep-adm__item-meta {
-  font-size: 10.5px;
-  color: var(--muted);
-  opacity: 0.8;
-}
-
-/* ==================== Badges de statut ==================== */
-
-.ep-adm__badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: var(--arrondi-bouton);
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.ep-adm__badge--active {
-  color: var(--green-text);
-  background: rgba(74, 222, 128, 0.12);
-  border: 1px solid rgba(74, 222, 128, 0.3);
-}
-
-/* Hors canon assumé : eperf.css n'a aucun jeton d'alerte (le noyau en a un,
-   `--alerte`, « noyau seulement » — DESIGN-SYSTEM-UNIFIE §2.5) ; sa promotion
-   dans eperf.css est recommandée en §6.3. Ambre littéral en attendant. */
-.ep-adm__badge--escalated {
-  color: #fbbf24;
-  background: rgba(251, 191, 36, 0.12);
-  border: 1px solid rgba(251, 191, 36, 0.3);
-}
-
-/* Escalade avec humain actif : accent renforcé */
-.ep-adm__badge--human-active {
-  background: rgba(251, 191, 36, 0.22);
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.35);
-}
-
-.ep-adm__badge--resolved {
-  color: var(--muted);
-  background: rgba(154, 150, 140, 0.12);
-  border: 1px solid rgba(154, 150, 140, 0.3);
-}
-
-.ep-adm__badge--abandoned {
-  color: var(--muted);
-  background: rgba(122, 118, 108, 0.15);
-  border: 1px solid rgba(122, 118, 108, 0.3);
-}
-
-/* ==================== Détail : en-tête ==================== */
-
-.ep-adm__detail-head {
+/* ---------- Détail ---------- */
+.adm-boite__detail-entete {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 14px;
   border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  backdrop-filter: blur(12px);
+  background: var(--card2);
 }
 
-.ep-adm__back {
+.adm-boite__retour {
   display: none;
   align-self: flex-start;
-  padding: 6px 12px;
-  border-radius: var(--arrondi-bouton);
-  border: 1px solid var(--gold-border);
-  background: transparent;
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 600;
 }
 
-.ep-adm__detail-id {
+.adm-boite__detail-id {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
-.ep-adm__chip {
-  padding: 3px 10px;
-  border-radius: var(--arrondi-bouton);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--gold);
-  background: rgba(201, 169, 110, 0.1);
-  border: 1px solid var(--border);
-}
-
-.ep-adm__chip--muted {
-  color: var(--muted);
-}
-
-.ep-adm__lead-name {
+.adm-boite__prospect {
+  margin: 0;
   font-family: var(--police-titres);
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 600;
-  color: var(--gold2);
-  line-height: 1.2;
+  line-height: 1.15;
+  color: var(--text);
 }
 
-.ep-adm__lead-contact {
+.adm-boite__contact {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin: 0;
   font-size: 12.5px;
-  color: var(--muted);
 }
 
-.ep-adm__actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.ep-adm__select--agent {
-  max-width: 220px;
-}
-
-.ep-adm__btn {
-  padding: 9px 16px;
-  border-radius: var(--arrondi-bouton);
-  border: 1px solid var(--gold-border);
-  background: rgba(201, 169, 110, 0.12);
-  color: var(--gold);
-  font-weight: 600;
-  font-size: 13px;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.ep-adm__btn:hover:not(:disabled) {
-  background: rgba(201, 169, 110, 0.22);
-  border-color: var(--gold);
-}
-
-.ep-adm__btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.ep-adm__btn--takeover {
-  border: none;
-  background: var(--gold);
-  color: var(--on-gold);
-  font-weight: 700;
-}
-
-.ep-adm__btn--takeover:hover:not(:disabled) {
-  background: var(--gold);
-  filter: brightness(1.05);
-}
-
-/* ==================== Fil des messages ==================== */
-
-.ep-adm__thread {
+.adm-boite__fil {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -923,46 +631,48 @@ watch(
   flex-direction: column;
   gap: 10px;
   padding: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
 
-.ep-adm-msg {
+.adm-message {
   max-width: 78%;
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 10px 14px;
-  border-radius: var(--arrondi-input);
+  border-radius: var(--arrondi-bloc);
   font-size: 14px;
   line-height: 1.55;
   word-break: break-word;
 }
 
-/* Visiteur à gauche */
-.ep-adm-msg--user {
+/* Visiteur à gauche — surface posée, filet décoratif */
+.adm-message--visiteur {
   align-self: flex-start;
   background: var(--card2);
   border: 1px solid var(--border);
 }
 
-/* IA à droite */
-.ep-adm-msg--ia {
+/* Mia à droite — trace d'accent (le bleu d'état reste réservé aux statuts) */
+.adm-message--mia {
   align-self: flex-end;
-  background: rgba(201, 169, 110, 0.08);
+  background: var(--gold-bg);
   border: 1px solid var(--border);
 }
 
-/* Conseiller humain à droite, or + badge "Conseiller" */
-.ep-adm-msg--human {
+/* Conseiller humain à droite — or plein, texte sur or */
+.adm-message--conseiller {
   align-self: flex-end;
   background: var(--gold);
   color: var(--on-gold);
 }
 
-.ep-adm-msg__badge {
+.adm-message__badge {
   align-self: flex-start;
   padding: 2px 8px;
   border-radius: var(--arrondi-bouton);
-  background: rgba(10, 10, 14, 0.18);
+  background: var(--neutre-trace);
   color: var(--on-gold);
   font-size: 10px;
   font-weight: 700;
@@ -970,109 +680,42 @@ watch(
   letter-spacing: 0.04em;
 }
 
-.ep-adm-msg__content {
+.adm-message__contenu {
   margin: 0;
   white-space: pre-wrap;
 }
 
-.ep-adm-msg__meta {
+.adm-message__meta {
   font-size: 10.5px;
-  opacity: 0.6;
+  opacity: 0.72;
 }
 
-/* ==================== Zone de saisie humaine ==================== */
-
-.ep-adm__composer {
+.adm-boite__redaction {
   display: flex;
   align-items: flex-end;
   gap: 10px;
   padding: 12px;
-  border-top: 1px solid var(--gold-border);
-  background: var(--card);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
+  border-top: 1px solid var(--border);
+  background: var(--card2);
 }
 
-.ep-adm__textarea {
+.adm-boite__texte {
   flex: 1;
   min-width: 0;
   resize: none;
-  padding: 10px 14px;
-  border-radius: var(--arrondi-input);
-  border: 1px solid var(--gold-border);
-  background: var(--card);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
   line-height: 1.5;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ep-adm__textarea::placeholder {
-  color: var(--muted);
-}
-
-.ep-adm__textarea:focus-visible {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
-}
-
-.ep-adm__send {
-  flex-shrink: 0;
-  padding: 11px 20px;
-  border: none;
-  border-radius: var(--arrondi-input);
-  background: var(--gold);
-  color: var(--on-gold);
-  font-weight: 700;
-  font-size: 14px;
-  transition: transform 0.15s ease, opacity 0.2s ease;
-}
-
-.ep-adm__send:hover:not(:disabled) {
-  transform: scale(1.03);
-}
-
-.ep-adm__send:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.ep-adm__composer-off {
+.adm-boite__hors-main {
   margin: 0;
-  padding: 10px 16px;
+  padding: 12px 14px;
   border-top: 1px solid var(--border);
-  background: rgba(12, 12, 16, 0.6);
+  background: var(--card2);
   color: var(--muted);
-  font-size: 12px;
-}
-
-/* ==================== États divers ==================== */
-
-.ep-adm__hint {
-  margin: 0;
-  padding: 14px 16px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.ep-adm__hint--inline {
-  padding: 0;
-  font-size: 12px;
-}
-
-.ep-adm__error {
-  margin: 0;
-  padding: 10px 12px;
-  border-radius: var(--arrondi-input);
-  background: rgba(220, 38, 38, 0.12);
-  border: 1px solid rgba(220, 38, 38, 0.35);
-  color: var(--red-text);
   font-size: 12.5px;
 }
 
-.ep-adm__empty {
+.adm-boite__vide {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -1083,46 +726,30 @@ watch(
   text-align: center;
 }
 
-.ep-adm__empty-title {
-  margin: 0;
-  font-family: var(--police-titres);
-  font-size: 20px;
-  color: var(--gold2);
-}
-
-.ep-adm__empty-sub {
-  margin: 0;
-  max-width: 320px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* ==================== Mobile (mobile-first <= 900px) ==================== */
-
-@media (max-width: 900px) {
-  .ep-adm__body {
-    grid-template-columns: 1fr;
+@media (max-width: 1000px) {
+  .adm-boite__corps {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .ep-adm__pane--detail {
+  .adm-boite__volet--detail {
     display: none;
   }
 
-  /* Conversation sélectionnée → détail plein écran, liste masquée */
-  .ep-adm--detail-open .ep-adm__pane--list {
+  /* Conversation ouverte → le détail prend l'écran, la liste s'efface */
+  .adm-boite--detail-ouvert .adm-boite__volet:not(.adm-boite__volet--detail) {
     display: none;
   }
 
-  .ep-adm--detail-open .ep-adm__pane--detail {
+  .adm-boite--detail-ouvert .adm-boite__volet--detail {
     display: flex;
   }
 
-  .ep-adm__back {
+  .adm-boite__retour {
     display: inline-flex;
   }
 
-  .ep-adm-msg {
-    max-width: 88%;
+  .adm-message {
+    max-width: 92%;
   }
 }
 </style>
