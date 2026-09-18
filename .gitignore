@@ -3,3 +3,13 @@ dist
 *.local
 *.log
 .DS_Store
+
+# Wrapper natif Android (tâche 6.4) — rien de secret ni de généré n'entre dans
+# le dépôt. La configuration (twa-manifest.json) et la procédure (native/) sont
+# versionnées ; la clé de signature et les binaires, jamais.
+*.keystore
+*.jks
+native/app/
+app-release-bundle.aab
+app-release-signed.apk
+app-release-unsigned.apk

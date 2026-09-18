@@ -1,0 +1,60 @@
+{
+  "packageId": "pro.eperformance.mia",
+  "host": "mia.eperformance.pro",
+  "name": "Mia — assistante ePerformance",
+  "launcherName": "Mia",
+  "display": "standalone",
+  "orientation": "any",
+  "startUrl": "/",
+  "webManifestUrl": "https://mia.eperformance.pro/mia-manifest.webmanifest",
+  "iconUrl": "https://mia.eperformance.pro/icons/mia-512.png",
+  "maskableIconUrl": "https://mia.eperformance.pro/icons/mia-maskable-512.png",
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "generatorApp": "bubblewrap-cli",
+  "fallbackType": "customtabs",
+  "enableNotifications": true,
+  "themeColor": "#fdfcfa",
+  "themeColorDark": "#08080c",
+  "navigationColor": "#fdfcfa",
+  "navigationColorDark": "#08080c",
+  "navigationDividerColor": "#e5e1d9",
+  "navigationDividerColorDark": "#1c1c22",
+  "backgroundColor": "#fdfcfa",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./native/android.keystore",
+    "alias": "mia"
+  },
+  "shortcuts": [
+    {
+      "name": "Poser une question",
+      "shortName": "Question",
+      "url": "/index.html?app=1#/",
+      "chosenIconUrl": "https://mia.eperformance.pro/icons/mia-192.png"
+    },
+    {
+      "name": "Mes conversations",
+      "shortName": "Conversations",
+      "url": "/index.html?app=1#/messages",
+      "chosenIconUrl": "https://mia.eperformance.pro/icons/mia-192.png"
+    },
+    {
+      "name": "Ce que Mia sait faire",
+      "shortName": "Aide",
+      "url": "/index.html?app=1#/aide",
+      "chosenIconUrl": "https://mia.eperformance.pro/icons/mia-192.png"
+    }
+  ],
+  "features": {
+    "playBilling": {
+      "enabled": false
+    },
+    "locationDelegation": {
+      "enabled": false
+    }
+  },
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": []
+}
