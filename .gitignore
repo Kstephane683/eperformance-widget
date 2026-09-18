@@ -13,3 +13,7 @@ native/app/
 app-release-bundle.aab
 app-release-signed.apk
 app-release-unsigned.apk
+
+# Caches Python : artefacts de machine, jamais des sources.
+__pycache__/
+*.pyc
