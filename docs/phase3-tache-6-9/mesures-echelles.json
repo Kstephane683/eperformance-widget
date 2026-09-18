@@ -1,0 +1,251 @@
+{
+  "arrondis_et_durees": {
+    "arrondis": {
+      "site": {
+        "--arrondi-input": "12px",
+        "--arrondi-bloc": "12px",
+        "--arrondi-carte": "28px",
+        "--arrondi-bouton": "999px"
+      },
+      "noyau": {
+        "--rayon-champ": "12px",
+        "--rayon-bloc": "20px",
+        "--rayon-carte": "28px",
+        "--rayon-bouton": "999px"
+      }
+    },
+    "espacements": {
+      "site": {},
+      "noyau": {
+        "--p-espace-1": "0.25rem",
+        "--p-espace-2": "0.5rem",
+        "--p-espace-3": "0.75rem",
+        "--p-espace-4": "1rem",
+        "--p-espace-5": "1.5rem",
+        "--p-espace-6": "2rem",
+        "--p-espace-7": "2.75rem",
+        "--p-espace-8": "4rem"
+      }
+    },
+    "durees": {
+      "site": {
+        "--t-fast": "150ms",
+        "--t": "300ms",
+        "--t-slow": "600ms"
+      },
+      "noyau": {
+        "--duree-rapide": "150ms",
+        "--duree": "300ms",
+        "--duree-lente": "600ms"
+      }
+    }
+  },
+  "espacements_recettes": {
+    "par_jeton": 0,
+    "litteral": 275,
+    "valeurs_litterales": {
+      "2px": 75,
+      "6px": 49,
+      "1px": 7,
+      "8px": 70,
+      "4px": 67,
+      "3px": 13,
+      "5px": 6,
+      "0px": 54,
+      "9px": 11,
+      "7px": 2,
+      "3.5rem": 2,
+      "6.5rem": 1,
+      "2.5rem": 2,
+      "4rem": 1,
+      "5rem": 1,
+      "2rem": 1
+    },
+    "occurrences_sur_l_echelle_du_noyau": 139,
+    "occurrences_hors_echelle": 223
+  },
+  "couleurs_des_coquilles": [
+    {
+      "fichier": "index.html",
+      "couleur": "#fdfcfa",
+      "role": "theme-color",
+      "jeton_attendu": {
+        "clair": "#fdfcfa",
+        "sombre": "#08080c"
+      },
+      "vaut_le_jeton_bg": true
+    },
+    {
+      "fichier": "index.html",
+      "couleur": "#08080c",
+      "role": "theme-color",
+      "jeton_attendu": {
+        "clair": "#fdfcfa",
+        "sombre": "#08080c"
+      },
+      "vaut_le_jeton_bg": true
+    },
+    {
+      "fichier": "application/index.html",
+      "couleur": "#fdfcfa",
+      "role": "theme-color",
+      "jeton_attendu": {
+        "clair": "#fdfcfa",
+        "sombre": "#08080c"
+      },
+      "vaut_le_jeton_bg": true
+    },
+    {
+      "fichier": "application/index.html",
+      "couleur": "#08080c",
+      "role": "theme-color",
+      "jeton_attendu": {
+        "clair": "#fdfcfa",
+        "sombre": "#08080c"
+      },
+      "vaut_le_jeton_bg": true
+    },
+    {
+      "fichier": "application/mia/index.html",
+      "couleur": "#fdfcfa",
+      "role": "theme-color",
+      "jeton_attendu": {
+        "clair": "#fdfcfa",
+        "sombre": "#08080c"
+      },
+      "vaut_le_jeton_bg": true
+    },
+    {
+      "fichier": "application/mia/index.html",
+      "couleur": "#08080c",
+      "role": "theme-color",
+      "jeton_attendu": {
+        "clair": "#fdfcfa",
+        "sombre": "#08080c"
+      },
+      "vaut_le_jeton_bg": true
+    }
+  ],
+  "espacements": {
+    "echelle_du_noyau": {
+      "--p-espace-1": "0.25rem",
+      "--p-espace-2": "0.5rem",
+      "--p-espace-3": "0.75rem",
+      "--p-espace-4": "1rem",
+      "--p-espace-5": "1.5rem",
+      "--p-espace-6": "2rem",
+      "--p-espace-7": "2.75rem",
+      "--p-espace-8": "4rem"
+    },
+    "echelle_du_site": {
+      "--section-padding": "4rem 0",
+      "--gutter": "1.5rem",
+      "--gutter-x": "24px"
+    },
+    "nombre_crans_noyau": 8,
+    "nombre_crans_site": 3
+  },
+  "couleurs_litterales": {
+    "par_perimetre": {
+      "widget": {
+        "hex": 0,
+        "rgb": 0,
+        "detail": []
+      },
+      "console": {
+        "hex": 0,
+        "rgb": 0,
+        "detail": []
+      },
+      "pages-publiques": {
+        "hex": 4,
+        "rgb": 0,
+        "detail": [
+          {
+            "fichier": "application/index.html",
+            "hex": 2,
+            "rgb": 0
+          },
+          {
+            "fichier": "application/mia/index.html",
+            "hex": 2,
+            "rgb": 0
+          }
+        ]
+      },
+      "application-mia": {
+        "hex": 2,
+        "rgb": 0,
+        "detail": [
+          {
+            "fichier": "index.html",
+            "hex": 2,
+            "rgb": 0
+          }
+        ]
+      },
+      "console-html": {
+        "hex": 0,
+        "rgb": 0,
+        "detail": []
+      },
+      "sdk gele": {
+        "hex": 10,
+        "rgb": 9,
+        "detail": [
+          {
+            "fichier": "src/sdk/entry.ts",
+            "hex": 10,
+            "rgb": 9
+          }
+        ]
+      },
+      "config widget": {
+        "hex": 2,
+        "rgb": 0,
+        "detail": [
+          {
+            "fichier": "src/stores/config.ts",
+            "hex": 2,
+            "rgb": 0
+          }
+        ]
+      }
+    },
+    "interface_total_hex": 6,
+    "interface_total_rgb": 0,
+    "avant_git": "HEAD~1",
+    "detail_restant": [
+      {
+        "perimetre": "pages-publiques",
+        "fichier": "application/index.html",
+        "hex": 2,
+        "rgb": 0
+      },
+      {
+        "perimetre": "pages-publiques",
+        "fichier": "application/mia/index.html",
+        "hex": 2,
+        "rgb": 0
+      },
+      {
+        "perimetre": "application-mia",
+        "fichier": "index.html",
+        "hex": 2,
+        "rgb": 0
+      },
+      {
+        "perimetre": "sdk gele",
+        "fichier": "src/sdk/entry.ts",
+        "hex": 10,
+        "rgb": 9
+      },
+      {
+        "perimetre": "config widget",
+        "fichier": "src/stores/config.ts",
+        "hex": 2,
+        "rgb": 0
+      }
+    ]
+  }
+}

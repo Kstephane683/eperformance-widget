@@ -1,0 +1,1057 @@
+{
+  "perimetres": {
+    "widget": {
+      "declarations": 9,
+      "familles": [
+        "Cormorant Garamond",
+        "DM Sans"
+      ],
+      "familles_du_noeud": [
+        [
+          "Cormorant Garamond",
+          "500",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "500",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "700",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "400",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "500",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "600",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "700",
+          "normal"
+        ]
+      ],
+      "empreinte": "231a83e63e81e791bd209ec9a8a8ca90962249679a4ea7ac305da0dbde62c2aa",
+      "detail": [
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500-italic.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600-italic.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "400",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-400.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-500.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        }
+      ]
+    },
+    "application-mia": {
+      "declarations": 9,
+      "familles": [
+        "Cormorant Garamond",
+        "DM Sans"
+      ],
+      "familles_du_noeud": [
+        [
+          "Cormorant Garamond",
+          "500",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "500",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "700",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "400",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "500",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "600",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "700",
+          "normal"
+        ]
+      ],
+      "empreinte": "231a83e63e81e791bd209ec9a8a8ca90962249679a4ea7ac305da0dbde62c2aa",
+      "detail": [
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500-italic.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600-italic.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "400",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-400.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-500.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        }
+      ]
+    },
+    "pages-publiques": {
+      "declarations": 4,
+      "familles": [
+        "Cormorant Garamond",
+        "DM Sans"
+      ],
+      "familles_du_noeud": [
+        [
+          "Cormorant Garamond",
+          "600",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "700",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "400",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "600",
+          "normal"
+        ]
+      ],
+      "empreinte": "97e7bfee5c199ef7c9a66b0a170b5365214d849c356b29632c10078d8ed17837",
+      "detail": [
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "400",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-400.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        }
+      ]
+    },
+    "console": {
+      "declarations": 9,
+      "familles": [
+        "Cormorant Garamond",
+        "DM Sans"
+      ],
+      "familles_du_noeud": [
+        [
+          "Cormorant Garamond",
+          "500",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "500",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "700",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "400",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "500",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "600",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "700",
+          "normal"
+        ]
+      ],
+      "empreinte": "231a83e63e81e791bd209ec9a8a8ca90962249679a4ea7ac305da0dbde62c2aa",
+      "detail": [
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500-italic.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600-italic.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "400",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-400.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-500.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-600.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-700.woff2",
+              "existe": false,
+              "md5": null,
+              "octets": null
+            }
+          ]
+        }
+      ]
+    },
+    "site": {
+      "declarations": 9,
+      "familles": [
+        "Cormorant Garamond",
+        "DM Sans"
+      ],
+      "familles_du_noeud": [
+        [
+          "Cormorant Garamond",
+          "500",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "500",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "700",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "400",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "500",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "600",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "700",
+          "normal"
+        ]
+      ],
+      "empreinte": "231a83e63e81e791bd209ec9a8a8ca90962249679a4ea7ac305da0dbde62c2aa",
+      "detail": [
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500-italic.woff2",
+              "existe": true,
+              "md5": "3e2c4175a96de7ac356a2bff686a68ef",
+              "octets": 39260
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600-italic.woff2",
+              "existe": true,
+              "md5": "3e2c4175a96de7ac356a2bff686a68ef",
+              "octets": 39260
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500.woff2",
+              "existe": true,
+              "md5": "c47ff12887a36dac62f887a6fdb51066",
+              "octets": 37640
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600.woff2",
+              "existe": true,
+              "md5": "c47ff12887a36dac62f887a6fdb51066",
+              "octets": 37640
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-700.woff2",
+              "existe": true,
+              "md5": "c47ff12887a36dac62f887a6fdb51066",
+              "octets": 37640
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "400",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-400.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-500.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-600.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-700.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        }
+      ]
+    },
+    "blog": {
+      "declarations": 9,
+      "familles": [
+        "Cormorant Garamond",
+        "DM Sans"
+      ],
+      "familles_du_noeud": [
+        [
+          "Cormorant Garamond",
+          "500",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "500",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "italic"
+        ],
+        [
+          "Cormorant Garamond",
+          "600",
+          "normal"
+        ],
+        [
+          "Cormorant Garamond",
+          "700",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "400",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "500",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "600",
+          "normal"
+        ],
+        [
+          "DM Sans",
+          "700",
+          "normal"
+        ]
+      ],
+      "empreinte": "231a83e63e81e791bd209ec9a8a8ca90962249679a4ea7ac305da0dbde62c2aa",
+      "detail": [
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500-italic.woff2",
+              "existe": true,
+              "md5": "3e2c4175a96de7ac356a2bff686a68ef",
+              "octets": 39260
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "italic",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600-italic.woff2",
+              "existe": true,
+              "md5": "3e2c4175a96de7ac356a2bff686a68ef",
+              "octets": 39260
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-500.woff2",
+              "existe": true,
+              "md5": "c47ff12887a36dac62f887a6fdb51066",
+              "octets": 37640
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-600.woff2",
+              "existe": true,
+              "md5": "c47ff12887a36dac62f887a6fdb51066",
+              "octets": 37640
+            }
+          ]
+        },
+        {
+          "famille": "Cormorant Garamond",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/cormorant-garamond-700.woff2",
+              "existe": true,
+              "md5": "c47ff12887a36dac62f887a6fdb51066",
+              "octets": 37640
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "400",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-400.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "500",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-500.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "600",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-600.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        },
+        {
+          "famille": "DM Sans",
+          "poids": "700",
+          "style": "normal",
+          "fichiers": [
+            {
+              "url": "../fonts/dm-sans-700.woff2",
+              "existe": true,
+              "md5": "6c1e961057d2473c0b110390bc876d36",
+              "octets": 62724
+            }
+          ]
+        }
+      ]
+    },
+    "noyau": {
+      "declarations": 0,
+      "familles": [],
+      "familles_du_noeud": [],
+      "empreinte": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "detail": []
+    }
+  },
+  "fichiers_auto_heberges": {
+    "widget": {
+      "nombre": 9,
+      "md5": {
+        "cormorant-garamond-500-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-500.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-600-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-600.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-700.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "dm-sans-400.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-500.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-600.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-700.woff2": "6c1e961057d2473c0b110390bc876d36"
+      }
+    },
+    "application-mia": {
+      "nombre": 9,
+      "md5": {
+        "cormorant-garamond-500-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-500.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-600-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-600.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-700.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "dm-sans-400.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-500.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-600.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-700.woff2": "6c1e961057d2473c0b110390bc876d36"
+      }
+    },
+    "console": {
+      "nombre": 9,
+      "md5": {
+        "cormorant-garamond-500-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-500.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-600-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-600.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-700.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "dm-sans-400.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-500.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-600.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-700.woff2": "6c1e961057d2473c0b110390bc876d36"
+      }
+    },
+    "pages-publiques": {
+      "nombre": 9,
+      "md5": {
+        "cormorant-garamond-500-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-500.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-600-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-600.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-700.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "dm-sans-400.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-500.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-600.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-700.woff2": "6c1e961057d2473c0b110390bc876d36"
+      }
+    },
+    "site": {
+      "nombre": 9,
+      "md5": {
+        "cormorant-garamond-500-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-500.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-600-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-600.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-700.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "dm-sans-400.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-500.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-600.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-700.woff2": "6c1e961057d2473c0b110390bc876d36"
+      }
+    },
+    "blog": {
+      "nombre": 9,
+      "md5": {
+        "cormorant-garamond-500-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-500.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-600-italic.woff2": "3e2c4175a96de7ac356a2bff686a68ef",
+        "cormorant-garamond-600.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "cormorant-garamond-700.woff2": "c47ff12887a36dac62f887a6fdb51066",
+        "dm-sans-400.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-500.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-600.woff2": "6c1e961057d2473c0b110390bc876d36",
+        "dm-sans-700.woff2": "6c1e961057d2473c0b110390bc876d36"
+      }
+    }
+  },
+  "references_fonderie_distante": [
+    "site-eperformance/merci-candidature.html:10: <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />",
+    "site-eperformance/merci-candidature.html:11: <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin />",
+    "site-eperformance/merci-candidature.html:12: <link href=\"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,w"
+  ],
+  "nombre_references_distantes": 3
+}

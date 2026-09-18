@@ -1,0 +1,87 @@
+{
+  "source": "API de production (POST /api/chatbot/message)",
+  "consignes_du_modele": "non modifiées — décision au propriétaire",
+  "echantillon": 10,
+  "reponses_obtenues": 10,
+  "reponses_avec_emoji": 6,
+  "ratio": 0.6,
+  "emoji_distincts": [
+    "→→→→→→",
+    "👋",
+    "🔍",
+    "🙂",
+    "🚀"
+  ],
+  "detail": [
+    {
+      "question": "Bonjour, je vends des cosmétiques en ligne et je veux doubler mes commandes.",
+      "longueur": 465,
+      "emoji": "",
+      "nombre_emoji": 0,
+      "extrait": "Bonjour ! Doubler tes commandes, c'est un objectif clair et atteignable — mais tout dépend de ce qui bloque aujourd'hui.\n\nDis-moi juste : tes ventes viennent d'où en ce moment ? (Facebook/Instagram, W"
+    },
+    {
+      "question": "Comment gagner en visibilité sans payer de publicité ?",
+      "longueur": 1909,
+      "emoji": "",
+      "nombre_emoji": 0,
+      "extrait": "Bonne question — et la réponse dépend beaucoup de ton activité. Mais avant d'entrer dans les détails, dis-moi : c'est quoi ton secteur, et tu vends à qui (particuliers, autres entreprises, des filleul"
+    },
+    {
+      "question": "Est-ce que je peux automatiser la relance de mes clients ?",
+      "longueur": 1463,
+      "emoji": "→→→→→→",
+      "nombre_emoji": 6,
+      "extrait": "Oui, et c'est probablement l'automatisation la plus rentable pour une PME. La relance, c'est rarement un problème de méthode — c'est un problème de mémoire. On oublie, on repousse, et le client part a"
+    },
+    {
+      "question": "Combien coûte un accompagnement ?",
+      "longueur": 1017,
+      "emoji": "",
+      "nombre_emoji": 0,
+      "extrait": "Chez ePerformance, l'accompagnement se fait en 3 niveaux selon ton besoin réel :\n\n**Pack Découverte — 100 000 FCFA**\nSite web pro + chatbot IA + capture de leads automatique + formation 2h + support 3"
+    },
+    {
+      "question": "Je veux un site qui convertit mieux, par où commencer ?",
+      "longueur": 1290,
+      "emoji": "🚀",
+      "nombre_emoji": 1,
+      "extrait": "Excellente question — et c'est le bon réflexe, parce qu'un site « joli » qui ne convertit pas, c'est de l'argent perdu.\n\nAvant de parler design, il y a **3 choses à vérifier dans cet ordre** :\n\n**1. T"
+    },
+    {
+      "question": "Bonjour",
+      "longueur": 72,
+      "emoji": "👋",
+      "nombre_emoji": 1,
+      "extrait": "Bonjour 👋\n\nComment puis-je t'aider aujourd'hui ? Dis-moi ce qui t'amène."
+    },
+    {
+      "question": "Merci beaucoup, c'est très clair.",
+      "longueur": 186,
+      "emoji": "🙂",
+      "nombre_emoji": 1,
+      "extrait": "Avec plaisir 🙂\n\nSi tu veux qu'on aille plus loin, dis-moi juste ce sur quoi tu veux qu'on travaille — ton offre, tes canaux de vente, ou un blocage précis que tu rencontres en ce moment."
+    },
+    {
+      "question": "Je veux arrêter de perdre du temps sur les devis.",
+      "longueur": 744,
+      "emoji": "",
+      "nombre_emoji": 0,
+      "extrait": "Je te comprends — les devis, c'est typiquement la tâche qui se répète tous les jours et qui bouffe des heures sans jamais s'arrêter.\n\nAvant de te proposer quoi que ce soit, une question simple : **c'e"
+    },
+    {
+      "question": "Quels sont vos délais ?",
+      "longueur": 649,
+      "emoji": "🙂",
+      "nombre_emoji": 1,
+      "extrait": "Pour te répondre précisément, il faut que je sache de quel délai tu parles 🙂\n\nTrois cas de figure, selon ce que tu as en tête :\n\n- **Le diagnostic stratégique gratuit** : on le fait en 5 à 10 minutes,"
+    },
+    {
+      "question": "Pouvez-vous m'aider pour le référencement local ?",
+      "longueur": 726,
+      "emoji": "🔍",
+      "nombre_emoji": 1,
+      "extrait": "Oui, avec plaisir. Le référencement local, c'est souvent là qu'il y a le plus de résultats rapides — surtout en Afrique francophone où la concurrence SEO est encore faible.\n\nPour te donner un plan uti"
+    }
+  ]
+}

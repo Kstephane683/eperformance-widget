@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Les applications ePerformance — Mia, l’assistante IA</title>
+    <meta
+      name="description"
+      content="Les applications ePerformance : Mia, l’assistante IA, à ouvrir dans le navigateur ou à installer sur votre téléphone. D’autres applications arriveront ici."
+    />
+    <!-- Canonique : adresse réelle de la page aujourd'hui (voir la DEMANDE de coordination consignée au journal pour le chemin public eperformance.pro). -->
+    <link rel="canonical" href="https://kstephane683.github.io/eperformance-widget/application/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="K. Stéphane" />
+    <meta name="theme-color" content="#fdfcfa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08080c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="ePerformance" />
+    <meta property="og:url" content="https://kstephane683.github.io/eperformance-widget/application/" />
+    <meta property="og:title" content="Les applications ePerformance" />
+    <meta
+      property="og:description"
+      content="Mia, l’assistante IA d’ePerformance : à ouvrir dans le navigateur ou à installer sur votre téléphone."
+    />
+    <meta
+      property="og:image"
+      content="https://kstephane683.github.io/eperformance-widget/preuves/mia-partage.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="../favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="manifest" href="../mia-manifest.webmanifest" />
+
+    <script>
+      ;(function () {
+        try {
+          var t = null
+          try {
+            t = window.localStorage.getItem('eperf-theme')
+          } catch (e) {
+            t = null
+          }
+          if (t !== 'dark' && t !== 'light') {
+            t =
+              window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          }
+          document.documentElement.setAttribute('data-theme', t)
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="../fonts/cormorant-garamond-700.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="../fonts/dm-sans-400.woff2"
+    />
+    <script type="module" crossorigin src="../assets/application-D1jJSeuQ.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/modulepreload-polyfill-P2Xu9kJm.js">
+    <link rel="modulepreload" crossorigin href="../assets/theme-C7lLq5Hp.js">
+    <link rel="modulepreload" crossorigin href="../assets/commun-BvsVIf0s.js">
+    <link rel="stylesheet" crossorigin href="../assets/commun-D8X9zw2J.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="marque" href="https://eperformance.pro/">
+          <img
+            class="marque__monogramme"
+            src="../icons/mia-192.png"
+            width="34"
+            height="34"
+            alt=""
+          />
+          <span class="marque__nom">ePerformance</span>
+        </a>
+        <a class="marque__retour" href="https://eperformance.pro/">Retour au site</a>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-bascule-theme
+          aria-label="Passer au thème sombre"
+        >
+          <svg class="icon-soleil" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7" />
+            <path
+              d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <svg class="icon-lune" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4z"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <section class="section-tight">
+        <div class="container">
+          <span class="eyebrow">Applications ePerformance</span>
+          <h1 class="titre-portail">Les outils d’ePerformance, à portée de main.</h1>
+          <p class="chapeau mt-2">
+            Des applications simples, utilisables tout de suite dans le navigateur — et
+            installables sur votre téléphone si vous voulez les garder sous la main. Aucun
+            compte à créer.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-tight" aria-labelledby="titre-liste">
+        <div class="container">
+          <h2 id="titre-liste" class="visually-hidden">Liste des applications</h2>
+
+          <div class="grid grid-2">
+            <!-- ================= MIA ================= -->
+            <article class="card card-hover" data-application="mia">
+              <img
+                src="../icons/mia-192.png"
+                width="52"
+                height="52"
+                alt=""
+                class="card-icon-app"
+              />
+              <h3 class="card-title">Mia — l’assistante IA</h3>
+              <p class="card-text">
+                Mia répond aux questions qui bloquent une activité : trouver des clients, gagner
+                en visibilité, automatiser avec l’IA. Neuf domaines, une seule interlocutrice,
+                des réponses actionnables.
+              </p>
+              <div class="hero__actions">
+                <a class="btn btn-gold" href="./mia/">Découvrir Mia</a>
+                <a class="btn btn-outline" href="../index.html?app=1">Ouvrir Mia</a>
+              </div>
+            </article>
+
+            <!-- Emplacement des prochaines applications : la grille est la
+                 structure, elle n'a pas besoin d'être refaite pour en accueillir
+                 une deuxième. Rien n'est annoncé ici qui ne soit pas prêt. -->
+            <article class="card" aria-label="Prochaines applications">
+              <h3 class="card-title">Les prochaines</h3>
+              <p class="card-text">
+                Cette page est faite pour accueillir les prochaines applications ePerformance.
+                Elles apparaîtront ici, au même format, quand elles seront prêtes.
+              </p>
+              <p class="card-text mt-2">
+                En attendant, Mia est disponible — et elle couvre déjà neuf sujets.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="section-rule"></div>
+      </div>
+
+      <section class="section" aria-labelledby="titre-utilisation">
+        <div class="container">
+          <span class="eyebrow">Bon à savoir</span>
+          <h2 id="titre-utilisation" class="titre-section">Utiliser, installer, entretenir</h2>
+
+          <div class="grid grid-3 mt-4">
+            <article class="card">
+              <h3 class="card-title">Sans installation</h3>
+              <p class="card-text">
+                Chaque application s’ouvre dans votre navigateur, sur téléphone comme sur
+                ordinateur. Aucun compte, aucun téléchargement obligatoire.
+              </p>
+            </article>
+            <article class="card">
+              <h3 class="card-title">Installer si vous voulez</h3>
+              <p class="card-text">
+                L’installation se fait depuis le navigateur : l’application s’ajoute à votre
+                écran d’accueil et s’ouvre en plein écran. Vous la retirez quand vous voulez.
+              </p>
+            </article>
+            <article class="card">
+              <h3 class="card-title">Hors ligne</h3>
+              <p class="card-text">
+                L’application s’ouvre même sans réseau et affiche un écran d’attente clair. La
+                conversation reprend d’elle-même dès que la connexion revient.
+              </p>
+            </article>
+          </div>
+
+          <p class="chapeau mt-4">
+            Mia affiche une version ancienne après une mise à jour ? Videz le cache local de
+            l’application, puis rechargez la page.
+          </p>
+          <p class="mt-2">
+            <button type="button" class="btn btn-outline btn-sm" data-vider-cache>
+              Vider le cache local
+            </button>
+          </p>
+          <p class="visually-hidden" data-message-installation role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          ePerformance — acquisition, IA et automatisation pour les PME et les e-commerces.
+        </p>
+        <ul class="site-footer__liens">
+          <li><a href="./mia/">Mia</a></li>
+          <li>
+            <a href="https://eperformance.pro/politique-confidentialite.html"
+              >Politique de confidentialité</a
+            >
+          </li>
+          <li><a href="https://eperformance.pro/cookies.html">Cookies</a></li>
+          <li><a href="https://eperformance.pro/cgv.html">Conditions générales de vente</a></li>
+          <li><a href="https://eperformance.pro/mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </div>
+    </footer>
+
+  </body>
+</html>

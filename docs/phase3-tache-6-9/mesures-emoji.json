@@ -1,0 +1,934 @@
+{
+  "avant": {
+    "reference": "fcd9df0^ (avant la correction)",
+    "expression": "mêmes plages que src/admin/regles.spec.ts",
+    "par_perimetre": {
+      "widget (vues, composants, stores)": {
+        "fichiers_lus": 38,
+        "interface": 3,
+        "commentaire": 36,
+        "palette": 1,
+        "detail": {
+          "interface": [
+            {
+              "fichier": "src/components/ChatMessages.vue",
+              "ligne": 27,
+              "emoji": "↻",
+              "extrait": "↻ Réessayer"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 54,
+              "emoji": "👋",
+              "extrait": "'Bonjour 👋 Vous parlez maintenant avec Mia. Comment puis-je vous aider ?'"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 278,
+              "emoji": "→",
+              "extrait": "`<div style=\"margin-top: 10px;\"><a href=\"${waLink}\" target=\"_blank\" rel=\"noopener\" data-ep-lead=\"wha"
+            }
+          ],
+          "commentaire": [
+            {
+              "fichier": "src/views/Help.vue",
+              "ligne": 223,
+              "emoji": "→",
+              "extrait": "* Capacité de Mia cliquée depuis l'aide (A.9) → conversation ouverte avec"
+            },
+            {
+              "fichier": "src/views/Home.vue",
+              "ligne": 181,
+              "emoji": "→",
+              "extrait": "* Capacité cliquée → conversation ouverte + message envoyé à Mia."
+            },
+            {
+              "fichier": "src/components/AppHeader.vue",
+              "ligne": 163,
+              "emoji": "→",
+              "extrait": "// reçu par App.vue → retour à l'accueil)"
+            },
+            {
+              "fichier": "src/components/AppHeader.vue",
+              "ligne": 237,
+              "emoji": "→",
+              "extrait": "/* Pastille « en ligne » : état de succès → --green-text (eperf.css:265) */"
+            },
+            {
+              "fichier": "src/components/ChatInput.vue",
+              "ligne": 318,
+              "emoji": "→",
+              "extrait": "// Focus/blur → le SDK relance son fix clavier au bon moment (iOS)"
+            },
+            {
+              "fichier": "src/components/InviteInstallation.vue",
+              "ligne": 52,
+              "emoji": "→",
+              "extrait": "*   · l'invite du navigateur a été capturée (Chromium) → le bouton déclenche"
+            },
+            {
+              "fichier": "src/components/InviteInstallation.vue",
+              "ligne": 54,
+              "emoji": "→",
+              "extrait": "*   · sinon (iOS Safari, Firefox, iframe) → le bouton ouvre la page"
+            },
+            {
+              "fichier": "src/components/MessageBubble.vue",
+              "ligne": 85,
+              "emoji": "→",
+              "extrait": "* 1. html backend contenant un <a> (fallback WhatsApp) → sanitisé tel quel"
+            },
+            {
+              "fichier": "src/components/MessageBubble.vue",
+              "ligne": 86,
+              "emoji": "→",
+              "extrait": "* 2. sinon → texte markdown rendu (les ** du LLM deviennent du gras réel)"
+            },
+            {
+              "fichier": "src/components/TabBar.vue",
+              "ligne": 6,
+              "emoji": "←→",
+              "extrait": "clavier ← → début/fin."
+            },
+            {
+              "fichier": "src/components/TabBar.vue",
+              "ligne": 107,
+              "emoji": "←→",
+              "extrait": "/** ← → parcourent les onglets, Début/Fin vont aux extrémités (motif WAI-ARIA) */"
+            },
+            {
+              "fichier": "src/stores/blog.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "*   2. à défaut (hors-ligne, CORS, 404, charge invalide) → copie embarquée"
+            },
+            {
+              "fichier": "src/stores/blog.ts",
+              "ligne": 92,
+              "emoji": "→",
+              "extrait": "/** Résultats de recherche (vide → tous les articles) */"
+            },
+            {
+              "fichier": "src/stores/conversation.ts",
+              "ligne": 8,
+              "emoji": "→",
+              "extrait": "* - restore() hydrate depuis GET /conversation/{id} ; 404 → session vierge"
+            },
+            {
+              "fichier": "src/stores/conversation.ts",
+              "ligne": 71,
+              "emoji": "→",
+              "extrait": "* 404 → session vierge silencieuse (nouvelle conversation au prochain message)."
+            },
+            {
+              "fichier": "src/stores/intent.ts",
+              "ligne": 4,
+              "emoji": "→",
+              "extrait": "* Intentions de navigation inter-écrans (Accueil/Aide → Conversation)."
+            },
+            {
+              "fichier": "src/stores/intent.ts",
+              "ligne": 47,
+              "emoji": "→",
+              "extrait": "* Suggestion cliquée → conversation ouverte + message envoyé à Mia."
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "* - Réception : suggestions JSON → quick_replies natifs (jamais parser le HTML)"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 59,
+              "emoji": "→",
+              "extrait": "* `data:image/png;base64,AAAA` → { data: 'AAAA', media_type: 'image/png' }"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 363,
+              "emoji": "→",
+              "extrait": "// Release: l'humain a rendu la main → l'IA reprend"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 404,
+              "emoji": "→",
+              "extrait": "// role reçu en format DB ('user'|'assistant') → converti dans le type WidgetMessage"
+            },
+            {
+              "fichier": "src/helpers/iconesCollections.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "* une icône SVG par collection (`assets/css/blog.css` → `.article-card-thumb`)."
+            },
+            {
+              "fichier": "src/helpers/installation.ts",
+              "ligne": 56,
+              "emoji": "→",
+              "extrait": "/** Stockage local tolérant : navigation privée ou stockage bloqué → état vide */"
+            },
+            {
+              "fichier": "src/helpers/notificationSound.ts",
+              "ligne": 27,
+              "emoji": "→",
+              "extrait": "/** Double bip doux descendant (La → Mi), ~0.35s, volume discret */"
+            },
+            {
+              "fichier": "src/helpers/push.ts",
+              "ligne": 99,
+              "emoji": "→",
+              "extrait": "/** Stockage local tolérant : navigation privée ou stockage bloqué → état vide */"
+            },
+            {
+              "fichier": "src/helpers/push.ts",
+              "ligne": 202,
+              "emoji": "→",
+              "extrait": "* Clé publique base64url → octets, pour `applicationServerKey`."
+            },
+            {
+              "fichier": "src/helpers/pwa.ts",
+              "ligne": 20,
+              "emoji": "→",
+              "extrait": "/** Nom du fichier, à la racine du dossier servi (public/sw.js → dist/sw.js) */"
+            },
+            {
+              "fichier": "src/helpers/sanitize.ts",
+              "ligne": 43,
+              "emoji": "→",
+              "extrait": "*  Les boutons backend (suggestions → quick replies natifs) ne fuient pas. */"
+            },
+            {
+              "fichier": "src/helpers/sanitize.ts",
+              "ligne": 83,
+              "emoji": "→",
+              "extrait": "// Ligne vide → fermer la liste en cours (séparateur visuel)"
+            },
+            {
+              "fichier": "src/helpers/sdkBridge.ts",
+              "ligne": 2,
+              "emoji": "↔",
+              "extrait": "* Bridge widget ↔ SDK (site hôte) — adapté de IframeEventHelper.js (Chatwoot)."
+            },
+            {
+              "fichier": "src/helpers/sdkBridge.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "*   SDK → widget : { event: 'open' | 'close' | 'identify', ... }"
+            },
+            {
+              "fichier": "src/helpers/sdkBridge.ts",
+              "ligne": 7,
+              "emoji": "→",
+              "extrait": "*   widget → SDK : { event: 'ready' } au montage"
+            },
+            {
+              "fichier": "src/helpers/theme.ts",
+              "ligne": 64,
+              "emoji": "↔",
+              "extrait": "/** Bascule clair ↔ sombre (bouton des pages publiques) */"
+            },
+            {
+              "fichier": "src/helpers/tracking.ts",
+              "ligne": 115,
+              "emoji": "→",
+              "extrait": "* Une réponse de Mia a été produite → `eperf:chatbot:message`."
+            },
+            {
+              "fichier": "src/helpers/tracking.ts",
+              "ligne": 127,
+              "emoji": "→",
+              "extrait": "* Capture de contact → `eperf:chatbot:lead`."
+            },
+            {
+              "fichier": "src/data/capacites.ts",
+              "ligne": 7,
+              "emoji": "→",
+              "extrait": "* opaque que seul le backend sait interpréter (mapping intent → agent dans"
+            }
+          ],
+          "palette": [
+            {
+              "fichier": "src/components/ChatInput.vue",
+              "ligne": 222,
+              "emoji": "😊👍🙏🔥💪🚀❤️✅🤝📈😂🤔",
+              "extrait": "const EMOJIS = ['😊', '👍', '🙏', '🔥', '💪', '🚀', '❤️', '✅', '🤝', '📈', '😂', '🤔']"
+            }
+          ]
+        }
+      },
+      "console": {
+        "fichiers_lus": 30,
+        "interface": 0,
+        "commentaire": 15,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 5,
+              "emoji": "→",
+              "extrait": "* - POST /api/auth/login — OAuth2PasswordRequestForm → form-urlencoded"
+            },
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "*   `username=<email>&password=<pwd>` → { access_token, token_type }"
+            },
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 11,
+              "emoji": "⚠️",
+              "extrait": "* ⚠️ Robustesse déploiement : le backend Railway actuel expose les routes"
+            },
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 107,
+              "emoji": "→",
+              "extrait": "/** Branché par main.ts : tout 401 → logout réactif du store auth. */"
+            },
+            {
+              "fichier": "src/admin/identite.ts",
+              "ligne": 42,
+              "emoji": "→→",
+              "extrait": "/** Initiales : « Stéphane Ballo » → « SB », « admin@eperformance.pro » → « AE ». */"
+            },
+            {
+              "fichier": "src/admin/main.ts",
+              "ligne": 2,
+              "emoji": "→",
+              "extrait": "* Point d'entrée de la console d'administration (admin.html → #admin)."
+            },
+            {
+              "fichier": "src/admin/main.ts",
+              "ligne": 30,
+              "emoji": "→",
+              "extrait": "// Tout 401 remonté par api.ts → déconnexion réactive : le shell (App.vue)"
+            },
+            {
+              "fichier": "src/admin/recherche.ts",
+              "ligne": 45,
+              "emoji": "→",
+              "extrait": "/** Minuscules sans accents — « Café » → « cafe ». */"
+            },
+            {
+              "fichier": "src/admin/router.ts",
+              "ligne": 73,
+              "emoji": "→",
+              "extrait": "// Toute route inconnue (lien profond périmé) → module par défaut"
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 12,
+              "emoji": "→",
+              "extrait": "*   · `eperf-theme = 'dark'`  → sombre ;"
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 13,
+              "emoji": "→",
+              "extrait": "*   · `eperf-theme = 'light'` → clair ;"
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 14,
+              "emoji": "→",
+              "extrait": "*   · clé absente             → système (suivi en direct)."
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 81,
+              "emoji": "←",
+              "extrait": "* `meta[name=theme-color]` ← valeur calculée de `--bg`."
+            },
+            {
+              "fichier": "src/admin/views/ConversationsView.vue",
+              "ligne": 738,
+              "emoji": "→",
+              "extrait": "/* Conversation ouverte → le détail prend l'écran, la liste s'efface */"
+            },
+            {
+              "fichier": "src/admin/views/IntegrationsView.vue",
+              "ligne": 43,
+              "emoji": "→",
+              "extrait": "* d'abord l'ACCÈS, la migration fonctionnelle PHP → FastAPI suit le calendrier"
+            }
+          ],
+          "palette": []
+        }
+      },
+      "pages publiques": {
+        "fichiers_lus": 3,
+        "interface": 0,
+        "commentaire": 1,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "src/application.css",
+              "ligne": 20,
+              "emoji": "→",
+              "extrait": "rapport à la FEUILLE COMPILÉE (dist/assets/… → dist/fonts/…), pas par"
+            }
+          ],
+          "palette": []
+        }
+      },
+      "coquilles HTML": {
+        "fichiers_lus": 2,
+        "interface": 0,
+        "commentaire": 1,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "index.html",
+              "ligne": 90,
+              "emoji": "→",
+              "extrait": "/* Mode application : document de premier niveau → mise en page"
+            }
+          ],
+          "palette": []
+        }
+      },
+      "manifestes": {
+        "fichiers_lus": 2,
+        "interface": 0,
+        "commentaire": 0,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [],
+          "palette": []
+        }
+      },
+      "SDK (gele)": {
+        "fichiers_lus": 1,
+        "interface": 1,
+        "commentaire": 6,
+        "palette": 0,
+        "detail": {
+          "interface": [
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 826,
+              "emoji": "✕",
+              "extrait": "'<button type=\"button\" aria-label=\"Masquer\">✕</button>'"
+            }
+          ],
+          "commentaire": [
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 198,
+              "emoji": "→",
+              "extrait": "rétractables du navigateur → débordement haut (header coupé) */"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 283,
+              "emoji": "↔",
+              "extrait": "// postMessage widget ↔ SDK"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 337,
+              "emoji": "→",
+              "extrait": "//   document.addEventListener('eperf:chatbot:message', …)  → GA4 chatbot_message"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 338,
+              "emoji": "→",
+              "extrait": "//   document.addEventListener('eperf:chatbot:lead', …)     → GA4 chatbot_lead"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 745,
+              "emoji": "→",
+              "extrait": "// et scrolle la page hôte de force → éléments fixed instables)."
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 863,
+              "emoji": "→",
+              "extrait": "// État ouvert persistant (refresh → widget réouvert, même conversation)"
+            }
+          ],
+          "palette": []
+        }
+      }
+    },
+    "total_interface": 4,
+    "total_commentaire": 59,
+    "total_palette": 1
+  },
+  "apres": {
+    "reference": "arbre de travail",
+    "expression": "mêmes plages que src/admin/regles.spec.ts",
+    "par_perimetre": {
+      "widget (vues, composants, stores)": {
+        "fichiers_lus": 38,
+        "interface": 0,
+        "commentaire": 38,
+        "palette": 1,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "src/views/Help.vue",
+              "ligne": 223,
+              "emoji": "→",
+              "extrait": "* Capacité de Mia cliquée depuis l'aide (A.9) → conversation ouverte avec"
+            },
+            {
+              "fichier": "src/views/Home.vue",
+              "ligne": 181,
+              "emoji": "→",
+              "extrait": "* Capacité cliquée → conversation ouverte + message envoyé à Mia."
+            },
+            {
+              "fichier": "src/components/AppHeader.vue",
+              "ligne": 163,
+              "emoji": "→",
+              "extrait": "// reçu par App.vue → retour à l'accueil)"
+            },
+            {
+              "fichier": "src/components/AppHeader.vue",
+              "ligne": 237,
+              "emoji": "→",
+              "extrait": "/* Pastille « en ligne » : état de succès → --green-text (eperf.css:265) */"
+            },
+            {
+              "fichier": "src/components/ChatInput.vue",
+              "ligne": 318,
+              "emoji": "→",
+              "extrait": "// Focus/blur → le SDK relance son fix clavier au bon moment (iOS)"
+            },
+            {
+              "fichier": "src/components/ChatMessages.vue",
+              "ligne": 25,
+              "emoji": "↻",
+              "extrait": "Sans caractère décoratif : « ↻ » est un emoji d'interface au sens de"
+            },
+            {
+              "fichier": "src/components/InviteInstallation.vue",
+              "ligne": 52,
+              "emoji": "→",
+              "extrait": "*   · l'invite du navigateur a été capturée (Chromium) → le bouton déclenche"
+            },
+            {
+              "fichier": "src/components/InviteInstallation.vue",
+              "ligne": 54,
+              "emoji": "→",
+              "extrait": "*   · sinon (iOS Safari, Firefox, iframe) → le bouton ouvre la page"
+            },
+            {
+              "fichier": "src/components/MessageBubble.vue",
+              "ligne": 85,
+              "emoji": "→",
+              "extrait": "* 1. html backend contenant un <a> (fallback WhatsApp) → sanitisé tel quel"
+            },
+            {
+              "fichier": "src/components/MessageBubble.vue",
+              "ligne": 86,
+              "emoji": "→",
+              "extrait": "* 2. sinon → texte markdown rendu (les ** du LLM deviennent du gras réel)"
+            },
+            {
+              "fichier": "src/components/TabBar.vue",
+              "ligne": 6,
+              "emoji": "←→",
+              "extrait": "clavier ← → début/fin."
+            },
+            {
+              "fichier": "src/components/TabBar.vue",
+              "ligne": 107,
+              "emoji": "←→",
+              "extrait": "/** ← → parcourent les onglets, Début/Fin vont aux extrémités (motif WAI-ARIA) */"
+            },
+            {
+              "fichier": "src/stores/blog.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "*   2. à défaut (hors-ligne, CORS, 404, charge invalide) → copie embarquée"
+            },
+            {
+              "fichier": "src/stores/blog.ts",
+              "ligne": 92,
+              "emoji": "→",
+              "extrait": "/** Résultats de recherche (vide → tous les articles) */"
+            },
+            {
+              "fichier": "src/stores/conversation.ts",
+              "ligne": 8,
+              "emoji": "→",
+              "extrait": "* - restore() hydrate depuis GET /conversation/{id} ; 404 → session vierge"
+            },
+            {
+              "fichier": "src/stores/conversation.ts",
+              "ligne": 71,
+              "emoji": "→",
+              "extrait": "* 404 → session vierge silencieuse (nouvelle conversation au prochain message)."
+            },
+            {
+              "fichier": "src/stores/intent.ts",
+              "ligne": 4,
+              "emoji": "→",
+              "extrait": "* Intentions de navigation inter-écrans (Accueil/Aide → Conversation)."
+            },
+            {
+              "fichier": "src/stores/intent.ts",
+              "ligne": 47,
+              "emoji": "→",
+              "extrait": "* Suggestion cliquée → conversation ouverte + message envoyé à Mia."
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "* - Réception : suggestions JSON → quick_replies natifs (jamais parser le HTML)"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 64,
+              "emoji": "→",
+              "extrait": "* `data:image/png;base64,AAAA` → { data: 'AAAA', media_type: 'image/png' }"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 281,
+              "emoji": "→",
+              "extrait": "// Le libellé du lien ne porte AUCUN caractère décoratif : « → » compte"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 371,
+              "emoji": "→",
+              "extrait": "// Release: l'humain a rendu la main → l'IA reprend"
+            },
+            {
+              "fichier": "src/stores/messages.ts",
+              "ligne": 412,
+              "emoji": "→",
+              "extrait": "// role reçu en format DB ('user'|'assistant') → converti dans le type WidgetMessage"
+            },
+            {
+              "fichier": "src/helpers/iconesCollections.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "* une icône SVG par collection (`assets/css/blog.css` → `.article-card-thumb`)."
+            },
+            {
+              "fichier": "src/helpers/installation.ts",
+              "ligne": 56,
+              "emoji": "→",
+              "extrait": "/** Stockage local tolérant : navigation privée ou stockage bloqué → état vide */"
+            },
+            {
+              "fichier": "src/helpers/notificationSound.ts",
+              "ligne": 27,
+              "emoji": "→",
+              "extrait": "/** Double bip doux descendant (La → Mi), ~0.35s, volume discret */"
+            },
+            {
+              "fichier": "src/helpers/push.ts",
+              "ligne": 99,
+              "emoji": "→",
+              "extrait": "/** Stockage local tolérant : navigation privée ou stockage bloqué → état vide */"
+            },
+            {
+              "fichier": "src/helpers/push.ts",
+              "ligne": 202,
+              "emoji": "→",
+              "extrait": "* Clé publique base64url → octets, pour `applicationServerKey`."
+            },
+            {
+              "fichier": "src/helpers/pwa.ts",
+              "ligne": 20,
+              "emoji": "→",
+              "extrait": "/** Nom du fichier, à la racine du dossier servi (public/sw.js → dist/sw.js) */"
+            },
+            {
+              "fichier": "src/helpers/sanitize.ts",
+              "ligne": 43,
+              "emoji": "→",
+              "extrait": "*  Les boutons backend (suggestions → quick replies natifs) ne fuient pas. */"
+            },
+            {
+              "fichier": "src/helpers/sanitize.ts",
+              "ligne": 83,
+              "emoji": "→",
+              "extrait": "// Ligne vide → fermer la liste en cours (séparateur visuel)"
+            },
+            {
+              "fichier": "src/helpers/sdkBridge.ts",
+              "ligne": 2,
+              "emoji": "↔",
+              "extrait": "* Bridge widget ↔ SDK (site hôte) — adapté de IframeEventHelper.js (Chatwoot)."
+            },
+            {
+              "fichier": "src/helpers/sdkBridge.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "*   SDK → widget : { event: 'open' | 'close' | 'identify', ... }"
+            },
+            {
+              "fichier": "src/helpers/sdkBridge.ts",
+              "ligne": 7,
+              "emoji": "→",
+              "extrait": "*   widget → SDK : { event: 'ready' } au montage"
+            },
+            {
+              "fichier": "src/helpers/theme.ts",
+              "ligne": 64,
+              "emoji": "↔",
+              "extrait": "/** Bascule clair ↔ sombre (bouton des pages publiques) */"
+            },
+            {
+              "fichier": "src/helpers/tracking.ts",
+              "ligne": 115,
+              "emoji": "→",
+              "extrait": "* Une réponse de Mia a été produite → `eperf:chatbot:message`."
+            },
+            {
+              "fichier": "src/helpers/tracking.ts",
+              "ligne": 127,
+              "emoji": "→",
+              "extrait": "* Capture de contact → `eperf:chatbot:lead`."
+            },
+            {
+              "fichier": "src/data/capacites.ts",
+              "ligne": 7,
+              "emoji": "→",
+              "extrait": "* opaque que seul le backend sait interpréter (mapping intent → agent dans"
+            }
+          ],
+          "palette": [
+            {
+              "fichier": "src/components/ChatInput.vue",
+              "ligne": 222,
+              "emoji": "😊👍🙏🔥💪🚀❤️✅🤝📈😂🤔",
+              "extrait": "const EMOJIS = ['😊', '👍', '🙏', '🔥', '💪', '🚀', '❤️', '✅', '🤝', '📈', '😂', '🤔']"
+            }
+          ]
+        }
+      },
+      "console": {
+        "fichiers_lus": 30,
+        "interface": 0,
+        "commentaire": 15,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 5,
+              "emoji": "→",
+              "extrait": "* - POST /api/auth/login — OAuth2PasswordRequestForm → form-urlencoded"
+            },
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 6,
+              "emoji": "→",
+              "extrait": "*   `username=<email>&password=<pwd>` → { access_token, token_type }"
+            },
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 11,
+              "emoji": "⚠️",
+              "extrait": "* ⚠️ Robustesse déploiement : le backend Railway actuel expose les routes"
+            },
+            {
+              "fichier": "src/admin/api.ts",
+              "ligne": 107,
+              "emoji": "→",
+              "extrait": "/** Branché par main.ts : tout 401 → logout réactif du store auth. */"
+            },
+            {
+              "fichier": "src/admin/identite.ts",
+              "ligne": 42,
+              "emoji": "→→",
+              "extrait": "/** Initiales : « Stéphane Ballo » → « SB », « admin@eperformance.pro » → « AE ». */"
+            },
+            {
+              "fichier": "src/admin/main.ts",
+              "ligne": 2,
+              "emoji": "→",
+              "extrait": "* Point d'entrée de la console d'administration (admin.html → #admin)."
+            },
+            {
+              "fichier": "src/admin/main.ts",
+              "ligne": 30,
+              "emoji": "→",
+              "extrait": "// Tout 401 remonté par api.ts → déconnexion réactive : le shell (App.vue)"
+            },
+            {
+              "fichier": "src/admin/recherche.ts",
+              "ligne": 45,
+              "emoji": "→",
+              "extrait": "/** Minuscules sans accents — « Café » → « cafe ». */"
+            },
+            {
+              "fichier": "src/admin/router.ts",
+              "ligne": 73,
+              "emoji": "→",
+              "extrait": "// Toute route inconnue (lien profond périmé) → module par défaut"
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 12,
+              "emoji": "→",
+              "extrait": "*   · `eperf-theme = 'dark'`  → sombre ;"
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 13,
+              "emoji": "→",
+              "extrait": "*   · `eperf-theme = 'light'` → clair ;"
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 14,
+              "emoji": "→",
+              "extrait": "*   · clé absente             → système (suivi en direct)."
+            },
+            {
+              "fichier": "src/admin/theme.ts",
+              "ligne": 81,
+              "emoji": "←",
+              "extrait": "* `meta[name=theme-color]` ← valeur calculée de `--bg`."
+            },
+            {
+              "fichier": "src/admin/views/ConversationsView.vue",
+              "ligne": 738,
+              "emoji": "→",
+              "extrait": "/* Conversation ouverte → le détail prend l'écran, la liste s'efface */"
+            },
+            {
+              "fichier": "src/admin/views/IntegrationsView.vue",
+              "ligne": 43,
+              "emoji": "→",
+              "extrait": "* d'abord l'ACCÈS, la migration fonctionnelle PHP → FastAPI suit le calendrier"
+            }
+          ],
+          "palette": []
+        }
+      },
+      "pages publiques": {
+        "fichiers_lus": 3,
+        "interface": 0,
+        "commentaire": 1,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "src/application.css",
+              "ligne": 20,
+              "emoji": "→",
+              "extrait": "rapport à la FEUILLE COMPILÉE (dist/assets/… → dist/fonts/…), pas par"
+            }
+          ],
+          "palette": []
+        }
+      },
+      "coquilles HTML": {
+        "fichiers_lus": 2,
+        "interface": 0,
+        "commentaire": 1,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [
+            {
+              "fichier": "index.html",
+              "ligne": 90,
+              "emoji": "→",
+              "extrait": "/* Mode application : document de premier niveau → mise en page"
+            }
+          ],
+          "palette": []
+        }
+      },
+      "manifestes": {
+        "fichiers_lus": 2,
+        "interface": 0,
+        "commentaire": 0,
+        "palette": 0,
+        "detail": {
+          "interface": [],
+          "commentaire": [],
+          "palette": []
+        }
+      },
+      "SDK (gele)": {
+        "fichiers_lus": 1,
+        "interface": 1,
+        "commentaire": 6,
+        "palette": 0,
+        "detail": {
+          "interface": [
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 826,
+              "emoji": "✕",
+              "extrait": "'<button type=\"button\" aria-label=\"Masquer\">✕</button>'"
+            }
+          ],
+          "commentaire": [
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 198,
+              "emoji": "→",
+              "extrait": "rétractables du navigateur → débordement haut (header coupé) */"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 283,
+              "emoji": "↔",
+              "extrait": "// postMessage widget ↔ SDK"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 337,
+              "emoji": "→",
+              "extrait": "//   document.addEventListener('eperf:chatbot:message', …)  → GA4 chatbot_message"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 338,
+              "emoji": "→",
+              "extrait": "//   document.addEventListener('eperf:chatbot:lead', …)     → GA4 chatbot_lead"
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 745,
+              "emoji": "→",
+              "extrait": "// et scrolle la page hôte de force → éléments fixed instables)."
+            },
+            {
+              "fichier": "src/sdk/entry.ts",
+              "ligne": 863,
+              "emoji": "→",
+              "extrait": "// État ouvert persistant (refresh → widget réouvert, même conversation)"
+            }
+          ],
+          "palette": []
+        }
+      }
+    },
+    "total_interface": 1,
+    "total_commentaire": 61,
+    "total_palette": 1
+  },
+  "correction": {
+    "interface": 3,
+    "commentaire": -2,
+    "palette": 0
+  }
+}
