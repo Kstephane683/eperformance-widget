@@ -6,7 +6,12 @@
     (aria-labelledby) ; l'écran Conversation n'est pas un panneau d'onglet.
   -->
   <div class="ep-app">
-    <AppHeader />
+    <!-- Hors ligne : l'application reste montée (le fil, la conversation et
+         l'état des stores sont conservés) mais devient inerte — le focus ne
+         peut pas passer derrière l'écran d'attente. -->
+    <AppHeader :inert="horsLigne || undefined" />
+
+    <InviteInstallation :inert="horsLigne || undefined" />
 
     <main
       v-if="estOnglet"
@@ -15,14 +20,17 @@
       role="tabpanel"
       :aria-labelledby="`ep-tab-${nomRoute}`"
       tabindex="-1"
+      :inert="horsLigne || undefined"
     >
       <router-view />
     </main>
-    <div v-else class="ep-corps">
+    <div v-else class="ep-corps" :inert="horsLigne || undefined">
       <router-view />
     </div>
 
-    <TabBar v-if="afficherOnglets" />
+    <TabBar v-if="afficherOnglets" :inert="horsLigne || undefined" />
+
+    <VoileHorsLigne />
   </div>
 </template>
 
@@ -33,7 +41,10 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppHeader from '@/components/AppHeader.vue'
+import InviteInstallation from '@/components/InviteInstallation.vue'
 import TabBar from '@/components/TabBar.vue'
+import VoileHorsLigne from '@/components/VoileHorsLigne.vue'
+import { horsLigne } from '@/helpers/reseau'
 import { initSdkBridge, notifyReady, postToSdk } from '@/helpers/sdkBridge'
 import { useConversationStore } from '@/stores/conversation'
 import { useMessagesStore } from '@/stores/messages'
@@ -130,7 +141,10 @@ function onEscape(e: KeyboardEvent) {
 </script>
 
 <style scoped>
+/* Racine de l'application : elle porte aussi l'écran d'attente hors-ligne,
+   qui se superpose (`position: absolute`) sans démonter le contenu. */
 .ep-app {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
