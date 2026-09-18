@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head><meta charset="utf-8"><title>E2E production</title>
+<style>html,body{margin:0;height:100%}iframe{width:400px;height:650px;border:0;
+position:absolute;right:24px;bottom:24px;box-shadow:0 12px 32px rgba(0,0,0,.2)}</style>
+</head><body>
+<iframe id="w" title="Assistant ePerformance"></iframe>
+<script>
+  const u = new URL('https://kstephane683.github.io/eperformance-widget/');
+  u.searchParams.set('apiUrl', 'https://web-production-4ab53.up.railway.app');
+  u.searchParams.set('siteId', 'eperformance_vitrine');
+  u.searchParams.set('theme', 'light');
+  u.searchParams.set('viewport', 'desktop');
+  u.searchParams.set('indexUrl', 'https://blog.eperformance.pro');
+  document.getElementById('w').src = u.toString();
+</script>
+</body></html>

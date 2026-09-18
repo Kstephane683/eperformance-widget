@@ -1,0 +1,168 @@
+{
+  "desktop-1280x720": {
+    "consent_mode_v2_defaut": {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied",
+      "analytics_storage": "denied",
+      "wait_for_update": 500
+    },
+    "bandeau_affiche": {
+      "fenetre": {
+        "w": 1280,
+        "h": 720
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bouton_whatsapp": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bulle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bulle_visible": false,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "119",
+      "bandeau_present": true,
+      "bandeau_masque": false
+    },
+    "bandeau_ferme": {
+      "fenetre": {
+        "w": 1280,
+        "h": 720
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bouton_whatsapp": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bulle": {
+        "x": 1204,
+        "y": 644,
+        "w": 56,
+        "h": 56,
+        "right": 1260,
+        "bottom": 700
+      },
+      "bulle_visible": true,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "2147483000",
+      "bandeau_present": true,
+      "bandeau_masque": true
+    },
+    "chevauchement_bulle_whatsapp_px2": 0,
+    "chevauchement_bulle_barre_px2": 0
+  },
+  "mobile-390x844": {
+    "consent_mode_v2_defaut": {
+      "ad_storage": "denied",
+      "ad_user_data": "denied",
+      "ad_personalization": "denied",
+      "analytics_storage": "denied",
+      "wait_for_update": 500
+    },
+    "bandeau_affiche": {
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 766,
+        "w": 390,
+        "h": 78,
+        "right": 390,
+        "bottom": 844
+      },
+      "bouton_whatsapp": {
+        "x": 216,
+        "y": 779,
+        "w": 156,
+        "h": 53,
+        "right": 372,
+        "bottom": 832
+      },
+      "bulle": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "bulle_visible": false,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "119",
+      "bandeau_present": true,
+      "bandeau_masque": false
+    },
+    "bandeau_ferme": {
+      "fenetre": {
+        "w": 390,
+        "h": 844
+      },
+      "barre_cta": {
+        "x": 0,
+        "y": 766,
+        "w": 390,
+        "h": 78,
+        "right": 390,
+        "bottom": 844
+      },
+      "bouton_whatsapp": {
+        "x": 216,
+        "y": 779,
+        "w": 156,
+        "h": 53,
+        "right": 372,
+        "bottom": 832
+      },
+      "bulle": {
+        "x": 318,
+        "y": 682,
+        "w": 56,
+        "h": 56,
+        "right": 374,
+        "bottom": 738
+      },
+      "bulle_visible": true,
+      "chevauchement_bulle_whatsapp_px2": 0,
+      "chevauchement_bulle_barre_px2": 0,
+      "z_index_holder": "2147483000",
+      "bandeau_present": true,
+      "bandeau_masque": true
+    },
+    "chevauchement_bulle_whatsapp_px2": 0,
+    "chevauchement_bulle_barre_px2": 0
+  }
+}
