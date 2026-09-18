@@ -226,8 +226,8 @@
     },
     {
       "fichier": "application-conversation-desktop-1440x900-clair.png",
-      "md5": "e74678ce4ec8267f12eb89a281f65356",
-      "octets": 119548,
+      "md5": "ac511255ad2b217cae0046b383334200",
+      "octets": 119553,
       "serie": "application",
       "ecran": "conversation",
       "gabarit": "desktop-1440x900",
@@ -237,14 +237,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 649,
+      "longueur_texte": 647,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-conversation-desktop-1440x900-sombre.png",
-      "md5": "a8781a98f0df0361ec22c974e5888c19",
-      "octets": 118233,
+      "md5": "ca59b9b639f0ce92d027f7e25b71745f",
+      "octets": 118219,
       "serie": "application",
       "ecran": "conversation",
       "gabarit": "desktop-1440x900",
@@ -254,14 +254,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 649,
+      "longueur_texte": 647,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-conversation-mobile-390x844-clair.png",
-      "md5": "ad57a5d710a1f04d98c284ef62db4d54",
-      "octets": 115960,
+      "md5": "1a27a3a39a31c4288cc3b85b938674f6",
+      "octets": 115974,
       "serie": "application",
       "ecran": "conversation",
       "gabarit": "mobile-390x844",
@@ -271,14 +271,14 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 683,
+      "longueur_texte": 681,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-conversation-mobile-390x844-sombre.png",
-      "md5": "bfa62e1a22f1ccd1c7140128855ec96b",
-      "octets": 115426,
+      "md5": "bdf510456a6a3626be5d8e05ed327665",
+      "octets": 115398,
       "serie": "application",
       "ecran": "conversation",
       "gabarit": "mobile-390x844",
@@ -288,14 +288,14 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 683,
+      "longueur_texte": 681,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-messages-desktop-1440x900-clair.png",
-      "md5": "097278924809e54bc02da4a985558a14",
-      "octets": 70132,
+      "md5": "f4acd9c87fabe7e7c5d46a668a081553",
+      "octets": 70141,
       "serie": "application",
       "ecran": "messages",
       "gabarit": "desktop-1440x900",
@@ -305,14 +305,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-messages-desktop-1440x900-sombre.png",
-      "md5": "b6c1f3469e7f54009bdb94fee516733c",
-      "octets": 69680,
+      "md5": "95fa35409079ffd32fc78b7546c97a06",
+      "octets": 69669,
       "serie": "application",
       "ecran": "messages",
       "gabarit": "desktop-1440x900",
@@ -322,14 +322,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-messages-mobile-390x844-clair.png",
-      "md5": "0d3af82cc437f9d5790464ecc5fad9b8",
-      "octets": 51338,
+      "md5": "99b160e47d82a808adb97b75edeb77b8",
+      "octets": 51340,
       "serie": "application",
       "ecran": "messages",
       "gabarit": "mobile-390x844",
@@ -339,14 +339,14 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "mode": "application"
     },
     {
       "fichier": "application-messages-mobile-390x844-sombre.png",
-      "md5": "c4da9fc469d4072fc232b26e77c187ab",
-      "octets": 51500,
+      "md5": "92f85ff12727046f7b9ab6d4fb068735",
+      "octets": 51495,
       "serie": "application",
       "ecran": "messages",
       "gabarit": "mobile-390x844",
@@ -356,7 +356,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "mode": "application"
     },
@@ -642,8 +642,8 @@
     },
     {
       "fichier": "console-boite-de-reception-desktop-1440x900-clair.png",
-      "md5": "8088593e7658229f9d5fffb1a92d6fc4",
-      "octets": 275046,
+      "md5": "eda8845b307ef93fd101feb77e63d3ba",
+      "octets": 274955,
       "serie": "console",
       "ecran": "boite-de-reception",
       "gabarit": "desktop-1440x900",
@@ -653,7 +653,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 1254,
+      "longueur_texte": 1251,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -677,8 +677,8 @@
     },
     {
       "fichier": "console-boite-de-reception-desktop-1440x900-sombre.png",
-      "md5": "1ef2321da2f86a1be6faee73f6c0cb46",
-      "octets": 269993,
+      "md5": "a3e014084e2d7b98c1bc35caab8b525f",
+      "octets": 269884,
       "serie": "console",
       "ecran": "boite-de-reception",
       "gabarit": "desktop-1440x900",
@@ -688,7 +688,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 1254,
+      "longueur_texte": 1251,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -712,8 +712,8 @@
     },
     {
       "fichier": "console-boite-de-reception-mobile-390x844-clair.png",
-      "md5": "d523d844f75a3ccdf6fb18f0dbeffb5d",
-      "octets": 148248,
+      "md5": "4e78141c9bf493e6f77f7e9dffe7a0b9",
+      "octets": 148137,
       "serie": "console",
       "ecran": "boite-de-reception",
       "gabarit": "mobile-390x844",
@@ -723,7 +723,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 1067,
+      "longueur_texte": 1064,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -747,8 +747,8 @@
     },
     {
       "fichier": "console-boite-de-reception-mobile-390x844-sombre.png",
-      "md5": "20018702ed52ddce1c143e8e42a1a45f",
-      "octets": 144953,
+      "md5": "a279d41ea03e01a244b6668d40cda99a",
+      "octets": 144843,
       "serie": "console",
       "ecran": "boite-de-reception",
       "gabarit": "mobile-390x844",
@@ -758,7 +758,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 1067,
+      "longueur_texte": 1064,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -1066,8 +1066,8 @@
     },
     {
       "fichier": "console-conversation-ouverte-desktop-1440x900-clair.png",
-      "md5": "85cc3238e009fd4a9c8e63235a48cf85",
-      "octets": 364083,
+      "md5": "0f74081df7196237cbcb945551a6e1ff",
+      "octets": 363953,
       "serie": "console",
       "ecran": "conversation-ouverte",
       "gabarit": "desktop-1440x900",
@@ -1077,7 +1077,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 1853,
+      "longueur_texte": 1850,
       "termes_internes_presents": [],
       "appels_api_interceptes": 5,
       "chemins_api": [
@@ -1102,8 +1102,8 @@
     },
     {
       "fichier": "console-conversation-ouverte-desktop-1440x900-sombre.png",
-      "md5": "a92636de0b436b99d7cc2545754373fc",
-      "octets": 358122,
+      "md5": "c2738c8f95df9890bfd00b2f5c3127c4",
+      "octets": 358048,
       "serie": "console",
       "ecran": "conversation-ouverte",
       "gabarit": "desktop-1440x900",
@@ -1113,7 +1113,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 1853,
+      "longueur_texte": 1850,
       "termes_internes_presents": [],
       "appels_api_interceptes": 5,
       "chemins_api": [
@@ -1361,7 +1361,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 1421,
+      "longueur_texte": 1418,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1396,7 +1396,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 1421,
+      "longueur_texte": 1418,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1560,8 +1560,8 @@
     },
     {
       "fichier": "console-prospects-desktop-1440x900-clair.png",
-      "md5": "23f506148dd3c10483d86100967d5f23",
-      "octets": 234946,
+      "md5": "7910c855c887746269a8c6d62ee446d7",
+      "octets": 234868,
       "serie": "console",
       "ecran": "prospects",
       "gabarit": "desktop-1440x900",
@@ -1571,7 +1571,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 913,
+      "longueur_texte": 911,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1595,8 +1595,8 @@
     },
     {
       "fichier": "console-prospects-desktop-1440x900-sombre.png",
-      "md5": "8f32ade1e62777b7e0f28c03bb4f7e20",
-      "octets": 230894,
+      "md5": "2d3035106035d4beb8a0bd53da1371e3",
+      "octets": 230813,
       "serie": "console",
       "ecran": "prospects",
       "gabarit": "desktop-1440x900",
@@ -1606,7 +1606,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 913,
+      "longueur_texte": 911,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1630,8 +1630,8 @@
     },
     {
       "fichier": "console-prospects-mobile-390x844-clair.png",
-      "md5": "d5c94f1f0c5b5208f4f43fd7a69f4a26",
-      "octets": 134886,
+      "md5": "d30743acc98edbac7e482d040a094a94",
+      "octets": 134806,
       "serie": "console",
       "ecran": "prospects",
       "gabarit": "mobile-390x844",
@@ -1641,7 +1641,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 853,
+      "longueur_texte": 851,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1665,8 +1665,8 @@
     },
     {
       "fichier": "console-prospects-mobile-390x844-sombre.png",
-      "md5": "c93ac606ec436843cb471f53cd05becd",
-      "octets": 131625,
+      "md5": "58d8f0e5749b7371671fc5a266ac0430",
+      "octets": 131566,
       "serie": "console",
       "ecran": "prospects",
       "gabarit": "mobile-390x844",
@@ -1676,7 +1676,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 853,
+      "longueur_texte": 851,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1840,8 +1840,8 @@
     },
     {
       "fichier": "console-tableau-de-bord-desktop-1440x900-clair.png",
-      "md5": "9efeb6c71ccf13e7ec24c84b36d015de",
-      "octets": 282554,
+      "md5": "30cee36310f292be90c7af0757c1a920",
+      "octets": 282574,
       "serie": "console",
       "ecran": "tableau-de-bord",
       "gabarit": "desktop-1440x900",
@@ -1851,7 +1851,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 1483,
+      "longueur_texte": 1480,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1875,8 +1875,8 @@
     },
     {
       "fichier": "console-tableau-de-bord-desktop-1440x900-sombre.png",
-      "md5": "0598bb2292731e5291e64d70fbc1406a",
-      "octets": 277477,
+      "md5": "af9d607f01d79b7efd590b3b995997f4",
+      "octets": 277478,
       "serie": "console",
       "ecran": "tableau-de-bord",
       "gabarit": "desktop-1440x900",
@@ -1886,7 +1886,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 1483,
+      "longueur_texte": 1480,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1921,7 +1921,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 1421,
+      "longueur_texte": 1418,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1956,7 +1956,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 1421,
+      "longueur_texte": 1418,
       "termes_internes_presents": [],
       "appels_api_interceptes": 3,
       "chemins_api": [
@@ -1980,8 +1980,8 @@
     },
     {
       "fichier": "console-utilisateurs-desktop-1440x900-clair.png",
-      "md5": "05c1322262213718feffdedac7d454d0",
-      "octets": 202196,
+      "md5": "75ccefa8a8b9fd519e3bfb8c85cce6fc",
+      "octets": 202933,
       "serie": "console",
       "ecran": "utilisateurs",
       "gabarit": "desktop-1440x900",
@@ -1991,7 +1991,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 745,
+      "longueur_texte": 756,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -2016,8 +2016,8 @@
     },
     {
       "fichier": "console-utilisateurs-desktop-1440x900-sombre.png",
-      "md5": "d84e9ad7abf4a82c7649a68db544df7d",
-      "octets": 198507,
+      "md5": "3e0715cf4dba01e08da366637224528b",
+      "octets": 199454,
       "serie": "console",
       "ecran": "utilisateurs",
       "gabarit": "desktop-1440x900",
@@ -2027,7 +2027,7 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 745,
+      "longueur_texte": 756,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -2063,7 +2063,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 690,
+      "longueur_texte": 701,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -2099,7 +2099,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 690,
+      "longueur_texte": 701,
       "termes_internes_presents": [],
       "appels_api_interceptes": 4,
       "chemins_api": [
@@ -2584,8 +2584,8 @@
     },
     {
       "fichier": "widget-conversation-desktop-1440x900-clair.png",
-      "md5": "06e4921c34be1bec509e43b6baac5e8b",
-      "octets": 93571,
+      "md5": "89f0a570007b7de226e212cf3f2869ff",
+      "octets": 93581,
       "serie": "widget",
       "ecran": "conversation",
       "gabarit": "desktop-1440x900",
@@ -2595,14 +2595,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 649,
+      "longueur_texte": 647,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
     {
       "fichier": "widget-conversation-desktop-1440x900-sombre.png",
-      "md5": "12668d17c5f346e1822c2e326148960a",
-      "octets": 93698,
+      "md5": "17e462a132a8a18f3fd9067ca758345c",
+      "octets": 93659,
       "serie": "widget",
       "ecran": "conversation",
       "gabarit": "desktop-1440x900",
@@ -2612,14 +2612,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 649,
+      "longueur_texte": 647,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
     {
       "fichier": "widget-conversation-mobile-390x844-clair.png",
-      "md5": "b4b522da4ddb0aaeb4e4941b63817ea3",
-      "octets": 118520,
+      "md5": "939137095602845eb6429caeda1d7a5f",
+      "octets": 118531,
       "serie": "widget",
       "ecran": "conversation",
       "gabarit": "mobile-390x844",
@@ -2629,14 +2629,14 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 683,
+      "longueur_texte": 681,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
     {
       "fichier": "widget-conversation-mobile-390x844-sombre.png",
-      "md5": "db098b9efe05e1503f94a64dc832f845",
-      "octets": 118161,
+      "md5": "8a0eb17367dac7e6649c2b69ce7dfe9f",
+      "octets": 118128,
       "serie": "widget",
       "ecran": "conversation",
       "gabarit": "mobile-390x844",
@@ -2646,7 +2646,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 683,
+      "longueur_texte": 681,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
@@ -2754,8 +2754,8 @@
     },
     {
       "fichier": "widget-messages-desktop-1440x900-clair.png",
-      "md5": "55dde984f8bd66843be60dfe1a1ff2fc",
-      "octets": 50871,
+      "md5": "dd41bdc4ae708a07418fa9ad48b5c73c",
+      "octets": 50899,
       "serie": "widget",
       "ecran": "messages",
       "gabarit": "desktop-1440x900",
@@ -2765,14 +2765,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
     {
       "fichier": "widget-messages-desktop-1440x900-sombre.png",
-      "md5": "2049bebf4c1c1f43f33ea26675284993",
-      "octets": 51481,
+      "md5": "92c9eb5742b5f4160005138551aee53d",
+      "octets": 51497,
       "serie": "widget",
       "ecran": "messages",
       "gabarit": "desktop-1440x900",
@@ -2782,14 +2782,14 @@
         "h": 900
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
     {
       "fichier": "widget-messages-mobile-390x844-clair.png",
-      "md5": "cb91bbf8f98036d5f806996e0f72ea44",
-      "octets": 52475,
+      "md5": "32c85d722991c9563908f365b067849e",
+      "octets": 52477,
       "serie": "widget",
       "ecran": "messages",
       "gabarit": "mobile-390x844",
@@ -2799,14 +2799,14 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     },
     {
       "fichier": "widget-messages-mobile-390x844-sombre.png",
-      "md5": "74af7846f6dbae20a53354a8b5c801b8",
-      "octets": 52970,
+      "md5": "19d2ee0e5531aa068a0921057f37b0a8",
+      "octets": 52962,
       "serie": "widget",
       "ecran": "messages",
       "gabarit": "mobile-390x844",
@@ -2816,7 +2816,7 @@
         "h": 844
       },
       "echelle": 2,
-      "longueur_texte": 275,
+      "longueur_texte": 274,
       "termes_internes_presents": [],
       "contexte": "page d'un site hôte, widget ouvert"
     }

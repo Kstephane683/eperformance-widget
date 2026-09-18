@@ -7,14 +7,15 @@ uniquement. **Hors périmètre, non touché :** `unified-ia-backend/**`,
 
 | Livrable | État | Preuve |
 |---|---|---|
-| 1. Maquettes de **tous** les écrans, clair **et** sombre, mobile **et** desktop | ✅ | **112 images** dans `docs/phase3-tache-6-6/maquettes/` |
-| 2. Échelle 2 (exigence : facteur 2 minimum) | ✅ | `maquettes.index.json` → `"echelle": 2` sur les 112 entrées |
-| 3. Nomenclature `<ecran>-<gabarit>-<theme>.png` | ✅ | `maquettes.config.json` → `nomenclature` |
-| 4. Fichiers sources : harnais + configuration versionnés | ✅ | `captures.py` (script) + `maquettes.config.json` + `jeux-essai.json` |
-| 5. Index de la tâche | ✅ | ce document + `maquettes.index.json` (une entrée par image) |
-| 6. Planche de synthèse (facultative) | ✅ | 4 planches, une par série |
-| 7. Rendu obtenu de l'application **réellement exécutée** | ✅ | build `dist/` servi tel quel ; API interceptée ; widget ouvert par le SDK dans une page hôte |
-| 8. Aucun emoji, aucun nom d'agent interne dans les images | ✅ | **0 fuite** sur 112 captures (analyse du texte rendu à chaque prise) |
+| 1. Maquettes de **tous** les écrans, clair **et** sombre, mobile **et** desktop | Oui | **112 images** dans `docs/phase3-tache-6-6/maquettes/` |
+| 2. Échelle 2 (exigence : facteur 2 minimum) | Oui | `maquettes.index.json` : `"echelle": 2` sur les 112 entrées |
+| 2 bis. Reproductibles à l'octet | Oui | Deux exécutions de la série console : **50/50 empreintes MD5 identiques** |
+| 3. Nomenclature `<ecran>-<gabarit>-<theme>.png` | Oui | `maquettes.config.json` : clef `nomenclature` |
+| 4. Fichiers sources : harnais + configuration versionnés | Oui | `captures.py` (script) + `maquettes.config.json` + `jeux-essai.json` |
+| 5. Index de la tâche | Oui | ce document + `maquettes.index.json` (une entrée par image) |
+| 6. Planche de synthèse (facultative) | Oui | 4 planches, une par série |
+| 7. Rendu obtenu de l'application **réellement exécutée** | Oui | build `dist/` servi tel quel ; API interceptée ; widget ouvert par le SDK dans une page hôte |
+| 8. Aucun emoji, aucun nom d'agent interne dans les images | Oui | **0 fuite** sur 112 captures (analyse du texte rendu à chaque prise) |
 
 ---
 
@@ -82,6 +83,7 @@ navigateur (Chromium 151, Playwright).
 | Échelle | `device_scale_factor = 2` | Exigence de la consigne |
 | Thèmes | `color_scheme` forcé par contexte **et** `?theme=` sur le document | Le clair et le sombre sont tous deux déterministes, indépendamment des préférences de la machine de mesure |
 | Planches | Recomposées depuis les maquettes **déjà écrites** | Aucune capture supplémentaire : la planche ne peut pas diverger des maquettes |
+| Horloge du navigateur | **figée** (`horloge_figee`, `2026-09-18T12:00:00Z`) | Les libellés relatifs du produit (« il y a 12 heures ») sont calculés depuis l'heure courante : sans épinglette, deux passes à une heure d'écart produisent des images différentes. Mesuré : **34 maquettes sur 112** différaient entre deux exécutions, sans qu'aucun fichier du produit ait bougé |
 
 ### Les trois contrôles qui empêchent une maquette fausse
 
@@ -103,6 +105,20 @@ prise**, et un échec interrompt la série :
 
 ---
 
+## 2.1 Reproductibilité — mesurée, pas promise
+
+La consigne est explicite : *« une maquette qu'on ne peut pas régénérer est une
+image morte »*. La reproductibilité est donc mesurée, comme le reste.
+
+| Contrôle | Résultat |
+|---|---|
+| Deux exécutions consécutives de la série console (50 images) | **50 / 50 identiques à l'octet** (même empreinte MD5) |
+| Avant l'épinglette d'horloge, deux passes à une heure d'écart | **34 images sur 112 différaient** — libellés relatifs dérivants, aucun fichier du produit modifié |
+
+La comparaison se lit dans `maquettes.index.json` : chaque entrée porte
+l'empreinte MD5 de son image. Régénérer le harnais et comparer l'index est le
+contrôle de non-régression des maquettes.
+
 ## 3. Défauts trouvés par le harnais, et corrigés
 
 | Défaut | Ce qui s'est passé | Ce qui l'a rendu visible |
@@ -110,7 +126,7 @@ prise**, et un échec interrompt la série :
 | **Motif d'interception d'API faux** | `page.route('…railway.app/*')` : dans un motif glob de Playwright, `*` **ne franchit pas** le `/`. La route n'était jamais interceptée, la requête partait sur le réseau réel et échouait en CORS. Le tableau de bord se capturait **avec des zéros** | Le compteur d'appels interceptés, ajouté au harnais : 0 appel = échec |
 | **Conversation vide crue pleine** | Réutiliser une page pour les cinq vues du widget faisait bloquer la reprise de conversation pendant la capture de l'écran précédent (2880×1800 en échelle 2) ; la copie de l'application annulait la requête (`net::ERR_FAILED`) et le fil retombait sur le message d'accueil | Le contrôle « texte attendu » : la série s'est arrêtée au lieu d'écrire 25 images fausses |
 | **Widget pointé sur le mauvais serveur** | Le paramètre `api` du harnais désignait le serveur local, qui répond 404 sur `/api/…` : la reprise de conversation échouait silencieusement | Idem — même contrôle |
-| **Entrées fantômes dans l'index** | L'index conservait les entrées d'une exécution précédente dont les fichiers avaient été supprimés (96 entrées pour 76 fichiers) | Contrôle de cohérence index ↔ disque, et dédoublonnage par nom de fichier |
+| **Entrées fantômes dans l'index** | L'index conservait les entrées d'une exécution précédente dont les fichiers avaient été supprimés (96 entrées pour 76 fichiers) | Contrôle de cohérence index et disque, et dédoublonnage par nom de fichier |
 
 Ces quatre défauts n'ont **pas** produit d'image : ils ont arrêté le harnais.
 C'est le résultat attendu d'un contrôle placé avant l'écriture du fichier.

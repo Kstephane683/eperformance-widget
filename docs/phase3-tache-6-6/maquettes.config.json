@@ -244,5 +244,7 @@
     ],
     "note_controle": "Les jeux d'essai portent VOLONTAIREMENT les clés d'agent internes : le texte rendu est analysé à chaque capture pour prouver qu'aucune n'apparaît. Le contrôle des emoji du document est fait par la tâche 6.9 (mesures.py), pas ici — un seul compteur, une seule vérité.",
     "attendu": "Fragment de texte qui doit apparaître dans le rendu. Un écran dont le fragment manque n'est pas une maquette : c'est un écran sans données, et le harnais échoue au lieu de l'écrire."
-  }
+  },
+  "horloge_figee": "2026-09-18T12:00:00Z",
+  "horloge_note": "Instant auquel le harnais fige l'horloge du navigateur. Sans cela, les libellés relatifs (« il y a 12 heures ») changent d'une exécution à l'autre : 34 maquettes sur 112 différaient entre deux passes, sans qu'aucun fichier du produit ait bougé. Une maquette de référence doit se régénérer à l'octet."
 }

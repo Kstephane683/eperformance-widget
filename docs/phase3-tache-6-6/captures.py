@@ -73,6 +73,7 @@ API_PRODUCTION = "https://web-production-4ab53.up.railway.app"
 MOTIF_API = re.compile(r"^https://web-production-4ab53\.up\.railway\.app/.*")
 
 ECHELLE = CONFIG["echelle"]
+HORLOGE_FIGEE = CONFIG["horloge_figee"]
 DELAIS = CONFIG["delais_ms"]
 ENTREES = CONFIG["entrees"]
 GABARITS = CONFIG["gabarits"]
@@ -309,6 +310,24 @@ def contexte(browser: Browser, largeur: int, hauteur: int, theme: str,
         locale="fr-FR",
         color_scheme="dark" if theme == "sombre" else "light",
     )
+    # Horloge figée, posée avant tout script de page. Les libellés relatifs du
+    # produit (« il y a 12 heures ») sont calculés à partir de l'heure courante :
+    # sans cette épinglette, deux exécutions à une heure d'écart produisent des
+    # images différentes — mesuré, 34 maquettes sur 112. Une maquette de
+    # référence qui change toute seule n'est pas une référence.
+    ctx.add_init_script(
+        "try {"
+        f"  var FIXE = Date.parse('{HORLOGE_FIGEE}');"
+        "  var Origine = Date;"
+        "  function DateFigee(...args) {"
+        "    return args.length ? new Origine(...args) : new Origine(FIXE);"
+        "  }"
+        "  DateFigee.prototype = Origine.prototype;"
+        "  DateFigee.now = function () { return FIXE; };"
+        "  DateFigee.parse = Origine.parse;"
+        "  DateFigee.UTC = Origine.UTC;"
+        "  window.Date = DateFigee;"
+        "} catch (e) {}")
     if amorce:
         ctx.add_init_script("\n".join(["try {", *amorce, "} catch (e) {}"]))
     return ctx
@@ -798,7 +817,11 @@ def main() -> int:
             navigateur.close()
 
         chemin = ecrire_index(index_global)
-        print(f"\nindex : {len(index_global)} images → {chemin.name}")
+        # Le compte affiché est celui du FICHIER écrit, pas celui de la liste de
+        # travail : après dédoublonnage les deux diffèrent (224 en mémoire, 112
+        # sur le disque), et c'est le fichier que le lecteur ouvrira.
+        ecrites = json.loads(chemin.read_text(encoding="utf-8"))["total"]
+        print(f"\nindex : {ecrites} images ecrites dans {chemin.name}")
         planche()
     finally:
         serveur.shutdown()
