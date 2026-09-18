@@ -1,9 +1,9 @@
 <template>
   <!--
     Candidatures — les diagnostics et candidatures reçus du site.
-    Les cartes remplacent le tableau : un score, un statut et un moyen de contact
-    se lisent mieux en carte, et la grille s'adapte au mobile sans défilement
-    horizontal. Le tri place les scores les plus chauds en premier.
+    Les blocs denses remplacent le tableau : un score, un statut et un moyen de
+    contact se lisent mieux en bloc, et la grille s'adapte au mobile sans
+    défilement horizontal. Le tri place les scores les plus chauds en premier.
   -->
   <div class="adm-page">
     <div class="adm-outils">
@@ -58,7 +58,7 @@
     </p>
 
     <ul v-else class="adm-grille">
-      <li v-for="candidature in filtered" :key="candidature.id" class="adm-carte">
+      <li v-for="candidature in filtered" :key="candidature.id" class="adm-bloc">
         <div class="adm-candidature__tete">
           <p class="adm-candidature__nom">{{ candidature.nom }}</p>
           <span class="adm-badge" :class="`adm-badge--${tonScore(candidature.score)}`">

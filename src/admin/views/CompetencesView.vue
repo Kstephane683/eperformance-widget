@@ -19,7 +19,7 @@
       <div class="adm-filet"><span class="adm-eyebrow">{{ famille.titre }}</span></div>
 
       <ul class="adm-grille">
-        <li v-for="capacite in famille.capacites" :key="capacite.libelle" class="adm-carte adm-competence">
+        <li v-for="capacite in famille.capacites" :key="capacite.libelle" class="adm-bloc adm-competence">
           <span class="adm-competence__vignette" aria-hidden="true">
             <svg
               viewBox="0 0 24 24"

@@ -47,7 +47,7 @@
     </p>
 
     <ul v-else class="adm-liste">
-      <li v-for="prospect in filtered" :key="prospect.conversation_id" class="adm-carte adm-prospect">
+      <li v-for="prospect in filtered" :key="prospect.conversation_id" class="adm-bloc adm-prospect">
         <div class="adm-prospect__tete">
           <span class="adm-prospect__pastille" aria-hidden="true">{{ initialesDe(prospect.nomSource) }}</span>
           <div class="adm-prospect__identite">

@@ -9,11 +9,23 @@
    parlent la même langue visuelle.
 
    Règle de vocabulaire (reprise du site) :
-     · la CARTE porte du contenu      — rayon 12, filet décoratif, surface ;
-     · le CHAMP se remplit            — rayon 12, filet de CONTRÔLE (3:1) ;
-     · le BOUTON s'actionne           — pilule 999, accent ou filet ;
-     · l'ÉTAT se lit                  — texte lisible + trace + filet.
-   Les rayons 12 / 999 et la transition `--t` sont ceux du design system.
+     · le BLOC DENSE porte du contenu — rayon 12, filet décoratif, surface ;
+     · la CARTE se pose sur la page  — rayon 28, filet décoratif, surface ;
+     · le CHAMP se remplit           — rayon 12, filet de CONTRÔLE (3:1) ;
+     · le BOUTON s'actionne          — pilule 999, accent ou filet ;
+     · l'ÉTAT se lit                 — texte lisible + trace + filet.
+   Les rayons 12 / 28 / 999 et la transition `--t` sont ceux du design system.
+
+   DÉCISION D7d — « carte » ne désigne plus le bloc à 12 px.
+   Le mot « carte » désignait ici un conteneur à rayon 12 (`--arrondi-bloc`),
+   alors que le noyau l'emploie pour un conteneur à rayon 28
+   (`--arrondi-carte`, `20-semantic.css:139`). Deux objets, un seul mot : la
+   collision était sémantique, pas visuelle. Les composants visés ici gardent
+   leur rayon de 12 px — `--arrondi-bloc` — et s'appellent désormais des
+   BLOCS DENSES ; le mot « carte » est réservé au rayon 28, comme au noyau et
+   sur les pages publiques (`.card`, `--arrondi-carte`).
+   Renommage à rendu constant : aucune valeur, aucune règle n'a bougé, seule
+   l'écriture des sélecteurs et des commentaires a changé.
 
    Aucune valeur littérale de couleur : `grep -nE '#[0-9a-f]{3,8}|rgba?\('`
    sur ce fichier doit rester vide (vérifié par docs/phase3-tache-6-3/mesures.py).
@@ -304,10 +316,10 @@ select.adm-champ {
 }
 
 /* --------------------------------------------------------------------------
-   Cartes et grilles
+   Blocs denses et grilles
    -------------------------------------------------------------------------- */
 
-.adm-carte {
+.adm-bloc {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -318,13 +330,13 @@ select.adm-champ {
   color: inherit;
 }
 
-.adm-carte--lien {
+.adm-bloc--lien {
   text-decoration: none;
   transition: border-color var(--t) var(--ease-out), box-shadow var(--t) var(--ease-out),
     transform var(--t) var(--ease-out);
 }
 
-.adm-carte--lien:hover {
+.adm-bloc--lien:hover {
   border-color: var(--gold-border);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);

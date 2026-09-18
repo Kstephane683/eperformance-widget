@@ -17,7 +17,7 @@
       {{ consoleStore.conversationsErreur }}
     </p>
 
-    <section class="adm-carte" aria-label="Volume des sept derniers jours">
+    <section class="adm-bloc" aria-label="Volume des sept derniers jours">
       <p class="adm-eyebrow">Conversations ouvertes — 7 derniers jours</p>
       <div class="adm-graphe">
         <div v-for="jour in semaine" :key="jour.cle" class="adm-graphe__colonne">
@@ -34,7 +34,7 @@
     </section>
 
     <div class="adm-grille">
-      <section class="adm-carte" aria-label="Taux de résolution">
+      <section class="adm-bloc" aria-label="Taux de résolution">
         <div class="adm-jauge">
           <span class="adm-jauge__legende">
             <span>Résolues</span>
@@ -47,7 +47,7 @@
         </div>
       </section>
 
-      <section class="adm-carte" aria-label="Taux d’escalade">
+      <section class="adm-bloc" aria-label="Taux d’escalade">
         <div class="adm-jauge">
           <span class="adm-jauge__legende">
             <span>Escaladées vers un conseiller</span>
@@ -60,7 +60,7 @@
         </div>
       </section>
 
-      <section class="adm-carte" aria-label="Capture de prospects">
+      <section class="adm-bloc" aria-label="Capture de prospects">
         <div class="adm-jauge">
           <span class="adm-jauge__legende">
             <span>Coordonnées laissées</span>

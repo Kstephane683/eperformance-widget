@@ -14,7 +14,7 @@
     </p>
 
     <div class="adm-grille">
-      <article v-for="collection in index.collections" :key="collection.slug" class="adm-carte">
+      <article v-for="collection in index.collections" :key="collection.slug" class="adm-bloc">
         <span class="adm-eyebrow">{{ collection.nombre }} article(s)</span>
         <h2 class="adm-titre">{{ collection.titre }}</h2>
         <p v-if="collection.slogan" class="adm-page__note">{{ collection.slogan }}</p>

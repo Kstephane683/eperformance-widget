@@ -14,7 +14,7 @@
 
     <ul class="adm-grille">
       <li v-for="lien in LIENS" :key="lien.href">
-        <a :href="lien.href" target="_blank" rel="noopener" class="adm-carte adm-carte--lien">
+        <a :href="lien.href" target="_blank" rel="noopener" class="adm-bloc adm-bloc--lien">
           <span class="adm-integration__vignette" aria-hidden="true">
             <svg
               viewBox="0 0 24 24"

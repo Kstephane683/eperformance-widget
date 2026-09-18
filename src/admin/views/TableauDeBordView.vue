@@ -20,7 +20,7 @@
         v-for="indicateur in indicateurs"
         :key="indicateur.cle"
         :to="{ name: indicateur.vers }"
-        class="adm-carte adm-carte--lien adm-kpi"
+        class="adm-bloc adm-bloc--lien adm-kpi"
       >
         <span class="adm-eyebrow">{{ indicateur.libelle }}</span>
         <span class="adm-kpi__valeur" :class="{ 'adm-kpi__valeur--or': indicateur.accent }">

@@ -159,7 +159,7 @@ function surTouche(evenement: KeyboardEvent): void {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  /* Le pied respire : sur mobile, le tiroir défile et la dernière carte ne doit
+  /* Le pied respire : sur mobile, le tiroir défile et le dernier bloc ne doit
      pas se coller au bord de l'écran. */
   padding: 16px 12px 24px;
   background: var(--bg2);
