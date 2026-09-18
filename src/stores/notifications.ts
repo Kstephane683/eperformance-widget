@@ -44,8 +44,6 @@ export const useNotificationsStore = defineStore('notifications', {
     message: '',
     /** Une action est en cours : le bouton doit être neutralisé */
     enCours: false,
-    /** La configuration a été lue au moins une fois */
-    charge: false,
   }),
 
   getters: {
@@ -78,7 +76,6 @@ export const useNotificationsStore = defineStore('notifications', {
         this.config = null
       }
       this.rafraichirEtat()
-      this.charge = true
     },
 
     /**
@@ -133,11 +130,6 @@ export const useNotificationsStore = defineStore('notifications', {
       } finally {
         this.enCours = false
       }
-    },
-
-    /** Après un échec, on remet l'état à ce qu'il est réellement */
-    oublierMessage() {
-      this.message = ''
     },
   },
 })
