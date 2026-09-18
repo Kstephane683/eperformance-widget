@@ -15,8 +15,10 @@ documentation de contrat.
 | Contrat d'interface mis à jour | ✅ `CONTRAT-INTERFACE-V2.md` (V2.2) |
 | Protocole de coordination + copies | ✅ |
 
-**Commits :** backend `1d084bb` (déployé, SHA vérifié) · widget `b437ec9`
-(déployé sur GitHub Pages) + commit de documentation.
+**Commits :** backend `1d084bb` (déployé, SHA vérifié sur `GET /`) · widget
+`b437ec9` + documentation `1100b63` (déployés sur GitHub Pages — l'asset servi
+est `main-BGI3bbDR.js`, identique au build local) · coordination `81563e7`
+(dépôt du site).
 **Tests :** widget **128/128** (90 avant) · backend **95** (nouveaux) ·
 site **16/16** · blog **88/88**.
 
@@ -161,6 +163,20 @@ recours** :
 
 Captures : `A2-actualites-{avant,apres}-{desktop,mobile}-{clair,sombre}.png` et
 `A2-actualites-bas-*.png` (bas de liste atteint après correction), `A7-accueil-bas-*`.
+
+**A.7 — les trois largeurs desktop demandées** (`mesures-largeurs-desktop.json`) :
+le panneau garde la même géométrie (400 × 650 px) quelle que soit la largeur de
+la fenêtre, mais la mesure confirme que le défilement fonctionne et que la
+dernière suggestion est atteignable :
+
+| Largeur | Contenu / visible | `overflow-y` | `scroll-behavior` | Défilement max | Dernière capacité atteignable |
+|---|---|---|---|---|---|
+| 1280 | 1 205 / 541 px | `auto` | `smooth` | 664 px (atteint) | ✅ |
+| 1440 | 1 205 / 541 px | `auto` | `smooth` | 664 px (atteint) | ✅ |
+| 1920 | 1 205 / 541 px | `auto` | `smooth` | 664 px (atteint) | ✅ |
+
+Le défilement est **doux** (`scroll-behavior: smooth` mesuré) et sans saut : la
+position progresse par animation, il n'y a pas de téléportation du contenu.
 
 **Les 5 écrans × 2 gabarits × 2 thèmes** ont été parcourus (10 combinaisons) :
 `A8-accueil`, `A2-actualites`, `A9-aide`, `A3A4A6-conversation` ×

@@ -1,0 +1,32 @@
+{
+  "1280": {
+    "scrollHeight": 1205,
+    "clientHeight": 541,
+    "overflowY": "auto",
+    "scrollBehavior": "smooth",
+    "scrollTop": 664,
+    "maxTop": 664,
+    "funnelAtteignable": true,
+    "defilable": true
+  },
+  "1440": {
+    "scrollHeight": 1205,
+    "clientHeight": 541,
+    "overflowY": "auto",
+    "scrollBehavior": "smooth",
+    "scrollTop": 664,
+    "maxTop": 664,
+    "funnelAtteignable": true,
+    "defilable": true
+  },
+  "1920": {
+    "scrollHeight": 1205,
+    "clientHeight": 541,
+    "overflowY": "auto",
+    "scrollBehavior": "smooth",
+    "scrollTop": 664,
+    "maxTop": 664,
+    "funnelAtteignable": true,
+    "defilable": true
+  }
+}
