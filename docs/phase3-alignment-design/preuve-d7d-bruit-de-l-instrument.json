@@ -1,0 +1,205 @@
+{
+  "gauche": "temoin",
+  "droite": "temoin2",
+  "renommage": [
+    "adm-carte",
+    "adm-bloc"
+  ],
+  "cascade_identiques": [
+    "dark-activite",
+    "dark-candidatures",
+    "dark-competences",
+    "dark-connaissances",
+    "dark-conversations",
+    "dark-integrations",
+    "dark-performance",
+    "dark-prospects",
+    "dark-publications",
+    "dark-tableau-de-bord",
+    "dark-utilisateurs",
+    "light-activite",
+    "light-candidatures",
+    "light-competences",
+    "light-connaissances",
+    "light-conversations",
+    "light-integrations",
+    "light-performance",
+    "light-prospects",
+    "light-publications",
+    "light-tableau-de-bord",
+    "light-utilisateurs"
+  ],
+  "cascade_differentes": [],
+  "captures": [
+    {
+      "capture": "dark-activite.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-candidatures.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 14,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 4,
+      "zone": [
+        287,
+        126,
+        290,
+        167
+      ]
+    },
+    {
+      "capture": "dark-competences.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-connaissances.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 11,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        930,
+        25,
+        932,
+        49
+      ]
+    },
+    {
+      "capture": "dark-conversations.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 13,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 4,
+      "zone": [
+        302,
+        25,
+        932,
+        174
+      ]
+    },
+    {
+      "capture": "dark-integrations.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-performance.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 32,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        288,
+        383,
+        1416,
+        500
+      ]
+    },
+    {
+      "capture": "dark-prospects.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-publications.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-tableau-de-bord.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-utilisateurs.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-activite.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 33,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 9,
+      "zone": [
+        287,
+        24,
+        932,
+        233
+      ]
+    },
+    {
+      "capture": "light-candidatures.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-competences.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-connaissances.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-conversations.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 2,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 5,
+      "zone": [
+        302,
+        172,
+        303,
+        174
+      ]
+    },
+    {
+      "capture": "light-integrations.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-performance.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 16,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        288,
+        142,
+        1416,
+        388
+      ]
+    },
+    {
+      "capture": "light-prospects.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 14,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        930,
+        24,
+        932,
+        50
+      ]
+    },
+    {
+      "capture": "light-publications.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 14,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        930,
+        24,
+        932,
+        50
+      ]
+    },
+    {
+      "capture": "light-tableau-de-bord.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-utilisateurs.png",
+      "identique_a_l_octet": true
+    }
+  ],
+  "captures_identiques_a_l_octet": 13
+}

@@ -1,0 +1,178 @@
+{
+  "D4_filet_bouton_secondaire": {
+    "clair": {
+      "jetons": {
+        "--border": "rgba(229, 225, 217, 1.0)",
+        "--border-strong": "rgba(143, 138, 126, 1.0)"
+      },
+      "surfaces": {
+        "--bg": {
+          "surface": "rgba(253, 252, 250, 1.0)",
+          "border": {
+            "ratio": 1.27
+          },
+          "border-strong": {
+            "ratio": 3.36
+          }
+        },
+        "--bg2": {
+          "surface": "rgba(247, 245, 241, 1.0)",
+          "border": {
+            "ratio": 1.2
+          },
+          "border-strong": {
+            "ratio": 3.16
+          }
+        },
+        "--card": {
+          "surface": "rgba(255, 255, 255, 1.0)",
+          "border": {
+            "ratio": 1.3
+          },
+          "border-strong": {
+            "ratio": 3.44
+          }
+        }
+      }
+    },
+    "sombre": {
+      "jetons": {
+        "--border": "rgba(28, 28, 34, 1.0)",
+        "--border-strong": "rgba(100, 100, 112, 1.0)"
+      },
+      "surfaces": {
+        "--bg": {
+          "surface": "rgba(8, 8, 12, 1.0)",
+          "border": {
+            "ratio": 1.18
+          },
+          "border-strong": {
+            "ratio": 3.43
+          }
+        },
+        "--bg2": {
+          "surface": "rgba(12, 12, 16, 1.0)",
+          "border": {
+            "ratio": 1.15
+          },
+          "border-strong": {
+            "ratio": 3.35
+          }
+        },
+        "--card": {
+          "surface": "rgba(16, 16, 20, 1.0)",
+          "border": {
+            "ratio": 1.12
+          },
+          "border-strong": {
+            "ratio": 3.25
+          }
+        }
+      }
+    }
+  },
+  "D7a_voiles_erreur": {
+    "clair": {
+      "--red-bg sur --bg": {
+        "declaration": "color-mix(in srgb, var(--erreur) 6%, transparent)",
+        "canonique": "rgba(168, 48, 47, 0.06)",
+        "composee": "#f8f0ee",
+        "ecart_avec_la_surface": 1.1
+      },
+      "--red-bg sur --card": {
+        "declaration": "color-mix(in srgb, var(--erreur) 6%, transparent)",
+        "canonique": "rgba(168, 48, 47, 0.06)",
+        "composee": "#faf3f3",
+        "ecart_avec_la_surface": 1.09
+      },
+      "--red-border sur --bg": {
+        "declaration": "color-mix(in srgb, var(--erreur) 28%, transparent)",
+        "canonique": "rgba(168, 48, 47, 0.28)",
+        "composee": "#e5c3c1",
+        "ecart_avec_la_surface": 1.59
+      },
+      "--red-border sur --card": {
+        "declaration": "color-mix(in srgb, var(--erreur) 28%, transparent)",
+        "canonique": "rgba(168, 48, 47, 0.28)",
+        "composee": "#e7c5c5",
+        "ecart_avec_la_surface": 1.59
+      },
+      "--red-text sur --bg": {
+        "canonique": "rgba(168, 48, 47, 1.0)",
+        "ratio": 6.55
+      },
+      "--red-text sur --card": {
+        "canonique": "rgba(168, 48, 47, 1.0)",
+        "ratio": 6.71
+      },
+      "--red-text sur --red-bg": {
+        "canonique": "rgba(168, 48, 47, 1.0)",
+        "surface_composee": "#faf3f3",
+        "ratio": 6.13
+      }
+    },
+    "sombre": {
+      "--red-bg sur --bg": {
+        "declaration": "color-mix(in srgb, var(--erreur) 12%, transparent)",
+        "canonique": "rgba(224, 112, 112, 0.12)",
+        "composee": "#221418",
+        "ecart_avec_la_surface": 1.12
+      },
+      "--red-bg sur --card": {
+        "declaration": "color-mix(in srgb, var(--erreur) 12%, transparent)",
+        "canonique": "rgba(224, 112, 112, 0.12)",
+        "composee": "#291c1f",
+        "ecart_avec_la_surface": 1.16
+      },
+      "--red-border sur --bg": {
+        "declaration": "color-mix(in srgb, var(--erreur) 30%, transparent)",
+        "canonique": "rgba(224, 112, 112, 0.3)",
+        "composee": "#49272a",
+        "ecart_avec_la_surface": 1.53
+      },
+      "--red-border sur --card": {
+        "declaration": "color-mix(in srgb, var(--erreur) 30%, transparent)",
+        "canonique": "rgba(224, 112, 112, 0.3)",
+        "composee": "#4e2d30",
+        "ecart_avec_la_surface": 1.57
+      },
+      "--red-text sur --bg": {
+        "canonique": "rgba(224, 112, 112, 1.0)",
+        "ratio": 6.4
+      },
+      "--red-text sur --card": {
+        "canonique": "rgba(224, 112, 112, 1.0)",
+        "ratio": 6.08
+      },
+      "--red-text sur --red-bg": {
+        "canonique": "rgba(224, 112, 112, 1.0)",
+        "surface_composee": "#291c1f",
+        "ratio": 5.25
+      }
+    }
+  },
+  "D7b_ombre_accent": {
+    "clair": {
+      "declaration": "0 6px 24px var(--gold-glow)",
+      "resolue": "0 6px 24px color-mix(in srgb, #856b37 28%, transparent)",
+      "halo_declare": "color-mix(in srgb, #856b37 28%, transparent)",
+      "halo_canonique": "rgba(133, 107, 55, 0.28)",
+      "halo_alpha": 0.28,
+      "halo_compose_sur_bg": "#dbd3c3"
+    },
+    "sombre": {
+      "declaration": "0 6px 24px var(--gold-glow)",
+      "resolue": "0 6px 24px color-mix(in srgb, #c9a96e 40%, transparent)",
+      "halo_declare": "color-mix(in srgb, #c9a96e 40%, transparent)",
+      "halo_canonique": "rgba(201, 169, 110, 0.4)",
+      "halo_alpha": 0.4,
+      "halo_compose_sur_bg": "#554833"
+    }
+  },
+  "D7c_durees": {
+    "--t (clair)": "300ms",
+    "--t-fast (clair)": "150ms",
+    "--t (sombre)": "300ms",
+    "--t-fast (sombre)": "150ms"
+  }
+}

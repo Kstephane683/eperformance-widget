@@ -1,0 +1,114 @@
+{
+  "etat": "temoin",
+  "modules": [
+    "tableau-de-bord",
+    "activite",
+    "performance",
+    "conversations",
+    "prospects",
+    "candidatures",
+    "connaissances",
+    "publications",
+    "competences",
+    "utilisateurs",
+    "integrations"
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "normalisation": [
+    "adm-carte",
+    "adm-bloc"
+  ],
+  "vues": {
+    "light-tableau-de-bord": {
+      "sha256": "f959c7d592f6c8b5859cc30f3354a6739e90e6304292d3311247c65315f1c760",
+      "elements": 245
+    },
+    "light-activite": {
+      "sha256": "384e362d91d34a0afa83d768043fa94154c013027cea471f6cba761a6c7fa533",
+      "elements": 294
+    },
+    "light-performance": {
+      "sha256": "d1c44976d85aafefa9dde2ca8b8381bc7e3cde45418019048fe0a425dd534ad1",
+      "elements": 267
+    },
+    "light-conversations": {
+      "sha256": "443d5eff83ff6b65989db28e570261411c0fb04a8d9c6d5aaf6b32a92e20eaa2",
+      "elements": 222
+    },
+    "light-prospects": {
+      "sha256": "b1c27d3cdc3804e1e10d4376ca7fc25e25c0726822736126e9906c0544401451",
+      "elements": 199
+    },
+    "light-candidatures": {
+      "sha256": "4674ca18f025ad971a701296535ee12959a7b55eb0d99fcf3a4ba91d7c946f02",
+      "elements": 216
+    },
+    "light-connaissances": {
+      "sha256": "fa85567b3e10fdcbff2d0763daaafbc02967bbfd1e908a07c3b4fcade5eec988",
+      "elements": 232
+    },
+    "light-publications": {
+      "sha256": "e2f5a5f4f041c4d16c921cf7bd370552b9a09052d501f14db55f90ace5aab08f",
+      "elements": 303
+    },
+    "light-competences": {
+      "sha256": "bb7bc3e4c2982edfb8bf8e29c241b10377ddd66cc1a84aca4922b0364d11ff5b",
+      "elements": 233
+    },
+    "light-utilisateurs": {
+      "sha256": "cb491c488ea5210e12e6021e31940b22e2cb92bf394c5b6ece9a2a95e5bd4ea8",
+      "elements": 206
+    },
+    "light-integrations": {
+      "sha256": "a3714a880409e4a8c865906e5f2fb986b5d4df7a871666b787b7c0f9f8f92f54",
+      "elements": 216
+    },
+    "dark-tableau-de-bord": {
+      "sha256": "9a4b1d4b54f923646d7e74980a57e72762186760f5a54a5c80bcd05d94b3ff34",
+      "elements": 245
+    },
+    "dark-activite": {
+      "sha256": "2a05d8bb0f29bb9a5644902cdd3f6ae92cb23c3a7cbc69ef8997bf889157e988",
+      "elements": 294
+    },
+    "dark-performance": {
+      "sha256": "2b345e84e2b298e19cd65f41b111d48d19a20edf10f69a629869a3343c1fc4bc",
+      "elements": 267
+    },
+    "dark-conversations": {
+      "sha256": "b1327e8e6d16ad0d3a38e498d0d3b6306ab73df5ee971efc2673e5f30fcc5728",
+      "elements": 222
+    },
+    "dark-prospects": {
+      "sha256": "6a7e860fcf0d9d545b62d5b4686ae2ab216b900d3c36ce3a8549c0da56350de4",
+      "elements": 199
+    },
+    "dark-candidatures": {
+      "sha256": "c165da96854a456452f8b03c874485e912e9f4bc52b8bf6ffa366ba9c2e524db",
+      "elements": 216
+    },
+    "dark-connaissances": {
+      "sha256": "2248150869a202917fbf91e02c090c98bebeb4d263d4b495eae0266e27e20e6b",
+      "elements": 232
+    },
+    "dark-publications": {
+      "sha256": "dcbc63ca378faf71e2addc0879f119f9efd6a05234bd2c038284f4f705710fab",
+      "elements": 303
+    },
+    "dark-competences": {
+      "sha256": "2f40be40761a8b2efe7c903e38d9fd73a6e220151a93fea52c8ca00205d9f44f",
+      "elements": 233
+    },
+    "dark-utilisateurs": {
+      "sha256": "9febd6492affb8ed2097817095db4b0aa03e218cdef19e7b7cae93df35aee0b9",
+      "elements": 206
+    },
+    "dark-integrations": {
+      "sha256": "e436cdc079d0d382e1a48c3ff34c3019d286d19771df1d95fb4495f8c037551e",
+      "elements": 216
+    }
+  }
+}

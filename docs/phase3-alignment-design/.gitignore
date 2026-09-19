@@ -1,0 +1,4 @@
+# Relevés bruts de la preuve D7d : ~3 Mo par vue, ~70 Mo par état, et ils se
+# régénèrent en une commande. Ce qui PROUVE est leur SHA-256, versionné à côté
+# dans `preuve-d7d-<état>-empreintes.json`.
+.releves/

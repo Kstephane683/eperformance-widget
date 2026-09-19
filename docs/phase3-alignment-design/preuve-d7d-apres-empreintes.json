@@ -1,0 +1,114 @@
+{
+  "etat": "apres",
+  "modules": [
+    "tableau-de-bord",
+    "activite",
+    "performance",
+    "conversations",
+    "prospects",
+    "candidatures",
+    "connaissances",
+    "publications",
+    "competences",
+    "utilisateurs",
+    "integrations"
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "normalisation": [
+    "adm-carte",
+    "adm-bloc"
+  ],
+  "vues": {
+    "dark-activite.dom": {
+      "sha256": "2c62af36c701242c323d5a7096bf59134b7d4a31f9644efe536f13b120cb9340",
+      "elements": 294
+    },
+    "dark-candidatures.dom": {
+      "sha256": "50731e7a1397e926ed92ad7027c8fab17ae39e7135ea281b193d7a092bed3745",
+      "elements": 216
+    },
+    "dark-competences.dom": {
+      "sha256": "7a72c14c6e87517c321a74af2fcb07456a28c0112977a775092fbe5eb0373207",
+      "elements": 233
+    },
+    "dark-connaissances.dom": {
+      "sha256": "1e0c3a53a600a1c932693c27ce5c4047380677a70d43499810708aeb002ce759",
+      "elements": 232
+    },
+    "dark-conversations.dom": {
+      "sha256": "ba814258223cdc455bb81bc9de894ed9b6cf792eb193717952955713b0490631",
+      "elements": 222
+    },
+    "dark-integrations.dom": {
+      "sha256": "2f255f2b3821f2623f1a5b1870ef977af341f5a7f6d46295be1ef36708fb3cdc",
+      "elements": 216
+    },
+    "dark-performance.dom": {
+      "sha256": "72d7de2803817c1204cdaba6fbea41fd8e2ad55dadf2c0e68d976032a2f83cd3",
+      "elements": 267
+    },
+    "dark-prospects.dom": {
+      "sha256": "f85c068945cb75d42b5682ac1c8e0934eeaf3fd9a2401d7164092bd6e9331ddd",
+      "elements": 199
+    },
+    "dark-publications.dom": {
+      "sha256": "cde24e59b3d7fb8f627ec92f9ece24fb24df0cda17ca175f69999f4c5db50580",
+      "elements": 303
+    },
+    "dark-tableau-de-bord.dom": {
+      "sha256": "d78714fa858737a14542ae4f68ad8b5708dc7c5a4656d8ad44c041c23d185aba",
+      "elements": 245
+    },
+    "dark-utilisateurs.dom": {
+      "sha256": "8709f51f77aad752f486ffc3fcdaed02394b6da593d1df9f5928bb26d87a2ee1",
+      "elements": 206
+    },
+    "light-activite.dom": {
+      "sha256": "30fa57bedd6664e701a018d54b72b645f03855ad5a5e8d1726ff9ffce4960adb",
+      "elements": 294
+    },
+    "light-candidatures.dom": {
+      "sha256": "310c4b4f0e105d6a871c2f64f9549bc0415f7dfc4873234184e4d5d839b4f184",
+      "elements": 216
+    },
+    "light-competences.dom": {
+      "sha256": "ed15417ca535c060f39992b5afb733df1844a1366c64d0dfe209a97b3db624e7",
+      "elements": 233
+    },
+    "light-connaissances.dom": {
+      "sha256": "87a21c092048d976651ca932c6fde3090e696af0c2c453b1cc48e9633c9cea42",
+      "elements": 232
+    },
+    "light-conversations.dom": {
+      "sha256": "eb4f3a26dcc1d42ebecfdf853723a4b3a8de6542106cadd66060ca8a2ba1d5d1",
+      "elements": 222
+    },
+    "light-integrations.dom": {
+      "sha256": "9079cb00f4889ff923a99cec62f0041f5177e7d8c88088a102480aed696228e1",
+      "elements": 216
+    },
+    "light-performance.dom": {
+      "sha256": "ad2ac4eb12079f24af6cdceaf71372690dfedf394faccbffab3293e7c457d8ed",
+      "elements": 267
+    },
+    "light-prospects.dom": {
+      "sha256": "4f933fa3f17810ea7782bf27a8f4803b3df620218b42f3d6915942233ded6650",
+      "elements": 199
+    },
+    "light-publications.dom": {
+      "sha256": "0d746ef344bd977698af90dea9daa9cbc4f9b12ad14e5920336eae5a5c461def",
+      "elements": 303
+    },
+    "light-tableau-de-bord.dom": {
+      "sha256": "a21f11fef13f436a2187aae22821c59d7dd2f9202e1833c0bd50bc60e8b9ff44",
+      "elements": 245
+    },
+    "light-utilisateurs.dom": {
+      "sha256": "fe30319a1634a2d5a271e41f248a6f63839114373308ee7c952670eb1b7d459b",
+      "elements": 206
+    }
+  }
+}

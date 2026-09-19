@@ -1,0 +1,753 @@
+{
+  "proprietes_systeme": [
+    "border-top-left-radius",
+    "background-color",
+    "color",
+    "border-top-color",
+    "border-top-width",
+    "border-top-style",
+    "box-shadow",
+    "font-family",
+    "transition-duration",
+    "transition-timing-function"
+  ],
+  "proprietes_metier": [
+    "padding-top",
+    "padding-right",
+    "font-size",
+    "font-weight",
+    "gap",
+    "min-height",
+    "letter-spacing",
+    "line-height"
+  ],
+  "proprietes_a_nuancer": [
+    "border-top-left-radius"
+  ],
+  "contextes": {
+    "widget": {
+      "libelle": "Widget / application Mia",
+      "roles": {
+        "bouton-accent": {
+          "style": {
+            "border-top-left-radius": "50%",
+            "background-color": "rgb(133, 107, 55)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgb(255, 255, 255)",
+            "border-top-width": "0px",
+            "border-top-style": "none",
+            "box-shadow": "color(srgb 0.521569 0.419608 0.215686 / 0.28) 0px 6px 24px 0px",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.15s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "0px",
+            "padding-right": "0px",
+            "font-size": "13.3333px",
+            "font-weight": "400",
+            "gap": "normal",
+            "min-height": "auto",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 44,
+            "h": 44
+          },
+          "image": "widget-bouton-accent.png",
+          "md5": "a28f7489a0743411517d83f30d9ad12e",
+          "selecteur": ".ep-send"
+        },
+        "bouton-secondaire": {
+          "absent": true,
+          "raison": "ce contexte ne porte pas ce rôle"
+        },
+        "carte": {
+          "style": {
+            "border-top-left-radius": "12px",
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(22, 21, 26)",
+            "border-top-color": "rgb(143, 138, 126)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "12px",
+            "padding-right": "14px",
+            "font-size": "13.5px",
+            "font-weight": "400",
+            "gap": "12px",
+            "min-height": "auto",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 726,
+            "h": 56
+          },
+          "image": "widget-carte.png",
+          "md5": "f6e60da2ab855af010ea0b3bd392709d",
+          "selecteur": ".ep-suggestion"
+        },
+        "champ": {
+          "style": {
+            "border-top-left-radius": "12px",
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(22, 21, 26)",
+            "border-top-color": "rgb(143, 138, 126)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "12px",
+            "padding-right": "16px",
+            "font-size": "14px",
+            "font-weight": "400",
+            "gap": "normal",
+            "min-height": "auto",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 514,
+            "h": 44
+          },
+          "image": "widget-champ.png",
+          "md5": "542f3609ba1bcae75ae6a35614826e38",
+          "selecteur": ".ep-input"
+        },
+        "etat-actif": {
+          "style": {
+            "border-top-left-radius": "0px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(133, 107, 55)",
+            "border-top-color": "rgb(133, 107, 55)",
+            "border-top-width": "0px",
+            "border-top-style": "none",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "9px",
+            "padding-right": "4px",
+            "font-size": "11px",
+            "font-weight": "600",
+            "gap": "3px",
+            "min-height": "auto",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 190,
+            "h": 55
+          },
+          "image": "widget-etat-actif.png",
+          "md5": "5b9451a5f0dac3384596744d204cdbdc",
+          "selecteur": ".ep-tab--actif"
+        }
+      }
+    },
+    "console": {
+      "libelle": "Console d'administration",
+      "roles": {
+        "bouton-accent": {
+          "style": {
+            "border-top-left-radius": "999px",
+            "background-color": "rgb(133, 107, 55)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgb(133, 107, 55)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "color(srgb 0.521569 0.419608 0.215686 / 0.28) 0px 6px 24px 0px",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s, 0.3s, 0.15s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "9px",
+            "padding-right": "15px",
+            "font-size": "13px",
+            "font-weight": "700",
+            "gap": "7px",
+            "min-height": "40px",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 132,
+            "h": 40
+          },
+          "image": "console-bouton-accent.png",
+          "md5": "62c081453299224f2a8cc3747f9b7c90",
+          "selecteur": ".adm-btn--or"
+        },
+        "bouton-secondaire": {
+          "style": {
+            "border-top-left-radius": "999px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(69, 66, 75)",
+            "border-top-color": "rgb(143, 138, 126)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s, 0.3s, 0.15s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "9px",
+            "padding-right": "15px",
+            "font-size": "13px",
+            "font-weight": "600",
+            "gap": "7px",
+            "min-height": "40px",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 96,
+            "h": 40
+          },
+          "image": "console-bouton-secondaire.png",
+          "md5": "dc75c4f9075429a7df3d97fe7b6d2639",
+          "selecteur": ".adm-btn--discret"
+        },
+        "carte": {
+          "style": {
+            "border-top-left-radius": "12px",
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(22, 21, 26)",
+            "border-top-color": "rgb(229, 225, 217)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "16px",
+            "padding-right": "16px",
+            "font-size": "16px",
+            "font-weight": "400",
+            "gap": "2px",
+            "min-height": "auto",
+            "letter-spacing": "normal",
+            "line-height": "26.4px"
+          },
+          "boite": {
+            "w": 216,
+            "h": 147
+          },
+          "image": "console-carte.png",
+          "md5": "e63148f303a6e2a8929c2e4a11d35cd7",
+          "selecteur": ".adm-kpi"
+        },
+        "champ": {
+          "style": {
+            "border-top-left-radius": "12px",
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(22, 21, 26)",
+            "border-top-color": "rgb(143, 138, 126)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "9px",
+            "padding-right": "13px",
+            "font-size": "13px",
+            "font-weight": "400",
+            "gap": "normal",
+            "min-height": "40px",
+            "letter-spacing": "normal",
+            "line-height": "19.5px"
+          },
+          "boite": {
+            "w": 616,
+            "h": 59
+          },
+          "image": "console-champ.png",
+          "md5": "084ecb1653155ce5cad47137f311ea4a",
+          "selecteur": ".adm-champ.adm-boite__texte"
+        },
+        "etat-actif": {
+          "style": {
+            "border-top-left-radius": "12px",
+            "background-color": "color(srgb 0.521569 0.419608 0.215686 / 0.07)",
+            "color": "rgb(115, 93, 50)",
+            "border-top-color": "rgb(115, 93, 50)",
+            "border-top-width": "0px",
+            "border-top-style": "none",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "9px",
+            "padding-right": "12px",
+            "font-size": "13.5px",
+            "font-weight": "600",
+            "gap": "10px",
+            "min-height": "44px",
+            "letter-spacing": "normal",
+            "line-height": "22.275px"
+          },
+          "boite": {
+            "w": 239,
+            "h": 44
+          },
+          "image": "console-etat-actif.png",
+          "md5": "17f45bf131d172570379b0889d65032d",
+          "selecteur": ".adm-lien--actif"
+        }
+      }
+    },
+    "pages": {
+      "libelle": "Pages publiques /application/mia",
+      "roles": {
+        "bouton-accent": {
+          "style": {
+            "border-top-left-radius": "999px",
+            "background-color": "rgb(133, 107, 55)",
+            "color": "rgb(255, 255, 255)",
+            "border-top-color": "rgba(0, 0, 0, 0)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "color(srgb 0.521569 0.419608 0.215686 / 0.28) 0px 6px 24px 0px",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s, 0.3s, 0.15s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "16px",
+            "padding-right": "32px",
+            "font-size": "16px",
+            "font-weight": "600",
+            "gap": "9px",
+            "min-height": "54px",
+            "letter-spacing": "normal",
+            "line-height": "26.4px"
+          },
+          "boite": {
+            "w": 145,
+            "h": 60
+          },
+          "image": "pages-bouton-accent.png",
+          "md5": "ae58d92b327abb9d3abda38e578a5ef2",
+          "selecteur": ".btn-gold"
+        },
+        "bouton-secondaire": {
+          "style": {
+            "border-top-left-radius": "999px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(22, 21, 26)",
+            "border-top-color": "rgb(143, 138, 126)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s, 0.3s, 0.15s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "16px",
+            "padding-right": "32px",
+            "font-size": "16px",
+            "font-weight": "600",
+            "gap": "9px",
+            "min-height": "54px",
+            "letter-spacing": "normal",
+            "line-height": "normal"
+          },
+          "boite": {
+            "w": 226,
+            "h": 60
+          },
+          "image": "pages-bouton-secondaire.png",
+          "md5": "3f4a3f45f22e9219ea573daa1c9608d6",
+          "selecteur": ".btn-outline"
+        },
+        "carte": {
+          "style": {
+            "border-top-left-radius": "28px",
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(22, 21, 26)",
+            "border-top-color": "rgb(229, 225, 217)",
+            "border-top-width": "1px",
+            "border-top-style": "solid",
+            "box-shadow": "none",
+            "font-family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+            "transition-duration": "0.3s, 0.3s, 0.3s",
+            "transition-timing-function": "cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1)",
+            "padding-top": "28px",
+            "padding-right": "28px",
+            "font-size": "16px",
+            "font-weight": "400",
+            "gap": "normal",
+            "min-height": "auto",
+            "letter-spacing": "normal",
+            "line-height": "26.4px"
+          },
+          "boite": {
+            "w": 368,
+            "h": 250
+          },
+          "image": "pages-carte.png",
+          "md5": "fc7a8a3c357a04dbc741749ef36e6051",
+          "selecteur": ".card"
+        },
+        "champ": {
+          "absent": true,
+          "raison": "ce contexte ne porte pas ce rôle"
+        },
+        "etat-actif": {
+          "absent": true,
+          "raison": "ce contexte ne porte pas ce rôle"
+        }
+      }
+    }
+  },
+  "comparaison": {
+    "bouton-accent": {
+      "contextes_presents": [
+        "console",
+        "pages",
+        "widget"
+      ],
+      "proprietes_systeme_comparees": 10,
+      "proprietes_metier_comparees": 8,
+      "divergences": [
+        {
+          "propriete": "border-top-color",
+          "valeurs": {
+            "widget": "rgb(255, 255, 255)",
+            "console": "rgb(133, 107, 55)",
+            "pages": "rgba(0, 0, 0, 0)"
+          }
+        },
+        {
+          "propriete": "border-top-width",
+          "valeurs": {
+            "widget": "0px",
+            "console": "1px",
+            "pages": "1px"
+          }
+        },
+        {
+          "propriete": "border-top-style",
+          "valeurs": {
+            "widget": "none",
+            "console": "solid",
+            "pages": "solid"
+          }
+        }
+      ],
+      "nombre_divergences": 3,
+      "differences_de_metier": [
+        {
+          "propriete": "padding-top",
+          "valeurs": {
+            "widget": "0px",
+            "console": "9px",
+            "pages": "16px"
+          }
+        },
+        {
+          "propriete": "padding-right",
+          "valeurs": {
+            "widget": "0px",
+            "console": "15px",
+            "pages": "32px"
+          }
+        },
+        {
+          "propriete": "font-size",
+          "valeurs": {
+            "widget": "13.3333px",
+            "console": "13px",
+            "pages": "16px"
+          }
+        },
+        {
+          "propriete": "font-weight",
+          "valeurs": {
+            "widget": "400",
+            "console": "700",
+            "pages": "600"
+          }
+        },
+        {
+          "propriete": "gap",
+          "valeurs": {
+            "widget": "normal",
+            "console": "7px",
+            "pages": "9px"
+          }
+        },
+        {
+          "propriete": "min-height",
+          "valeurs": {
+            "widget": "auto",
+            "console": "40px",
+            "pages": "54px"
+          }
+        },
+        {
+          "propriete": "line-height",
+          "valeurs": {
+            "widget": "normal",
+            "console": "normal",
+            "pages": "26.4px"
+          }
+        }
+      ],
+      "nombre_differences_de_metier": 7
+    },
+    "bouton-secondaire": {
+      "contextes_presents": [
+        "console",
+        "pages"
+      ],
+      "proprietes_systeme_comparees": 10,
+      "proprietes_metier_comparees": 8,
+      "divergences": [
+        {
+          "propriete": "color",
+          "valeurs": {
+            "console": "rgb(69, 66, 75)",
+            "pages": "rgb(22, 21, 26)"
+          }
+        }
+      ],
+      "nombre_divergences": 1,
+      "differences_de_metier": [
+        {
+          "propriete": "padding-top",
+          "valeurs": {
+            "console": "9px",
+            "pages": "16px"
+          }
+        },
+        {
+          "propriete": "padding-right",
+          "valeurs": {
+            "console": "15px",
+            "pages": "32px"
+          }
+        },
+        {
+          "propriete": "font-size",
+          "valeurs": {
+            "console": "13px",
+            "pages": "16px"
+          }
+        },
+        {
+          "propriete": "gap",
+          "valeurs": {
+            "console": "7px",
+            "pages": "9px"
+          }
+        },
+        {
+          "propriete": "min-height",
+          "valeurs": {
+            "console": "40px",
+            "pages": "54px"
+          }
+        }
+      ],
+      "nombre_differences_de_metier": 5
+    },
+    "carte": {
+      "contextes_presents": [
+        "console",
+        "pages",
+        "widget"
+      ],
+      "proprietes_systeme_comparees": 10,
+      "proprietes_metier_comparees": 8,
+      "divergences": [
+        {
+          "propriete": "border-top-left-radius",
+          "valeurs": {
+            "widget": "12px",
+            "console": "12px",
+            "pages": "28px"
+          }
+        },
+        {
+          "propriete": "border-top-color",
+          "valeurs": {
+            "widget": "rgb(143, 138, 126)",
+            "console": "rgb(229, 225, 217)",
+            "pages": "rgb(229, 225, 217)"
+          }
+        }
+      ],
+      "nombre_divergences": 2,
+      "differences_de_metier": [
+        {
+          "propriete": "padding-top",
+          "valeurs": {
+            "widget": "12px",
+            "console": "16px",
+            "pages": "28px"
+          }
+        },
+        {
+          "propriete": "padding-right",
+          "valeurs": {
+            "widget": "14px",
+            "console": "16px",
+            "pages": "28px"
+          }
+        },
+        {
+          "propriete": "font-size",
+          "valeurs": {
+            "widget": "13.5px",
+            "console": "16px",
+            "pages": "16px"
+          }
+        },
+        {
+          "propriete": "gap",
+          "valeurs": {
+            "widget": "12px",
+            "console": "2px",
+            "pages": "normal"
+          }
+        },
+        {
+          "propriete": "line-height",
+          "valeurs": {
+            "widget": "normal",
+            "console": "26.4px",
+            "pages": "26.4px"
+          }
+        }
+      ],
+      "nombre_differences_de_metier": 5
+    },
+    "champ": {
+      "contextes_presents": [
+        "console",
+        "widget"
+      ],
+      "proprietes_systeme_comparees": 10,
+      "proprietes_metier_comparees": 8,
+      "divergences": [],
+      "nombre_divergences": 0,
+      "differences_de_metier": [
+        {
+          "propriete": "padding-top",
+          "valeurs": {
+            "widget": "12px",
+            "console": "9px"
+          }
+        },
+        {
+          "propriete": "padding-right",
+          "valeurs": {
+            "widget": "16px",
+            "console": "13px"
+          }
+        },
+        {
+          "propriete": "font-size",
+          "valeurs": {
+            "widget": "14px",
+            "console": "13px"
+          }
+        },
+        {
+          "propriete": "min-height",
+          "valeurs": {
+            "widget": "auto",
+            "console": "40px"
+          }
+        },
+        {
+          "propriete": "line-height",
+          "valeurs": {
+            "widget": "normal",
+            "console": "19.5px"
+          }
+        }
+      ],
+      "nombre_differences_de_metier": 5
+    },
+    "etat-actif": {
+      "contextes_presents": [
+        "console",
+        "widget"
+      ],
+      "proprietes_systeme_comparees": 10,
+      "proprietes_metier_comparees": 8,
+      "divergences": [
+        {
+          "propriete": "border-top-left-radius",
+          "valeurs": {
+            "widget": "0px",
+            "console": "12px"
+          }
+        },
+        {
+          "propriete": "background-color",
+          "valeurs": {
+            "widget": "rgba(0, 0, 0, 0)",
+            "console": "color(srgb 0.521569 0.419608 0.215686 / 0.07)"
+          }
+        },
+        {
+          "propriete": "color",
+          "valeurs": {
+            "widget": "rgb(133, 107, 55)",
+            "console": "rgb(115, 93, 50)"
+          }
+        },
+        {
+          "propriete": "border-top-color",
+          "valeurs": {
+            "widget": "rgb(133, 107, 55)",
+            "console": "rgb(115, 93, 50)"
+          }
+        }
+      ],
+      "nombre_divergences": 4,
+      "differences_de_metier": [
+        {
+          "propriete": "padding-right",
+          "valeurs": {
+            "widget": "4px",
+            "console": "12px"
+          }
+        },
+        {
+          "propriete": "font-size",
+          "valeurs": {
+            "widget": "11px",
+            "console": "13.5px"
+          }
+        },
+        {
+          "propriete": "gap",
+          "valeurs": {
+            "widget": "3px",
+            "console": "10px"
+          }
+        },
+        {
+          "propriete": "min-height",
+          "valeurs": {
+            "widget": "auto",
+            "console": "44px"
+          }
+        },
+        {
+          "propriete": "line-height",
+          "valeurs": {
+            "widget": "normal",
+            "console": "22.275px"
+          }
+        }
+      ],
+      "nombre_differences_de_metier": 5
+    }
+  }
+}

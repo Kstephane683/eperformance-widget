@@ -1,0 +1,169 @@
+{
+  "gauche": "avant",
+  "droite": "apres",
+  "renommage": [
+    "adm-carte",
+    "adm-bloc"
+  ],
+  "cascade_identiques": [
+    "dark-activite.dom",
+    "dark-candidatures.dom",
+    "dark-competences.dom",
+    "dark-connaissances.dom",
+    "dark-conversations.dom",
+    "dark-integrations.dom",
+    "dark-performance.dom",
+    "dark-prospects.dom",
+    "dark-publications.dom",
+    "dark-tableau-de-bord.dom",
+    "dark-utilisateurs.dom",
+    "light-activite.dom",
+    "light-candidatures.dom",
+    "light-competences.dom",
+    "light-connaissances.dom",
+    "light-conversations.dom",
+    "light-integrations.dom",
+    "light-performance.dom",
+    "light-prospects.dom",
+    "light-publications.dom",
+    "light-tableau-de-bord.dom",
+    "light-utilisateurs.dom"
+  ],
+  "cascade_differentes": [],
+  "captures": [
+    {
+      "capture": "dark-activite.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-candidatures.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-competences.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-connaissances.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-conversations.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 11,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        930,
+        25,
+        932,
+        49
+      ]
+    },
+    {
+      "capture": "dark-integrations.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-performance.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 37,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        288,
+        25,
+        932,
+        500
+      ]
+    },
+    {
+      "capture": "dark-prospects.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-publications.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 11,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        930,
+        25,
+        932,
+        49
+      ]
+    },
+    {
+      "capture": "dark-tableau-de-bord.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "dark-utilisateurs.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-activite.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-candidatures.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-competences.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-connaissances.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-conversations.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-integrations.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-performance.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 8,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        288,
+        142,
+        290,
+        147
+      ]
+    },
+    {
+      "capture": "light-prospects.png",
+      "identique_a_l_octet": false,
+      "pixels_differents": 14,
+      "pixels_total": 1296000,
+      "delta_max_sur_255": 1,
+      "zone": [
+        930,
+        24,
+        932,
+        50
+      ]
+    },
+    {
+      "capture": "light-publications.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-tableau-de-bord.png",
+      "identique_a_l_octet": true
+    },
+    {
+      "capture": "light-utilisateurs.png",
+      "identique_a_l_octet": true
+    }
+  ],
+  "captures_identiques_a_l_octet": 17
+}

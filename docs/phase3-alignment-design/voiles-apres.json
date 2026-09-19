@@ -1,0 +1,46 @@
+{
+  "console-adm-erreur-light": {
+    "selecteur": ".adm-erreur",
+    "theme": "light",
+    "style": {
+      "background-color": "color(srgb 0.658824 0.188235 0.184314 / 0.06)",
+      "border-top-color": "color(srgb 0.658824 0.188235 0.184314 / 0.28)",
+      "color": "rgb(168, 48, 47)",
+      "border-top-left-radius": "12px"
+    },
+    "image": "console-adm-erreur-light.png"
+  },
+  "console-adm-erreur-dark": {
+    "selecteur": ".adm-erreur",
+    "theme": "dark",
+    "style": {
+      "background-color": "color(srgb 0.878431 0.439216 0.439216 / 0.12)",
+      "border-top-color": "color(srgb 0.878431 0.439216 0.439216 / 0.3)",
+      "color": "rgb(224, 112, 112)",
+      "border-top-left-radius": "12px"
+    },
+    "image": "console-adm-erreur-dark.png"
+  },
+  "console-login-erreur-light": {
+    "selecteur": ".ep-login__error",
+    "theme": "light",
+    "style": {
+      "background-color": "color(srgb 0.658824 0.188235 0.184314 / 0.06)",
+      "border-top-color": "color(srgb 0.658824 0.188235 0.184314 / 0.28)",
+      "color": "rgb(168, 48, 47)",
+      "border-top-left-radius": "12px"
+    },
+    "image": "console-login-erreur-light.png"
+  },
+  "console-login-erreur-dark": {
+    "selecteur": ".ep-login__error",
+    "theme": "dark",
+    "style": {
+      "background-color": "color(srgb 0.878431 0.439216 0.439216 / 0.12)",
+      "border-top-color": "color(srgb 0.878431 0.439216 0.439216 / 0.3)",
+      "color": "rgb(224, 112, 112)",
+      "border-top-left-radius": "12px"
+    },
+    "image": "console-login-erreur-dark.png"
+  }
+}

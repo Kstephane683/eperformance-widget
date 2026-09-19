@@ -1,0 +1,31 @@
+{
+  "admin": {
+    "avant": "admin-DAGd3vKw.css",
+    "apres": "admin-Bh-qZlnd.css",
+    "occurrences_avant": 3,
+    "occurrences_apres": 0,
+    "occurrences_nouveau": 3,
+    "identique_a_l_octet_modulo_renommage": true
+  },
+  "style": {
+    "avant": "style-BthoimLw.css",
+    "apres": "style-BthoimLw.css",
+    "occurrences_avant": 0,
+    "occurrences_apres": 0,
+    "occurrences_nouveau": 0,
+    "identique_a_l_octet_modulo_renommage": true
+  },
+  "commun": {
+    "avant": "commun-D8X9zw2J.css",
+    "apres": "commun-D8X9zw2J.css",
+    "occurrences_avant": 0,
+    "occurrences_apres": 0,
+    "occurrences_nouveau": 0,
+    "identique_a_l_octet_modulo_renommage": true
+  },
+  "gabarits_compiles": {
+    "fichier": "admin-CkMLMrU8.js",
+    "occurrences_avant": 0,
+    "occurrences_nouveau": 12
+  }
+}
