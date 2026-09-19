@@ -230,7 +230,7 @@ function surTouche(evenement: KeyboardEvent): void {
      l'ÉTAT ACTIF du module courant, et le geste équivalent du widget (l'onglet
      actif, `.ep-tab`) dure `var(--t)`. Deux contextes du même produit animaient
      le même geste l'un en 300 ms, l'autre en 150 ms : c'est la durée du design
-     system qui s'applique, `--t` = `--duree` = 300 ms (jetons.css:16-18).
+     system qui s'applique, `--t` = `--duree` = 300 ms (jetons.css:16, 158).
      Aucun littéral de durée n'intervient : la valeur est celle du jeton. */
   transition: background-color var(--t) var(--ease-out), color var(--t) var(--ease-out);
 }

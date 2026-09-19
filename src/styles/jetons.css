@@ -136,7 +136,7 @@
      var(--accent-halo)`, `20-semantic.css:160`.
      `--gold-glow` EST ce halo côté widget : même teinte (`--gold` = l'accent
      du noyau) et mêmes pourcentages (28 % en clair, 40 % en sombre),
-     `jetons.css:64` et `:171`. La déclaration est donc écrite UNE fois, ici,
+     `jetons.css:64` et `:182`. La déclaration est donc écrite UNE fois, ici,
      et le thème sombre ne la redéfinit plus : au noyau, seule la teinte du
      halo change d'un thème à l'autre, jamais la géométrie de l'ombre. */
   --shadow-gold: 0 6px 24px var(--gold-glow);
